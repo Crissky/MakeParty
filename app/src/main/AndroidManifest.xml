@@ -92,7 +92,7 @@
         <activity android:name=".fornecedor.gui.AnunciosFornecedorActivity" />
         <activity android:name=".fornecedor.gui.CapturaDadosCalendarActivity" />
         <activity android:name=".cliente.gui.ListaDesejosClienteActivity"></activity>
-        <activity android:name=".fornecedor.gui.CriarAnuncio"></activity>
+        <activity android:name=".fornecedor.gui.CriarAnuncioActivity"></activity>
 
     </application>
 

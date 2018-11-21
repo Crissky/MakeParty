@@ -8,7 +8,6 @@ import android.widget.ListView;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
-import com.inovaufrpe.makeparty.fornecedor.gui.adapter.AnuncioFornecedorAdapter;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ public class AnunciosFornecedorActivity extends AppCompatActivity {
     }
 
     private void criarAnuncio(){
-        startActivity(new Intent(AnunciosFornecedorActivity.this, CriarAnuncio.class))
+        startActivity(new Intent(AnunciosFornecedorActivity.this, CriarAnuncioActivity.class))
         AnunciosFornecedorActivity.this.finish();
     }
     //checar os Ids

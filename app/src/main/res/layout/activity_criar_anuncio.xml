@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".fornecedor.gui.CriarAnuncio">
+    tools:context=".fornecedor.gui.CriarAnuncioActivity">
 
     <ScrollView
         android:layout_width="match_parent"
