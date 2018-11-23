@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorButoes"
         android:text="Criar Anúncio"
+        android:onClick="irParaTelaCriarAnuncio"
         android:textColor="@color/colorTextoBut" />
 
     <ListView

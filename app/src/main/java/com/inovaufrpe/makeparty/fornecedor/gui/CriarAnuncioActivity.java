@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,8 +15,12 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
+import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CriarAnuncioActivity extends AppCompatActivity {
     private EditText edtTitulo, edtValor, edtDescricao, edtTags, edtTelefone, edtRua, edtNumero, edtBairro, edtCidade, edtCep;
@@ -24,17 +29,24 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     private String validar = "";
     private boolean isValido = false;
     private ProgressDialog mprogressDialog;
+    private ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_criar_anuncio);
-        opcoesSpinner();
         setTela();
+//        cadastroAnuncio.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onClickCadastrar();
+//            }
+//        });
 //        cadastrando();
     }
     public void opcoesSpinner(){
         // Ainda tem que setar isso daqui
+        // setei no xml strings
     }
 
     public void setTela(){
@@ -48,7 +60,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         edtBairro = findViewById(R.id.editTextBairro);
         edtCidade = findViewById(R.id.editTextCidade);
         edtCep = findViewById(R.id.editTextCep);
-        cadastroAnuncio = findViewById(R.id.criarAnuncioId);
+        cadastroAnuncio = findViewById(R.id.button_criar_anuncio);
         edtTipoAnuncio = findViewById(R.id.spinnertipoAnuncio);
     }
 
@@ -56,20 +68,62 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         mprogressDialog = new ProgressDialog(CriarAnuncioActivity.this);
         mprogressDialog.setMessage("Cadastrando anúncio...");
         mprogressDialog.show();
-        // Fazer verificação de campos
-        // Isso aqui embaixo fica dentro do if de validação
-        String anuncio = setarAnuncio();
-        try{
-            cadastrar(anuncio);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }// if acaba aqui
+        if(verficarCampos()){
+            String anuncio = setarAnuncio();
+            try{
+                cadastrar(anuncio);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+        }}
         mprogressDialog.dismiss();
         exibirMensagemSeValidouCadastro();
+
+    }
+
+    private boolean verficarCampos(){
+        String cidade = edtCidade.getText().toString().trim();
+        String bairro = edtBairro.getText().toString().trim();
+        String cep = edtCep.getText().toString().trim();
+        String rua = edtRua.getText().toString().trim();
+        String titulo = edtTitulo.getText().toString().trim();
+//        double valor = Double.parseDouble(edtValor.getText().toString().trim());
+        String descricao = edtDescricao.getText().toString().trim();
+        String telefone = edtTelefone.getText().toString().trim();
+
+        Boolean camposOk = true;
+        if (!validacaoGuiRapida.isCampoAceitavel(titulo)){
+            this.edtTitulo.setError(("Digite o título do seu anúncio"));
+            this.edtTitulo.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isCampoAceitavel(descricao)){
+            this.edtDescricao.setError("Descreva melhor o seu serviço");
+            this.edtDescricao.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isTelefoneValido(telefone)){
+            this.edtTelefone.setError("Telefone Invalido");
+            this.edtTelefone.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isCampoVazio(cidade)){
+            this.edtCidade.setError("Favor insira a cidade");
+            this.edtCidade.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isCampoVazio(bairro)){
+            this.edtBairro.setError("Favor insira o Bairro");
+            this.edtBairro.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isCampoVazio(rua)){
+            this.edtRua.setError("Favor insira a Rua");
+            return false;
+        }else if(!validacaoGuiRapida.isCepValido(cep)){
+            this.edtCep.setError("Favor insira um CEP Válido");
+            this.edtCep.requestFocus();
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public String setarAnuncio(){
-//        tentando desvendar a api pra saber como cadastrar
         String cidade = edtCidade.getText().toString().trim();
         String bairro = edtBairro.getText().toString().trim();
         String cep = edtCep.getText().toString().trim();
@@ -88,7 +142,12 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         String descricao = edtDescricao.getText().toString().trim();
         String telefone = edtTelefone.getText().toString().trim();
         String tipo = edtTipoAnuncio.getSelectedItem().toString();
-        // Tem que ver como vai fazer pra guardar as tags
+//        String stringTags = edtTags.getText().toString().trim();
+//        String[] stags = stringTags.split(",");
+//        ArrayList<String> tags = new ArrayList<String>(stags);
+//
+////        ArrayList<String> tags = new ArrayList<>(stringTags.split(","));
+
 
         Anuncio anuncio = new Anuncio();
         anuncio.setTitle(titulo);
@@ -98,6 +157,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         anuncio.setPhone(telefone);
         anuncio.setType(tipo);
         anuncio.setAddress(endereco);
+//        anuncio.setTags(tags);
 
         Gson gson = new Gson();
         String ad = gson.toJson(anuncio);
@@ -129,7 +189,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
 
     private void exibirMensagemSeValidouCadastro() {
         Toast.makeText(getApplicationContext(), validar, Toast.LENGTH_SHORT).show();
-
+        mudarTela(AnunciosFornecedorActivity.class);
     }
 
     private void mudarTela(Class proximaTela){
@@ -138,8 +198,12 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         finish();
     }
 
+    public void cadastroAnuncio(View view) {
+        this.mudarTela(AnunciosFornecedorActivity.class);
+    }
+
     @Override
     public void onBackPressed() {
-        //mudarTela( INSERIR AQUI A TELA );
+        this.mudarTela(AnunciosFornecedorActivity.class);
     }
 }

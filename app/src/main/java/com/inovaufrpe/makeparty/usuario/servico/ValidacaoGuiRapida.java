@@ -11,6 +11,7 @@ public class ValidacaoGuiRapida {
     private static final String DATA_COMUM_CB   = "dd/MM/yyyy";
     private static final String DATA_COMUM_SB = "yyyyMMdd";
 
+    private static final int TAMCEP = 8;
     private static final int TAMCPF = 11;
     private static final int TAMCNPJ = 14;
     private static final int TAMTEL = 11;
@@ -27,6 +28,10 @@ public class ValidacaoGuiRapida {
     }
     public boolean isCampoAceitavel(String valor){
         return ((valor.length() >= TRES));
+    }
+
+    public boolean isCepValido(String valor) {
+        return((valor.length()==TAMCEP));
     }
 
     public boolean isEmailValido(String email) {
