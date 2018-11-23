@@ -4,28 +4,30 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
+import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class CriarAnuncioActivity extends AppCompatActivity {
     private EditText edtTitulo, edtValor, edtDescricao, edtTags, edtTelefone, edtRua, edtNumero, edtBairro, edtCidade, edtCep;
     private Spinner edtTipoAnuncio;
     private Button cadastroAnuncio;
+    private ImageButton imgButtonImgsAnex,imgButtonAnexMaisFt;
     private String validar = "";
     private boolean isValido = false;
     private ProgressDialog mprogressDialog;
@@ -35,14 +37,14 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_criar_anuncio);
         setTela();
-//        cadastroAnuncio.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onClickCadastrar();
-//            }
-//        });
-//        cadastrando();
+        cadastroAnuncio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickCriarAnuncio();
+           }
+       });
     }
     public void opcoesSpinner(){
         // Ainda tem que setar isso daqui
@@ -50,35 +52,45 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     }
 
     public void setTela(){
-        edtTitulo = findViewById(R.id.editTextTitulo);
-        edtValor = findViewById(R.id.editTextValor);
-        edtDescricao = findViewById(R.id.editTextDescricao);
-        edtTags = findViewById(R.id.editTextTags);
-        edtTelefone = findViewById(R.id.editTextTelefone);
-        edtRua = findViewById(R.id.RuaId);
-        edtNumero = findViewById(R.id.editTextNumero);
-        edtBairro = findViewById(R.id.editTextBairro);
-        edtCidade = findViewById(R.id.editTextCidade);
-        edtCep = findViewById(R.id.editTextCep);
+        edtTitulo = findViewById(R.id.editTextTituloCriarAn);
+        edtValor = findViewById(R.id.editTextValorCriarAn);
+        edtDescricao = findViewById(R.id.editTextDescricaoCriarAn);
+        edtTags = findViewById(R.id.editTextTagsCriarAn);
+        edtTelefone = findViewById(R.id.editTextTelefoneCriarAnun);
+        edtRua = findViewById(R.id.RuaIdCriarAnuncio);
+        edtNumero = findViewById(R.id.editTextNumeroCriarAnuncio);
+        edtBairro = findViewById(R.id.editTextBairroCriarAnuncio);
+        edtCidade = findViewById(R.id.editTextCidadeCriarAnuncio);
+        edtCep = findViewById(R.id.editTextCepCriarAnuncio);
         cadastroAnuncio = findViewById(R.id.button_criar_anuncio);
         edtTipoAnuncio = findViewById(R.id.spinnertipoAnuncio);
+        imgButtonImgsAnex = findViewById(R.id.imgButtonGalFotosAnexAn);
+        imgButtonAnexMaisFt = findViewById(R.id.imgButtonAnexarMaisFtAn);
+    }
+    public void onClickCriarAnuncio(){
+        SimOuNaoDialog.show(getSupportFragmentManager(),"Você confirma os dados desse anúncio?", new SimOuNaoDialog.Callback() {
+            @Override
+            public void metodoSimAoDialog() {
+                mprogressDialog = new ProgressDialog(CriarAnuncioActivity.this);
+                mprogressDialog.setMessage("Cadastrando anúncio...");
+                mprogressDialog.show();
+                if(verficarCampos()){
+                    String anuncio = setarAnuncio();
+                    try{
+                        cadastrar(anuncio);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }}
+                mprogressDialog.dismiss();
+                exibirMensagemSeValidouCadastro();
+                if (isValido){
+                    mudarTela(AnunciosFornecedorActivity.class);
+                }
+
+            }
+        });
     }
 
-    private void onClickCadastrar(){
-        mprogressDialog = new ProgressDialog(CriarAnuncioActivity.this);
-        mprogressDialog.setMessage("Cadastrando anúncio...");
-        mprogressDialog.show();
-        if(verficarCampos()){
-            String anuncio = setarAnuncio();
-            try{
-                cadastrar(anuncio);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-        }}
-        mprogressDialog.dismiss();
-        exibirMensagemSeValidouCadastro();
-
-    }
 
     private boolean verficarCampos(){
         String cidade = edtCidade.getText().toString().trim();
@@ -100,18 +112,18 @@ public class CriarAnuncioActivity extends AppCompatActivity {
             this.edtDescricao.requestFocus();
             return false;
         }else if(!validacaoGuiRapida.isTelefoneValido(telefone)){
-            this.edtTelefone.setError("Telefone Invalido");
+            this.edtTelefone.setError("Telefone Invalido ou sem ddd");
             this.edtTelefone.requestFocus();
             return false;
-        }else if(!validacaoGuiRapida.isCampoVazio(cidade)){
+        }else if(validacaoGuiRapida.isCampoVazio(cidade)){
             this.edtCidade.setError("Favor insira a cidade");
             this.edtCidade.requestFocus();
             return false;
-        }else if(!validacaoGuiRapida.isCampoVazio(bairro)){
+        }else if(validacaoGuiRapida.isCampoVazio(bairro)){
             this.edtBairro.setError("Favor insira o Bairro");
             this.edtBairro.requestFocus();
             return false;
-        }else if(!validacaoGuiRapida.isCampoVazio(rua)){
+        }else if(validacaoGuiRapida.isCampoVazio(rua)){
             this.edtRua.setError("Favor insira a Rua");
             return false;
         }else if(!validacaoGuiRapida.isCepValido(cep)){
@@ -172,7 +184,8 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                validar = ConectarServidor.post("https://makepartyserver.herokuapp.com/ads", data);
+                validar = ConectarServidor.postComToken("https://makepartyserver.herokuapp.com/ads", data);
+                Log.i("Script", "OLHAAA: "+ validar);
                 if (validar.substring(2, 5).equals("err")){
                     // Não sei qual o erro
                     validar = "Não foi possível criar o anúncio";
@@ -189,7 +202,6 @@ public class CriarAnuncioActivity extends AppCompatActivity {
 
     private void exibirMensagemSeValidouCadastro() {
         Toast.makeText(getApplicationContext(), validar, Toast.LENGTH_SHORT).show();
-        mudarTela(AnunciosFornecedorActivity.class);
     }
 
     private void mudarTela(Class proximaTela){

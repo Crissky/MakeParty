@@ -62,7 +62,7 @@ public class CadastroActivity extends AppCompatActivity {
         //edtMei.addTextChangedListener(Mask.insert("", edtMei));
         edtCnpj = findViewById(R.id.editTextCNPJ);
         edtCnpj.addTextChangedListener(Mask.insert("##.###.###/####-##", edtCnpj));
-        edtTelefone = findViewById(R.id.editTextTelefone);
+        edtTelefone = findViewById(R.id.editTextTelefoneCriarAnun);
         edtTelefone.addTextChangedListener(Mask.insert("(##)#####-####",edtTelefone));
 
     }

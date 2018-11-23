@@ -17,21 +17,21 @@ import java.util.ArrayList;
 public class AnunciosFornecedorActivity extends AppCompatActivity {
     private ArrayList<Anuncio> lista;
     private ListView listaAnuncios;
-    private Button cadastro;
+    private Button btCriarAnuncio;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncios_fornecedor);
-        cadastro = findViewById(R.id.criarAnuncioId);
+        btCriarAnuncio = findViewById(R.id.criarAnuncioId);
         listaAnuncios = findViewById(R.id.listaId);
-//        cadastro.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                criarAnuncio();
-//            }
-//        });
+        btCriarAnuncio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                telacriarAnuncio();
+            }
+        });
 
     }
 
@@ -45,9 +45,9 @@ public class AnunciosFornecedorActivity extends AppCompatActivity {
         this.mudarTela(CriarAnuncioActivity.class);
     }
 
-//    private void criarAnuncio(){
-//        startActivity(new Intent(AnunciosFornecedorActivity.this, CriarAnuncioActivity.class));
-//        AnunciosFornecedorActivity.this.finish();
-//    }
+   private void telacriarAnuncio(){
+        startActivity(new Intent(AnunciosFornecedorActivity.this, CriarAnuncioActivity.class));
+        AnunciosFornecedorActivity.this.finish();
+   }
 
 }

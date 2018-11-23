@@ -40,7 +40,7 @@ public class TelaInicialFornecedorActivity extends AppCompatActivity {
         anuncios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TelaInicialFornecedorActivity.this, AnunciosFornecedorActivity.class));
+                startActivity(new Intent(TelaInicialFornecedorActivity.this, EscolhasSobreAnuncioActivity.class));
             }
         });
 

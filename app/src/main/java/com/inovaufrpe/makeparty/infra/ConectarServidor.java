@@ -9,6 +9,7 @@ import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -137,6 +138,64 @@ public class ConectarServidor {
             Log.i("Script", "ANSWER: "+ answer);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+        return answer;
+    }
+    public static String postComToken(String url, String body) {
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setHeader("Content-type", "application/json");
+        httpPost.addHeader("Authorization", "Bearer "+ SessaoApplication.instance.getTokenUser());
+        String answer;
+        try {
+            StringEntity stringEntity = new StringEntity(body);
+            httpPost.getRequestLine();
+            httpPost.setEntity(stringEntity);
+            HttpResponse resposta = httpClient.execute(httpPost);
+            int status = resposta.getStatusLine().getStatusCode();
+            if (status == 201) {
+                answer = EntityUtils.toString(resposta.getEntity());
+                Log.i("Script", "ANSWER: "+ answer);
+            } else if (status == 409) {
+                throw new Exception("Mr já existe");
+            } else {
+                throw new Exception("Erro inesperado");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return answer;
+    }
+    //dos men
+    private static String put(String url, String body) {
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPut httpPut = new HttpPut(url);
+        httpPut.setHeader("Content-type", "application/json");
+        httpPut.addHeader("Authorization", "Bearer "+ SessaoApplication.instance.getTokenUser());
+        String answer;
+        String Erro = null;
+        try {
+            StringEntity stringEntity = new StringEntity(body);
+            httpPut.getRequestLine();
+            httpPut.setEntity(stringEntity);
+            HttpResponse resposta = httpClient.execute(httpPut);
+
+            int status = resposta.getStatusLine().getStatusCode();
+            if (status == 200) {
+                answer = EntityUtils.toString(resposta.getEntity());
+                Log.i("Script", "ANSWER: "+ answer);
+            } else if (status == 404) {
+                Erro = "- não encontrado";
+                throw new Exception(Erro);
+            } else if(status == 400) {
+                Erro = "Email em uso";
+                throw new Exception(Erro);
+            } else {
+                Erro = "Erro Inesperado";
+                throw new Exception(Erro);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(Erro);
         }
         return answer;
     }

@@ -113,13 +113,32 @@
     <string name="text_atualizar">Atualizar</string>
 
     <string name="tipo_Anuncio">Tipo do Anuncio</string>
+    <string name="edit_text_telefone_criar_an">Telefone</string>
+    <string name="edit_text_endereco">Endereço</string>
+    <string name="text_view_endereco">Endereço</string>
+    <string name="edit_text_rua_criar_anuncio">Rua</string>
+    <string name="edit_text_numero_an">Número</string>
+    <string name="button_criar_anuncio">Criar anúncio</string>
+    <string name="edit_text_cep_anuncio">CEP</string>
+    <string name="edit_text_cidade_criar_an">Cidade</string>
+    <string name="edit_text_bairro_criar_an">Bairro</string>
+    <string name="spinner_msg_esc_tipo_an">Escolha o tipo de Anúncio:</string>
+    <string name="label_escolhas_sobre_anuncios">Escolhas sobre o anúncio</string>
+    <string name="button_chat_fornecedor">CHAT</string>
+    <string name="button_visualizar_an_forn">Meus anúncios</string>
+    <string name="text_view_anexar_img_an">Anexar imagens</string>
+    <string name="text_view_limites_criar_anuncio_forn">Você tem plano tal tal com limite de ft, vc ja postou x</string>
+    <string name="text_view_criar_novo_anuncio">Criar novo anúncio</string>
+    <string name="label_meus_anuncios_forn">Meus anúncios</string>
+    <string name="label_lista_desej_cliente">Minha lista de desejo</string>
+    <string name="label_lista_minhas_notif_forn">Minhas notificações</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>
         <item>Buffet</item>
         <item>Decoração</item>
+        <item>Pacote</item>
     </string-array>
-
 
 
 </resources>

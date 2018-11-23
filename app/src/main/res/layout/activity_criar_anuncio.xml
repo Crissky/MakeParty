@@ -12,14 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<android.support.v7.widget.CardView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="8dp"-->
-            <!--android:layout_marginTop="@dimen/margin_top_card"-->
-            <!--app:cardCornerRadius="@dimen/card_border"-->
-            <!--app:cardElevation="@dimen/card_elevation"-->
-            <!--app:contentPadding="@dimen/card_padding">-->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginTop="@dimen/margin_top_card"
+            app:cardCornerRadius="@dimen/card_border"
+            app:cardElevation="@dimen/card_elevation"
+            app:contentPadding="@dimen/card_padding">
 
 
             <LinearLayout
@@ -27,43 +27,48 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <TextView
-                    android:id="@+id/textViewEscolhadeAnuncio"
-                    android:layout_width="283dp"
+                    android:id="@+id/textViewCriandoNovoAnuncio"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="16dp"
+                    android:layout_margin="28dp"
                     android:layout_marginTop="36dp"
-                    android:gravity="center_horizontal"
-                    android:text="Escolha o tipo de Anúncio:"
+                    android:text="@string/text_view_criar_novo_anuncio"
+                    android:gravity="center"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15sp"
+                    android:textSize="25sp"
                     tools:layout_editor_absoluteX="95dp"
                     tools:layout_editor_absoluteY="46dp" />
 
-                <!--<android.support.v7.widget.CardView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_margin="16dp"-->
-                    <!--app:cardCornerRadius="8dp"-->
-                    <!--app:cardElevation="8dp"-->
-                    <!--app:contentPadding="8dp">-->
 
-                    <Spinner
-                        android:id="@+id/spinnertipoAnuncio"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:popupBackground="@color/colorWhite"
-                        android:spinnerMode="dropdown"
-                        tools:layout_editor_absoluteX="16dp"
-                        tools:layout_editor_absoluteY="129dp"
-                        android:entries="@array/tipo"
-                        android:prompt="@string/tipo_Anuncio"/>
-                <!--</android.support.v7.widget.CardView>-->
+                <TextView
+                    android:id="@+id/textViewEscolhadeAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="28dp"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/spinner_msg_esc_tipo_an"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="19sp"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="46dp" />
+
+
+                <Spinner
+                    android:id="@+id/spinnertipoAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:popupBackground="@color/colorWhite"
+                    android:spinnerMode="dropdown"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="129dp"
+                    android:entries="@array/tipo"
+                    android:textSize="18sp"
+                    android:prompt="@string/tipo_Anuncio"/>
 
                 <EditText
-                    android:id="@+id/editTextTitulo"
+                    android:id="@+id/editTextTituloCriarAn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -75,7 +80,7 @@
 
 
                 <EditText
-                    android:id="@+id/editTextValor"
+                    android:id="@+id/editTextValorCriarAn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -85,19 +90,20 @@
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="277dp" />
 
+
                 <EditText
-                    android:id="@+id/editTextDescricao"
+                    android:id="@+id/editTextDescricaoCriarAn"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
                     android:hint="Descreva seu serviço!"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="355dp" />
 
                 <EditText
-                    android:id="@+id/editTextTags"
+                    android:id="@+id/editTextTagsCriarAn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -109,100 +115,153 @@
 
 
                 <EditText
-                    android:id="@+id/editTextTelefone"
+                    android:id="@+id/editTextTelefoneCriarAnun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
-                    android:hint="Telefone"
+                    android:hint="@string/edit_text_telefone_criar_an"
                     android:inputType="text"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="430dp" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textViewEnderecoCriarAn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Endereço"
-                    android:textSize="18sp" />
+                    android:text="@string/text_view_endereco"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    />
 
                 <EditText
-                    android:id="@+id/RuaId"
+                    android:id="@+id/RuaIdCriarAnuncio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="16dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:ems="10"
-                    android:hint="Rua"
+                    android:hint="@string/edit_text_rua_criar_anuncio"
                     android:inputType="text"
                     tools:layout_editor_absoluteX="17dp"
                     tools:layout_editor_absoluteY="646dp" />
 
                 <EditText
-                    android:id="@+id/editTextNumero"
+                    android:id="@+id/editTextNumeroCriarAnuncio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
-                    android:hint="Numero"
+                    android:hint="@string/edit_text_numero_an"
                     android:inputType="text"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="502dp" />
 
 
                 <EditText
-                    android:id="@+id/editTextBairro"
+                    android:id="@+id/editTextBairroCriarAnuncio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
                     android:ems="10"
-                    android:hint="Bairro"
+                    android:hint="@string/edit_text_bairro_criar_an"
                     android:inputType="text"
                     android:visibility="visible"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="715dp" />
 
                 <EditText
-                    android:id="@+id/editTextCidade"
+                    android:id="@+id/editTextCidadeCriarAnuncio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
                     android:ems="10"
-                    android:hint="Cidade"
+                    android:hint="@string/edit_text_cidade_criar_an"
                     android:inputType="text"
                     android:visibility="visible"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="783dp" />
 
                 <EditText
-                    android:id="@+id/editTextCep"
+                    android:id="@+id/editTextCepCriarAnuncio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
                     android:ems="10"
-                    android:hint="Cep"
+                    android:hint="@string/edit_text_cep_anuncio"
                     android:inputType="text"
                     android:visibility="visible"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="783dp" />
+                <TextView
+                    android:id="@+id/textViewAnexarImgAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/text_view_anexar_img_an"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="19sp"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="46dp" />
+                <TextView
+                    android:id="@+id/textViewObsLimitesAnuncioForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/text_view_limites_criar_anuncio_forn"
+                    android:textSize="14sp"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="46dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:id="@+id/imgButtonGalFotosAnexAn"
+                        android:layout_width="5dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1" />
+                    <ImageButton
+                        android:layout_weight="1"
+                        android:id="@+id/imgButtonAnexarMaisFtAn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_control_point_24dp"/>
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/button_criar_anuncio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="16dp"
+                    android:layout_margin="18dp"
                     android:background="@color/colorButoes"
-                    android:text="Criar Anúncio"
-                    android:onClick="cadastroAnuncio"
+                    android:text="@string/button_criar_anuncio"
                     android:textColor="@color/colorTextoBut"
                     tools:layout_editor_absoluteX="46dp"
                     tools:layout_editor_absoluteY="878dp" />
+
             </LinearLayout>
-        <!--</android.support.v7.widget.CardView>-->
+        </android.support.v7.widget.CardView>
+
+
     </ScrollView>
 
 
