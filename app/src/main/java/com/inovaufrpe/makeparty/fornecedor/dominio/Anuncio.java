@@ -1,5 +1,8 @@
 package com.inovaufrpe.makeparty.fornecedor.dominio;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.inovaufrpe.makeparty.fornecedor.dominio.PessoaJuridica;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
 
@@ -9,7 +12,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Anuncio {
+public class Anuncio implements Parcelable {
 
     public Long id;
     private String title;
@@ -133,6 +136,47 @@ public class Anuncio {
         }
         return null;
     }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // Escreve os dados para serem serializados
+        dest.writeLong(id);
+        dest.writeString(this.title);
+        //dest.writeString(this.owner.getSocialname());
+        dest.writeString(this.description);
+        //dest.writeString(this.urlFoto);
+        dest.writeDouble(this.price);
+        //dest.writeString(this.urlVideo);
+        dest.writeString(this.phone);
+        //dest.writeString(this.address);
+    }
+
+    public void readFromParcel(Parcel parcel) {
+        // Lê os dados na mesma ordem em que foram escritos
+        this.id = parcel.readLong();
+        this.title = parcel.readString();
+        this.description = parcel.readString();
+        this.price = parcel.readDouble();
+        //this.urlFoto = parcel.readString();
+        this.phone = parcel.readString();
+    }
+
+    public static final Parcelable.Creator<Anuncio> CREATOR = new Parcelable.Creator<Anuncio>() {
+        @Override
+        public Anuncio createFromParcel(Parcel p) {
+            Anuncio c = new Anuncio();
+            c.readFromParcel(p);
+            return c;
+        }
+        @Override
+        public Anuncio[] newArray(int size) {
+            return new Anuncio[size];
+        }
+    };
 
 
 }

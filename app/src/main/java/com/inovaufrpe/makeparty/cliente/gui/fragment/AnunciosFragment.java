@@ -4,6 +4,8 @@ package com.inovaufrpe.makeparty.cliente.gui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.dialog.SimOuNaoDialog;
@@ -155,15 +158,15 @@ public class AnunciosFragment extends BaseFragment {
                 Anuncio c = anuncios.get(idx);
 
                 if (actionMode == null) {
-                    //ImageView img = holder.img;
+                    ImageView img = holder.img;
 
                     Intent intent = new Intent(getActivity(), DetalhesAnuncioActivity.class);
-                    //intent.putExtra("anuncio", c);
+                    intent.putExtra("anuncio", c);
                     String key = getString(R.string.transition_key);
 
                     // Compat
-                    //ActivityOptionsCompat opts = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), img, key);
-                    //ActivityCompat.startActivity(getActivity(), intent, opts.toBundle());
+                    ActivityOptionsCompat opts = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), img, key);
+                    ActivityCompat.startActivity(getActivity(), intent, opts.toBundle());
                 } else {
                     // Seleciona o anuncio e atualiza a lista
                     c.selected = !c.selected;
