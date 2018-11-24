@@ -41,10 +41,8 @@ public class LoginActivity extends AppCompatActivity{
     public void onClickLogar(View view){
         String email = edtEmail.getText().toString();
         String senha = edtSenha.getText().toString();
-        showProgressDialogWithTitle();
         try {
             login();
-            progressDialog.dismiss();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -54,13 +52,14 @@ public class LoginActivity extends AppCompatActivity{
         if (this.verificarCampos()) {
             if(isOnline()){
                 String usuario = setarUsuario(edtEmail.getText().toString().trim(), edtSenha.getText().toString().trim());
+                showProgressDialogWithTitle();
                 logar(usuario);
                 //Toast.makeText(this, Sessao.instance.getResposta(), Toast.LENGTH_SHORT).show();
                 if(SessaoApplication.instance.getResposta().contains("E-mail ou senha incorretos")){
                     Toast.makeText(this, "E-mail ou senha incorretos", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 } else {
                     //getSessaoApi();
-                    progressDialog.dismiss();
                     String[] parts = SessaoApplication.instance.getResposta().split(",");
                     String token = parts[0].substring(9,parts[0].length()); //FALTA  setar o usuario logado
                     tipoUserLogou = parts[1].substring(8,parts[1].length()-2);
@@ -79,7 +78,6 @@ public class LoginActivity extends AppCompatActivity{
             } else {
                 Toast.makeText(this, "Sem conexão com a internet", Toast.LENGTH_SHORT).show();
             }
-
         }
 
     }

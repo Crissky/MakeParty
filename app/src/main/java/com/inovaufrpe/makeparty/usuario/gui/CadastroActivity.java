@@ -133,8 +133,6 @@ public class CadastroActivity extends AppCompatActivity {
             this.mudarTela(EntrarOuCadastrarActivity.class);
         }
 
-
-
     }
 
     private boolean verificarCamposEmailSenhaETelefone() {
