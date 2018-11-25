@@ -93,7 +93,14 @@
         <activity android:name=".fornecedor.gui.CapturaDadosCalendarActivity" />
         <activity android:name=".cliente.gui.ListaDesejosClienteActivity" />
         <activity android:name=".fornecedor.gui.CriarAnuncioActivity" />
-        <activity android:name=".fornecedor.gui.EscolhasSobreAnuncioActivity"></activity>
+        <activity android:name=".fornecedor.gui.EscolhasSobreAnuncioActivity" />
+        <activity android:name=".cliente.gui.fragment.dialog.CalendarioAnuncioDialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

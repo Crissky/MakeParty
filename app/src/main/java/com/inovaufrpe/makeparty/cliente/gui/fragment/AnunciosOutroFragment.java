@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
 import com.inovaufrpe.makeparty.cliente.gui.adapter.AnuncioAdapter;
-import com.inovaufrpe.makeparty.cliente.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.servico.AnuncioService;

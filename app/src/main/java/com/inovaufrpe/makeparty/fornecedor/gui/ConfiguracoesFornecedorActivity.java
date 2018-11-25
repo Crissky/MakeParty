@@ -1,7 +1,6 @@
 package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,19 +8,15 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
-import com.inovaufrpe.makeparty.cliente.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Permissoes;
-import com.inovaufrpe.makeparty.usuario.gui.EscolhaTipoUserActivity;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 
 public class ConfiguracoesFornecedorActivity extends AppCompatActivity {
 

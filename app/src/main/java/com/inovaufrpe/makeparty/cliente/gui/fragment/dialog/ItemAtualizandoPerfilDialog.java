@@ -1,16 +1,11 @@
-package com.inovaufrpe.makeparty.cliente.gui.dialog;
+package com.inovaufrpe.makeparty.cliente.gui.fragment.dialog;
 
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-
-import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
 
 public class ItemAtualizandoPerfilDialog extends DialogFragment {
     //private Callback callback;

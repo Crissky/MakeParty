@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.cliente.gui.dialog;
+package com.inovaufrpe.makeparty.cliente.gui.fragment.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
