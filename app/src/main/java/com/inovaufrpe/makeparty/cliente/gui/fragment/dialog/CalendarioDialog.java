@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class CalendarioDialog extends DialogFragment {
 
@@ -20,6 +22,14 @@ public class CalendarioDialog extends DialogFragment {
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         return new DatePickerDialog(getActivity(),(DatePickerDialog.OnDateSetListener)getActivity(),year,mouth,day);
+    }
+    private void updateLabel() {
+
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("pt","BR"));
+
+        //linha abaixo errada pq n ta numa activity, mas deixando aq p caso leitura futura
+        //edittext.setText(sdf.format(myCalendar.getTime()));
     }
 
 }

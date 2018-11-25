@@ -71,9 +71,10 @@ public class LoginActivity extends AppCompatActivity{
                     if (tipoUserLogou.equals("customer")){
                         irParaTelaInicialCliente();
                     }else{
-
                         irParaTelaInicialFornecedor();
                     }
+
+
                 }
             } else {
                 Toast.makeText(this, "Sem conexão com a internet", Toast.LENGTH_SHORT).show();

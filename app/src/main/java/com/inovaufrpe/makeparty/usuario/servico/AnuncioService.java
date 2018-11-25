@@ -14,6 +14,7 @@ import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.ResponseWithURL;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.FileUtils;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
+import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,13 +102,17 @@ public class AnuncioService {
                 c.setTitle(jsonAnuncio.optString("title"));
                 c.setPrice(jsonAnuncio.optDouble("price"));
                 c.setPhone(jsonAnuncio.optString("phone"));
+                c.setOwner((PessoaJuridica) jsonAnuncio.opt("owner"));
+                c.setAddress((Endereco) jsonAnuncio.opt("address"));
+                //c.setTags(jsonAnuncio.optJSONArray("tags"));
 
+                //refazer
+                //c.setSocialname(jsonAnuncio.opt("owner"));
                 //c.setSocialname(jsonAnuncio.opt);
                 //c.setAddress(jsonAnuncio.optS);
                // c.setOwner(jsonAnuncio.toJSONArray("owner"));
-                PessoaJuridica d= new PessoaJuridica();
-                //d.setCnpj(jsonAnuncio.optJSONObject("owner"));
-                //c.setOwner(jsonAnuncio.optJSONObject("owner"));
+                //c.setCnpj((PessoaJuridica) jsonAnuncio.optJSONObject("owner"));
+                //c.setOwner((PessoaJuridica)jsonAnuncio.optJSONObject("owner"));
 
                 if (LOG_ON) {
                     Log.d(TAG, "Anuncio" + c.getDescription() + ">");

@@ -66,7 +66,7 @@
 
             <TextView
                 android:id="@+id/textViewTitleAds"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
@@ -81,8 +81,8 @@
 
             <TextView
                 android:id="@+id/textViewNomeFornecedor"
-                android:layout_width="0dp"
-                android:layout_height="31dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="62dp"
@@ -90,7 +90,7 @@
                 android:layout_marginRight="16dp"
                 android:text="Nome dx fornecedor(a): Kimbelly Ferraz"
                 android:textColor="@color/colorBlack"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,7 @@
 
             <TextView
                 android:id="@+id/textViewAnuncioMediaGeral"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
@@ -130,8 +130,8 @@
 
             <RatingBar
                 android:id="@+id/ratingBarMediaTipoAnuncioFornecedor"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="248dp"
                 android:layout_marginLeft="8dp"
@@ -166,13 +166,9 @@
                 app:layout_constraintStart_toEndOf="@+id/ratingBarMediaTipoAnuncioFornecedor" />
             <TextView
                 android:id="@+id/textViewDescription"
-                android:layout_width="0dp"
-                android:layout_height="64dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:text="Quer fazer uma festa? Nós temos o serviço, nesse anúncio conta-se com 1 bolo de 3kg , 50 salgados, 50 doces...."
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
@@ -182,16 +178,12 @@
 
             <TextView
                 android:id="@+id/textViewTelefoneAds"
-                android:layout_width="196dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:text="Telefone: 81 99999999"
                 android:textColor="@color/colorBlack"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.02"
                 app:layout_constraintStart_toStartOf="parent"
@@ -199,16 +191,12 @@
 
             <TextView
                 android:id="@+id/textViewPriceAds"
-                android:layout_width="196dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:text="Preço: R$99,99"
                 android:textColor="@color/colorBlack"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.02"
                 app:layout_constraintStart_toStartOf="parent"
@@ -219,14 +207,14 @@
             <TextView
                 android:id="@+id/textViewTags"
                 android:layout_width="match_parent"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:text="tags: balada, linduxo"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textColor="@color/colorBlack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -236,15 +224,11 @@
             <TextView
                 android:id="@+id/textViewAddressAds"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:text="Endereço: Rua Marquês de Baipendi, Campo Grande, Recife, Pernambuco"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -252,16 +236,18 @@
 
             <Button
                 android:id="@+id/buttonVerifDispAnuncio"
-                android:layout_width="224dp"
-                android:layout_height="30dp"
-                android:layout_margin="16dp"
-                android:layout_marginTop="56dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:background="@color/colorButoes"
+                android:onClick="onClickVerificarDisponibilidade"
                 android:text="@string/text_view_verificar_disponibilidade_anuncio"
                 android:textColor="@color/colorWhite"
-                android:onClick="onClickVerificarDisponibilidade"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.456"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTags" />
 
@@ -289,7 +275,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />

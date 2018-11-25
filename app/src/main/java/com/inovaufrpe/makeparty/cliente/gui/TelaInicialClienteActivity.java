@@ -2,6 +2,7 @@ package com.inovaufrpe.makeparty.cliente.gui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
@@ -97,8 +98,19 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         } else if (id == R.id.action_filtrar_por_regiao) {
         } else if (id == R.id.action_filtrar_por_preco) {
         }else if (id==R.id.action_sair){
-            SessaoApplication.instance.onTerminate();
-            finish();
+            String qmsetado= SessaoApplication.getInstance().getTipoDeUserLogado();
+            Log.i("Script", "OLHAAA esse era antes" + qmsetado);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                finishAffinity();
+            }
+            Log.i("Script", "OLHAAA: "+ qmsetado);
+            String qmsetadohehe= SessaoApplication.instance.getTipoDeUserLogado();
+            Log.i("Script", "OLHAAA: "+ qmsetadohehe);
+            //finish();
+            //System.exit(0);
+              SessaoApplication.instance.onTerminate();
+            Log.i("Script", "OLHAAA: "+ qmsetadohehe);
+            //finish();
         }
 
         return super.onOptionsItemSelected(item);

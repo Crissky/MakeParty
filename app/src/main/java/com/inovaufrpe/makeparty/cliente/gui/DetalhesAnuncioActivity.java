@@ -56,7 +56,7 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
-        TextView textView = (TextView) findViewById(R.id.textView);
+        TextView textView = (TextView) findViewById(R.id.textView1);
         textView.setText(currentDateString);
     }
 
