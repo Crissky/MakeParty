@@ -13,14 +13,14 @@
 
     <item
         android:id="@+id/action_share"
-        android:icon="@drawable/ic_menu_share"
+        android:icon="@drawable/ic_menu_share_white"
         android:title="Compartilhar"
         android:visible="false"/>
     <item
         android:id="@+id/action_send_selec"
-        android:icon="@drawable/ic_menu_send"
+        android:icon="@drawable/ic_menu_send_white"
         android:orderInCategory="308"
-        android:iconTint="@color/colorWhite"
+        app:itemIconTint="@color/colorWhite"
         android:title="Send" />
 
 </menu>

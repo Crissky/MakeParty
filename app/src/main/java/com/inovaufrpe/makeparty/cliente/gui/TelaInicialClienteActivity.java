@@ -36,7 +36,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial_cliente);
-        //acoesReferentesAoBottomNavigation();
+        acoesReferentesAoBottomNavigation();
         toolbarComMenuNavAbreEFecha();
         viewDoMenuNavListaClicavel();
         criarFragment(savedInstanceState);
@@ -146,27 +146,38 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
     protected Context getContext() {
         return this;
     }
+
     public void acoesReferentesAoBottomNavigation(){
         bottomNavigationView =  (BottomNavigationView) findViewById(R.id.tab_bar_opcoes_embaixo);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()  {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId()==R.id.action_pacotes){
-
+                    trocarFragmento("pacotes");
                 }else if (item.getItemId()==R.id.action_casa_festa){
-
+                    trocarFragmento("casa de festa");
                 }else if (item.getItemId()==R.id.action_buffet){
-
+                    trocarFragmento("buffet");
                 }else if (item.getItemId()==R.id.action_decoracao){
-
+                    trocarFragmento("decoracao");
                 }else if (item.getItemId()==R.id.action_animacao){
-
+                    trocarFragmento("animacao");
                 }
                 return false;
             }
         });
 
     }
+    public void trocarFragmento(String tipo){
+        //getSupportActionBar().setTitle(getString(getIntent().getStringExtra("tipo",tipo)));
+        AnunciosOutroFragment frag = new AnunciosOutroFragment();
+        //AnunciosFragment frag = new AnunciosFragment();
+        frag.setArguments(getIntent().getExtras());
+        //getSupportFragmentManager().beginTransaction().add(R.id.container, frag).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, frag).commit();
+
+    }
+
     private void mudarTela(Class tela){
         Intent intent=new Intent(this, tela);
         startActivity(intent);

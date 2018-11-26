@@ -82,7 +82,7 @@ public class AnuncioService {
     }
 
     public static List<Anuncio> getAnunciosByTipo(String tipo) throws IOException {
-        String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", "Festa");
+        String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
 
         // Request HTTP GET
         ConectarServidor http = new ConectarServidor();
@@ -102,8 +102,8 @@ public class AnuncioService {
                 c.setTitle(jsonAnuncio.optString("title"));
                 c.setPrice(jsonAnuncio.optDouble("price"));
                 c.setPhone(jsonAnuncio.optString("phone"));
-                c.setOwner((PessoaJuridica) jsonAnuncio.opt("owner"));
-                c.setAddress((Endereco) jsonAnuncio.opt("address"));
+                //c.setOwner((PessoaJuridica) jsonAnuncio.opt("owner"));
+                //c.setAddress((Endereco) jsonAnuncio.opt("address"));
                 //c.setTags(jsonAnuncio.optJSONArray("tags"));
 
                 //refazer

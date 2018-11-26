@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/action_pacotes"
-        android:title="@string/ic_pacotes"
-        android:icon="@drawable/ic_package_black_and_white"
-        />
-    <item
-        android:id="@+id/action_casa_festa"
-        android:title="@string/ic_casadefesta"
-        android:icon="@drawable/ic_big_castle_black_and_white">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    </item>
-    <item
-        android:id="@+id/action_buffet"
-        android:title="@string/ic_buffet"
-        android:icon="@drawable/ic_wedding_cake_black_and_white"/>
-    <item
-        android:id="@+id/action_decoracao"
-        android:title="@string/ic_decoracao"
-        android:icon="@drawable/ic_balloons_black_and_white"/>
-    <item
-        android:id="@+id/action_animacao"
-        android:title="@string/ic_animacao"
-        android:icon="@drawable/ic_clown_black_and_white" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_pacotes"
+            android:title="@string/ic_pacotes"
+            android:icon="@drawable/ic_package_black_and_white"
+            app:showAsAction="always|withText"
+            />
+        <item
+            android:id="@+id/action_casa_festa"
+            android:title="@string/ic_casadefesta"
+            android:icon="@drawable/ic_big_castle_black_and_white"
+            app:showAsAction="always|withText">
+
+        </item>
+        <item
+            android:id="@+id/action_buffet"
+            android:title="@string/ic_buffet"
+            android:icon="@drawable/ic_wedding_cake_black_and_white"
+            app:showAsAction="always|withText"/>
+        <item
+            android:id="@+id/action_decoracao"
+            android:title="@string/ic_decoracao"
+            android:icon="@drawable/ic_balloons_black_and_white"
+            app:showAsAction="always|withText"/>
+        <item
+            android:id="@+id/action_animacao"
+            android:title="@string/ic_animacao"
+            android:icon="@drawable/ic_clown_black_and_white"
+            app:showAsAction="always|withText"/>
+    </group>
 
 
 </menu>

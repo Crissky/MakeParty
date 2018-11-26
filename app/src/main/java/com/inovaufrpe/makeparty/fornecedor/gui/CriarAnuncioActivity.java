@@ -17,6 +17,7 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
+import com.inovaufrpe.makeparty.infra.utils.Mask;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
@@ -56,11 +57,13 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         edtDescricao = findViewById(R.id.editTextDescricaoCriarAn);
         edtTags = findViewById(R.id.editTextTagsCriarAn);
         edtTelefone = findViewById(R.id.editTextTelefoneCriarAnun);
+        edtTelefone.addTextChangedListener(Mask.insert("(##)#####-####",edtTelefone));
         edtRua = findViewById(R.id.RuaIdCriarAnuncio);
         edtNumero = findViewById(R.id.editTextNumeroCriarAnuncio);
         edtBairro = findViewById(R.id.editTextBairroCriarAnuncio);
         edtCidade = findViewById(R.id.editTextCidadeCriarAnuncio);
         edtCep = findViewById(R.id.editTextCepCriarAnuncio);
+        edtCep.addTextChangedListener(Mask.insert("#####-###",edtCep));
         cadastroAnuncio = findViewById(R.id.button_criar_anuncio);
         edtTipoAnuncio = findViewById(R.id.spinnertipoAnuncio);
         imgButtonImgsAnex = findViewById(R.id.imgButtonGalFotosAnexAn);
@@ -80,11 +83,12 @@ public class CriarAnuncioActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }}
-                mprogressDialog.dismiss();
+
                 exibirMensagemSeValidouCadastro();
                 if (isValido){
                     mudarTela(AnunciosFornecedorActivity.class);
                 }
+                mprogressDialog.dismiss();
 
             }
         });

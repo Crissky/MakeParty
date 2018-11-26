@@ -30,8 +30,9 @@ public class ValidacaoGuiRapida {
         return ((valor.length() >= TRES));
     }
 
-    public boolean isCepValido(String valor) {
-        return((valor.length()==TAMCEP));
+    public boolean isCepValido(String cep) {
+        cep = String.valueOf(cep).replace("-","");
+        return((cep.length()==TAMCEP));
     }
 
     public boolean isEmailValido(String email) {

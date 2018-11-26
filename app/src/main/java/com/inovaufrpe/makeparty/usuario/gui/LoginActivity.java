@@ -50,9 +50,9 @@ public class LoginActivity extends AppCompatActivity{
     }
     private void login() throws InterruptedException {
         if (this.verificarCampos()) {
+            showProgressDialogWithTitle();
             if(isOnline()){
                 String usuario = setarUsuario(edtEmail.getText().toString().trim(), edtSenha.getText().toString().trim());
-                showProgressDialogWithTitle();
                 logar(usuario);
                 //Toast.makeText(this, Sessao.instance.getResposta(), Toast.LENGTH_SHORT).show();
                 if(SessaoApplication.instance.getResposta().contains("E-mail ou senha incorretos")){
@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity{
                 }
             } else {
                 Toast.makeText(this, "Sem conexão com a internet", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         }
 

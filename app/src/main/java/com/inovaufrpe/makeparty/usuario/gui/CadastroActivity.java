@@ -85,7 +85,7 @@ public class CadastroActivity extends AppCompatActivity {
                     edtCpf.setVisibility(View.INVISIBLE);
                     edtCpf.setText("");
                     edtNasc.setText("");
-                    edtNasc.setVisibility(View.INVISIBLE);
+                    edtNasc.setVisibility(View.GONE);
                     tipoDeUserParaCadastro = "Fornecedor";
                 } else{
                     edtNome.setHint("Nome");
@@ -127,11 +127,12 @@ public class CadastroActivity extends AppCompatActivity {
                 }
 
             }
-        }mprogressDialog.dismiss();
+        }
         exibirMensagemSeValidouCadastro();
         if (isValido){
             this.mudarTela(EntrarOuCadastrarActivity.class);
         }
+        mprogressDialog.dismiss();
 
     }
 
