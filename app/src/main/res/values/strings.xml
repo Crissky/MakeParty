@@ -132,6 +132,8 @@
     <string name="label_meus_anuncios_forn">Meus anúncios</string>
     <string name="label_lista_desej_cliente">Minha lista de desejo</string>
     <string name="label_lista_minhas_notif_forn">Minhas notificações</string>
+    <string name="label_lista_dias_disp_cliente_clicou">Lista de disponibilidade do fornecedor</string>
+    <string name="button_enviar_solic_reuniao">Enviar solicitação de reunião</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>

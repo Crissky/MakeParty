@@ -14,9 +14,12 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -128,6 +131,7 @@ public class ConectarServidor {
         String answer;
         HttpPost httpPost = new HttpPost(completeUrl);
         httpPost.setHeader("Content-type", "application/json");
+
         try {
             StringEntity stringEntity = new StringEntity(body);
             httpPost.getRequestLine();
@@ -141,11 +145,51 @@ public class ConectarServidor {
         }
         return answer;
     }
+    private String inserirDocServer(String... strings){
+        String jsonResposta = null;
+
+        try{
+            URL url = new URL("https://makepartyserver.herokuapp.com/ads");
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod("post");
+            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.setRequestProperty("authorization",SessaoApplication.instance.getTokenUser());
+
+            conexao.setDoOutput(true);
+            conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            //printStream.println(strings[ZERO]);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader( new InputStreamReader( conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while( ( linha = reader.readLine() ) != null )
+            {
+                sbHtml.append (linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        //usuarioService.setRespostaServidor(jsonResposta);
+
+        return jsonResposta;
+    }
     public static String postComToken(String url, String body) {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
         httpPost.setHeader("Content-type", "application/json");
-        httpPost.addHeader("Authorization", "Bearer "+ SessaoApplication.instance.getTokenUser());
+        httpPost.addHeader("Authorization","token:{" + SessaoApplication.instance.getTokenUser()+"}");
         String answer;
         try {
             StringEntity stringEntity = new StringEntity(body);
@@ -158,12 +202,20 @@ public class ConectarServidor {
                 Log.i("Script", "ANSWER: "+ answer);
             } else if (status == 409) {
                 throw new Exception("Mr já existe");
+            }else if(status==403) {
+                answer = EntityUtils.toString(resposta.getEntity());
+                Log.i("Script", "ANSWER: " + answer);
+            }else if(status==200){
+                answer = EntityUtils.toString(resposta.getEntity());
+                Log.i("Script", "ANSWER: " + answer);
             } else {
                 throw new Exception("Erro inesperado");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+       Log.i("resp",answer);
+
         return answer;
     }
     //dos men

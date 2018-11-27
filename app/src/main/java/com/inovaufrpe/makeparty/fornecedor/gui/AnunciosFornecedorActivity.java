@@ -17,24 +17,27 @@ import java.util.ArrayList;
 public class AnunciosFornecedorActivity extends AppCompatActivity {
     private ArrayList<Anuncio> lista;
     private ListView listaAnuncios;
-    private Button btCriarAnuncio;
+    private Button btVisualAnuncio,btCriarAnuncio;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncios_fornecedor);
-        btCriarAnuncio = findViewById(R.id.criarAnuncioId);
-        listaAnuncios = findViewById(R.id.listaId);
-        btCriarAnuncio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                telacriarAnuncio();
-            }
-        });
+        procurandoViews();
 
     }
 
+    private void procurandoViews(){
+        btVisualAnuncio=findViewById(R.id.buttonVisualizarMeusAnunciosForn);
+        btCriarAnuncio = findViewById(R.id.buttonCriarAnuncioEs);
+        btCriarAnuncio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AnunciosFornecedorActivity.this,CriarAnuncioActivity.class));
+            }
+        });
+    }
     private void mudarTela(Class proximaTela){
         Intent intent = new Intent( AnunciosFornecedorActivity.this, proximaTela);
         startActivity(intent);
@@ -45,9 +48,13 @@ public class AnunciosFornecedorActivity extends AppCompatActivity {
         this.mudarTela(CriarAnuncioActivity.class);
     }
 
-   private void telacriarAnuncio(){
+    private void telacriarAnuncio() {
         startActivity(new Intent(AnunciosFornecedorActivity.this, CriarAnuncioActivity.class));
         AnunciosFornecedorActivity.this.finish();
-   }
+    }
+    @Override
+    public void onBackPressed() {
+        mudarTela(TelaInicialFornecedorActivity.class);
+    }
 
 }

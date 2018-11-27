@@ -121,7 +121,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
                     android:hint="@string/edit_text_telefone_criar_an"
-                    android:inputType="text"
+                    android:inputType="number"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="430dp" />
 
@@ -159,7 +159,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
                     android:hint="@string/edit_text_numero_an"
-                    android:inputType="text"
+                    android:inputType="number"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="502dp" />
 
@@ -198,7 +198,7 @@
                     android:layout_margin="16dp"
                     android:ems="10"
                     android:hint="@string/edit_text_cep_anuncio"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:visibility="visible"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="783dp" />

@@ -58,6 +58,7 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
 
         TextView textView = (TextView) findViewById(R.id.textView1);
         textView.setText(currentDateString);
+        mudarTela(DispDiaSelecPeloClienteActivity.class);
     }
 
     public void mudarTela(Class tela){

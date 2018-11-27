@@ -19,6 +19,9 @@ import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.ServicoDownload;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class LoginActivity extends AppCompatActivity{
     private EditText edtEmail, edtSenha;
     private ProgressDialog progressDialog;
@@ -49,8 +52,8 @@ public class LoginActivity extends AppCompatActivity{
 
     }
     private void login() throws InterruptedException {
+        showProgressDialogWithTitle();
         if (this.verificarCampos()) {
-            showProgressDialogWithTitle();
             if(isOnline()){
                 String usuario = setarUsuario(edtEmail.getText().toString().trim(), edtSenha.getText().toString().trim());
                 logar(usuario);
@@ -65,6 +68,11 @@ public class LoginActivity extends AppCompatActivity{
                     tipoUserLogou = parts[1].substring(8,parts[1].length()-2);
                     SessaoApplication.instance.setTokenUser(token);
                     SessaoApplication.instance.setTipoDeUserLogado(tipoUserLogou);
+                    SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
+                    //Date data = new Date();
+                    java.util.Date dataUtil = new java.util.Date();
+                    //String dataFormatada = formataData.format(data);
+                    SessaoApplication.instance.setHoraRecebidoToken(dataUtil);
                     //Toast.makeText(this, tipoUserLogou, Toast.LENGTH_SHORT).show();
 
                     Toast.makeText(this, "Logado", Toast.LENGTH_SHORT).show();
@@ -80,6 +88,8 @@ public class LoginActivity extends AppCompatActivity{
                 Toast.makeText(this, "Sem conexão com a internet", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
+        }else{
+            progressDialog.dismiss();
         }
 
     }

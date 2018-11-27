@@ -17,6 +17,7 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Mask;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
@@ -141,7 +142,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     public String setarAnuncio(){
         String cidade = edtCidade.getText().toString().trim();
         String bairro = edtBairro.getText().toString().trim();
-        String cep = edtCep.getText().toString().trim();
+        String cep = edtCep.getText().toString().trim().replace("-","");
         String rua = edtRua.getText().toString().trim();
         String numero = edtNumero.getText().toString().trim();
 
@@ -155,7 +156,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         String titulo = edtTitulo.getText().toString().trim();
         double valor = Double.parseDouble(edtValor.getText().toString().trim());
         String descricao = edtDescricao.getText().toString().trim();
-        String telefone = edtTelefone.getText().toString().trim();
+        String telefone = edtTelefone.getText().toString().trim().replace("(","").replace(")","").replace("-","");
         String tipo = edtTipoAnuncio.getSelectedItem().toString();
 //        String stringTags = edtTags.getText().toString().trim();
 //        String[] stags = stringTags.split(",");
@@ -173,9 +174,16 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         anuncio.setType(tipo);
         anuncio.setAddress(endereco);
 //        anuncio.setTags(tags);
-
+        Log.i("Script", "OLHAAA: "+ SessaoApplication.getInstance().getTokenUser());
         Gson gson = new Gson();
         String ad = gson.toJson(anuncio);
+        //String ad = gson.toJson(anuncio +"{" +"token:"+ SessaoApplication.getInstance().getTokenUser() + "}");
+        Log.i("Script", "OLHAAA: "+ ad);
+        ad=ad.substring(0,ad.length()-1)+","+"\"token\""+":"+ SessaoApplication.getInstance().getTokenUser()+ "}";
+        Log.i("Script", "OLHAAA: "+ ad);
+        //String json1 = ad.replace("}",",",ad.length());
+        //String json2 = jsonPf.substring(UM,jsonPf.length());
+        //return json1 + json2;
         return ad;
     }
 
@@ -187,7 +195,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                validar = ConectarServidor.postComToken("https://makepartyserver.herokuapp.com/ads", data);
+                validar = ConectarServidor.post("https://makepartyserver.herokuapp.com/ads", data);
                 Log.i("Script", "OLHAAA: "+ validar);
                 if (validar.substring(2, 5).equals("err")){
                     // Não sei qual o erro

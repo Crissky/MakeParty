@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".cliente.gui.DispDiaSelecPeloClienteActivity">
 
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        app:title="@string/label_lista_dias_disp_cliente_clicou"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        style="@style/ToolBarWithNavigationBack"
+        />
+
+    <Button
+        android:id="@+id/button_enviar_solic_reuniao"
+        android:layout_width="290dp"
+        android:layout_height="51dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorButoes"
+        android:text="@string/button_enviar_solic_reuniao"
+        android:textColor="@color/colorTextoBut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.93" />
+
+
 </android.support.constraint.ConstraintLayout>

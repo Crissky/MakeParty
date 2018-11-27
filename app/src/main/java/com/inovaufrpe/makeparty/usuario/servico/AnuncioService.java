@@ -80,6 +80,19 @@ public class AnuncioService {
         List<Anuncio> anuncios = new Gson().fromJson(json, listType);
         return anuncios;
     }
+    public static List<Anuncio> getAnunciosByTipoTwo(String tipo) throws IOException {
+        String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", "Festa");
+        // Request HTTP GET
+        ConectarServidor http = new ConectarServidor();
+        http.LOG_ON = true;
+        String json = http.doGet(url);
+
+        // Parser JSON
+        Type listType = new TypeToken<ArrayList<Anuncio>>() {}.getType();
+        List<Anuncio> anuncios = new Gson().fromJson(json, listType);
+        return anuncios;
+
+    }
 
     public static List<Anuncio> getAnunciosByTipo(String tipo) throws IOException {
         String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
