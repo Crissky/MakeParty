@@ -2,7 +2,7 @@ package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.inovaufrpe.makeparty.R;
@@ -22,7 +22,8 @@ public class PlanoEscolhaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plano_escolha);
         setTela();
     }
-    private void setTela(){
+
+    private void setTela() {
         planoBronzeMensal = findViewById(R.id.planoBronzeMensalId);
         planoBronzeAnual = findViewById(R.id.planoBronzeAnualId);
         planoPrataMensal = findViewById(R.id.planoPrataMensalId);
@@ -30,5 +31,19 @@ public class PlanoEscolhaActivity extends AppCompatActivity {
         planoOuroMensal = findViewById(R.id.planoOuroMensalId);
         planoOuroAnual = findViewById(R.id.planoOuroAnualId);
         versaoGratuita = findViewById(R.id.versaoGratuitaId);
+    }
+
+    private void onClickImage(ImageView imageView) {
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            //mudar plano
+            }
+        });
+    }
+    // por enquanto apenas fechando
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

@@ -18,12 +18,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Plano Bronze"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
             <LinearLayout
                 android:id="@+id/planoBronzeId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
                 <ImageView
@@ -31,12 +33,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:srcCompat="@drawable/bronzemensal"
                     />
                 <ImageView
                     android:id="@+id/planoBronzeAnualId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:srcCompat="@drawable/bronzeanual"
                     />
 
             </LinearLayout>
@@ -44,12 +48,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Plano Prata"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
             <LinearLayout
                 android:id="@+id/planoPrataId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
                 <ImageView
@@ -57,12 +63,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:srcCompat="@drawable/pratamensal"
                     />
                 <ImageView
                     android:id="@+id/planoPrataAnualId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:srcCompat="@drawable/prataanual"
                     />
 
             </LinearLayout>
@@ -70,12 +78,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Plano Ouro"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
             <LinearLayout
                 android:id="@+id/planoOuroId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
                 <ImageView
@@ -83,12 +93,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:srcCompat="@drawable/ouromensal"
                     />
                 <ImageView
                     android:id="@+id/planoOuroAnualId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:srcCompat="@drawable/ouroanual"
                     />
             </LinearLayout>
             <LinearLayout
@@ -99,13 +111,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Versão Gratuita"/>
+                    android:text="Versão Gratuita"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30dp"
+                    android:textStyle="bold"/>
                 <ImageView
                     android:id="@+id/versaoGratuitaId"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/gratuito"/>
             </LinearLayout>
-            
+
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

@@ -115,7 +115,12 @@ public class ConfiguracoesFornecedorActivity extends AppCompatActivity {
     }
 
     public void telaMudarPlanoFornecedor(View view) {
-        //this.mudarTela();
+        mudarPlano.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfiguracoesFornecedorActivity.this,PlanoEscolhaActivity.class));
+            }
+        });
     }
 
     public void telaMandarMensagemFornecedor(View view) {
