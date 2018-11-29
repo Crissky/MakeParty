@@ -94,7 +94,8 @@
         <activity android:name=".cliente.gui.ListaDesejosClienteActivity" />
         <activity android:name=".fornecedor.gui.CriarAnuncioActivity" />
         <activity android:name=".fornecedor.gui.EscolhasSobreAnuncioActivity" />
-        <activity android:name=".cliente.gui.DispDiaSelecPeloClienteActivity"></activity>
+        <activity android:name=".cliente.gui.DispDiaSelecPeloClienteActivity" />
+        <activity android:name=".fornecedor.gui.PlanoEscolhaActivity"></activity>
     </application>
 
 </manifest>
