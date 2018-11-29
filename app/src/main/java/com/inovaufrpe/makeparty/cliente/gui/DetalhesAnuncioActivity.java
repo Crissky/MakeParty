@@ -59,6 +59,8 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         TextView textView = (TextView) findViewById(R.id.textView1);
         textView.setText(currentDateString);
         mudarTela(DispDiaSelecPeloClienteActivity.class);
+        //intent.putExtra("dataselecionada", currentDateString);
+        //getIntent().putExtra("anuncio selecionado",get._id);
     }
 
     public void mudarTela(Class tela){
@@ -81,12 +83,18 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         this.addressAds = findViewById(R.id.textViewAddressAds);
         this.botaoDispAds = findViewById(R.id.buttonVerifDispAnuncio);
         this.containerComentarios = findViewById(R.id.containerComentariosAnuncio);
-
-
     }
 
     public void setarInfoView(){
-
+       /* titleAds.setText();
+        nomeFornecedor.setText();
+        descriptionAds.setText();
+        phoneAds.setText();
+        priceAds.setText();
+        addressAds.setText();
+        adsTags.setText();
+        //galeriaPhotos.setAdapter(); ---acho q n é assim
+        */
     }
 
     public void onClickAddDesejo(View view){

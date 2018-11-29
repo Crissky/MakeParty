@@ -3,7 +3,6 @@ package com.inovaufrpe.makeparty.fornecedor.dominio;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.inovaufrpe.makeparty.fornecedor.dominio.PessoaJuridica;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
 
 import org.json.JSONException;
@@ -12,28 +11,32 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Anuncio implements Parcelable {
+public class Ads implements Parcelable {
 
-    public Long id;
+    public String _id;
     private String title;
-    private Date dataAd;
+    private Date createdAt;
     private String description;
     private double price;
     private Endereco address;
     private String phone;
     private String type;
     private ArrayList tags;
-    private PessoaJuridica socialname;
-    private PessoaJuridica owner;
-    private ArrayList photo;
-    //private ArrayList<> photos;                  ARRAYLIST<OBJETO???>
+    private Owner owner;
+    private ArrayList photos;
 
     // Flag para a action bar de contexto
     public boolean selected;
     // Está favoritado se vem do banco de dadosine
     public boolean favorited;
 
+    public String get_id() {
+        return _id;
+    }
 
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getTitle() {
         return title;
@@ -43,12 +46,12 @@ public class Anuncio implements Parcelable {
         this.title = title;
     }
 
-    public Date getDataAd() {
-        return dataAd;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDataAd(Date dataAnuncio) {
-        this.dataAd = dataAnuncio;
+    public void setCreatedAt(Date dataAnuncio) {
+        this.createdAt = dataAnuncio;
     }
 
     public String getDescription() {
@@ -98,44 +101,36 @@ public class Anuncio implements Parcelable {
     public void setTags(ArrayList tags) {
         this.tags = tags;
     }
-    public PessoaJuridica getSocialname() {
-        return socialname;
-    }
 
-    public void setSocialname(PessoaJuridica socialname) {
-        this.socialname = socialname;
-    }
-
-    public PessoaJuridica getOwner() {
+    public Owner getOwner() {
         return owner;
     }
 
-    public void setOwner(PessoaJuridica owner) {
+    public void setOwner(Owner owner) {
         this.owner = owner;
     }
 
-    public ArrayList getPhoto() {
-        return photo;
+    public ArrayList getPhotos() {
+        return photos;
     }
 
-    public void setPhoto(ArrayList photo) {
-        this.photo = photo;
+    public void setPhotos(ArrayList photos) {
+        this.photos = photos;
     }
-   /* @Override
-   public String toString() {
-        return "Anuncio{" + "nome='" + nome + '\'' + ", desc='" + desc + '\'' + '}';
-    }*/
-    @Override
+
+
+    /*@Override
     public String toString() {
         try {
-            JSONObject o = new JSONObject().put("id", id).put("title", title).put("price", price).put("description", description)
-                    .put("type", type).put("photo", photo);
+            JSONObject o = new JSONObject().put("id", _id).put("title", title).put("price", price).put("description", description)
+                    .put("type", type).put("photos", photos);
             return o.toString();
         } catch (JSONException e) {
             System.out.println("Erro no toString do Filme JSON: "+ e.getMessage());
         }
         return null;
-    }
+    }*/
+
     @Override
     public int describeContents() {
         return 0;
@@ -144,39 +139,60 @@ public class Anuncio implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         // Escreve os dados para serem serializados
-        dest.writeLong(id);
+        dest.writeString(_id);
         dest.writeString(this.title);
-        //dest.writeString(this.owner.getSocialname());
         dest.writeString(this.description);
         //dest.writeString(this.urlFoto);
         dest.writeDouble(this.price);
         //dest.writeString(this.urlVideo);
         dest.writeString(this.phone);
         //dest.writeString(this.address);
+        dest.writeString(String.valueOf(this.address));
     }
 
     public void readFromParcel(Parcel parcel) {
         // Lê os dados na mesma ordem em que foram escritos
-        this.id = parcel.readLong();
+        this._id = parcel.readString();
         this.title = parcel.readString();
         this.description = parcel.readString();
         this.price = parcel.readDouble();
         //this.urlFoto = parcel.readString();
         this.phone = parcel.readString();
+        //this.photos = parcel.readArrayList();
+        //this.owner = parcel.readP
+
     }
 
-    public static final Parcelable.Creator<Anuncio> CREATOR = new Parcelable.Creator<Anuncio>() {
+    public static final Parcelable.Creator<Ads> CREATOR = new Parcelable.Creator<Ads>() {
         @Override
-        public Anuncio createFromParcel(Parcel p) {
-            Anuncio c = new Anuncio();
+        public Ads createFromParcel(Parcel p) {
+            Ads c = new Ads();
             c.readFromParcel(p);
             return c;
         }
         @Override
-        public Anuncio[] newArray(int size) {
-            return new Anuncio[size];
+        public Ads[] newArray(int size) {
+            return new Ads[size];
         }
     };
 
 
+    @Override
+    public String toString() {
+        return "Ads[" +
+                "_id='" + _id + '\'' +
+                ", title='" + title + '\'' +
+                ", createdAt=" + createdAt +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", address=" + address +
+                ", phone='" + phone + '\'' +
+                ", type='" + type + '\'' +
+                ", tags=" + tags +
+                ", owner=" + owner +
+                ", photos=" + photos +
+                ", selected=" + selected +
+                ", favorited=" + favorited +
+                ']';
+    }
 }

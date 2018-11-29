@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.dominio.PessoaFisica;
-import com.inovaufrpe.makeparty.fornecedor.dominio.PessoaJuridica;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
@@ -221,11 +221,11 @@ public class CadastroActivity extends AppCompatActivity {
         String cnpj = edtCnpj.getText().toString().trim().replace(".","").replace("-","").replace("/","");
 
         Usuario usuario = new Usuario(email, senha);
-        PessoaJuridica pessoaJuridica = new PessoaJuridica(usuario, razaoSocial,cnpj,telefone);
+        Owner owner = new Owner(usuario, razaoSocial,cnpj,telefone);
         //FornecedorService fornecedor = new FornecedorService();
-        //fornecedor.criarFornecedor(pessoaJuridica);
+        //fornecedor.criarFornecedor(owner);
         Gson gson = new Gson();
-        String pj = gson.toJson(pessoaJuridica);
+        String pj = gson.toJson(owner);
         return pj;
     }
     private String setarCliente(){ //throws IOException { //a

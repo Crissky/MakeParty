@@ -1,19 +1,19 @@
 package com.inovaufrpe.makeparty.cliente.dominio;
 
-import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 import java.util.ArrayList;
 
 public class ListaDesejos {
 
-    private ArrayList<Anuncio> ad;
+    private ArrayList<Ads> ad;
     private PessoaFisica nomesocial;
 
-    public ArrayList<Anuncio> getAd() {
+    public ArrayList<Ads> getAd() {
         return ad;
     }
 
-    public void setAd(ArrayList<Anuncio> ad) {
+    public void setAd(ArrayList<Ads> ad) {
         this.ad = ad;
     }
 

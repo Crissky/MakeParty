@@ -12,16 +12,16 @@
 //
 //import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.cliente.gui.adapter.AnuncioAdapter;
-//import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
+//import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 //
 //import java.util.List;
 //
 //public class AnuncioFornecedorAdapter extends RecyclerView.Adapter<AnuncioFornecedorAdapter.AnuncioFornecedorViewHolder> {
-//    private final List<Anuncio> anuncios;
+//    private final List<Ads> anuncios;
 //    private final Context context;
 //    private final AnuncioOnClickListener onClickListener;
 //
-//    public AnuncioFornecedorAdapter(Context context, List<Anuncio> anuncios, AnuncioAdapter.AnuncioOnClickListener onClickListener) {
+//    public AnuncioFornecedorAdapter(Context context, List<Ads> anuncios, AnuncioAdapter.AnuncioOnClickListener onClickListener) {
 //        this.context = context;
 //        this.anuncios = anuncios;
 //        this.onClickListener = onClickListener;
@@ -42,7 +42,7 @@
 //
 //    @Override
 //    public void onBindViewHolder(final AnuncioFornecedorViewHolder holder, final int position) {
-//        Anuncio c = anuncios.get(position);
+//        Ads c = anuncios.get(position);
 //        holder.title.setText(c.getTitle());
 //        holder.tDesc.setText(c.getDescription());
 //        if (onClickListener != null) {

@@ -20,7 +20,6 @@ import com.inovaufrpe.makeparty.infra.ServicoDownload;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity{
     private EditText edtEmail, edtSenha;
@@ -98,7 +97,7 @@ public class LoginActivity extends AppCompatActivity{
         Gson gson = new Gson();
         //SessionApi sessionApi = gson.fromJson(Sessao.instance.getResposta(), SessionApi.class);
         //Sessao.instance.setSession(sessionApi);
-       // setMApi(sessionApi.getUser());
+       // setMApi(sessionApi.getUsuario());
     }
 
     /*private void setMApi(final Usuario usuario) throws InterruptedException {

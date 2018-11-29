@@ -20,7 +20,7 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
 import com.inovaufrpe.makeparty.cliente.gui.adapter.AnuncioAdapter;
 import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.servico.AnuncioService;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.fragment.BaseFragment;
@@ -33,16 +33,16 @@ import java.util.List;
 
 public class AnunciosOutroFragment extends BaseFragment {
     protected RecyclerView recyclerView;
-    private int tipo;
-    private List<Anuncio> anuncios;
+    private String tipo;
+    private List<Ads> ads;
     private SwipeRefreshLayout swipeLayout;
     private ActionMode actionMode;
     private Intent shareIntent;
 
     // Método para instanciar esse fragment pelo tipo.
-    public static AnunciosOutroFragment newInstance(int tipo) {
+    public static AnunciosOutroFragment newInstance(String tipo) {
         Bundle args = new Bundle();
-        args.putInt("tipo", tipo);
+        args.putString("tipo", String.valueOf(tipo));
         AnunciosOutroFragment f = new AnunciosOutroFragment();
         f.setArguments(args);
         return f;
@@ -53,7 +53,7 @@ public class AnunciosOutroFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             // Lê o tipo dos argumentos.
-            this.tipo = getArguments().getInt("tipo");
+            this.tipo = getArguments().getString("tipo");
         }
 
         // Registra a classe para receber eventos.
@@ -117,22 +117,22 @@ public class AnunciosOutroFragment extends BaseFragment {
 
     private void taskAnuncios(boolean pullToRefresh) {
         // Busca os carros: Dispara a Task
-        startTask("anuncios", new GetAnunciosTask(pullToRefresh), pullToRefresh ? R.id.swipeToRefresh : R.id.progress);
+        startTask("ads", new GetAnunciosTask(pullToRefresh), pullToRefresh ? R.id.swipeToRefresh : R.id.progress);
     }
 
     private AnuncioAdapter.AnuncioOnClickListener onClickAnuncio() {
         return new AnuncioAdapter.AnuncioOnClickListener() {
             @Override
             public void onClickAnuncio(AnuncioAdapter.AnunciosViewHolder holder, int indexAnuncio) {
-                Anuncio c = anuncios.get(indexAnuncio);
+                Ads c = ads.get(indexAnuncio);
                 if (actionMode == null) {
                     Intent intent = new Intent(getContext(), DetalhesAnuncioActivity.class);
                     //intent.putExtra("anuncio", (Parcelable) c);
                     startActivity(intent);
                 } else { // Se a CAB está ativada
-                    // Seleciona o carro
+                    // Seleciona o anuncio
                     c.selected = !c.selected;
-                    // Atualiza o título com a quantidade de carros selecionados
+                    // Atualiza o título com a quantidade de anuncios selecionados
                     updateActionModeTitle();
                     // Redesenha a lista
                     recyclerView.getAdapter().notifyDataSetChanged();
@@ -148,11 +148,11 @@ public class AnunciosOutroFragment extends BaseFragment {
                 // Liga a action bar de contexto (CAB)
                 actionMode = getAppCompatActivity().
                         startSupportActionMode(getActionModeCallback());
-                Anuncio c = anuncios.get(indexAnuncio);
-                c.selected = true; // Seleciona o carro
+                Ads c = ads.get(indexAnuncio);
+                c.selected = true; // Seleciona o anuncio
                 // Solicita ao Android para desenhar a lista novamente
                 recyclerView.getAdapter().notifyDataSetChanged();
-                // Atualiza o título para mostrar a quantidade de carros selecionados
+                // Atualiza o título para mostrar a quantidade de anuncios selecionados
                 updateActionModeTitle();
             }
         };
@@ -161,30 +161,30 @@ public class AnunciosOutroFragment extends BaseFragment {
     // Atualiza o título da action bar (CAB)
     private void updateActionModeTitle() {
         if (actionMode != null) {
-            actionMode.setTitle("Selecione os anuncios.");
+            actionMode.setTitle("Selecione os ads.");
             actionMode.setSubtitle(null);
-            List<Anuncio> selectedAnuncios = getSelectedAnuncios();
-            if (selectedAnuncios.size() == 1) {
+            List<Ads> selectedAds = getSelectedAnuncios();
+            if (selectedAds.size() == 1) {
                 actionMode.setSubtitle("1 anuncio selecionado");
-            } else if (selectedAnuncios.size() > 1) {
-                actionMode.setSubtitle(selectedAnuncios.size() + " anuncios selecionados");
+            } else if (selectedAds.size() > 1) {
+                actionMode.setSubtitle(selectedAds.size() + " ads selecionados");
             }
-            updateShareIntent(selectedAnuncios);
+            updateShareIntent(selectedAds);
         }
     }
 
-    // Atualiza a share intent com os anuncios selecionados
-    private void updateShareIntent(List<Anuncio> selectedAnuncios) {
+    // Atualiza a share intent com os ads selecionados
+    private void updateShareIntent(List<Ads> selectedAds) {
         if (shareIntent != null) {
             // Texto com os anúncios
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "Anúncios: " + selectedAnuncios);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Anúncios: " + selectedAds);
         }
     }
 
-    // Retorna a lista de anuncios selecionados
-    private List<Anuncio> getSelectedAnuncios() {
-        List<Anuncio> list = new ArrayList<Anuncio>();
-        for (Anuncio c : anuncios) {
+    // Retorna a lista de ads selecionados
+    private List<Ads> getSelectedAnuncios() {
+        List<Ads> list = new ArrayList<Ads>();
+        for (Ads c : ads) {
             if (c.selected) {
                 list.add(c);
             }
@@ -216,7 +216,7 @@ public class AnunciosOutroFragment extends BaseFragment {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                List<Anuncio> selectedAnuncios = getSelectedAnuncios();
+                List<Ads> selectedAds = getSelectedAnuncios();
                 if (item.getItemId()==R.id.action_add_lista_desejo_finalm){
                     SimOuNaoDialog.show(getFragmentManager(),"Deseja adicionar esses anúncios que foram selecionados a sua lista de desejos?", new SimOuNaoDialog.Callback() {
                         @Override
@@ -226,20 +226,20 @@ public class AnunciosOutroFragment extends BaseFragment {
                     });
                 }
                 /*if (item.getItemId() == R.id.action_remove) {
-                    CarroDB db = new CarroDB(getContext());
+                    AnuncioDB db = new AnuncioDB(getContext());
                     try {
-                        for (Anuncio c : selectedAnuncios) {
-                            db.delete(c); // Deleta o carro do banco
-                            carros.remove(c); // Remove da lista
+                        for (Ads c : selectedAds) {
+                            db.delete(c); // Deleta o anúncio do banco
+                            anuncios.remove(c); // Remove da lista
                         }
                     } finally {
                         db.close();
                     }
-                    snack(recyclerView, "Carros excluídos com sucesso.");
+                    snack(recyclerView, "Anúncios excluídos com sucesso.");
 
                 } else if (item.getItemId() == R.id.action_share) {
                     // Dispara a tarefa para fazer download das fotos
-                    startTask("compartilhar", new CompartilharTask(selectedAnuncios));
+                    startTask("compartilhar", new CompartilharTask(selectedAds));
 
                 }*/
                 // Encerra o action mode
@@ -251,8 +251,8 @@ public class AnunciosOutroFragment extends BaseFragment {
             public void onDestroyActionMode(ActionMode mode) {
                 // Limpa o estado
                 actionMode = null;
-                // Configura todos os carros para não selecionados
-                for (Anuncio c : anuncios) {
+                // Configura todos os anuncios para não selecionados
+                for (Ads c : ads) {
                     c.selected = false;
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -260,8 +260,8 @@ public class AnunciosOutroFragment extends BaseFragment {
         };
     }
 
-    // Task para buscar os anuncios
-    private class GetAnunciosTask implements TaskListener<List<Anuncio>> {
+    // Task para buscar os ads
+    private class GetAnunciosTask implements TaskListener<List<Ads>> {
         private boolean refresh;
 
         public GetAnunciosTask(boolean refresh) {
@@ -269,19 +269,19 @@ public class AnunciosOutroFragment extends BaseFragment {
         }
 
         @Override
-        public List<Anuncio> execute() throws Exception {
+        public List<Ads> execute() throws Exception {
             // Busca os carros em background (Thread)
             return AnuncioService.getAnunciosByTipo("Festa");
-            //return AnuncioService.getCarros(getContext(), tipo, refresh);
+            //return AnuncioService.getAnuncios(getContext(), tipo, refresh);
         }
 
         @Override
-        public void updateView(List<Anuncio> anuncios) {
-            if (anuncios != null) {
-                // Salva a lista de carros no atributo da classe
-                AnunciosOutroFragment.this.anuncios = anuncios;
+        public void updateView(List<Ads> ads) {
+            if (ads != null) {
+                // Salva a lista de anuncios no atributo da classe
+                AnunciosOutroFragment.this.ads = ads;
                 // Atualiza a view na UI Thread
-                recyclerView.setAdapter(new AnuncioAdapter(getContext(), anuncios,  onClickAnuncio()));
+                recyclerView.setAdapter(new AnuncioAdapter(getContext(), ads,  onClickAnuncio()));
             }
         }
 
@@ -299,19 +299,19 @@ public class AnunciosOutroFragment extends BaseFragment {
     // Task para fazer o download
     // Faça import da classe android.net.Uri;
     private class CompartilharTask implements TaskListener {
-        private final List<Anuncio> selectedAnuncios;
+        private final List<Ads> selectedAds;
         // Lista de arquivos para compartilhar
         ArrayList<Uri> imageUris = new ArrayList<Uri>();
 
-        public CompartilharTask(List<Anuncio> selectedAnuncios) {
-            this.selectedAnuncios = selectedAnuncios;
+        public CompartilharTask(List<Ads> selectedAds) {
+            this.selectedAds = selectedAds;
         }
 
         @Override
         public Object execute() throws Exception {
-            if (selectedAnuncios != null) {
-                for (Anuncio c : selectedAnuncios) {
-                    // Faz o download da foto do carro para arquivo
+            if (selectedAds != null) {
+                for (Ads c : selectedAds) {
+                    // Faz o download da foto do anuncio para arquivo
                     //String url = c.urlFoto;
                     //String fileName = url.substring(url.lastIndexOf("/"));
                     // Cria o arquivo no SD card
@@ -326,7 +326,7 @@ public class AnunciosOutroFragment extends BaseFragment {
 
         @Override
         public void updateView(Object o) {
-            // Cria a intent com a foto dos carros
+            // Cria a intent com a foto dos anuncios
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);

@@ -27,7 +27,7 @@
     <string name="edit_text_cnpj">CNPJ</string>
     <string name="edit_text_mei">MEI</string>
     <string name="img_ic_cliente">Icone cliente</string>
-    <string name="img_ic_fornecedor">Icone pessoaJuridica</string>
+    <string name="img_ic_fornecedor">Icone owner</string>
     <string name="action_settings">Configurações</string>
     <string name="Search">Pesquisar</string>
     <string name="ic_pacotes">Pacotes</string>
@@ -56,7 +56,7 @@
     <string name="img_fornecedor_avaliacao">Imagem do fornecedor</string>
     <string name="text_nome_fornecedor">Nome do fornecedor</string>
     <string name="text_view_escolha_usuario">Escolha o tipo de usuário:</string>
-    <string name="text_view_title_anuncio">Titulo do anuncio</string>
+    <string name="text_view_title_anuncio">Titulo do ads</string>
     <string name="text_view_razao_social_fornecedor">Nome do fornecedor</string>
     <string name="text_view_preco_anuncio">R$0,00</string>
     <string name="text_view_modificar">Titulo "Modificar"</string>

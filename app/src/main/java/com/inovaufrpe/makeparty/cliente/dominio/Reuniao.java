@@ -1,14 +1,13 @@
 package com.inovaufrpe.makeparty.cliente.dominio;
 
-import com.inovaufrpe.makeparty.cliente.dominio.PessoaFisica;
-import com.inovaufrpe.makeparty.fornecedor.dominio.PessoaJuridica;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 
 import java.util.Date;
 
 public class Reuniao {
 
     private PessoaFisica name;
-    private PessoaJuridica socialname;
+    private Owner socialname;
     private Date date;
     private String typeSolicitation;
 
@@ -20,11 +19,11 @@ public class Reuniao {
         this.name = name;
     }
 
-    public PessoaJuridica getSocialname() {
+    public Owner getSocialname() {
         return socialname;
     }
 
-    public void setSocialname(PessoaJuridica socialname) {
+    public void setSocialname(Owner socialname) {
         this.socialname = socialname;
     }
 

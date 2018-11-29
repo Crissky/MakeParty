@@ -8,14 +8,13 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
-import com.inovaufrpe.makeparty.usuario.gui.CadastroActivity;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 import java.util.ArrayList;
 
 
 public class AnunciosFornecedorActivity extends AppCompatActivity {
-    private ArrayList<Anuncio> lista;
+    private ArrayList<Ads> lista;
     private ListView listaAnuncios;
     private Button btVisualAnuncio,btCriarAnuncio;
 

@@ -7,13 +7,14 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
-import com.inovaufrpe.makeparty.fornecedor.dominio.PessoaJuridica;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.ResponseWithURL;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.FileUtils;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
+import com.inovaufrpe.makeparty.usuario.dominio.Data;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
 
 import org.json.JSONArray;
@@ -67,34 +68,43 @@ public class AnuncioService {
         return "";
     }
 
-    public static List<Anuncio> getTodosAnuncios(Context context) throws IOException {
+    public static List<Ads> getTodosAnuncios(Context context) throws IOException {
         String url = URL_LISTAR_ANUNCIOS;
 
         // Request HTTP GET
         ConectarServidor http = new ConectarServidor();
         http.LOG_ON = true;
         String json = http.doGet(url);
-
         // Parser JSON
-        Type listType = new TypeToken<ArrayList<Anuncio>>() {}.getType();
-        List<Anuncio> anuncios = new Gson().fromJson(json, listType);
-        return anuncios;
+        Type listType = new TypeToken<ArrayList<Ads>>() {}.getType();
+        List<Ads> ads = new Gson().fromJson(json, listType);
+        return ads;
     }
-    public static List<Anuncio> getAnunciosByTipoTwo(String tipo) throws IOException {
-        String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", "Festa");
+    public static List<Ads> getAnunciosByTipoTwo(String tipo) throws IOException {
+        String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
         // Request HTTP GET
         ConectarServidor http = new ConectarServidor();
         http.LOG_ON = true;
         String json = http.doGet(url);
 
         // Parser JSON
-        Type listType = new TypeToken<ArrayList<Anuncio>>() {}.getType();
-        List<Anuncio> anuncios = new Gson().fromJson(json, listType);
-        return anuncios;
+        Type listType = new TypeToken<ArrayList<Ads>>() {}.getType();
+        List<Ads> ads = new Gson().fromJson(json, listType);
+        return ads;
+    }
+    public static List<Ads> getAnunciosByTipo(String tipo) throws IOException {
+        String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
 
+        // Request HTTP GET
+        ConectarServidor http = new ConectarServidor();
+        http.LOG_ON = true;
+        String json = http.doGet(url);
+        Log.d("um json ai", json);
+        Data data = new Gson().fromJson(json,Data.class);
+        return data;
     }
 
-    public static List<Anuncio> getAnunciosByTipo(String tipo) throws IOException {
+    public static List<Ads> getAnunciosByTipoThree(String tipo) throws IOException {
         String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
 
         // Request HTTP GET
@@ -103,53 +113,51 @@ public class AnuncioService {
         String json = http.doGet(url);
         Log.d("um json ai", json);
 
-        List<Anuncio> anuncios = new ArrayList<Anuncio>();
+
+        List<Ads> ads = new ArrayList<Ads>();
         try {
-            //Lê o array de anuncios do Json
-            JSONArray jsonAnuncios = new JSONArray(json);
+            JSONObject objetoJson = new JSONObject(json);
+            JSONArray jsonAnuncios = objetoJson.getJSONArray("ads");
+
+            //Lê o array de ads do Json
+            //JSONArray jsonAnuncios = new JSONArray(json);
             for (int i=0;i<jsonAnuncios.length();i++) {
                 JSONObject jsonAnuncio = jsonAnuncios.getJSONObject(i);
-                Anuncio c = new Anuncio();
+                Ads c = new Ads();
                 //Lê as info de cada anuncio
                 c.setDescription(jsonAnuncio.optString("description"));
                 c.setTitle(jsonAnuncio.optString("title"));
                 c.setPrice(jsonAnuncio.optDouble("price"));
                 c.setPhone(jsonAnuncio.optString("phone"));
-                //c.setOwner((PessoaJuridica) jsonAnuncio.opt("owner"));
+                //c.setOwner((Owner) jsonAnuncio.opt("owner"));
                 //c.setAddress((Endereco) jsonAnuncio.opt("address"));
-                //c.setTags(jsonAnuncio.optJSONArray("tags"));
-
-                //refazer
-                //c.setSocialname(jsonAnuncio.opt("owner"));
-                //c.setSocialname(jsonAnuncio.opt);
-                //c.setAddress(jsonAnuncio.optS);
-               // c.setOwner(jsonAnuncio.toJSONArray("owner"));
-                //c.setCnpj((PessoaJuridica) jsonAnuncio.optJSONObject("owner"));
-                //c.setOwner((PessoaJuridica)jsonAnuncio.optJSONObject("owner"));
+                c.set_id(jsonAnuncio.optString("_id"));
+                //c.setTags((ArrayList) jsonAnuncio.opt("tags"));
+                //c.setPhotos((ArrayList) jsonAnuncio.opt("photos"));
 
                 if (LOG_ON) {
-                    Log.d(TAG, "Anuncio" + c.getDescription() + ">");
+                    Log.d(TAG, "Ads" + c.getDescription() + ">");
 
                 }
-                anuncios.add(c);
+                ads.add(c);
             }
             if (LOG_ON){
-                Log.d(TAG,anuncios.size()+"encontrados");
+                Log.d(TAG, ads.size()+"encontrados");
             }
         }catch (JSONException e){
             throw new IOException(e.getMessage(),e);
         }
-        return anuncios;
+        return ads;
 
     }
 
-    public static List<Anuncio> searchByNome(String nome) throws IOException {
+    public static List<Ads> searchByNome(String nome) throws IOException {
         String url = URL_BASE + "/nome/" + nome; // << essa url ta errada, eu n sei qual url da p pesquisar pelo nome la na API
         ConectarServidor http = new ConectarServidor();
         String json = http.doGet(url);
-        Type listType = new TypeToken<ArrayList<Anuncio>>() {}.getType();
-        List<Anuncio> anuncios = new Gson().fromJson(json, listType);
-        return anuncios;
+        Type listType = new TypeToken<ArrayList<Ads>>() {}.getType();
+        List<Ads> ads = new Gson().fromJson(json, listType);
+        return ads;
     }
 
     public static ResponseWithURL postFotoBase64(File file) throws IOException {
@@ -207,10 +215,10 @@ public class AnuncioService {
         return response;
     }
 
-    public static Response saveAnuncio(Anuncio anuncio) throws IOException {
+    public static Response saveAnuncio(Ads ads) throws IOException {
         String url = URL_BASE;
 
-        String jsonAnuncio = new Gson().toJson(anuncio);
+        String jsonAnuncio = new Gson().toJson(ads);
         Log.d(TAG, ">> saveAnuncio: " + jsonAnuncio);
         ConectarServidor http = new ConectarServidor();
         http.setContentType("application/json; charset=utf-8");
@@ -230,12 +238,12 @@ public class AnuncioService {
      * "msg": "Anúncio deletado com sucesso"
      * }
      */
-    public static boolean delete(List<Anuncio> selectedAnuncios) throws IOException, JSONException {
+    public static boolean delete(List<Ads> selectedAds) throws IOException, JSONException {
         ConectarServidor http = new ConectarServidor();
         http.setContentType("application/json; charset=utf-8");
-        for (Anuncio c : selectedAnuncios) {
+        for (Ads c : selectedAds) {
             // URL para excluir o carro
-            String url = URL_BASE + "/" + c.id;
+            String url = URL_BASE + "/" + c._id;
             Log.d(TAG, "Delete anuncio: " + url);
             // Request HTTP DELETE
             String json = http.doDelete(url);
@@ -252,26 +260,26 @@ public class AnuncioService {
     }
 
     // Faz a requisição HTTP, cria a lista de anuncios e salva o JSON em arquivo
-    public static List<Anuncio> getAnunciosFromWebService(Context context, int tipo) throws IOException {
+    public static List<Ads> getAnunciosFromWebService(Context context, int tipo) throws IOException {
         String tipoString = getTipo(tipo);
         String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipoString);
         Log.d(TAG, "URL: " + url);
         ConectarServidor http = new ConectarServidor();
         String json = http.doGet(url);
-        List<Anuncio> anuncios = parserJSON(context, json);
+        List<Ads> ads = parserJSON(context, json);
         salvaArquivoNaMemoriaInterna(context, url, json);
-        // Depois de buscar salva os anuncios
-        //salvarAnuncios(context, tipo, anuncios);
-        return anuncios;
+        // Depois de buscar salva os ads
+        //salvarAnuncios(context, tipo, ads);
+        return ads;
     }
 
-    private static List<Anuncio> parserJSON(Context context, String json) throws IOException {
+    private static List<Ads> parserJSON(Context context, String json) throws IOException {
         //Informa ao GSON que vamos converter uma lista de anúncios
-        Type listType = new TypeToken<ArrayList<Anuncio>>() {}.getType();
+        Type listType = new TypeToken<ArrayList<Ads>>() {}.getType();
         //Faz o parser em apenas uma linha e cria a list
-        List<Anuncio> anuncios = new Gson().fromJson(json,listType);
+        List<Ads> ads = new Gson().fromJson(json,listType);
 
-        return anuncios;
+        return ads;
     }
 
     private static void salvaArquivoNaMemoriaInterna(Context context, String url, String json) {
@@ -282,15 +290,15 @@ public class AnuncioService {
 
     }
 
-    public static List<Anuncio> getAnunciosFromRaw(Context context, int tipo) throws IOException {
+    public static List<Ads> getAnunciosFromRaw(Context context, int tipo) throws IOException {
         //String json = readFile(context, tipo);
-        //List<Anuncio> anuncios = parserJSON(context, json);
+        //List<Ads> anuncios = parserJSON(context, json);
 
         //return anuncios;
         return null;
     }
     // Abre o arquivo salvo, se existir, e cria a lista de anuncios
-    public static List<Anuncio> getAnunciosFromArquivo(Context context, int tipo) throws IOException {
+    public static List<Ads> getAnunciosFromArquivo(Context context, int tipo) throws IOException {
         String tipoString = getTipo(tipo);
         String fileName = String.format("anuncios_%s.json", tipoString);
         Log.d(TAG, "Abrindo arquivo: " + fileName);
@@ -300,9 +308,9 @@ public class AnuncioService {
             Log.d(TAG, "Arquivo " + fileName + " não encontrado.");
             return null;
         }
-        List<Anuncio> anuncios = parserJSON(context, json);
-        Log.d(TAG, "Retornando anuncios do arquivo " + fileName + ".");
-        return anuncios;
+        List<Ads> ads = parserJSON(context, json);
+        Log.d(TAG, "Retornando ads do arquivo " + fileName + ".");
+        return ads;
     }
 
     //converte um objeto para json
@@ -311,12 +319,18 @@ public class AnuncioService {
     }
 
     //converte um json para objeto
-    public Anuncio criarObjeto(String json) {
-        return gson.fromJson(json,Anuncio.class);
+    public Ads criarObjeto(String json) {
+        return gson.fromJson(json,Ads.class);
 
     }
 
     public void criarAnuncio(Object objeto) throws IOException {
         String novoJson = criarJson(objeto);
+    }
+    public void addWishList(List listAnuncios){
+
+    }
+    public void getUserWishList(){
+
     }
 }

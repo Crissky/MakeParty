@@ -1,7 +1,6 @@
 package com.inovaufrpe.makeparty.cliente.gui.adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,12 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 import java.util.List;
 
 public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnunciosViewHolder> {
-    private final List<Anuncio> anuncios;
+    private final List<Ads> ads;
     private final Context context;
     private final AnuncioOnClickListener onClickListener;
 
@@ -28,10 +27,10 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
     }
 
     //Aqui esta informando que esse adapter , essa classe AnuncioAdapter esta personalizando cada item de uma lista
-    // uma lista de anuncios que no caso ficará "guardada" em AnuncioView
-    public AnuncioAdapter(Context context, List<Anuncio> anuncios, AnuncioOnClickListener onClickListener) {
+    // uma lista de ads que no caso ficará "guardada" em AnuncioView
+    public AnuncioAdapter(Context context, List<Ads> ads, AnuncioOnClickListener onClickListener) {
         this.context = context;
-        this.anuncios = anuncios;
+        this.ads = ads;
         this.onClickListener = onClickListener;
     }
     //aqui embaixo esta informando qual xml ta desenhando o item de cada lista, esta personalizando o item
@@ -48,17 +47,17 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
     //seta os itens view do item, trocando pelas informações corretas em cada campo
     @Override
     public void onBindViewHolder(final AnunciosViewHolder holder, final int position) {
-        //Anuncio anuncio = anuncios.get(position).getAnuncio(); --hamba
+        //Ads anuncio = ads.get(position).getAnuncio(); --hamba
         //Bitmap imagemAnuncio = anuncio.getImagemBitmap(); --hamba
         //holder.imageView.setImageBitmap(imagemAnuncio); --hamba
-        // Anuncio da linha
-        Anuncio c = anuncios.get(position);
+        // Ads da linha
+        Ads c = ads.get(position);
 
         // Atualizada os valores nas views
         holder.title.setText(c.getTitle());
         holder.tDesc.setText(c.getDescription());
 
-        // Foto do Anuncio
+        // Foto do Ads
         //ImageUtils.setImage(context, c.urlFoto, holder.img);
 
         if (onClickListener != null) {
@@ -76,8 +75,8 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
                 }
             });
         }
-        //anuncios.get(position).getSelecionado()
-        //int corFundo = context.getResources().getColor(anuncios.get(position).getSelecionado() ? R.color.colorBlue : R.color.colorWhite);
+        //ads.get(position).getSelecionado()
+        //int corFundo = context.getResources().getColor(ads.get(position).getSelecionado() ? R.color.colorBlue : R.color.colorWhite);
         int corFundo = context.getResources().getColor(c.selected ? R.color.colorBlue : R.color.colorWhite);
         //int corFundo = ContextCompat.getColor(context, c.selected ? R.color.colorBlue : R.color.colorWhite);
 
@@ -86,7 +85,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
     //metodo abaixo retorna quantos itens anuncio tem
     @Override
     public int getItemCount() {
-        return this.anuncios != null ? this.anuncios.size() : 0;
+        return this.ads != null ? this.ads.size() : 0;
     }
 
     //metodo abaixo diz q é classe view e que herda de RecyclerView.ViewHolder

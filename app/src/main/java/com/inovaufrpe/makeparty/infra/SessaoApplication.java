@@ -19,7 +19,7 @@ public class SessaoApplication extends Application {
     private String tipoDeUserLogado = "null";
     private String token;
     private String _id;
-    private Usuario user;
+    private Usuario usuario;
     private Date horaRecebidoToken;
 
     public static SessaoApplication getInstance() {
@@ -62,12 +62,12 @@ public class SessaoApplication extends Application {
         this._id = _id;
     }
 
-    public Usuario getUser() {
-        return user;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getTokenUser() {

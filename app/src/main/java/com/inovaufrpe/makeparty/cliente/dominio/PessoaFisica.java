@@ -8,16 +8,16 @@ public class PessoaFisica {
     private String cpf;
     private String birthdate;
     private String phone;
-    private Usuario user;
+    private Usuario usuario;
     //private Byte photo;
     //private String photo;
 
-    public PessoaFisica(Usuario user,String name, String cpf, String birthdate, String phone) {
+    public PessoaFisica(Usuario usuario, String name, String cpf, String birthdate, String phone) {
         this.name = name;
         this.cpf = cpf;
         this.birthdate = birthdate;
         this.phone = phone;
-        this.user = user;
+        this.usuario = usuario;
     }
 
     public String getName() {
@@ -52,19 +52,19 @@ public class PessoaFisica {
         this.phone = phone;
     }
 
-    public Usuario getUser() {
-        return user;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    //public String getPhoto() {
+    //public String getPhotos() {
       //  return photo;
     //}
 
-    //public void setPhoto(String photo) {
+    //public void setPhotos(String photo) {
       //  this.photo = photo;
     //}
 

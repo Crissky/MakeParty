@@ -3,25 +3,25 @@ package com.inovaufrpe.makeparty.fornecedor.dominio;
 
 import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
 
-public class PessoaJuridica {
+public class Owner {
 
     private String socialname;
     private String cnpj;
     private String authorization;
     private String photo;
     //private Byte photo;
-    private Usuario user;
+    private Usuario usuario;
     private String phone;
     private Plano plan;
     private Agenda schedule;
 
 
-    public PessoaJuridica() {
+    public Owner() {
     }
-    public PessoaJuridica(Usuario user, String socialname, String cnpj, String phone) {
+    public Owner(Usuario usuario, String socialname, String cnpj, String phone) {
         this.socialname = socialname;
         this.cnpj = cnpj;
-        this.user = user;
+        this.usuario = usuario;
         this.phone = phone;
     }
 
@@ -57,12 +57,12 @@ public class PessoaJuridica {
         this.photo = photo;
     }
 
-    public Usuario getUser() {
-        return user;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getPhone() {
@@ -90,5 +90,18 @@ public class PessoaJuridica {
     }
 
 
+    @Override
+    public String toString() {
+        return "Owner[" +
+                "socialname='" + socialname + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", authorization='" + authorization + '\'' +
+                ", photo='" + photo + '\'' +
+                ", usuario=" + usuario +
+                ", phone='" + phone + '\'' +
+                ", plan=" + plan +
+                ", schedule=" + schedule +
+                ']';
+    }
 }
 

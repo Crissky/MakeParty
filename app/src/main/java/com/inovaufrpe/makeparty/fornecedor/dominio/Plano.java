@@ -32,6 +32,12 @@ class Plano {
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "Plano[" +
+                "type='" + type + '\'' +
+                ", numberAdActive=" + numberAdActive +
+                ", numberPhotos=" + numberPhotos +
+                ']';
+    }
 }

@@ -169,11 +169,10 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
 
     }
     public void trocarFragmento(String tipo){
-        //getSupportActionBar().setTitle(getString(getIntent().getStringExtra("tipo",tipo)));
+        getSupportActionBar().setTitle(getIntent().getStringExtra(tipo));
         AnunciosOutroFragment frag = new AnunciosOutroFragment();
         //AnunciosFragment frag = new AnunciosFragment();
         frag.setArguments(getIntent().getExtras());
-        //getSupportFragmentManager().beginTransaction().add(R.id.container, frag).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, frag).commit();
 
     }

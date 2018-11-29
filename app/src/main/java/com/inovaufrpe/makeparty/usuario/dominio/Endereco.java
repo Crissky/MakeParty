@@ -59,10 +59,15 @@ public class Endereco {
     private String state;
 
 
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Endereco[" +
+                "street='" + street + '\'' +
+                ", neighborhood='" + neighborhood + '\'' +
+                ", number='" + number + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ']';
+    }
 }

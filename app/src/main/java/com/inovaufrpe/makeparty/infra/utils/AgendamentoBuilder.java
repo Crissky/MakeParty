@@ -2,7 +2,7 @@ package com.inovaufrpe.makeparty.infra.utils;
 
 import com.inovaufrpe.makeparty.cliente.dominio.PessoaFisica;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Agendamento;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Anuncio;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class AgendamentoBuilder {
         List<Agendamento> list = new ArrayList<>();
         String[] nomes = new String[]{"Lucas Carvalho", "Carlos Rogério", "Maria Júlia", "Renata Almeida"};
         Agendamento agendamento;
-        Anuncio anuncio = new Anuncio();
+        Ads anuncio = new Ads();
         anuncio.setTitle("Buffet para festa infantil");
         for (int i = 0; i < 4; i++) {
             agendamento = new Agendamento();
