@@ -320,7 +320,7 @@ public class AnunciosFragment extends BaseFragment {
             startTask("deletar",new BaseTask(){
                 @Override
                 public Object execute() throws Exception {
-                    boolean ok = AnuncioService.delete(selectedAds);
+                    boolean ok = AnuncioService.deleteItensLista(selectedAds);
                     if(ok) {
                         // Se excluiu do banco, remove da lista da tela.
                         for (Ads c : selectedAds) {

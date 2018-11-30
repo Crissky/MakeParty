@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 import java.util.ArrayList;
@@ -23,8 +24,19 @@ public class AnunciosFornecedorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncios_fornecedor);
+        criarFragment(savedInstanceState);
         procurandoViews();
 
+    }
+    private void criarFragment(Bundle savedInstanceState) {
+        //getSupportActionBar().setTitle(getString(getIntent().getIntExtra("tipo",6)));
+        if (savedInstanceState == null) {
+            AnunciosOutroFragment frag = new AnunciosOutroFragment();
+            //AnunciosFragment frag = new AnunciosFragment();
+            frag.setArguments(getIntent().getExtras());
+            //getSupportFragmentManager().beginTransaction().add(R.id.container, frag).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.containerMeusAnuncios, frag).commit();
+        }
     }
 
     private void procurandoViews(){

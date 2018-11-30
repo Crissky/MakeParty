@@ -161,13 +161,13 @@ public class AnunciosOutroFragment extends BaseFragment {
     // Atualiza o título da action bar (CAB)
     private void updateActionModeTitle() {
         if (actionMode != null) {
-            actionMode.setTitle("Selecione os ads.");
+            actionMode.setTitle("Selecione os anúncios.");
             actionMode.setSubtitle(null);
             List<Ads> selectedAds = getSelectedAnuncios();
             if (selectedAds.size() == 1) {
                 actionMode.setSubtitle("1 anuncio selecionado");
             } else if (selectedAds.size() > 1) {
-                actionMode.setSubtitle(selectedAds.size() + " ads selecionados");
+                actionMode.setSubtitle(selectedAds.size() + " anúncios selecionados");
             }
             updateShareIntent(selectedAds);
         }

@@ -21,9 +21,10 @@
 
     <!-- fragment aqui -->
     <FrameLayout
+        android:layout_margin="0dp"
         android:id="@+id/containerFAV"
         android:layout_width="match_parent"
-        android:layout_height="521dp" />
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
