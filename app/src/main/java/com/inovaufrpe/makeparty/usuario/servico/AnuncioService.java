@@ -44,7 +44,7 @@ public class AnuncioService {
     private static final String URL_LISTAR_PJS = URL_BASE + "advertisers";
     private static final String URL_CRIAR_LISTA_DESEJOS = URL_BASE + "wishlists";
     private static final String URL_LISTA_DESEJOS = URL_BASE + "wishlists";
-    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE= URL_BASE + "owners/:idOuTokenDele";
+    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE= URL_BASE + "ads/owners/:idOuTokenDele";
 
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -350,7 +350,7 @@ public class AnuncioService {
     public void getUserWishList(){
 
     }
-    public List getAnunciosDeUmFornecedor(String tokenOuId) throws IOException {
+    public static List getAnunciosDeUmFornecedor(String tokenOuId) throws IOException {
         Gson gson = new Gson();
         String jsonTokenOuId = gson.toJson(tokenOuId);
         String url = URL_LISTA_ANUNCIOS_DO_ANUNCIANTE.replace(":idOuTokenDele",tokenOuId);

@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -170,8 +171,8 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
     }
     public void trocarFragmento(String tipo){
         getSupportActionBar().setTitle(getIntent().getStringExtra(tipo));
-        AnunciosOutroFragment frag = new AnunciosOutroFragment();
-        //AnunciosFragment frag = new AnunciosFragment();
+        Fragment frag = null;
+        frag =AnunciosOutroFragment.newInstance(tipo);
         frag.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.container, frag).commit();
 

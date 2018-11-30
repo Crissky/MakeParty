@@ -270,9 +270,12 @@ public class AnunciosOutroFragment extends BaseFragment {
 
         @Override
         public List<Ads> execute() throws Exception {
-            // Busca os carros em background (Thread)
-            return AnuncioService.getAnunciosByTipo("Festa");
-            //return AnuncioService.getAnuncios(getContext(), tipo, refresh);
+            // Busca os anuncios em background (Thread)
+            if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("Fornecedor")){
+                return AnuncioService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser().toString());
+            }else {
+                return AnuncioService.getAnunciosByTipo(tipo);
+            }
         }
 
         @Override
