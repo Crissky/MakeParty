@@ -44,7 +44,16 @@ public class ConfiguracoesFornecedorActivity extends AppCompatActivity {
         mandarMensagem = findViewById(R.id.button_modificar_mandar_mensagem_fornecedor);
         apagarConta = findViewById(R.id.button_modificar_apagar_conta_fornecedor);
         sair = findViewById(R.id.button_modificar_sair_fornecedor);
+        acoesItensViews();
 
+    }
+    private void acoesItensViews(){
+        mudarPlano.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudarTela(PlanoEscolhaActivity.class);
+            }
+        });
     }
 
     public void mudarTela(Class tela){

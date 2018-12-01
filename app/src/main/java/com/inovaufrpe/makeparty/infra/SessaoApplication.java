@@ -94,5 +94,9 @@ public class SessaoApplication extends Application {
         return bus;
     }
 
+    public void reset() {
+        this.values.clear();
+    }
+
 
 }

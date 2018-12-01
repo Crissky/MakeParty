@@ -14,15 +14,23 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
+import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.CalendarioDialog;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private ViewPager galeriaPhotos;
-    private TextView titleAds,nomeFornecedor,adsMediaGeral,descriptionAds,avaliacaoAds,phoneAds;
+    private TextView titleAds,nomeFornecedor,adsMediaGeral,descriptionAds,avaliacaoAds,phoneAds, datapub;
     private TextView priceAds, adsTags, addressAds;
+    private TextView avaliarAquiText;
     private RatingBar ratingMediaTipoAnuncio;
     private Button botaoDispAds;
     private FloatingActionButton floatingAddListaDesejo;
@@ -34,40 +42,19 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_anuncio);
         encontrandoItensViews();
-        //setarInfoView();
 
-        // botão da tela detalhes para acionar o calendario
-        botaoDispAds.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                CalendarioDialog datePicker = new CalendarioDialog();
-                datePicker.show(getSupportFragmentManager(),"date picker");
-            }
-        });
     }
-
-
     //IMPLEMENTAÇÃO RELACIONADO AO CALENDÁRIO
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         Calendar c  = Calendar.getInstance();
         c.set(Calendar.YEAR,year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
-
-        TextView textView = (TextView) findViewById(R.id.textView1);
-        textView.setText(currentDateString);
+        FiltroAnuncioSelecionado.instance.setDiaSelecionadoPeloClienteDisp(datePicker.getMaxDate());
         mudarTela(DispDiaSelecPeloClienteActivity.class);
-        //intent.putExtra("dataselecionada", currentDateString);
-        //getIntent().putExtra("anuncio selecionado",get._id);
-    }
 
-    public void mudarTela(Class tela){
-        Intent intent=new Intent(this, tela);
-        startActivity(intent);
     }
-
     public void encontrandoItensViews(){
         this.galeriaPhotos = findViewById(R.id.viewPager);
         this.titleAds = findViewById(R.id.textViewTitleAds);
@@ -83,27 +70,79 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         this.addressAds = findViewById(R.id.textViewAddressAds);
         this.botaoDispAds = findViewById(R.id.buttonVerifDispAnuncio);
         this.containerComentarios = findViewById(R.id.containerComentariosAnuncio);
+        this.avaliarAquiText = findViewById(R.id.textViewButtonAvaliar);
+        this.datapub = findViewById(R.id.textViewDataPublicacaoAnuncio);
+        acoesBotoes();
+        setUpViewPagerGaleriaFotos();
+        setarInfoView();
+    }
+    public void acoesBotoes(){
+        // botão da tela detalhes para acionar o calendario
+        botaoDispAds.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                CalendarioDialog datePicker = new CalendarioDialog();
+                datePicker.show(getSupportFragmentManager(),"date picker");
+            }
+        });
+        avaliarAquiText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                telaAvaliarAnuncio();
+
+            }
+        });
+    }
+    private void setUpViewPagerGaleriaFotos() {
+        //AnuncioService anuncioService = new AnuncioService(); -- TEM Q ADAPTAR AINDA VIUUUUUUUUU
+        CircleIndicator indicator = (CircleIndicator)findViewById(R.id.indicator);
+        //GaleriaFotosAdapter galeriaFotosAdapter = new GaleriaFotosAdapter(this, AnuncioService.getImagens() ); --ADAPTAR AINDA
+        //galeriaPhotos.setAdapter(galeriaFotosAdapter);
+        indicator.setViewPager(galeriaPhotos);
     }
 
     public void setarInfoView(){
-       /* titleAds.setText();
-        nomeFornecedor.setText();
-        descriptionAds.setText();
-        phoneAds.setText();
-        priceAds.setText();
-        addressAds.setText();
-        adsTags.setText();
-        //galeriaPhotos.setAdapter(); ---acho q n é assim
+      /*  Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        titleAds.setText(anuncioSelecionado.getTitle());
+        nomeFornecedor.setText(("Nome do fornecedor :" +anuncioSelecionado.getOwner().getSocialname()));
+        descriptionAds.setText(("Descrição: " +anuncioSelecionado.getDescription()));
+        phoneAds.setText(("Telefone :" +  anuncioSelecionado.getPhone()));
+        priceAds.setText((int) anuncioSelecionado.getPrice());
+        addressAds.setText(("Endereço : "+anuncioSelecionado.getAddress().getStreet()
+                +","+ anuncioSelecionado.getAddress().getNeighborhood()+","+ "Número:"
+                +anuncioSelecionado.getAddress().getNumber()+ anuncioSelecionado.getAddress().getCity()
+                +","+anuncioSelecionado.getAddress().getState()
+                +", CEP :"+anuncioSelecionado.getAddress().getZipcode()
+        ));
+        adsTags.setText(("Tags : " +anuncioSelecionado.getTags().toString()));
+        setUpViewPagerGaleriaFotos();
+        buscarComentariosEAvaliacoes();
         */
     }
+
+    public void buscarComentariosEAvaliacoes(){}
 
     public void onClickAddDesejo(View view){
 
     }
 
-    public void avaliarAnuncio(){
+    public void telaAvaliarAnuncio(){
+        mudarTela(AvaliacaoNotaActivity.class);
 
     }
+    public void mudarTela(Class tela){
+        Intent intent=new Intent(this, tela);
+        startActivity(intent);
+        finish();
+    }
+    @Override
+    public void onBackPressed() {
+        if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
+            this.mudarTela(TelaInicialClienteActivity.class);
+        //}else if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
 
-
+        }else if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
+            this.mudarTela(AnunciosFornecedorActivity.class);
+        }
+    }
 }

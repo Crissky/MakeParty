@@ -138,6 +138,10 @@
     <string name="button_editar_anuncio">Editar anúncio</string>
     <string name="button_atualizar_anuncio">Atualizar anúncio</string>
     <string name="button_excluir_anuncio">Excluir anúncio</string>
+    <string name="text_button_avaliar_anuncio_detalhes_an">Avalie clicando aqui</string>
+    <string name="text_view_detalhes_anuncio">Detalhes</string>
+    <string name="text_view_perg_ja_conhece_servico">Ja conhece o serviço desse fornecedor?</string>
+    <string name="text_view_data_pub_anuncio">Data de publicação:XX/XX/XXXX</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>

@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
 import com.inovaufrpe.makeparty.cliente.gui.adapter.AnuncioAdapter;
+import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.gui.EditarAnuncioActivity;
@@ -127,10 +128,10 @@ public class AnunciosOutroFragment extends BaseFragment {
             @Override
             public void onClickAnuncio(AnuncioAdapter.AnunciosViewHolder holder, int indexAnuncio) {
                 Ads c = ads.get(indexAnuncio);
+                FiltroAnuncioSelecionado.instance.setAnuncioSelecionado(c);
                 if (actionMode == null) {
                     if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
                         Intent intent = new Intent(getContext(), EditarAnuncioActivity.class);
-                        //intent.putExtra("anuncio", (Parcelable) c);
                         startActivity(intent);
                     }else{
                         Intent intent = new Intent(getContext(), DetalhesAnuncioActivity.class);
@@ -335,7 +336,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                     //String url = c.urlFoto;
                     //String fileName = url.substring(url.lastIndexOf("/"));
                     // Cria o arquivo no SD card
-                    //File file = SDCardUtils.getPrivateFile(getContext(), "carros", fileName);
+                    //File file = SDCardUtils.getPrivateFile(getContext(), "anuncios", fileName);
                     //IOUtils.downloadToFile(c.urlFoto, file);
                     // Salva a Uri para compartilhar a foto
                     //imageUris.add(Uri.fromFile(file));

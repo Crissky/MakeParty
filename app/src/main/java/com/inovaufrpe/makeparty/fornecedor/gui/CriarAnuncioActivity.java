@@ -22,7 +22,10 @@ import com.inovaufrpe.makeparty.infra.utils.Mask;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class CriarAnuncioActivity extends AppCompatActivity {
     private EditText edtTitulo, edtValor, edtDescricao, edtTags, edtTelefone, edtRua, edtNumero, edtBairro, edtCidade, edtCep;
@@ -157,13 +160,11 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         double valor = Double.parseDouble(edtValor.getText().toString().trim());
         String descricao = edtDescricao.getText().toString().trim();
         String telefone = edtTelefone.getText().toString().trim().replace("(","").replace(")","").replace("-","");
-        String tipo = edtTipoAnuncio.getSelectedItem().toString();
 //        String stringTags = edtTags.getText().toString().trim();
 //        String[] stags = stringTags.split(",");
 //        ArrayList<String> tags = new ArrayList<String>(stags);
 //
 ////        ArrayList<String> tags = new ArrayList<>(stringTags.split(","));
-
 
         Ads ads = new Ads();
         ads.setTitle(titulo);
@@ -171,8 +172,14 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         ads.setCreatedAt(new Date());
         ads.setDescription(descricao);
         ads.setPhone(telefone);
+        String tipo = edtTipoAnuncio.getSelectedItem().toString();
         ads.setType(tipo);
         ads.setAddress(endereco);
+        String textoTags = edtTags.getText().toString();
+        String[] itensDasTags = textoTags.split(",");
+        List<String> arrayDasTags = new ArrayList<String>();
+        Collections.addAll(arrayDasTags, itensDasTags);
+        ads.setTags((ArrayList) arrayDasTags);
 //        ads.setTags(tags);
         Log.i("Script", "OLHAAA: "+ SessaoApplication.getInstance().getTokenUser());
         Gson gson = new Gson();
@@ -181,9 +188,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         Log.i("Script", "OLHAAA: "+ ad);
         ad=ad.substring(0,ad.length()-1)+","+"\"token\""+":"+ SessaoApplication.getInstance().getTokenUser()+ "}";
         Log.i("Script", "OLHAAA: "+ ad);
-        //String json1 = ad.replace("}",",",ad.length());
-        //String json2 = jsonPf.substring(UM,jsonPf.length());
-        //return json1 + json2;
+
         return ad;
     }
 

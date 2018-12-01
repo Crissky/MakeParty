@@ -1,5 +1,6 @@
 package com.inovaufrpe.makeparty.fornecedor.gui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,8 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
+import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class EditarAnuncioActivity extends AppCompatActivity {
 
@@ -46,26 +53,117 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
         buttonAtualizarAnuncio = findViewById(R.id.button_atualizar_anuncio);
         buttonExcluirAnuncio = findViewById(R.id.button_excluir_anuncio);
+        acoesButoesAtualizarOuExcluirAnuncio();
+        //setandoInfoItensViewAntesEdicao();
 
     }
-    public void setandoInfoItensView(){
-
-    }
-    public void atualizarItensAnuncio(){
-        SimOuNaoDialog.show(getSupportFragmentManager(),"Deseja confirmar a atualização desse anúncio?", new SimOuNaoDialog.Callback() {
+    public void acoesButoesAtualizarOuExcluirAnuncio(){
+        buttonAtualizarAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void metodoSimAoDialog() {
-
+            public void onClick(View v) {
+                cliqueAtualizarItensAnuncio();
+            }
+        });
+        buttonExcluirAnuncio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cliqueExcluindoAnuncio();
             }
         });
     }
+
+    public void setandoInfoItensViewAntesEdicao(){
+        Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+
+        //spinnerTipoAnuncio.setOnItemSelectedListener(anuncioSelecionado.getType());
+
+        editTextTituloAnuncio.setText(anuncioSelecionado.getTitle());
+        editTextValorAnuncio.setText((int) anuncioSelecionado.getPrice());
+        editTextDescAnuncio.setText(anuncioSelecionado.getDescription());
+        editTextTagsAnuncio.setText((anuncioSelecionado.getTags().toString()));
+        editTextTelefoneAnuncio.setText((anuncioSelecionado.getPhone()));
+        editTextRuaAnuncio.setText(anuncioSelecionado.getAddress().getStreet());
+        editTextNumeroEndAnuncio.setText(anuncioSelecionado.getAddress().getNumber());
+        editTextBairroEndAnuncio.setText(anuncioSelecionado.getAddress().getNeighborhood());
+        editTextCidadeEndAnuncio .setText(anuncioSelecionado.getAddress().getCity());
+        editTextCepEndAnuncio.setText(anuncioSelecionado.getAddress().getZipcode());
+        textViewLimitesAnuncio.setText("");
+        ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
+        buscarAntigasImgAntesEdicao();
+    }
+    public void buscarAntigasImgAntesEdicao(){
+
+    }
+    public void cliqueAtualizarItensAnuncio(){
+        SimOuNaoDialog.show(getSupportFragmentManager(),"Deseja confirmar a atualização desse anúncio?", new SimOuNaoDialog.Callback() {
+            @Override
+            public void metodoSimAoDialog() {
+                //
+                //
+                showProgressDialogWithTitle("Por favor, espere", "atualizando dados do anúncio");
+                msgToast("Anúncio atualizado com sucesso");
+                msgToast("Erro");
+                mudarTela(AnunciosFornecedorActivity.class);
+            }
+        });
+    }
+    public Ads retornandoAnuncioComNovosDadosParaAtualizar(){
+        Ads dadosAnuncioSelecionadoAntesEdicao = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        Ads anuncioASerEnviadoPUT =  new Ads();
+        anuncioASerEnviadoPUT.set_id( dadosAnuncioSelecionadoAntesEdicao.get_id());
+        anuncioASerEnviadoPUT.setTitle(editTextTituloAnuncio.getText().toString());
+        anuncioASerEnviadoPUT.setPrice(Double.parseDouble(editTextValorAnuncio.getText().toString().trim()));
+        anuncioASerEnviadoPUT.setDescription(editTextDescAnuncio.getText().toString());
+        anuncioASerEnviadoPUT.setPhone(editTextTelefoneAnuncio.getText().toString());
+
+        String textoTags = editTextTagsAnuncio.getText().toString();
+        String[] itensDasTags = textoTags.split(",");
+        List<String> arrayDasTags = new ArrayList<String>();
+        Collections.addAll(arrayDasTags, itensDasTags);
+        anuncioASerEnviadoPUT.setTags((ArrayList) arrayDasTags);
+
+        Endereco endAnuncioEditado = new Endereco();
+        endAnuncioEditado.setStreet(editTextRuaAnuncio.getText().toString());
+        endAnuncioEditado.setNeighborhood(editTextBairroEndAnuncio.getText().toString());
+        endAnuncioEditado.setCity(editTextCidadeEndAnuncio.getText().toString());
+        endAnuncioEditado.setNumber(editTextNumeroEndAnuncio.getText().toString());
+        endAnuncioEditado.setState("Pernambuco"); //MUDAR ISSO AQ EINNNNNNNNNN
+        endAnuncioEditado.setZipcode(editTextCepEndAnuncio.getText().toString());
+        anuncioASerEnviadoPUT.setAddress(endAnuncioEditado);
+
+
+        //textViewLimitesAnuncio.setText("");
+        ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
+        guardandoNovasImgsSelecionadasEditadas();
+
+        return anuncioASerEnviadoPUT;
+    }
+    public void guardandoNovasImgsSelecionadasEditadas(){
+
+    }
+
     public void cliqueExcluindoAnuncio() {
         SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja mesmo excluir esse anúncio ?", new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {
+                //
+                //
+
+                showProgressDialogWithTitle("Por favor, espere", "excluindo anúncio");
+                msgToast("Anúncio excluído com sucesso");
+                msgToast("Erro");
+                mudarTela(AnunciosFornecedorActivity.class);
 
             }
         });
+    }
+    public void showProgressDialogWithTitle(String title, String msgEmbaixo) {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle(title);
+        progressDialog.setMessage(msgEmbaixo);
+        progressDialog.show();
     }
     public void msgToast(String msgToast){
         Toast.makeText(this, msgToast, Toast.LENGTH_SHORT).show();
