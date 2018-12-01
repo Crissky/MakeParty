@@ -9,6 +9,7 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
 import com.inovaufrpe.makeparty.cliente.gui.adapter.AnuncioAdapter;
 import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.gui.EditarAnuncioActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.servico.AnuncioService;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.fragment.BaseFragment;
@@ -126,9 +128,14 @@ public class AnunciosOutroFragment extends BaseFragment {
             public void onClickAnuncio(AnuncioAdapter.AnunciosViewHolder holder, int indexAnuncio) {
                 Ads c = ads.get(indexAnuncio);
                 if (actionMode == null) {
-                    Intent intent = new Intent(getContext(), DetalhesAnuncioActivity.class);
-                    //intent.putExtra("anuncio", (Parcelable) c);
-                    startActivity(intent);
+                    if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
+                        Intent intent = new Intent(getContext(), EditarAnuncioActivity.class);
+                        //intent.putExtra("anuncio", (Parcelable) c);
+                        startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(getContext(), DetalhesAnuncioActivity.class);
+                        startActivity(intent);
+                    }
                 } else { // Se a CAB está ativada
                     // Seleciona o anuncio
                     c.selected = !c.selected;
@@ -261,7 +268,7 @@ public class AnunciosOutroFragment extends BaseFragment {
     }
 
     // Task para buscar os ads
-    private class GetAnunciosTask implements TaskListener<List<Ads>> {
+    private class GetAnunciosTask implements TaskListener<List> {
         private boolean refresh;
 
         public GetAnunciosTask(boolean refresh) {
@@ -269,17 +276,27 @@ public class AnunciosOutroFragment extends BaseFragment {
         }
 
         @Override
-        public List<Ads> execute() throws Exception {
+        public List execute() throws Exception {
+            Log.d("Olhaa quem logou",SessaoApplication.getInstance().getTipoDeUserLogado());
+            switch (SessaoApplication.getInstance().getTipoDeUserLogado()) {
+                case "advertiser":
+                    //return AnuncioService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+                    return AnuncioService.getAnunciosByTipo("Festa");
+                case "customer":
+                    return AnuncioService.getAnunciosByTipo("Festa");
+                default:
+                    return AnuncioService.getAnunciosByTipo("Festa");
+            }
             // Busca os anuncios em background (Thread)
-            if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("Fornecedor")){
+            /*if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("Adverstier")){
                 return AnuncioService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser().toString());
             }else {
                 return AnuncioService.getAnunciosByTipo(tipo);
-            }
+            }*/
         }
 
         @Override
-        public void updateView(List<Ads> ads) {
+        public void updateView(List ads) {
             if (ads != null) {
                 // Salva a lista de anuncios no atributo da classe
                 AnunciosOutroFragment.this.ads = ads;

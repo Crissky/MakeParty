@@ -134,6 +134,10 @@
     <string name="label_lista_minhas_notif_forn">Minhas notificações</string>
     <string name="label_lista_dias_disp_cliente_clicou">Lista de disponibilidade do fornecedor</string>
     <string name="button_enviar_solic_reuniao">Enviar solicitação de reunião</string>
+    <string name="text_view_editar_anuncio">Editar anúncio</string>
+    <string name="button_editar_anuncio">Editar anúncio</string>
+    <string name="button_atualizar_anuncio">Atualizar anúncio</string>
+    <string name="button_excluir_anuncio">Excluir anúncio</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>

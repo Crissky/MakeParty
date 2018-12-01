@@ -38,13 +38,17 @@ public class AnuncioService {
     private static final String URL_COLOCAR_ANUNCIO = URL_BASE + "ads";
     private static final String URL_LISTAR_ANUNCIOS = URL_BASE + "ads";
     //GET ANÚNCIOS
-    private static final String URL_LISTAR_ANUNCIOS_PELA_TAG = URL_BASE + "ads/tags/:tag";
-    private static final String URL_LISTAR_ANUNCIOS_PELO_TIPO = URL_BASE + "ads/types/:type";
+    private static final String URL_LISTAR_ANUNCIOS_PELA_TAG = URL_LISTAR_ANUNCIOS + "/tags/:tag";
+    private static final String URL_LISTAR_ANUNCIOS_PELO_TIPO = URL_LISTAR_ANUNCIOS + "/types/:type";
     private static final String URL_PESQUISAR_PJ_PELO_ID = URL_BASE + "advertisers/:id";
     private static final String URL_LISTAR_PJS = URL_BASE + "advertisers";
     private static final String URL_CRIAR_LISTA_DESEJOS = URL_BASE + "wishlists";
     private static final String URL_LISTA_DESEJOS = URL_BASE + "wishlists";
-    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE= URL_BASE + "ads/owners/:idOuTokenDele";
+    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_ANUNCIOS+ "/owners/:idOuTokenDele";
+    private static final String URL_LISTA_ANUNCIOS_POR_NOME = URL_LISTAR_ANUNCIOS + "titles/:title";
+    private static final String URL_LISTA_ANUNCIOS_POR_ID_ANUNCIO = URL_LISTAR_ANUNCIOS + ":id";
+
+
 
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -67,10 +71,10 @@ public class AnuncioService {
         Log.i("Script", "OLHA resposta do servidor se foi conc listinhaa: "+ jsonRespostaAoPost);
         return jsonRespostaAoPost;
     }
-    /*public static String conectarServidorDelete(String url, String jsonAserEnviado){
+   /* public static String conectarServidorDelete(String url, String jsonAserEnviado){
         ConectarServidor http = new ConectarServidor();
         http.LOG_ON = true;
-        String jsonRespostaAoPost = http.post(url,jsonAserEnviado);
+        String jsonRespostaAoPost = http.do(url,jsonAserEnviado);
         Log.i("Script", "OLHA resposta do servidor se foi conc listinhaa: "+ jsonRespostaAoPost);
         return jsonRespostaAoPost;
     }*/
@@ -165,7 +169,7 @@ public class AnuncioService {
         return ads;
     }
 
-    public static List<Ads> searchByNome(String nome) throws IOException {
+    public static List<Ads> searchAllAdsByNome(String nome) throws IOException {
         String url = URL_BASE + "/nome/" + nome; // << essa url ta errada, eu n sei qual url da p pesquisar pelo nome la na API
         ConectarServidor http = new ConectarServidor();
         String json = http.doGet(url);
@@ -331,17 +335,16 @@ public class AnuncioService {
     public void criarAnuncio(Object objeto) throws IOException {
         String novoJson = criarJson(objeto);
     }
-    public String addWishList(List listAnuncios){
+    public String addWishList(List listAnuncios) {
         String url = URL_CRIAR_LISTA_DESEJOS;
         //transf lista em json
         Gson gson = new Gson();
         String listString = gson.toJson(listAnuncios);
         //colocando token
-        listString=listString.substring(0,listString.length()-1)+","+"\"token\""+":"+ SessaoApplication.getInstance().getTokenUser()+ "}";
-        Log.i("Script", "OLHA listinhaa: "+ listString);
-        String respostaAoPost = conectarServidorPost(url,listString);
+        listString = listString.substring(0, listString.length() - 1) + "," + "\"token\"" + ":" + SessaoApplication.getInstance().getTokenUser() + "}";
+        Log.i("Script", "OLHA listinhaa: " + listString);
+        String respostaAoPost = conectarServidorPost(url, listString);
         return respostaAoPost;
-
     }
 
     public void excluirAnuncioDaWishList(List listAnunciosExcluidos){

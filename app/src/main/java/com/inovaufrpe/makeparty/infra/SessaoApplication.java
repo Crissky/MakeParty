@@ -17,10 +17,10 @@ public class SessaoApplication extends Application {
     private final Map<String, Object> values = new HashMap<>();
     private Bus bus = new Bus();
     private String tipoDeUserLogado = "null";
-    private String token;
-    private String _id;
+    private String token = "null";
+    private String _id = "null";
     private Usuario usuario;
-    private Date horaRecebidoToken;
+    private Date horaRecebidoToken = null;
 
     public static SessaoApplication getInstance() {
         return instance; // Singleton

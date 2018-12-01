@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginTop="@dimen/margin_top_card"
+            app:cardCornerRadius="@dimen/card_border"
+            app:cardElevation="@dimen/card_elevation"
+            app:contentPadding="@dimen/card_padding">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewCriandoNovoAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="28dp"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/text_view_editar_anuncio"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="46dp" />
+
+
+                <TextView
+                    android:id="@+id/textViewEscolhadeAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="28dp"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/spinner_msg_esc_tipo_an"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="19sp"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="46dp" />
+
+
+                <Spinner
+                    android:id="@+id/spinnertipoAnuncioEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:popupBackground="@color/colorWhite"
+                    android:spinnerMode="dropdown"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="129dp"
+                    android:entries="@array/tipo"
+                    android:textSize="18sp"
+                    android:prompt="@string/tipo_Anuncio"/>
+
+                <EditText
+                    android:id="@+id/editTextTituloEditarAn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:hint="Titulo do Anúncio"
+                    android:inputType="text"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="200dp" />
+
+
+                <EditText
+                    android:id="@+id/editTextValorEditarAn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:hint="Valor"
+                    android:inputType="number"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="277dp" />
+
+
+                <EditText
+                    android:id="@+id/editTextDescricaoEditarAn"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:hint="Descreva seu serviço!"
+                    android:inputType="textMultiLine"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="355dp" />
+
+                <EditText
+                    android:id="@+id/editTextTagsEditarAn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:hint="Tags"
+                    android:inputType="text"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="430dp" />
+
+
+                <EditText
+                    android:id="@+id/editTextTelefoneEditarAnun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:hint="@string/edit_text_telefone_criar_an"
+                    android:inputType="number"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="430dp" />
+
+                <TextView
+                    android:id="@+id/textViewEnderecoEditarAn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_view_endereco"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    />
+
+                <EditText
+                    android:id="@+id/RuaIdEditarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_rua_criar_anuncio"
+                    android:inputType="text"
+                    tools:layout_editor_absoluteX="17dp"
+                    tools:layout_editor_absoluteY="646dp" />
+
+                <EditText
+                    android:id="@+id/editTextNumeroEditarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:hint="@string/edit_text_numero_an"
+                    android:inputType="number"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="502dp" />
+
+
+                <EditText
+                    android:id="@+id/editTextBairroEditarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_bairro_criar_an"
+                    android:inputType="text"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="715dp" />
+
+                <EditText
+                    android:id="@+id/editTextCidadeEditarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_cidade_criar_an"
+                    android:inputType="text"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="783dp" />
+
+                <EditText
+                    android:id="@+id/editTextCepEditarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_cep_anuncio"
+                    android:inputType="number"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="783dp" />
+                <TextView
+                    android:id="@+id/textViewAnexarEditarImgAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/text_view_anexar_img_an"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="19sp"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="46dp" />
+                <TextView
+                    android:id="@+id/textViewObsLimitesAnuncioForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/text_view_limites_criar_anuncio_forn"
+                    android:textSize="14sp"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="46dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:id="@+id/imgButtonGalFotosAnexAnEdit"
+                        android:layout_width="5dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1" />
+                    <ImageButton
+                        android:layout_weight="1"
+                        android:id="@+id/imgButtonAnexarMaisFtAnEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_control_point_24dp"/>
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/button_atualizar_anuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="18dp"
+                    android:background="@color/colorButoes"
+                    android:text="@string/button_atualizar_anuncio"
+                    android:textColor="@color/colorTextoBut"
+                    tools:layout_editor_absoluteX="46dp"
+                    tools:layout_editor_absoluteY="878dp" />
+                <Button
+                    android:id="@+id/button_excluir_anuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@color/colorButoes"
+                    android:text="@string/button_excluir_anuncio"
+                    android:textColor="@color/colorTextoBut"
+                    tools:layout_editor_absoluteX="46dp"
+                    tools:layout_editor_absoluteY="878dp" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </ScrollView>
+
+
+</LinearLayout>
