@@ -10,6 +10,7 @@
     <color name="colorControlHighlight">#fff</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlue">#3F51B5</color>
+    <color name="colorRosaClaro">#ffc4e3</color>
     <color name="colorRosa">#f956ad</color>
     <color name="colorBlack">#0d0d0d</color>
     <color name="colorRosaChoque">#d64090</color>

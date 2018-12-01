@@ -50,7 +50,7 @@ public class DispDiaSelecPeloClienteActivity extends AppCompatActivity {
 
     public void setandoDataSelecionadaAnteriormente(){
         Long diaSelecionadoPeloClienteDisp = FiltroAnuncioSelecionado.instance.getDiaSelecionadoPeloClienteDisp();
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(diaSelecionadoPeloClienteDisp);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(diaSelecionadoPeloClienteDisp).;
         TextView textView = (TextView) findViewById(R.id.textViewDataSelecionadaNaTelaDetalhes);
         textView.setText(currentDateString);
     }

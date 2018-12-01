@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 public class AvaliacaoNotaActivity extends AppCompatActivity {
@@ -19,6 +21,7 @@ public class AvaliacaoNotaActivity extends AppCompatActivity {
     private Button botaoAvaliar;
     private Double nota;
     private ImageView imageViewFornecedorAvaliar;
+    private EditText comentarioAvaliacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,9 @@ public class AvaliacaoNotaActivity extends AppCompatActivity {
             }
         });
     }
-    public void avaliar(Ads ads, Double nota) {
+    public void avaliar(Ads ads, Double nota, String comentario) {
+        comentarioAvaliacao= findViewById(R.id.editTextDescricaoComentAnuncAdd);
+        Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         //TUDO DO HAMBA , AINDA P ADAPTAR
         //ServicoTitulo servicoTitulo = new ServicoTitulo();
         //servicoTitulo.avaliar(ads, nota);

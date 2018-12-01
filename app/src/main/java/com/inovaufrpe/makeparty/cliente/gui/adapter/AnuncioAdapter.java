@@ -76,9 +76,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
             });
         }
         //ads.get(position).getSelecionado()
-        //int corFundo = context.getResources().getColor(ads.get(position).getSelecionado() ? R.color.colorBlue : R.color.colorWhite);
-        int corFundo = context.getResources().getColor(c.selected ? R.color.colorBlue : R.color.colorWhite);
-        //int corFundo = ContextCompat.getColor(context, c.selected ? R.color.colorBlue : R.color.colorWhite);
+        int corFundo = context.getResources().getColor(c.selected ? R.color.colorRosaClaro : R.color.colorWhite);
 
         holder.cardView.setCardBackgroundColor(corFundo);
     }

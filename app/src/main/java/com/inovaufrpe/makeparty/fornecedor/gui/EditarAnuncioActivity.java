@@ -17,6 +17,7 @@ import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
+import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,8 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     private TextView textViewLimitesAnuncio;
     private Button buttonAtualizarAnuncio,buttonExcluirAnuncio;
     private ImageButton ImgButtonGalFotosAnex;
+    ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
+    boolean isValido=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         buttonAtualizarAnuncio = findViewById(R.id.button_atualizar_anuncio);
         buttonExcluirAnuncio = findViewById(R.id.button_excluir_anuncio);
         acoesButoesAtualizarOuExcluirAnuncio();
-        //setandoInfoItensViewAntesEdicao();
+        setandoInfoItensViewAntesEdicao();
 
     }
     public void acoesButoesAtualizarOuExcluirAnuncio(){
@@ -78,18 +81,18 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         //spinnerTipoAnuncio.setOnItemSelectedListener(anuncioSelecionado.getType());
 
         editTextTituloAnuncio.setText(anuncioSelecionado.getTitle());
-        editTextValorAnuncio.setText((int) anuncioSelecionado.getPrice());
+        //editTextValorAnuncio.setText((int) anuncioSelecionado.getPrice());
         editTextDescAnuncio.setText(anuncioSelecionado.getDescription());
-        editTextTagsAnuncio.setText((anuncioSelecionado.getTags().toString()));
+        //editTextTagsAnuncio.setText((anuncioSelecionado.getTags().toString()));
         editTextTelefoneAnuncio.setText((anuncioSelecionado.getPhone()));
-        editTextRuaAnuncio.setText(anuncioSelecionado.getAddress().getStreet());
+        /*editTextRuaAnuncio.setText(anuncioSelecionado.getAddress().getStreet());
         editTextNumeroEndAnuncio.setText(anuncioSelecionado.getAddress().getNumber());
         editTextBairroEndAnuncio.setText(anuncioSelecionado.getAddress().getNeighborhood());
         editTextCidadeEndAnuncio .setText(anuncioSelecionado.getAddress().getCity());
         editTextCepEndAnuncio.setText(anuncioSelecionado.getAddress().getZipcode());
         textViewLimitesAnuncio.setText("");
         ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
-        buscarAntigasImgAntesEdicao();
+        buscarAntigasImgAntesEdicao(); */
     }
     public void buscarAntigasImgAntesEdicao(){
 
@@ -100,12 +103,28 @@ public class EditarAnuncioActivity extends AppCompatActivity {
             public void metodoSimAoDialog() {
                 //
                 //
-                showProgressDialogWithTitle("Por favor, espere", "atualizando dados do anúncio");
-                msgToast("Anúncio atualizado com sucesso");
-                msgToast("Erro");
-                mudarTela(AnunciosFornecedorActivity.class);
+             /*   if(verficarCampos()) {
+                    //Ads anuncioParaAtualizar = retornandoAnuncioComNovosDadosParaAtualizar();
+                    try {
+                        showProgressDialogWithTitle("Por favor, espere", "atualizando dados do anúncio");
+                        //atualizarAnuncio(anuncioParaAtualizar);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                exibirMsgSeValidouAtualizao();
+
+                if (isValido){
+                    msgToast("Anúncio atualizado com sucesso");
+                    mudarTela(AnunciosFornecedorActivity.class);
+                }else{
+                    msgToast("Erro");
+                }
+              */
             }
+
         });
+
     }
     public Ads retornandoAnuncioComNovosDadosParaAtualizar(){
         Ads dadosAnuncioSelecionadoAntesEdicao = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
@@ -157,6 +176,49 @@ public class EditarAnuncioActivity extends AppCompatActivity {
             }
         });
     }
+    private boolean verficarCampos(){
+        String cidade = editTextCidadeEndAnuncio.getText().toString().trim();
+        String bairro = editTextBairroEndAnuncio.getText().toString().trim();
+        String cep = editTextCepEndAnuncio.getText().toString().trim();
+        String rua = editTextRuaAnuncio.getText().toString().trim();
+        String titulo = editTextTituloAnuncio.getText().toString().trim();
+//        double valor = Double.parseDouble(edtValor.getText().toString().trim());
+        String descricao = editTextDescAnuncio.getText().toString().trim();
+        String telefone = editTextTelefoneAnuncio.getText().toString().trim();
+
+        Boolean camposOk = true;
+        if (!validacaoGuiRapida.isCampoAceitavel(titulo)){
+            this.editTextTituloAnuncio.setError(("Digite o título do seu anúncio"));
+            this.editTextTituloAnuncio.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isCampoAceitavel(descricao)){
+            this.editTextDescAnuncio.setError("Descreva melhor o seu serviço");
+            this.editTextDescAnuncio.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isTelefoneValido(telefone)){
+            this.editTextTelefoneAnuncio.setError("Telefone Invalido ou sem ddd");
+            this.editTextTelefoneAnuncio.requestFocus();
+            return false;
+        }else if(validacaoGuiRapida.isCampoVazio(cidade)){
+            this.editTextCidadeEndAnuncio.setError("Favor insira a cidade");
+            this.editTextCidadeEndAnuncio.requestFocus();
+            return false;
+        }else if(validacaoGuiRapida.isCampoVazio(bairro)){
+            this.editTextBairroEndAnuncio.setError("Favor insira o Bairro");
+            this.editTextBairroEndAnuncio.requestFocus();
+            return false;
+        }else if(validacaoGuiRapida.isCampoVazio(rua)){
+            this.editTextRuaAnuncio.setError("Favor insira a Rua");
+            return false;
+        }else if(!validacaoGuiRapida.isCepValido(cep)){
+            this.editTextCepEndAnuncio.setError("Favor insira um CEP Válido");
+            this.editTextCepEndAnuncio.requestFocus();
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public void showProgressDialogWithTitle(String title, String msgEmbaixo) {
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -168,6 +230,9 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     public void msgToast(String msgToast){
         Toast.makeText(this, msgToast, Toast.LENGTH_SHORT).show();
         finish();
+    }
+    public void exibirMsgSeValidouAtualizao(){
+
     }
     public void mudarTela(Class tela){
         Intent intent=new Intent(this, tela);

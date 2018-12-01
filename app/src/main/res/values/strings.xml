@@ -51,7 +51,7 @@
     <string name="prompt_telefone">Telefone</string>
     <string name="label_user_avaliar_fornecedor">Avaliar fornecedor</string>
     <string name="Confirmar">Confirmar</string>
-    <string name="text_resultado_user_avaliacao_para_fornecedor">Resultado avaliação</string>
+    <string name="text_resultado_user_avaliacao_para_fornecedor">Resultado sua avaliação</string>
     <string name="text_avaliar_fornecedor">Avaliar fornecedor</string>
     <string name="img_fornecedor_avaliacao">Imagem do fornecedor</string>
     <string name="text_nome_fornecedor">Nome do fornecedor</string>
@@ -142,6 +142,8 @@
     <string name="text_view_detalhes_anuncio">Detalhes</string>
     <string name="text_view_perg_ja_conhece_servico">Ja conhece o serviço desse fornecedor?</string>
     <string name="text_view_data_pub_anuncio">Data de publicação:XX/XX/XXXX</string>
+    <string name="text_view_deixe_coment">Quer deixar algum comentário? digite abaixo</string>
+    <string name="edit_digite_seu_coment_add_avalie">Digite seu comentário</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>
