@@ -75,6 +75,7 @@
                     android:layout_margin="16dp"
                     android:hint="Titulo do Anúncio"
                     android:inputType="text"
+                    android:maxLength="30"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="200dp" />
 
@@ -86,7 +87,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="16dp"
                     android:hint="Valor"
-                    android:inputType="number"
+                    android:maxLength="15"
+                    android:inputType="numberDecimal"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="277dp" />
 
@@ -99,6 +101,7 @@
                     android:layout_margin="16dp"
                     android:hint="Descreva seu serviço!"
                     android:inputType="textMultiLine"
+                    android:maxLength="350"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="355dp" />
 
@@ -160,6 +163,7 @@
                     android:layout_margin="16dp"
                     android:hint="@string/edit_text_numero_an"
                     android:inputType="number"
+                    android:maxLength="6"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="502dp" />
 

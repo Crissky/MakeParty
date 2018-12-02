@@ -10,7 +10,8 @@
         android:icon="@drawable/ic_search_24dp"
         android:orderInCategory="200"
         android:title="@string/Search"
-        app:showAsAction="always" />
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always|collapseActionView" />
     <item
         android:id="@+id/action_carrinho"
         android:icon="@drawable/ic_carrinho_24dp"
@@ -30,6 +31,7 @@
         android:id="@+id/action_filtrar_por_regiao"
         android:orderInCategory="100"
         android:title="@string/action_filtrar_por_regiao"
+        android:visible="false"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_filtrar_por_preco"

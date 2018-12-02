@@ -7,6 +7,7 @@ import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
 
 import org.json.JSONException;
@@ -33,8 +34,10 @@ public class FornecedorService {
     //POST, PUT, DELETE E GET
     private static final String URL_COLOCAR_ANUNCIO = URL_BASE + "ads";
     private static final String URL_LISTAR_ANUNCIOS = URL_BASE + "ads";
-    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_ANUNCIOS+ "/owners/:idOuTokenDele";
+    private static final String URL_LISTAR_MEUS_ANUNCIOS = URL_LISTAR_ANUNCIOS + "/owners?token=:tokenAqui";
+    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_MEUS_ANUNCIOS+ "/owners/:idDele";
     private static final String URL_APAGAR_ANUNCIO = URL_LISTAR_ANUNCIOS;
+
     private AnuncioEmComumService anuncioEmComumService = new AnuncioEmComumService();
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -100,9 +103,7 @@ public class FornecedorService {
     }
 
     public static List getAnunciosDeUmFornecedor(String tokenOuId) throws IOException {
-        Gson gson = new Gson();
-        String jsonTokenOuId = gson.toJson(tokenOuId);
-        String url = URL_LISTA_ANUNCIOS_DO_ANUNCIANTE.replace(":idOuTokenDele",tokenOuId);
+        String url = URL_LISTAR_MEUS_ANUNCIOS.replace(":tokenAqui",tokenOuId);
         String json =conectarServidorGet(url);
         Log.d("um json ai", json);
         List listaAnunciosFornecedor = AnuncioEmComumService.parserJSONListaAnunciosComFor(json);

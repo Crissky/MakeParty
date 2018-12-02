@@ -184,9 +184,8 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         Log.i("Script", "OLHAAA: "+ SessaoApplication.getInstance().getTokenUser());
         Gson gson = new Gson();
         String ad = gson.toJson(ads);
-        //String ad = gson.toJson(ads +"{" +"token:"+ SessaoApplication.getInstance().getTokenUser() + "}");
         Log.i("Script", "OLHAAA: "+ ad);
-        ad=ad.substring(0,ad.length()-1)+","+"\"token\""+":"+ SessaoApplication.getInstance().getTokenUser()+ "}";
+        ad=ad.substring(0,ad.length()-1)+","+"\"token\""+":"+ "\""+SessaoApplication.getInstance().getTokenUser()+"\""+ "}";
         Log.i("Script", "OLHAAA: "+ ad);
 
         return ad;

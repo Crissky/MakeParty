@@ -189,7 +189,8 @@ public class ConectarServidor {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
         httpPost.setHeader("Content-type", "application/json");
-        httpPost.addHeader("Authorization","token:{" + SessaoApplication.instance.getTokenUser()+"}");
+        httpPost.addHeader("Authorization",SessaoApplication.instance.getTokenUser());
+        //ESSE METODO POSTCOMTOKENTADANDOERRADOO
         String answer;
         try {
             StringEntity stringEntity = new StringEntity(body);

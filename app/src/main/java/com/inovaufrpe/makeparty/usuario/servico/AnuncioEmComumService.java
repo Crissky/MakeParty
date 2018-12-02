@@ -2,7 +2,6 @@ package com.inovaufrpe.makeparty.usuario.servico;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
 
@@ -11,12 +10,12 @@ import com.google.gson.reflect.TypeToken;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.servico.ClienteService;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.fornecedor.servico.FornecedorService;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.ResponseWithURL;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.FormatadorImagemSimples;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.FileUtils;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
 import com.inovaufrpe.makeparty.usuario.dominio.Data;
@@ -103,14 +102,21 @@ public class AnuncioEmComumService {
                 Ads c = new Ads();
                 //Lê as info de cada anuncio
                 c.setDescription(jsonAnuncio.optString("description"));
-                c.setTitle(jsonAnuncio.optString("title"));
                 c.setPrice(jsonAnuncio.optDouble("price"));
-                c.setPhone(jsonAnuncio.optString("phone"));
-                //c.setOwner((Owner) jsonAnuncio.opt("owner"));
-                //c.setAddress((Endereco) jsonAnuncio.opt("address"));
-                c.set_id(jsonAnuncio.optString("_id"));
-                //c.setTags((ArrayList) jsonAnuncio.opt("tags"));
+                JSONArray arrayListEmJson=jsonAnuncio.getJSONArray("tags");
                 //c.setPhotos((ArrayList) jsonAnuncio.opt("photos"));
+                c.set_id(jsonAnuncio.optString("_id"));
+                c.setTitle(jsonAnuncio.optString("title"));
+                c.setType(jsonAnuncio.optString("type"));
+                c.setPhone(jsonAnuncio.optString("phone"));
+                //JSONObject objetoJson2 = new JSONObject(json);
+                //objetoJson2.getJSONObject("owner");
+               // c.setOwner(jsonAnuncios.getJSONObject("owner")));
+                //JSONObject objetoJson3 = new JSONObject(json);
+                //c.setCreatedAt(jsonAnuncio.getLong("createdAt"));
+                //c.setUpdatedAt();
+                //objetoJson3.getJSONObject("adress");
+                //c.setAddress((Endereco) jsonAnuncio.opt("address"));
 
                 if (LOG_ON) {
                     Log.d(TAG, "Ads" + c.getDescription() + ">");

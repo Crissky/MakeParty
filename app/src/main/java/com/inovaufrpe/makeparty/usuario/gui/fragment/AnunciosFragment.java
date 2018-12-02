@@ -117,6 +117,7 @@ public class AnunciosFragment extends BaseFragment {
 
         @Override
         public List<Ads> execute() throws Exception {
+            Log.d("Olhaa quem logou",SessaoApplication.getInstance().getTipoDeUserLogado());
             // Busca os Anuncios em background
             if (nome != null) {
                 // É uma busca por nome

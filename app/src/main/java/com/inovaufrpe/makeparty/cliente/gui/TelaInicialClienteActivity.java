@@ -21,6 +21,7 @@ import android.view.MenuItem;
 
 import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
+import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
 import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;

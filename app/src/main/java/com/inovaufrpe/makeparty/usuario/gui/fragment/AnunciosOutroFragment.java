@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
+import com.inovaufrpe.makeparty.fornecedor.servico.FornecedorService;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.AnuncioAdapter;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
@@ -58,25 +61,10 @@ public class AnunciosOutroFragment extends BaseFragment {
             // Lê o tipo dos argumentos.
             this.tipo = getArguments().getString("tipo");
         }
-
+        //setHasOptionsMenu(true); oq é isso? non sei
         // Registra a classe para receber eventos.
         SessaoApplication.getInstance().getBus().register(this);
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        // Cancela o recebimento de eventos.
-        SessaoApplication.getInstance().getBus().unregister(this);
-    }
-
-    @Subscribe
-    public void onBusAtualizarListaAnuncios(String refresh) {
-        // Recebeu o evento, atualiza a lista.
-        taskAnuncios(false);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,34 +83,59 @@ public class AnunciosOutroFragment extends BaseFragment {
 
         return view;
     }
-
-    private SwipeRefreshLayout.OnRefreshListener OnRefreshListener() {
-        return new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Valida se existe conexão ao fazer o gesto Pull to Refresh
-                if (AndroidUtils.isNetworkAvailable(getContext())) {
-                    // Atualiza ao fazer o gesto Pull to Refresh
-                    taskAnuncios(true);
-                } else {
-                    swipeLayout.setRefreshing(false);
-                    snack(recyclerView, R.string.msg_error_conexao_indisponivel);
-                }
-            }
-        };
-    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         taskAnuncios(false);
     }
+    // Task para buscar os ads
+    private class GetAnunciosTask implements TaskListener<List> {
+        private boolean refresh;
 
-    private void taskAnuncios(boolean pullToRefresh) {
-        // Busca os carros: Dispara a Task
-        startTask("ads", new GetAnunciosTask(pullToRefresh), pullToRefresh ? R.id.swipeToRefresh : R.id.progress);
+        public GetAnunciosTask(boolean refresh) {
+            this.refresh = refresh;
+        }
+
+        @Override
+        public List execute() throws Exception {
+            Log.d("Olhaa quem logou",SessaoApplication.getInstance().getTipoDeUserLogado());
+            switch (SessaoApplication.getInstance().getTipoDeUserLogado()) {
+                case "advertiser":
+                    //return AnuncioEmComumService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+                    return FornecedorService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+                case "customer":
+                    return AnuncioEmComumService.getAnunciosByTipo("Festa");
+                default:
+                    return AnuncioEmComumService.getAnunciosByTipo("Festa");
+            }
+            // Busca os anuncios em background (Thread)
+            /*if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("Adverstier")){
+                return AnuncioEmComumService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser().toString());
+            }else {
+                return AnuncioEmComumService.getAnunciosByTipo(tipo);
+            }*/
+        }
+
+        @Override
+        public void updateView(List ads) {
+            if (ads != null) {
+                // Salva a lista de anuncios no atributo da classe
+                AnunciosOutroFragment.this.ads = ads;
+                // Atualiza a view na UI Thread
+                recyclerView.setAdapter(new AnuncioAdapter(getContext(), ads,  onClickAnuncio()));
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+            // Qualquer exceção lançada no método execute vai cair aqui.
+            alert("Ocorreu algum erro ao buscar os dados.");
+        }
+
+        @Override
+        public void onCancelled(String s) {
+        }
     }
-
     private AnuncioAdapter.AnuncioOnClickListener onClickAnuncio() {
         return new AnuncioAdapter.AnuncioOnClickListener() {
             @Override
@@ -166,6 +179,44 @@ public class AnunciosOutroFragment extends BaseFragment {
         };
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        // Cancela o recebimento de eventos.
+        SessaoApplication.getInstance().getBus().unregister(this);
+    }
+
+    @Subscribe
+    public void onBusAtualizarListaAnuncios(String refresh) {
+        // Recebeu o evento, atualiza a lista.
+        taskAnuncios(false);
+    }
+
+    private SwipeRefreshLayout.OnRefreshListener OnRefreshListener() {
+        return new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Valida se existe conexão ao fazer o gesto Pull to Refresh
+                if (AndroidUtils.isNetworkAvailable(getContext())) {
+                    // Atualiza ao fazer o gesto Pull to Refresh
+                    taskAnuncios(true);
+                } else {
+                    swipeLayout.setRefreshing(false);
+                    snack(recyclerView, R.string.msg_error_conexao_indisponivel);
+                }
+            }
+        };
+    }
+
+
+    private void taskAnuncios(boolean pullToRefresh) {
+        // Busca os carros: Dispara a Task
+        startTask("ads", new GetAnunciosTask(pullToRefresh), pullToRefresh ? R.id.swipeToRefresh : R.id.progress);
+    }
+
+
+
     // Atualiza o título da action bar (CAB)
     private void updateActionModeTitle() {
         if (actionMode != null) {
@@ -207,8 +258,8 @@ public class AnunciosOutroFragment extends BaseFragment {
                 // Infla o menu específico da action bar de contexto (CAB)
                 MenuInflater inflater = getActivity().getMenuInflater();
                 inflater.inflate(R.menu.menu_selecao, menu);
-               // MenuItem shareItem = menu.findItem(R.id.action_share);
-//                ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+                MenuItem shareItem = menu.findItem(R.id.action_share);
+                //ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
 //                shareIntent = new Intent(Intent.ACTION_SEND);
 //                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
 //                shareIntent.setType("text/plain");
@@ -268,54 +319,6 @@ public class AnunciosOutroFragment extends BaseFragment {
         };
     }
 
-    // Task para buscar os ads
-    private class GetAnunciosTask implements TaskListener<List> {
-        private boolean refresh;
-
-        public GetAnunciosTask(boolean refresh) {
-            this.refresh = refresh;
-        }
-
-        @Override
-        public List execute() throws Exception {
-            Log.d("Olhaa quem logou",SessaoApplication.getInstance().getTipoDeUserLogado());
-            switch (SessaoApplication.getInstance().getTipoDeUserLogado()) {
-                case "advertiser":
-                    //return AnuncioEmComumService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
-                    return AnuncioEmComumService.getAnunciosByTipo("Festa");
-                case "customer":
-                    return AnuncioEmComumService.getAnunciosByTipo("Festa");
-                default:
-                    return AnuncioEmComumService.getAnunciosByTipo("Festa");
-            }
-            // Busca os anuncios em background (Thread)
-            /*if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("Adverstier")){
-                return AnuncioEmComumService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser().toString());
-            }else {
-                return AnuncioEmComumService.getAnunciosByTipo(tipo);
-            }*/
-        }
-
-        @Override
-        public void updateView(List ads) {
-            if (ads != null) {
-                // Salva a lista de anuncios no atributo da classe
-                AnunciosOutroFragment.this.ads = ads;
-                // Atualiza a view na UI Thread
-                recyclerView.setAdapter(new AnuncioAdapter(getContext(), ads,  onClickAnuncio()));
-            }
-        }
-
-        @Override
-        public void onError(Exception e) {
-            // Qualquer exceção lançada no método execute vai cair aqui.
-            alert("Ocorreu algum erro ao buscar os dados.");
-        }
-
-        @Override
-        public void onCancelled(String s) {
-        }
-    }
 
     // Task para fazer o download
     // Faça import da classe android.net.Uri;

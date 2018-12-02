@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity{
                 } else {
                     //getSessaoApi();
                     String[] parts = SessaoApplication.instance.getResposta().split(",");
-                    String token = parts[0].substring(9,parts[0].length()); //FALTA  setar o usuario logado
+                    String token = parts[0].substring(10,parts[0].length()-1); //FALTA  setar o usuario logado
                     tipoUserLogou = parts[1].substring(8,parts[1].length()-2);
                     SessaoApplication.instance.setTokenUser(token);
                     SessaoApplication.instance.setTipoDeUserLogado(tipoUserLogou);
