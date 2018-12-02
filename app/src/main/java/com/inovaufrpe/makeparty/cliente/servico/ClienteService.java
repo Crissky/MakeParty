@@ -106,7 +106,7 @@ public class ClienteService{
     public void getUserWishList(){
 
     }
-    public static boolean deleteItensLista(List<Ads> selectedAds) throws IOException, JSONException {
+    public static boolean deleteItensListaCliente(List<Ads> selectedAds) throws IOException, JSONException {
         ConectarServidor http = new ConectarServidor();
         http.setContentType("application/json; charset=utf-8");
         for (Ads c : selectedAds) {

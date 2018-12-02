@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.usuario.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.CalendarioDialog;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
@@ -23,6 +25,7 @@ import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;
+import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -44,8 +47,18 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_anuncio);
+        setUpToolbar();
         encontrandoItensViews();
 
+    }
+    protected void setUpToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarTelaDetalhes);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     //IMPLEMENTAÇÃO RELACIONADO AO CALENDÁRIO
@@ -109,10 +122,10 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
     }
 
     private void setUpViewPagerGaleriaFotos() {
-        //AnuncioEmComumService anuncioService = new AnuncioEmComumService(); -- TEM Q ADAPTAR AINDA VIUUUUUUUUU
+        AnuncioEmComumService anuncioEmService = new AnuncioEmComumService();
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        //GaleriaFotosAdapter galeriaFotosAdapter = new GaleriaFotosAdapter(this, AnuncioEmComumService.getImagens() ); --ADAPTAR AINDA
-        //galeriaPhotos.setAdapter(galeriaFotosAdapter);
+        GaleriaFotosAdapter galeriaFotosAdapter = new GaleriaFotosAdapter(this, AnuncioEmComumService.getImagensAnuncioSelecionado() );
+        galeriaPhotos.setAdapter(galeriaFotosAdapter);
         indicator.setViewPager(galeriaPhotos);
     }
 
@@ -186,12 +199,15 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
 
     @Override
     public void onBackPressed() {
+        //AJEITAR AQ EMMMMMMMMM
         if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")) {
-            this.mudarTela(TelaInicialClienteActivity.class);
+            this.mudarTela(ListaDesejosClienteActivity.class);
             //}else if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
 
         } else if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")) {
             this.mudarTela(AnunciosFornecedorActivity.class);
+        } else{
+            this.mudarTela(TelaInicialClienteActivity.class);
         }
     }
 }

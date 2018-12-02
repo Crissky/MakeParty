@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.ImageUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,18 +49,16 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
     //seta os itens view do item, trocando pelas informações corretas em cada campo
     @Override
     public void onBindViewHolder(final AnunciosViewHolder holder, final int position) {
-        //Ads anuncio = ads.get(position).getAnuncio(); --hamba
-        //Bitmap imagemAnuncio = anuncio.getImagemBitmap(); --hamba
-        //holder.imageView.setImageBitmap(imagemAnuncio); --hamba
         // Ads da linha
         Ads c = ads.get(position);
 
         // Atualizada os valores nas views
         holder.title.setText(c.getTitle());
         holder.tDesc.setText(c.getDescription());
+        //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView); HMMMMMMM
 
         // Foto do Ads
-        //ImageUtils.setImage(context, c.urlFoto, holder.img);
+        ImageUtils.setImage(context,"http://i.imgur.com/DvpvklR.png", holder.img);
 
         if (onClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

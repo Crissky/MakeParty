@@ -1,6 +1,7 @@
 package com.inovaufrpe.makeparty.infra;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
@@ -21,6 +22,9 @@ public class SessaoApplication extends Application {
     private String _id = "null";
     private Usuario usuario;
     private Date horaRecebidoToken = null;
+    private Class telaAtual =null;
+    private Class telaAnterior =null;
+    private static Context mContext;
 
     public static SessaoApplication getInstance() {
         return instance; // Singleton
@@ -33,6 +37,7 @@ public class SessaoApplication extends Application {
         Log.d(TAG, " SessaoApplication.onCreate()");
         // Salva a instância para termos acesso como Singleton
         instance = this;
+        mContext = this;
     }
 
     private void setValor(String chave, Object valor) {
@@ -84,6 +89,23 @@ public class SessaoApplication extends Application {
     public Date getHoraRecebidoToken() {
         return horaRecebidoToken;
     }
+
+    public void setTelaAtual(Class telaAtual) {
+        this.telaAtual =telaAtual;
+    }
+    public Class getTelaAtual() {
+        return telaAtual;
+    }
+    public void setTelaAnterior(Class telaAnterior){
+        this.telaAnterior = telaAnterior;
+    }
+    public Class telaAnterior(){
+        return telaAnterior;
+    }
+    public static Context getContext(){
+        return mContext;
+    }
+
     @Override
     public void onTerminate() {
         super.onTerminate();

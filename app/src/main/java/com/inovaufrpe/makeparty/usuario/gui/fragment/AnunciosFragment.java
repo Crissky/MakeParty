@@ -22,7 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
+import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
@@ -35,6 +38,9 @@ import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.task.TaskList
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.AndroidUtils;
 import com.squareup.otto.Subscribe;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
@@ -375,4 +381,5 @@ public class AnunciosFragment extends BaseFragment {
         // Cancela o recebimento de eventos.
         SessaoApplication.getInstance().getBus().unregister(this);
     }
+
 }

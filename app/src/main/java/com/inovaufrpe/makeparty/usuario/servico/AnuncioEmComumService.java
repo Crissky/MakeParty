@@ -1,17 +1,22 @@
 package com.inovaufrpe.makeparty.usuario.servico;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.servico.ClienteService;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.servico.FornecedorService;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.ResponseWithURL;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.FormatadorImagemSimples;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.FileUtils;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
 import com.inovaufrpe.makeparty.usuario.dominio.Data;
@@ -49,6 +54,8 @@ public class AnuncioEmComumService {
 
     private Gson gson = new Gson();
     private String respostaServidor;
+    private static ClienteService clienteService = new ClienteService();
+    private static FornecedorService fornecedorService = new FornecedorService();
 
 
     public AnuncioEmComumService() {
@@ -307,5 +314,35 @@ public class AnuncioEmComumService {
     public Ads criarObjeto(String json) {
         return gson.fromJson(json,Ads.class);
 
+    }
+    public static boolean deleteItensLista(List<Ads> selectedAds) throws IOException, JSONException {
+        if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
+            //aqui embaixo esse metodo acho q n é a melhor forma de implementar, talvez o wishlist? chamando ele?
+            //verificar ainda qual tela ta
+            ClienteService.deleteItensListaCliente(selectedAds);
+        }
+        else if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
+            //ta dizendo q é do item dele neh, falta verificar se ele ta na tela meus anuncios
+            FornecedorService.deleteItensListaFornecedor(selectedAds);
+        }
+        // A fazer
+        return true;
+    }
+    public static ArrayList<Bitmap> getImagensAnuncioSelecionado(){
+        //ISSO AQ EMBAIXO É DO HAMBA, PRECISA DE REMODELAÇÃO PQ IREMOS PEGAR DO ARRAYLIST DAS URLS DE CADA ANUNCIO
+        //PEGAR DO PICASSO E PEI
+        ArrayList<Bitmap> bitMapList = new ArrayList<>();
+        //verificar se o arraylist das fotos de cada anúncio n ta vazia ainda, e tbm se pode mais de 2 fotos
+        /*Titulo titulo = FiltroTitulo.instance.getTituloSelecionado();
+        TituloDao tituloDao = new TituloDao();
+        ArrayList<byte[]> imagensByte = tituloDao.getImagemByIdTitulo(titulo.getId());
+        FormatadorImagemSimples formatadorImagemSimples = new FormatadorImagemSimples();
+        bitMapList = formatadorImagemSimples.listByteToListBitmap(imagensByte);
+        */
+       /* if(tavazioalistadeUrl){
+            //mandar o array com uma só foto , ou no caso 2, pq to testando a adaptação aq
+        }
+        */
+        return bitMapList;
     }
 }
