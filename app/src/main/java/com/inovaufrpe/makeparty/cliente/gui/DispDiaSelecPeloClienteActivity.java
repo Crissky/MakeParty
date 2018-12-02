@@ -9,14 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
-import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
-import com.inovaufrpe.makeparty.infra.SessaoApplication;
-
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.List;
 
 public class DispDiaSelecPeloClienteActivity extends AppCompatActivity {
     TextView textViewDataSelecionadaNaTelaDetalhes;
@@ -49,14 +43,14 @@ public class DispDiaSelecPeloClienteActivity extends AppCompatActivity {
     }
 
     public void setandoDataSelecionadaAnteriormente(){
-        Long diaSelecionadoPeloClienteDisp = FiltroAnuncioSelecionado.instance.getDiaSelecionadoPeloClienteDisp();
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(diaSelecionadoPeloClienteDisp).;
+        String diaSelecionadoPeloClienteDisp = FiltroAnuncioSelecionado.instance.getDiaSelecionadoPeloClienteDisp();
         TextView textView = (TextView) findViewById(R.id.textViewDataSelecionadaNaTelaDetalhes);
-        textView.setText(currentDateString);
+        textView.setText(diaSelecionadoPeloClienteDisp);
     }
     public void procurandoHorariosDispDoFornecNoDiaSelecPeloCliente(){
         Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
-        Long diaSelecionadoPeloClienteDispParaBuscarNaAPI = FiltroAnuncioSelecionado.instance.getDiaSelecionadoPeloClienteDisp();
+        //Date aq viu ainda transf aq embaixo
+        // Calendar diaSelecionadoPeloClienteDispParaBuscarNaAPI = FiltroAnuncioSelecionado.instance.getDiaSelecionadoPeloClienteDisp();
         //FALTA
         //FALTA RETORNAR REALMENTEEEEEEEEEEEEE
         //PUXAR UM ADAPTER UMA LISTA OU SL AINDA E COLOCAR NO FRAMELAYOUT

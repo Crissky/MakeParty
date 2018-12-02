@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.AnunciosOutroFragment;
+import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 import java.util.ArrayList;

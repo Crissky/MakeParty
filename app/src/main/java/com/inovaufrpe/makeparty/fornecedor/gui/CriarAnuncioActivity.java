@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;

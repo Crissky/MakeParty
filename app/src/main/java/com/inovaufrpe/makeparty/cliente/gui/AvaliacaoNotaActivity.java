@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 public class AvaliacaoNotaActivity extends AppCompatActivity {

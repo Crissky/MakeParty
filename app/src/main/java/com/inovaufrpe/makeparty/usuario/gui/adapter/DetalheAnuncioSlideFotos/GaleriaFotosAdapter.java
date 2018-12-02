@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.cliente.gui.adapter.DetalheAnuncioSlideFotos;
+package com.inovaufrpe.makeparty.usuario.gui.adapter.DetalheAnuncioSlideFotos;
 
 import android.content.Context;
 import android.graphics.Bitmap;

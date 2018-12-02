@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Permissoes;
 

@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.cliente.gui.adapter;
+package com.inovaufrpe.makeparty.usuario.gui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;

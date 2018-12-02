@@ -1,9 +1,8 @@
-package com.inovaufrpe.makeparty.cliente.gui.adapter;
+package com.inovaufrpe.makeparty.usuario.gui.adapter;
 
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,10 +33,10 @@ public class FiltroAnuncioSelecionado {
     public void setTipoAnuncioSelecionado(Ads anuncioSelecionado) {
         setValor("sessao.AnuncioSelecionado", anuncioSelecionado);
     }
-    public Long getDiaSelecionadoPeloClienteDisp(){
-        return ((Long) values.get("sessao.DiaSelecionadoPeloCliente"));
+    public String getDiaSelecionadoPeloClienteDisp(){
+        return ((String) values.get("sessao.DiaSelecionadoPeloCliente"));
     }
-    public void setDiaSelecionadoPeloClienteDisp(long dataSelecionadaPeloClienteDisp){
+    public void setDiaSelecionadoPeloClienteDisp(String dataSelecionadaPeloClienteDisp){
         setValor("sessao.DiaSelecionadoPeloClienteDisp", dataSelecionadaPeloClienteDisp);
 
     }

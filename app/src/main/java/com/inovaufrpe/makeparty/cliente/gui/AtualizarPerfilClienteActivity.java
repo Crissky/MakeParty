@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 public class AtualizarPerfilClienteActivity extends AppCompatActivity {

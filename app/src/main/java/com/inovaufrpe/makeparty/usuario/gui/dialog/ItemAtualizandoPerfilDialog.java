@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.cliente.gui.fragment.dialog;
+package com.inovaufrpe.makeparty.usuario.gui.dialog;
 
 
 import android.os.Bundle;

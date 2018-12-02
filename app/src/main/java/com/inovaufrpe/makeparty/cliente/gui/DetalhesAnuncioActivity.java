@@ -16,10 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
-import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.CalendarioDialog;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.CalendarioDialog;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -56,7 +55,10 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        FiltroAnuncioSelecionado.instance.setDiaSelecionadoPeloClienteDisp(datePicker.getMaxDate());
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        adsTags.setText(currentDateString);
+        ////MISTERIOOO , A DATA N TA QRENDO SER ENVIADA DE JEITO NENHUM, MAS ELA SETA O DIA NO ADSTAGS Q ESTRANHO
+        FiltroAnuncioSelecionado.instance.setDiaSelecionadoPeloClienteDisp(currentDateString);
         mudarTela(DispDiaSelecPeloClienteActivity.class);
 
     }
@@ -107,9 +109,9 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
     }
 
     private void setUpViewPagerGaleriaFotos() {
-        //AnuncioService anuncioService = new AnuncioService(); -- TEM Q ADAPTAR AINDA VIUUUUUUUUU
+        //AnuncioEmComumService anuncioService = new AnuncioEmComumService(); -- TEM Q ADAPTAR AINDA VIUUUUUUUUU
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        //GaleriaFotosAdapter galeriaFotosAdapter = new GaleriaFotosAdapter(this, AnuncioService.getImagens() ); --ADAPTAR AINDA
+        //GaleriaFotosAdapter galeriaFotosAdapter = new GaleriaFotosAdapter(this, AnuncioEmComumService.getImagens() ); --ADAPTAR AINDA
         //galeriaPhotos.setAdapter(galeriaFotosAdapter);
         indicator.setViewPager(galeriaPhotos);
     }

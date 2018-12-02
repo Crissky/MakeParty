@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.AnunciosOutroFragment;
+import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
 
 public class ListaDesejosClienteActivity extends AppCompatActivity {
 

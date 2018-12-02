@@ -16,6 +16,7 @@ public class Ads implements Parcelable {
     public String _id;
     private String title;
     private Date createdAt;
+    private Date updatedAt;
     private String description;
     private double price;
     private Endereco address;
@@ -52,6 +53,14 @@ public class Ads implements Parcelable {
 
     public void setCreatedAt(Date dataAnuncio) {
         this.createdAt = dataAnuncio;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getDescription() {

@@ -18,12 +18,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
-//import com.inovaufrpe.makeparty.cliente.gui.fragment.AnunciosFragment;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.AnunciosOutroFragment;
-import com.inovaufrpe.makeparty.fornecedor.gui.TelaInicialFornecedorActivity;
+//import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
+import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;
 

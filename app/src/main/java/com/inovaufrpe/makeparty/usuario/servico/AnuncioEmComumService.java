@@ -29,21 +29,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AnuncioService {
+public class AnuncioEmComumService {
 
-    private static final String TAG = "AnuncioService";
+    private static final String TAG = "AnuncioEmComumService";
     private static final boolean LOG_ON = false;
     private static final String URL_BASE = "https://makepartyserver.herokuapp.com/";
     //POST, PUT, DELETE E GET
-    private static final String URL_COLOCAR_ANUNCIO = URL_BASE + "ads";
     private static final String URL_LISTAR_ANUNCIOS = URL_BASE + "ads";
     //GET ANÚNCIOS
     private static final String URL_LISTAR_ANUNCIOS_PELA_TAG = URL_LISTAR_ANUNCIOS + "/tags/:tag";
     private static final String URL_LISTAR_ANUNCIOS_PELO_TIPO = URL_LISTAR_ANUNCIOS + "/types/:type";
     private static final String URL_PESQUISAR_PJ_PELO_ID = URL_BASE + "advertisers/:id";
     private static final String URL_LISTAR_PJS = URL_BASE + "advertisers";
-    private static final String URL_CRIAR_LISTA_DESEJOS = URL_BASE + "wishlists";
-    private static final String URL_LISTA_DESEJOS = URL_BASE + "wishlists";
     private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_ANUNCIOS+ "/owners/:idOuTokenDele";
     private static final String URL_LISTA_ANUNCIOS_POR_NOME = URL_LISTAR_ANUNCIOS + "titles/:title";
     private static final String URL_LISTA_ANUNCIOS_POR_ID_ANUNCIO = URL_LISTAR_ANUNCIOS + ":id";
@@ -54,7 +51,7 @@ public class AnuncioService {
     private String respostaServidor;
 
 
-    public AnuncioService() {
+    public AnuncioEmComumService() {
     } //CONSTRUTOR
 
     public static String conectarServidorGet(String url) throws IOException {
@@ -86,7 +83,7 @@ public class AnuncioService {
 
         return ads;
     }
-    private static List<Ads> parserJSONListaAnunciosComFor(String json) throws IOException {
+    public static List<Ads> parserJSONListaAnunciosComFor(String json) throws IOException {
         List<Ads> ads = new ArrayList<Ads>();
         try {
             JSONObject objetoJson = new JSONObject(json);
@@ -255,26 +252,6 @@ public class AnuncioService {
      * "msg": "Anúncio deletado com sucesso"
      * }
      */
-    public static boolean deleteItensLista(List<Ads> selectedAds) throws IOException, JSONException {
-        ConectarServidor http = new ConectarServidor();
-        http.setContentType("application/json; charset=utf-8");
-        for (Ads c : selectedAds) {
-            // URL para excluir o anúncio
-            String url = URL_LISTA_DESEJOS + c._id;
-            Log.d(TAG, "Delete anuncio: " + url);
-            // Request HTTP DELETE
-            String json = http.doDelete(url);
-            Log.d(TAG, "JSON delete: " + json);
-            // Parser do JSON
-            Gson gson = new Gson();
-            Response response = gson.fromJson(json, Response.class);
-            if (!response.isOk()) {
-                throw new IOException("Erro ao excluir: " + response.getMsg());
-            }
-        }
-        // A fazer
-        return true;
-    }
 
     // Faz a requisição HTTP, cria a lista de anuncios e salva o JSON em arquivo
     public static List<Ads> getAnunciosFromWebService(Context context, int tipo) throws IOException {
@@ -330,36 +307,5 @@ public class AnuncioService {
     public Ads criarObjeto(String json) {
         return gson.fromJson(json,Ads.class);
 
-    }
-
-    public void criarAnuncio(Object objeto) throws IOException {
-        String novoJson = criarJson(objeto);
-    }
-    public String addWishList(List listAnuncios) {
-        String url = URL_CRIAR_LISTA_DESEJOS;
-        //transf lista em json
-        Gson gson = new Gson();
-        String listString = gson.toJson(listAnuncios);
-        //colocando token
-        listString = listString.substring(0, listString.length() - 1) + "," + "\"token\"" + ":" + SessaoApplication.getInstance().getTokenUser() + "}";
-        Log.i("Script", "OLHA listinhaa: " + listString);
-        String respostaAoPost = conectarServidorPost(url, listString);
-        return respostaAoPost;
-    }
-
-    public void excluirAnuncioDaWishList(List listAnunciosExcluidos){
-
-    }
-    public void getUserWishList(){
-
-    }
-    public static List getAnunciosDeUmFornecedor(String tokenOuId) throws IOException {
-        Gson gson = new Gson();
-        String jsonTokenOuId = gson.toJson(tokenOuId);
-        String url = URL_LISTA_ANUNCIOS_DO_ANUNCIANTE.replace(":idOuTokenDele",tokenOuId);
-        String json =conectarServidorGet(url);
-        Log.d("um json ai", json);
-        List listaAnunciosFornecedor = parserJSONListaAnunciosComFor(json);
-        return listaAnunciosFornecedor;
     }
 }

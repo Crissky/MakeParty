@@ -11,7 +11,7 @@
 //import android.widget.TextView;
 //
 //import com.inovaufrpe.makeparty.R;
-//import com.inovaufrpe.makeparty.cliente.gui.adapter.AnuncioAdapter;
+//import com.inovaufrpe.makeparty.usuario.gui.adapter.AnuncioAdapter;
 //import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 //
 //import java.util.List;

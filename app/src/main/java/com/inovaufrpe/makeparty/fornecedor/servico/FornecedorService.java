@@ -1,10 +1,22 @@
 package com.inovaufrpe.makeparty.fornecedor.servico;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
+import com.inovaufrpe.makeparty.infra.Response;
+import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
+
+import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+
+import static com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService.conectarServidorGet;
+import static com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService.getAnunciosByTipo;
 
 public class FornecedorService {
 
@@ -18,6 +30,12 @@ public class FornecedorService {
     private static final String URL_PESQUISAR_PJ_PELO_ID = URL_BASE + "advertisers/:id";
     private static final String URL_LISTAR_PJS = URL_BASE + "advertisers";
     private static final String URL_LISTAR_USUARIOS = URL_BASE +"users";
+    //POST, PUT, DELETE E GET
+    private static final String URL_COLOCAR_ANUNCIO = URL_BASE + "ads";
+    private static final String URL_LISTAR_ANUNCIOS = URL_BASE + "ads";
+    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_ANUNCIOS+ "/owners/:idOuTokenDele";
+    private static final String URL_APAGAR_ANUNCIO = URL_LISTAR_ANUNCIOS;
+    private AnuncioEmComumService anuncioEmComumService = new AnuncioEmComumService();
     private Gson gson = new Gson();
     private String respostaServidor;
 
@@ -77,6 +95,42 @@ public class FornecedorService {
         return URL_BASE;
     }
 
+    public void criarAnuncio(Object objeto) throws IOException {
+        String novoJson = criarJson(objeto);
+    }
+
+    public static List getAnunciosDeUmFornecedor(String tokenOuId) throws IOException {
+        Gson gson = new Gson();
+        String jsonTokenOuId = gson.toJson(tokenOuId);
+        String url = URL_LISTA_ANUNCIOS_DO_ANUNCIANTE.replace(":idOuTokenDele",tokenOuId);
+        String json =conectarServidorGet(url);
+        Log.d("um json ai", json);
+        List listaAnunciosFornecedor = AnuncioEmComumService.parserJSONListaAnunciosComFor(json);
+        return listaAnunciosFornecedor;
+    }
+    public static boolean deleteItensLista(List<Ads> selectedAds) throws IOException, JSONException {
+        ConectarServidor http = new ConectarServidor();
+        http.setContentType("application/json; charset=utf-8");
+        for (Ads c : selectedAds) {
+            // URL para excluir o anúncio
+            //verificar como faz a exclusão do anúncio, n entendi se era pela url ou mandando msg p ele só
+            //Refazer metodo e tbm se é p apagar de um em um, ou mando a lista td
+            //mandar tbm token
+            String url = URL_APAGAR_ANUNCIO + c._id;
+            Log.d(TAG, "Delete anuncio: " + url);
+            // Request HTTP DELETE
+            String json = http.doDelete(url);
+            Log.d(TAG, "JSON delete: " + json);
+            // Parser do JSON
+            Gson gson = new Gson();
+            Response response = gson.fromJson(json, Response.class);
+            if (!response.isOk()) {
+                throw new IOException("Erro ao excluir: " + response.getMsg());
+            }
+        }
+        // A fazer
+        return true;
+    }
 
 
 

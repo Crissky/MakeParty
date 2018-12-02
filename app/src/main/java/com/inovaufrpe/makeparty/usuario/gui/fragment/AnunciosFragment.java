@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.cliente.gui.fragment;
+package com.inovaufrpe.makeparty.usuario.gui.fragment;
 
 
 import android.content.Intent;
@@ -23,13 +23,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
-import com.inovaufrpe.makeparty.cliente.gui.adapter.AnuncioAdapter;
+import com.inovaufrpe.makeparty.usuario.gui.adapter.AnuncioAdapter;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.gui.event.BusEvent;
-import com.inovaufrpe.makeparty.usuario.servico.AnuncioService;
+import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.fragment.BaseFragment;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.task.TaskListener;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.AndroidUtils;
@@ -114,12 +114,12 @@ public class AnunciosFragment extends BaseFragment {
             // Busca os Anuncios em background
             if (nome != null) {
                 // É uma busca por nome
-                //return AnuncioService.searchByNome(nome);
-                return AnuncioService.getAnunciosByTipo(tipo);
+                //return AnuncioEmComumService.searchByNome(nome);
+                return AnuncioEmComumService.getAnunciosByTipo(tipo);
             } else {
                 // É para listar por tipo
                 //return Retrofit.getAnuncioREST().getAnuncios(tipo);
-                return AnuncioService.getAnunciosByTipo(tipo);
+                return AnuncioEmComumService.getAnunciosByTipo(tipo);
             }
         }
 
@@ -320,7 +320,7 @@ public class AnunciosFragment extends BaseFragment {
             startTask("deletar",new BaseTask(){
                 @Override
                 public Object execute() throws Exception {
-                    boolean ok = AnuncioService.deleteItensLista(selectedAds);
+                    boolean ok = AnuncioEmComumService.deleteItensLista(selectedAds);
                     if(ok) {
                         // Se excluiu do banco, remove da lista da tela.
                         for (Ads c : selectedAds) {

@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.cliente.gui.fragment;
+package com.inovaufrpe.makeparty.usuario.gui.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -19,13 +19,13 @@ import android.view.ViewGroup;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
-import com.inovaufrpe.makeparty.cliente.gui.adapter.AnuncioAdapter;
-import com.inovaufrpe.makeparty.cliente.gui.adapter.FiltroAnuncioSelecionado;
-import com.inovaufrpe.makeparty.cliente.gui.fragment.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.usuario.gui.adapter.AnuncioAdapter;
+import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.gui.EditarAnuncioActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.servico.AnuncioService;
+import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.fragment.BaseFragment;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.task.TaskListener;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.AndroidUtils;
@@ -281,18 +281,18 @@ public class AnunciosOutroFragment extends BaseFragment {
             Log.d("Olhaa quem logou",SessaoApplication.getInstance().getTipoDeUserLogado());
             switch (SessaoApplication.getInstance().getTipoDeUserLogado()) {
                 case "advertiser":
-                    //return AnuncioService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
-                    return AnuncioService.getAnunciosByTipo("Festa");
+                    //return AnuncioEmComumService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+                    return AnuncioEmComumService.getAnunciosByTipo("Festa");
                 case "customer":
-                    return AnuncioService.getAnunciosByTipo("Festa");
+                    return AnuncioEmComumService.getAnunciosByTipo("Festa");
                 default:
-                    return AnuncioService.getAnunciosByTipo("Festa");
+                    return AnuncioEmComumService.getAnunciosByTipo("Festa");
             }
             // Busca os anuncios em background (Thread)
             /*if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("Adverstier")){
-                return AnuncioService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser().toString());
+                return AnuncioEmComumService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser().toString());
             }else {
-                return AnuncioService.getAnunciosByTipo(tipo);
+                return AnuncioEmComumService.getAnunciosByTipo(tipo);
             }*/
         }
 
