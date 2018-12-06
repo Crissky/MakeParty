@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Permissoes;
@@ -31,6 +33,7 @@ public class ConfiguracoesFornecedorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracoes_fornecedor);
+        SessaoApplication.getInstance().setTelaAtual(ConfiguracoesFornecedorActivity.class);
         setUpToolbar();
         procurandoViews();
     }
@@ -161,7 +164,7 @@ public class ConfiguracoesFornecedorActivity extends AppCompatActivity {
             @Override
             public void metodoSimAoDialog() {
                 SessaoApplication.instance.onTerminate();
-                finish();
+                mudarTela(EntrarOuCadastrarActivity.class);
 
             }
         });

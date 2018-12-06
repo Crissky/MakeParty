@@ -58,7 +58,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView); HMMMMMMM
 
         // Foto do Ads
-        ImageUtils.setImage(context,"https://lh3.googleusercontent.com/Dpoi7ge79UZTfhjakYLXOzbdAk4w5U4gi18B62LN0XxInJT68_QV_4DTdrKceFrpfbGlPdNi2Cs5aZlbszvBcfLpN-Np_MPapArJJnV-ic3d6CHFYZqGlpspO6viVUxmWYjdl6bSKU7R_p_WB45fDMZekcA-5dXR-PlpyVlUVDlv3pI-zvCK8ate4lacZAtW6PHwfoHftJ9Uv4Ed5UysfYBAy79tjmSYYEFAiNkrNcJdH9n3bWOmN5WTmg7_4Cel50BdMV8bAKJxufUr23So-ktMAIDwMxuQYOxO53h-WRCmcjVsgiZpPI8679gO8yNOSsZoRg8e76DlMORtLGj4VdRVaoxVP6JNMkf9f8CLR4AGsBvuFCZ_sXjtsiST6DRheWucc0YM5mgKs4ko7QEhRYjCxQZuqU6wZyB0h0U8eQjwse04AyQQ2O5HOFWa1LdDIvIttJLHGRlXy49HjktLKJrye30qp52zDVXzDgdqXtMoTayWJ3bwB-JJYnhkrSGalTpkaRhFEGPODTgzsL_MYSpOywvzFifInAs_YmEFGu5KfEdRizyYy-RFrmOH3uSvIBZd_Oq-KbnU99vu35GcR_DemSlNtD5GCbsa1f3N7iig76Ycq1IRcgZxRJT4nvarSXWgG63h6EOpYLku1W9W6VKB6g=w835-h626-no", holder.img);
+        ImageUtils.setImage(context,"http://i.imgur.com/DvpvklR.png", holder.img);
 
         if (onClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

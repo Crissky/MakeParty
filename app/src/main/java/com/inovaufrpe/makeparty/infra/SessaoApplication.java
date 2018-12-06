@@ -91,6 +91,7 @@ public class SessaoApplication extends Application {
     }
 
     public void setTelaAtual(Class telaAtual) {
+        setTelaAnterior(this.telaAtual);
         this.telaAtual =telaAtual;
     }
     public Class getTelaAtual() {
@@ -99,7 +100,7 @@ public class SessaoApplication extends Application {
     public void setTelaAnterior(Class telaAnterior){
         this.telaAnterior = telaAnterior;
     }
-    public Class telaAnterior(){
+    public Class getTelaAnterior(){
         return telaAnterior;
     }
     public static Context getContext(){
@@ -108,6 +109,7 @@ public class SessaoApplication extends Application {
 
     @Override
     public void onTerminate() {
+        reset();
         super.onTerminate();
         Log.d(TAG, " SessaoApplication.onTerminate()");
     }

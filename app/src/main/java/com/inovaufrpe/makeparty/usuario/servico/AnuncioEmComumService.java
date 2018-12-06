@@ -8,9 +8,13 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
+import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
+import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
 import com.inovaufrpe.makeparty.cliente.servico.ClienteService;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
+import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
 import com.inovaufrpe.makeparty.fornecedor.servico.FornecedorService;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
@@ -45,11 +49,9 @@ public class AnuncioEmComumService {
     private static final String URL_LISTAR_ANUNCIOS_PELO_TIPO = URL_LISTAR_ANUNCIOS + "/types/:type";
     private static final String URL_PESQUISAR_PJ_PELO_ID = URL_BASE + "advertisers/:id";
     private static final String URL_LISTAR_PJS = URL_BASE + "advertisers";
-    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_ANUNCIOS+ "/owners/:idOuTokenDele";
+    private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_ANUNCIOS + "/owners/:idOuTokenDele";
     private static final String URL_LISTA_ANUNCIOS_POR_NOME = URL_LISTAR_ANUNCIOS + "titles/:title";
     private static final String URL_LISTA_ANUNCIOS_POR_ID_ANUNCIO = URL_LISTAR_ANUNCIOS + ":id";
-
-
 
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -67,28 +69,41 @@ public class AnuncioEmComumService {
         String json = http.doGet(url);
         return json;
     }
-    public static String conectarServidorPost(String url, String jsonAserEnviado){
+
+    public static String conectarServidorPost(String url, String jsonAserEnviado) {
         ConectarServidor http = new ConectarServidor();
         http.LOG_ON = true;
-        String jsonRespostaAoPost = http.post(url,jsonAserEnviado);
-        Log.i("Script", "OLHA resposta do servidor se foi conc listinhaa: "+ jsonRespostaAoPost);
+        String jsonRespostaAoPost = http.post(url, jsonAserEnviado);
+        Log.i("Script", "OLHA resposta do servidor se foi conc listinhaa: " + jsonRespostaAoPost);
         return jsonRespostaAoPost;
     }
-   /* public static String conectarServidorDelete(String url, String jsonAserEnviado){
+
+    /* public static String conectarServidorDelete(String url, String jsonAserEnviado){
+         ConectarServidor http = new ConectarServidor();
+         http.LOG_ON = true;
+         String jsonRespostaAoPost = http.do(url,jsonAserEnviado);
+         Log.i("Script", "OLHA resposta do servidor se foi conc listinhaa: "+ jsonRespostaAoPost);
+         return jsonRespostaAoPost;
+     }*/
+    /*public static String conectarServidorPut(String url, String jsonAserEnviado) {
+        //Esse  metodo ta errado ainda viu
         ConectarServidor http = new ConectarServidor();
         http.LOG_ON = true;
-        String jsonRespostaAoPost = http.do(url,jsonAserEnviado);
-        Log.i("Script", "OLHA resposta do servidor se foi conc listinhaa: "+ jsonRespostaAoPost);
+        String jsonRespostaAoPost = http.p(url, jsonAserEnviado);
+        Log.i("Script", "OLHA resposta do servidor se foi conc listinhaa: " + jsonRespostaAoPost);
         return jsonRespostaAoPost;
     }*/
+
     private static List<Ads> parserJSON(Context context, String json) throws IOException {
         //Informa ao GSON que vamos converter uma lista de anúncios
-        Type listType = new TypeToken<ArrayList<Ads>>() {}.getType();
+        Type listType = new TypeToken<ArrayList<Ads>>() {
+        }.getType();
         //Faz o parser em apenas uma linha e cria a list
-        List<Ads> ads = new Gson().fromJson(json,listType);
+        List<Ads> ads = new Gson().fromJson(json, listType);
 
         return ads;
     }
+
     public static List<Ads> parserJSONListaAnunciosComFor(String json) throws IOException {
         List<Ads> ads = new ArrayList<Ads>();
         try {
@@ -97,13 +112,13 @@ public class AnuncioEmComumService {
 
             //Lê o array de ads do Json
             //JSONArray jsonAnuncios = new JSONArray(json);
-            for (int i=0;i<jsonAnuncios.length();i++) {
+            for (int i = 0; i < jsonAnuncios.length(); i++) {
                 JSONObject jsonAnuncio = jsonAnuncios.getJSONObject(i);
                 Ads c = new Ads();
                 //Lê as info de cada anuncio
                 c.setDescription(jsonAnuncio.optString("description"));
                 c.setPrice(jsonAnuncio.optDouble("price"));
-                JSONArray arrayListEmJson=jsonAnuncio.getJSONArray("tags");
+                //JSONArray arrayListEmJson=jsonAnuncio.getJSONArray("tags");
                 //c.setPhotos((ArrayList) jsonAnuncio.opt("photos"));
                 c.set_id(jsonAnuncio.optString("_id"));
                 c.setTitle(jsonAnuncio.optString("title"));
@@ -111,7 +126,7 @@ public class AnuncioEmComumService {
                 c.setPhone(jsonAnuncio.optString("phone"));
                 //JSONObject objetoJson2 = new JSONObject(json);
                 //objetoJson2.getJSONObject("owner");
-               // c.setOwner(jsonAnuncios.getJSONObject("owner")));
+                // c.setOwner(jsonAnuncios.getJSONObject("owner")));
                 //JSONObject objetoJson3 = new JSONObject(json);
                 //c.setCreatedAt(jsonAnuncio.getLong("createdAt"));
                 //c.setUpdatedAt();
@@ -124,15 +139,16 @@ public class AnuncioEmComumService {
                 }
                 ads.add(c);
             }
-            if (LOG_ON){
-                Log.d(TAG, ads.size()+"encontrados");
+            if (LOG_ON) {
+                Log.d(TAG, ads.size() + "encontrados");
             }
-        }catch (JSONException e){
-            throw new IOException(e.getMessage(),e);
+        } catch (JSONException e) {
+            throw new IOException(e.getMessage(), e);
         }
         return ads;
 
     }
+
     private static String getTipo(int tipo) {
         if (tipo == R.string.text_pacotes) {
             return "pacotes";
@@ -142,7 +158,7 @@ public class AnuncioEmComumService {
             return "buffet";
         } else if (tipo == R.string.text_decoracao) {
             return "decoracao";
-        } else if (tipo == R.string.text_animacao){
+        } else if (tipo == R.string.text_animacao) {
             return "animacao";
         }
         return "";
@@ -151,34 +167,45 @@ public class AnuncioEmComumService {
     public static List getTodosAnuncios(Context context) throws IOException {
         String url = URL_LISTAR_ANUNCIOS;
         String json = conectarServidorGet(url);
-        List listaAds= parserJSON(context,json);
+        List listaAds = parserJSON(context, json);
         return listaAds;
     }
-    public static List<Ads> getAnunciosByTipoTwo(Context context,String tipo) throws IOException {
+
+    public static List<Ads> getAnunciosByTipoTwo(Context context, String tipo) throws IOException {
         String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
         String json = conectarServidorGet(url);
-        List listaAnunciosPorTipo = parserJSON(context,json);
+        List listaAnunciosPorTipo = parserJSON(context, json);
         return listaAnunciosPorTipo;
     }
+
     public static List<Ads> getAnunciosByTipoThree(String tipo) throws IOException {
         String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
         String json = conectarServidorGet(url);
         Log.d("um json ai", json);
-        Data data = new Gson().fromJson(json,Data.class);
+        Data data = new Gson().fromJson(json, Data.class);
         return data;
     }
-    public void verifTipoReqLista(String tipo){
+
+    public void verifTipoReqLista(String tipo) {
         //if verifTipoReqLista(SessaoApplication.getInstance().getTipoDeUserLogado().equals("Fornecedor"));
     }
+
     public static List<Ads> getAnunciosByTipo(String tipo) throws IOException {
-        //if (verifTipoReqLista(tipo).
-        String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
-        String json =conectarServidorGet(url);
-        Log.d("um json ai", json);
-        List ads =parserJSONListaAnunciosComFor(json);
+        List ads = new ArrayList<Ads>();
+        if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser") | tipo.equals("advertiser")) {
+            ads = FornecedorService.getAnunciosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+        } else if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer") && (SessaoApplication.getInstance().getTelaAtual().equals(ListaDesejosClienteActivity.class))) {
+            ads = ClienteService.getUserWishList(SessaoApplication.getInstance().getTokenUser());
+            //Esse metodo acima ainda esta em desenvolvimento bjss , ainda falta setar tela
+        } else {
+            String url = URL_LISTAR_ANUNCIOS_PELO_TIPO.replace(":type", tipo);
+            String json = conectarServidorGet(url);
+            Log.d("um json ai", json);
+            ads = parserJSONListaAnunciosComFor(json);
+        }
+
         return ads;
     }
-
     public static List<Ads> searchAllAdsByNome(String nome) throws IOException {
         String url = URL_BASE + "/nome/" + nome; // << essa url ta errada, eu n sei qual url da p pesquisar pelo nome la na API
         ConectarServidor http = new ConectarServidor();
@@ -186,6 +213,34 @@ public class AnuncioEmComumService {
         List litaAnunciosPorNome = parserJSONListaAnunciosComFor(json);
         return litaAnunciosPorNome;
     }
+    public static boolean addItensLista(List<Ads> selectedAds) throws IOException, JSONException {
+        if ((SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer") &&
+                ((SessaoApplication.getInstance().getTelaAtual().equals(TelaInicialClienteActivity.class)
+                        | SessaoApplication.getInstance().getTelaAtual().equals(DetalhesAnuncioActivity.class))))) {
+
+            Boolean a = clienteService.addAWishList(selectedAds);
+            //aqui embaixo esse metodo acho q n é a melhor forma de implementar, talvez o wishlist? chamando ele?
+            //setar ainda qual tela ta
+
+        } else {
+            return false;
+        }return true;
+    }
+
+    public static boolean deleteItensLista(List<Ads> selectedAds) throws IOException, JSONException {
+        //Falta setar as telas q ele ta
+        if((SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")&&(SessaoApplication.getInstance().getTelaAtual().equals(ListaDesejosClienteActivity.class)))){
+            ClienteService.deleteItensListaDesejoCliente(selectedAds,SessaoApplication.getInstance().getTokenUser());
+        }
+        else if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")&&(SessaoApplication.getInstance().getTelaAtual().equals(AnunciosFornecedorActivity.class))){
+            //ta dizendo q é do item dele neh, falta verificar se ele ta na tela meus anuncios
+            FornecedorService.deleteItensListaFornecedor(selectedAds,SessaoApplication.getInstance().getTokenUser());
+        }else{
+            return false;
+        }
+        return true;
+    }
+
 
     public static ResponseWithURL postFotoBase64(File file) throws IOException {
         String url = URL_BASE + "/postFotoBase64";
@@ -259,13 +314,6 @@ public class AnuncioEmComumService {
         return response;
     }
 
-    /**
-     * {
-     * "status": "OK",
-     * "msg": "Anúncio deletado com sucesso"
-     * }
-     */
-
     // Faz a requisição HTTP, cria a lista de anuncios e salva o JSON em arquivo
     public static List<Ads> getAnunciosFromWebService(Context context, int tipo) throws IOException {
         String tipoString = getTipo(tipo);
@@ -295,6 +343,7 @@ public class AnuncioEmComumService {
         //return anuncios;
         return null;
     }
+
     // Abre o arquivo salvo, se existir, e cria a lista de anuncios
     public static List<Ads> getAnunciosFromArquivo(Context context, int tipo) throws IOException {
         String tipoString = getTipo(tipo);
@@ -318,22 +367,10 @@ public class AnuncioEmComumService {
 
     //converte um json para objeto
     public Ads criarObjeto(String json) {
-        return gson.fromJson(json,Ads.class);
+        return gson.fromJson(json, Ads.class);
 
     }
-    public static boolean deleteItensLista(List<Ads> selectedAds) throws IOException, JSONException {
-        if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
-            //aqui embaixo esse metodo acho q n é a melhor forma de implementar, talvez o wishlist? chamando ele?
-            //verificar ainda qual tela ta
-            ClienteService.deleteItensListaCliente(selectedAds);
-        }
-        else if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
-            //ta dizendo q é do item dele neh, falta verificar se ele ta na tela meus anuncios
-            FornecedorService.deleteItensListaFornecedor(selectedAds);
-        }
-        // A fazer
-        return true;
-    }
+
     public static ArrayList<Bitmap> getImagensAnuncioSelecionado(){
         //ISSO AQ EMBAIXO É DO HAMBA, PRECISA DE REMODELAÇÃO PQ IREMOS PEGAR DO ARRAYLIST DAS URLS DE CADA ANUNCIO
         //PEGAR DO PICASSO E PEI

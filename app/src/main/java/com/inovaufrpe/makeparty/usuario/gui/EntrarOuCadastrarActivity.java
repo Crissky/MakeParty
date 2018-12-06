@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 public class EntrarOuCadastrarActivity extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class EntrarOuCadastrarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entrar_ou_cadastrar);
+        SessaoApplication.getInstance().setTelaAtual(EntrarOuCadastrarActivity.class);
     }
 
     private void mudarTela(Class proximaTela){

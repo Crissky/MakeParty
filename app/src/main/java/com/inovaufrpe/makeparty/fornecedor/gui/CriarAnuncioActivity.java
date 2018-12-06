@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
@@ -42,6 +43,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criar_anuncio);
+        SessaoApplication.getInstance().setTelaAtual(CriarAnuncioActivity.class);
         setTela();
         cadastroAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override

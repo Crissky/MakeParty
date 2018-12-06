@@ -16,11 +16,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
 import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -40,6 +42,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         toolbarComMenuNavAbreEFecha();
         viewDoMenuNavListaClicavel();
         criarFragment(savedInstanceState);
+        SessaoApplication.getInstance().setTelaAtual(TelaInicialClienteActivity.class);
 
 
     }
@@ -98,7 +101,10 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         } else if (id == R.id.action_filtrar_por_regiao) {
         } else if (id == R.id.action_filtrar_por_preco) {
         }else if (id==R.id.action_sair){
+            SessaoApplication.instance.onTerminate();
             String qmsetado= SessaoApplication.getInstance().getTipoDeUserLogado();
+            mudarTela(EntrarOuCadastrarActivity.class);
+            SessaoApplication.getInstance().getTipoDeUserLogado();
             Log.i("Script", "OLHAAA esse era antes" + qmsetado);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 finishAffinity();
@@ -108,7 +114,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
             Log.i("Script", "OLHAAA: "+ qmsetadohehe);
             //finish();
             //System.exit(0);
-              SessaoApplication.instance.onTerminate();
+              //SessaoApplication.instance.onTerminate();
             Log.i("Script", "OLHAAA: "+ qmsetadohehe);
             //finish();
         }

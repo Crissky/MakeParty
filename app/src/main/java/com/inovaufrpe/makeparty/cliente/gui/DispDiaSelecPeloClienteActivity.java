@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
@@ -24,6 +25,7 @@ public class DispDiaSelecPeloClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_disp_dia_selec_pelo_cliente);
         setUpToolbar();
         procurandoItensView();
+        SessaoApplication.getInstance().setTelaAtual(DispDiaSelecPeloClienteActivity.class);
     }
     protected void setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

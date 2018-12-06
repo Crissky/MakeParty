@@ -144,6 +144,13 @@
     <string name="text_view_data_pub_anuncio">Data de publicação:XX/XX/XXXX</string>
     <string name="text_view_deixe_coment">Quer deixar algum comentário? digite abaixo</string>
     <string name="edit_digite_seu_coment_add_avalie">Digite seu comentário</string>
+    <string name="text_view_nome_cliente">Nome cliente</string>
+    <string name="text_view_desc_coment">Descricao do comentario: Esse serviço prestado por Kimbelly é topasso, melhor pessoa! hshs</string>
+
+    <string name="text_view_nota_coment_avaliacao">Nota: </string>
+    <string name="text_view_data_avaliacao_cliente_coment">Data: xx/xx/xxxx</string>
+    <string name="action_opcoes_coment">Opções referentes ao comentário</string>
+    <string name="action_delete_item_lista">Delete item da lista</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>

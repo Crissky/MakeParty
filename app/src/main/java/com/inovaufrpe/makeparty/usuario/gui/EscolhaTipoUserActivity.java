@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 public class EscolhaTipoUserActivity extends AppCompatActivity {
 
@@ -14,6 +15,7 @@ public class EscolhaTipoUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escolha_tipo_user);
+        SessaoApplication.getInstance().setTelaAtual(EscolhaTipoUserActivity.class);
     }
 
     private void mudarTela(Class proximaTela){

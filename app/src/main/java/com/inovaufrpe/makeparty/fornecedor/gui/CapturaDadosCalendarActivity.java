@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Agendamento;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.AgendamentosFornecedorAdapter;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.AgendamentoBuilder;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class CapturaDadosCalendarActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_captura_dados_calendar);
+        SessaoApplication.getInstance().setTelaAtual(CapturaDadosCalendarActivity.class);
         pegarIntent();
         setUpToolbar();
         configurarTela();

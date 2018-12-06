@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.dominio.PessoaFisica;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
@@ -38,6 +39,7 @@ public class CadastroActivity extends AppCompatActivity {
         listandoOpçoesSpinner();
         encontrandoViews();
         saberQualTipoDeUser();
+        SessaoApplication.getInstance().setTelaAtual(CadastroActivity.class);
 
     }
     public void listandoOpçoesSpinner() {

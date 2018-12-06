@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
@@ -38,6 +40,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_anuncio);
+        SessaoApplication.getInstance().setTelaAtual(EditarAnuncioActivity.class);
         encontrandoItensView();
     }
     public void encontrandoItensView(){

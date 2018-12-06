@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
@@ -25,6 +27,7 @@ public class AnunciosFornecedorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncios_fornecedor);
+        SessaoApplication.getInstance().setTelaAtual(AnunciosFornecedorActivity.class);
         setUpToolbar();
         criarFragment(savedInstanceState);
         procurandoViews();

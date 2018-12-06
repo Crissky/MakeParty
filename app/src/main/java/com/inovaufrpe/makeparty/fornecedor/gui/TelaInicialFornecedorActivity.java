@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 
 
 public class TelaInicialFornecedorActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class TelaInicialFornecedorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial_fornecedor);
+        SessaoApplication.getInstance().setTelaAtual(TelaInicialFornecedorActivity.class);
         procurandoViews();
         notificacoes.setOnClickListener(new View.OnClickListener() {
             @Override

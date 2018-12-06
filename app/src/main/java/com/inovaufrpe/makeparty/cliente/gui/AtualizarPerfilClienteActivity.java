@@ -5,11 +5,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
@@ -24,6 +26,7 @@ public class AtualizarPerfilClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atualizar_perfil_cliente);
+        SessaoApplication.getInstance().setTelaAtual(AtualizarPerfilClienteActivity.class);
         setUpToolbar();
         procurandoViews();
     }
@@ -86,7 +89,10 @@ public class AtualizarPerfilClienteActivity extends AppCompatActivity {
             @Override
             public void metodoSimAoDialog() {
                 SessaoApplication.instance.onTerminate();
-                finish();
+                String qmsetado= SessaoApplication.getInstance().getTipoDeUserLogado();
+                Log.d("qmsetado",qmsetado);
+                mudarTela(EntrarOuCadastrarActivity.class);
+                Log.d("qmsetado2",qmsetado);
 
             }
         });

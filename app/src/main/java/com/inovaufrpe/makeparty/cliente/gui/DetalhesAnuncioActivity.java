@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.CalendarioDialog;
@@ -41,6 +42,7 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
     private Button botaoDispAds;
     private FloatingActionButton floatingAddListaDesejo;
     private FrameLayout containerComentarios;
+    private TextView textViewPergJaConhece;
     private View v;
 
     @Override
@@ -94,6 +96,7 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         this.avaliarAquiText = findViewById(R.id.textViewButtonAvaliar);
         this.datapub = findViewById(R.id.textViewDataPublicacaoAnuncio);
         acoesBotoes();
+        tornarInvisivelAlgunsPFornecedor();
         setUpViewPagerGaleriaFotos();
         setarInfoView();
     }
@@ -120,6 +123,17 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
             }
         });
     }
+    public void tornarInvisivelAlgunsPFornecedor(){
+        //TALVEZ ISSSO AQ DE ERRO NO XML EIN, PQ LA É CONSTRAINT IIIIIIIIIIIIIIH, TESTAR
+        if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
+            botaoDispAds.setVisibility(View.GONE);
+            avaliarAquiText.setVisibility(View.GONE);
+            floatingAddListaDesejo.setVisibility(View.GONE);
+            textViewPergJaConhece = findViewById(R.id.textViewPergJaConheceOServico);
+            textViewPergJaConhece.setVisibility(View.GONE);
+
+        }
+    }
 
     private void setUpViewPagerGaleriaFotos() {
         AnuncioEmComumService anuncioEmService = new AnuncioEmComumService();
@@ -136,7 +150,8 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         //datapub.setText(anuncioSelecionado.getCreatedAt().toString());
         descriptionAds.setText(("Descrição: " + anuncioSelecionado.getDescription()));
         phoneAds.setText(("Telefone :" + anuncioSelecionado.getPhone()));
-        //priceAds.setText((int) anuncioSelecionado.getPrice()); --METODO DE CONV ERRADO
+        //String priceAnuncioStr = Double.toString(anuncioSelecionado.getPrice());
+        //priceAds.setText(priceAnuncioStr);
         /*addressAds.setText(("Endereço : "+anuncioSelecionado.getAddress().getStreet()
                 +","+ anuncioSelecionado.getAddress().getNeighborhood()+","+ "Número:"
                 +anuncioSelecionado.getAddress().getNumber()+ anuncioSelecionado.getAddress().getCity()
@@ -199,11 +214,8 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
 
     @Override
     public void onBackPressed() {
-        //AJEITAR AQ EMMMMMMMMM
         if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")) {
-            this.mudarTela(ListaDesejosClienteActivity.class);
-            //}else if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
-
+            this.mudarTela(SessaoApplication.getInstance().getTelaAnterior());
         } else if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")) {
             this.mudarTela(AnunciosFornecedorActivity.class);
         } else{

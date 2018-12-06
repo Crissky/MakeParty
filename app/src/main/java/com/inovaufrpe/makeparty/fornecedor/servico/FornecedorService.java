@@ -109,7 +109,7 @@ public class FornecedorService {
         List listaAnunciosFornecedor = AnuncioEmComumService.parserJSONListaAnunciosComFor(json);
         return listaAnunciosFornecedor;
     }
-    public static boolean deleteItensListaFornecedor(List<Ads> selectedAds) throws IOException, JSONException {
+    public static boolean deleteItensListaFornecedor(List<Ads> selectedAds,String tokenOuId) throws IOException, JSONException {
         ConectarServidor http = new ConectarServidor();
         http.setContentType("application/json; charset=utf-8");
         for (Ads c : selectedAds) {

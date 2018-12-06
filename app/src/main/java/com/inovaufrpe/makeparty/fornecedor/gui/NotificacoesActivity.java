@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 
 public class NotificacoesActivity extends AppCompatActivity {
     private ListView listaNotificacoes;
@@ -15,6 +17,7 @@ public class NotificacoesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificacoes);
+        SessaoApplication.getInstance().setTelaAtual(NotificacoesActivity.class);
         setUpToolbar();
     }
     protected void setUpToolbar() {

@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.dominio.ListaDesejos;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
 
 public class ListaDesejosClienteActivity extends AppCompatActivity {
@@ -17,6 +19,7 @@ public class ListaDesejosClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_desejos_cliente);
         criarFragment(savedInstanceState);
         setUpToolbar();
+        SessaoApplication.getInstance().setTelaAtual(ListaDesejosClienteActivity.class);
     }
     protected void setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

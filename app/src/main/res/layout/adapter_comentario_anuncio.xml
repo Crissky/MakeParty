@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardElevation="3dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="false"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="13dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="16dp">
+
+        <FrameLayout
+            android:layout_width="80dp"
+            android:layout_height="wrap_content">
+            <!-- Foto de qm comentou -->
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="200dp"
+                android:layout_height="57dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:layout_marginTop="6dp"
+                android:contentDescription="@string/img_view_foto_anuncio"
+                android:src="@drawable/ic_avatar" />
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewNomeCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/text_view_nome_cliente"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/menuMiniOpcoesComentEspecif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="320dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:background="@color/colorWhite"
+                    android:contentDescription="@string/action_opcoes_coment"
+                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewDataAvaliacaoAnuncioCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_view_data_avaliacao_cliente_coment"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textViewNotaAvaliacaoAnuncioCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_view_nota_coment_avaliacao"
+                    android:textSize="14sp" />
+
+                <RatingBar
+                    android:id="@+id/ratingBarJaAvaliadoComent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="0.0"
+                    android:scaleX="0.4"
+                    android:scaleY="0.4"
+                    android:transformPivotX="20dp"
+                    android:transformPivotY="0dp"
+                    android:stepSize="1.0" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/textViewDescComentCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/text_view_desc_coment"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

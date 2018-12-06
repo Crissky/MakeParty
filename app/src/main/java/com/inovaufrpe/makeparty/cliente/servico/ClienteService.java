@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import static com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService.conectarServidorGet;
 import static com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService.conectarServidorPost;
 
 public class ClienteService{
@@ -30,7 +31,7 @@ public class ClienteService{
     private static final String URL_PESQUISAR_PF_PELO_ID = URL_BASE + "customers/:id";
     private static final String URL_LISTAR_USUARIOS = URL_BASE + "users";
     private static final String URL_CRIAR_LISTA_DESEJOS = URL_BASE + "wishlists";
-    private static final String URL_LISTA_DESEJOS = URL_BASE + "wishlists";
+    private static final String URL_LISTA_DESEJOS = URL_BASE + "wishlists"+"?=tokenAqui";
     private AnuncioEmComumService anuncioEmComumService = new AnuncioEmComumService();
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -88,29 +89,40 @@ public class ClienteService{
         return URL_BASE;
     }
 
-    public String addWishList(List listAnuncios) {
+    public static boolean addAWishList(List<Ads> listAnunciosSelecPAddWishList) throws IOException {
         String url = URL_CRIAR_LISTA_DESEJOS;
-        //transf lista em json
-        Gson gson = new Gson();
-        String listString = gson.toJson(listAnuncios);
-        //colocando token
-        listString = listString.substring(0, listString.length() - 1) + "," + "\"token\"" + ":" + SessaoApplication.getInstance().getTokenUser() + "}";
-        Log.i("Script", "OLHA listinhaa: " + listString);
-        String respostaAoPost = conectarServidorPost(url, listString);
-        return respostaAoPost;
+        //de um por um( id do anuncio + token)
+        String token=  "," + "\"token\"" + ":" + SessaoApplication.getInstance().getTokenUser() + "}";
+        for (Ads c: listAnunciosSelecPAddWishList){
+            String jsonAMao ="{" + "\"ad:\""+c.get_id()+"\""+ token;
+            String respostaServidorAoAdd= ConectarServidor.post(url,jsonAMao);
+            Log.d(TAG, "JSON a mao: " + jsonAMao);
+            Log.d(TAG, "Resposta servidor a add da lista: " + respostaServidorAoAdd);
+            Gson gson = new Gson();
+            Response response = gson.fromJson(respostaServidorAoAdd, Response.class);
+            if (!response.isOk()) {
+                throw new IOException("Erro ao adicionar a lista de desejo " + response.getMsg());
+            }
+        }return true;
     }
 
     public void excluirAnuncioDaWishList(List listAnunciosExcluidos){
 
     }
-    public void getUserWishList(){
+    public static List getUserWishList(String tokenOuId) throws IOException{
+        String url = URL_LISTA_DESEJOS.replace(":tokenAqui",tokenOuId);
+        String json =conectarServidorGet(url);
+        Log.d("um json ai", json);
+        List listaDesejosCliente = AnuncioEmComumService.parserJSONListaAnunciosComFor(json);
+        return listaDesejosCliente;
 
     }
-    public static boolean deleteItensListaCliente(List<Ads> selectedAds) throws IOException, JSONException {
+    public static boolean deleteItensListaDesejoCliente(List<Ads> selectedAds,String tokenOuId) throws IOException, JSONException {
         ConectarServidor http = new ConectarServidor();
         http.setContentType("application/json; charset=utf-8");
         for (Ads c : selectedAds) {
             // URL para excluir o anúncio
+            //TA ERRADO AINDA AQ VIU
             String url = URL_LISTA_DESEJOS + c._id;
             Log.d(TAG, "Delete anuncio: " + url);
             // Request HTTP DELETE

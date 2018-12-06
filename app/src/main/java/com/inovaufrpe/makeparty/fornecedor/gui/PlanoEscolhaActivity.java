@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 
 public class PlanoEscolhaActivity extends AppCompatActivity {
@@ -19,6 +21,7 @@ public class PlanoEscolhaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plano_escolha);
+        SessaoApplication.getInstance().setTelaAtual(PlanoEscolhaActivity.class);
         setTela();
     }
 
