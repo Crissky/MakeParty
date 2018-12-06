@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class CapturaDadosCalendarActivity extends Activity {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private Date date;
     private List<Agendamento> agendamentos = new ArrayList<>();
+    private Button btCriarEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class CapturaDadosCalendarActivity extends Activity {
 
     }
     protected void setUpToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.materialup_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +59,13 @@ public class CapturaDadosCalendarActivity extends Activity {
     private void configurarTela(){
         TextView txt = (TextView) findViewById(R.id.textView1);
         txt.setText(sdf.format(date));
+        btCriarEvento = findViewById(R.id.criarEvento);
+        btCriarEvento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irTelaCriarEvento();
+            }
+        });
         ListView listView = findViewById(R.id.listView);
         escolherAgendamentos();
         AgendamentosFornecedorAdapter adapter = new AgendamentosFornecedorAdapter(CapturaDadosCalendarActivity.this, agendamentos);
@@ -70,5 +79,11 @@ public class CapturaDadosCalendarActivity extends Activity {
                 agendamentos.add(agendamento);
             }
         }
+    }
+
+    private void irTelaCriarEvento(){
+        Intent intent = new Intent(CapturaDadosCalendarActivity.this, CriarIndisponibilidadeActivity.class);
+        intent.putExtra("timeLong", date.getTime());
+        startActivity(intent);
     }
 }

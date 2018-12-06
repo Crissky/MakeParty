@@ -96,7 +96,8 @@
         <activity android:name=".fornecedor.gui.EscolhasSobreAnuncioActivity" />
         <activity android:name=".cliente.gui.DispDiaSelecPeloClienteActivity" />
         <activity android:name=".fornecedor.gui.PlanoEscolhaActivity" />
-        <activity android:name=".fornecedor.gui.EditarAnuncioActivity"></activity>
+        <activity android:name=".fornecedor.gui.EditarAnuncioActivity" />
+        <activity android:name=".fornecedor.gui.CriarIndisponibilidadeActivity"></activity>
     </application>
 
 </manifest>

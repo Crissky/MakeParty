@@ -33,9 +33,19 @@
         android:textSize="20sp"
         android:gravity="center"/>
 
+    <Button
+        android:id="@+id/criarEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Criar evento/indisponibilidade"
+        android:background="@color/colorButoes"
+        android:textColor="@color/colorTextoBut"
+        android:layout_margin="8dp"/>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
 
 </LinearLayout>
