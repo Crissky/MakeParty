@@ -23,7 +23,7 @@
         android:id="@+id/action_share"
         android:icon="@drawable/ic_menu_share_white"
         android:title="Compartilhar"
-        android:visible="false"/>
+        android:visible="true"/>
     <item
         android:id="@+id/action_send_selec"
         android:icon="@drawable/ic_menu_send_white"

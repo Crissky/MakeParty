@@ -95,6 +95,7 @@ public class ClienteService{
         String token=  "," + "\"token\"" + ":" + SessaoApplication.getInstance().getTokenUser() + "}";
         for (Ads c: listAnunciosSelecPAddWishList){
             String jsonAMao ="{" + "\"ad:\""+c.get_id()+"\""+ token;
+            Log.d(TAG, "JSON a mao: " + jsonAMao);
             String respostaServidorAoAdd= ConectarServidor.post(url,jsonAMao);
             Log.d(TAG, "JSON a mao: " + jsonAMao);
             Log.d(TAG, "Resposta servidor a add da lista: " + respostaServidorAoAdd);
