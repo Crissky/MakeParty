@@ -206,6 +206,13 @@ public class AnuncioEmComumService {
 
         return ads;
     }
+    public static List<Ads> getAnunciosByPriceFilter(String intervaloInicio,String intervaloFim) throws IOException {
+        List ads = new ArrayList<Ads>();
+        //FAZER AQ EINNNNNNNNNNNNNNNNNNNNNNNNN
+        //FILTRO PREÇOOOOOOOOOO
+
+        return ads;
+    }
     public static List<Ads> searchAllAdsByNome(String nome) throws IOException {
         String url = URL_BASE + "/nome/" + nome; // << essa url ta errada, eu n sei qual url da p pesquisar pelo nome la na API
         ConectarServidor http = new ConectarServidor();

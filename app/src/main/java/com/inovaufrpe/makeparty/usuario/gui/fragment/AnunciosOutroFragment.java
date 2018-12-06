@@ -54,7 +54,7 @@ public class AnunciosOutroFragment extends BaseFragment {
     // Método para instanciar esse fragment pelo tipo.
     public static AnunciosOutroFragment newInstance(String tipo) {
         Bundle args = new Bundle();
-        args.putString("tipo", String.valueOf(tipo));
+        args.putString("tipo", tipo);
         AnunciosOutroFragment f = new AnunciosOutroFragment();
         f.setArguments(args);
         return f;
@@ -66,6 +66,9 @@ public class AnunciosOutroFragment extends BaseFragment {
         if (getArguments() != null) {
             // Lê o tipo dos argumentos.
             this.tipo = getArguments().getString("tipo");
+        }else{
+            //POR ENQ AQ TA FESTA VIU, MAS TEM Q MUDARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR ,
+            this.tipo = "festa";
         }
         //setHasOptionsMenu(true); oq é isso? non sei
         // Registra a classe para receber eventos.
@@ -107,10 +110,9 @@ public class AnunciosOutroFragment extends BaseFragment {
         public List execute() throws Exception {
             Log.d("Olhaa quem logou", SessaoApplication.getInstance().getTipoDeUserLogado());
             //Log.d("tiporetornado",tipo);
-            return AnuncioEmComumService.getAnunciosByTipo("Festa");
+            return AnuncioEmComumService.getAnunciosByTipo(tipo);
             // Busca os anuncios em background (Thread)
         }
-
         @Override
         public void updateView(List ads) {
             if (ads != null) {
@@ -120,13 +122,11 @@ public class AnunciosOutroFragment extends BaseFragment {
                 recyclerView.setAdapter(new AnuncioAdapter(getContext(), ads, onClickAnuncio()));
             }
         }
-
         @Override
         public void onError(Exception e) {
             // Qualquer exceção lançada no método execute vai cair aqui.
             alert("Ocorreu algum erro ao buscar os dados.");
         }
-
         @Override
         public void onCancelled(String s) {
         }
@@ -154,7 +154,6 @@ public class AnunciosOutroFragment extends BaseFragment {
                     // Redesenha a lista
                     recyclerView.getAdapter().notifyDataSetChanged();
                 }
-
             }
 
             @Override
@@ -178,7 +177,6 @@ public class AnunciosOutroFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         // Cancela o recebimento de eventos.
         SessaoApplication.getInstance().getBus().unregister(this);
     }
@@ -257,7 +255,6 @@ public class AnunciosOutroFragment extends BaseFragment {
 
                 return true;
             }
-
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
                 return true;
@@ -290,7 +287,6 @@ public class AnunciosOutroFragment extends BaseFragment {
                 mode.finish();
                 return true;
             }
-
             @Override
             public void onDestroyActionMode(ActionMode mode) {
                 // Limpa o estado
@@ -301,9 +297,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
-
         };
-
     }
     private void telaAtualIconesVisivelOuNaoMenuSelecao(Menu menuSelecao) {
         if (SessaoApplication.getInstance().getTelaAtual().equals(TelaInicialClienteActivity.class)) {
