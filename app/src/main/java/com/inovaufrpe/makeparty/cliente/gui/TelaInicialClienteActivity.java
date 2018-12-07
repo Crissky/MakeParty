@@ -65,7 +65,6 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
             AnunciosOutroFragment frag = new AnunciosOutroFragment();
             //AnunciosFragment frag = new AnunciosFragment();
             frag.setArguments(getIntent().getExtras());
-            //getSupportFragmentManager().beginTransaction().add(R.id.container, frag).commit();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, frag).commit();
         }
     }
@@ -100,25 +99,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         } else if (id == R.id.action_carrinho) {
         } else if (id == R.id.action_filtrar_por_regiao) {
         } else if (id == R.id.action_filtrar_por_preco) {
-        }else if (id==R.id.action_sair){
-            SessaoApplication.instance.onTerminate();
-            String qmsetado= SessaoApplication.getInstance().getTipoDeUserLogado();
-            mudarTela(EntrarOuCadastrarActivity.class);
-            SessaoApplication.getInstance().getTipoDeUserLogado();
-            Log.i("Script", "OLHAAA esse era antes" + qmsetado);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                finishAffinity();
-            }
-            Log.i("Script", "OLHAAA: "+ qmsetado);
-            String qmsetadohehe= SessaoApplication.instance.getTipoDeUserLogado();
-            Log.i("Script", "OLHAAA: "+ qmsetadohehe);
-            //finish();
-            //System.exit(0);
-              //SessaoApplication.instance.onTerminate();
-            Log.i("Script", "OLHAAA: "+ qmsetadohehe);
-            //finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
     @SuppressWarnings("StatementWithEmptyBody")
@@ -142,7 +123,23 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         } else if (id == R.id.nav_manage) {
             if (!SessaoApplication.instance.getTipoDeUserLogado().equals("null")) { irParaTelaConfiguracoesCliente(); }else { irParaTelaEntrarOuCadastrar(); }
         } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_exit) {
+            SessaoApplication.instance.onTerminate();
+            String qmsetado= SessaoApplication.getInstance().getTipoDeUserLogado();
+            mudarTela(EntrarOuCadastrarActivity.class);
+            SessaoApplication.getInstance().getTipoDeUserLogado();
+            Log.i("Script", "OLHAAA esse era antes" + qmsetado);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                finishAffinity();
+            }
+            Log.i("Script", "OLHAAA: "+ qmsetado);
+            String qmsetadohehe= SessaoApplication.instance.getTipoDeUserLogado();
+            Log.i("Script", "OLHAAA: "+ qmsetadohehe);
+            //finish();
+            //System.exit(0);
+            //SessaoApplication.instance.onTerminate();
+            Log.i("Script", "OLHAAA: "+ qmsetadohehe);
+            //finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -161,7 +158,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
                 if(item.getItemId()==R.id.action_pacotes){
                     trocarFragmento("pacotes");
                 }else if (item.getItemId()==R.id.action_casa_festa){
-                    trocarFragmento("casa de festa");
+                    trocarFragmento("casadefesta");
                 }else if (item.getItemId()==R.id.action_buffet){
                     trocarFragmento("buffet");
                 }else if (item.getItemId()==R.id.action_decoracao){
@@ -175,8 +172,8 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
 
     }
     public void trocarFragmento(String tipo){
-        getSupportActionBar().setTitle(getIntent().getStringExtra(tipo));
         Fragment frag = null;
+        getSupportActionBar().setTitle(getIntent().getStringExtra(tipo));
         frag =AnunciosOutroFragment.newInstance(tipo);
         frag.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.container, frag).commit();

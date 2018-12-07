@@ -83,7 +83,6 @@
         <activity android:name=".cliente.gui.FiltroInicialActivity" />
         <activity android:name=".cliente.gui.MostraGPSActivity" />
         <activity android:name=".cliente.gui.DetalhesAnuncioActivity" />
-        <activity android:name=".cliente.gui.TesteActivity" />
         <activity android:name=".cliente.gui.AvaliacaoNotaActivity" />
         <activity android:name=".cliente.gui.AtualizarPerfilClienteActivity" />
         <activity android:name=".fornecedor.gui.CalendarActivity" />
@@ -93,11 +92,12 @@
         <activity android:name=".fornecedor.gui.CapturaDadosCalendarActivity" />
         <activity android:name=".cliente.gui.ListaDesejosClienteActivity" />
         <activity android:name=".fornecedor.gui.CriarAnuncioActivity" />
-        <activity android:name=".fornecedor.gui.EscolhasSobreAnuncioActivity" />
         <activity android:name=".cliente.gui.DispDiaSelecPeloClienteActivity" />
         <activity android:name=".fornecedor.gui.PlanoEscolhaActivity" />
         <activity android:name=".fornecedor.gui.EditarAnuncioActivity" />
-        <activity android:name=".fornecedor.gui.CriarIndisponibilidadeActivity"></activity>
+        <activity android:name=".fornecedor.gui.CriarIndisponibilidadeActivity" />
+        <activity android:name=".cliente.gui.AlterandoDadosPerfilClienteActivity"></activity>
+        <activity android:name=".cliente.gui.FIltroPrecoActivity"></activity>
     </application>
 
 </manifest>

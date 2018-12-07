@@ -43,11 +43,13 @@
         android:id="@+id/action_settings1"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:visible="false"/>
 
     <item
         android:id="@+id/action_sair"
         android:orderInCategory="101"
-        android:title="Sair" />
+        android:title="Sair"
+        android:visible="false"/>
 
 </menu>

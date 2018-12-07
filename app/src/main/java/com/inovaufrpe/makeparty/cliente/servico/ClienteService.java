@@ -32,6 +32,7 @@ public class ClienteService{
     private static final String URL_LISTAR_USUARIOS = URL_BASE + "users";
     private static final String URL_CRIAR_LISTA_DESEJOS = URL_BASE + "wishlists";
     private static final String URL_LISTA_DESEJOS = URL_BASE + "wishlists"+"?=tokenAqui";
+    private static final String URL_LISTAR_ANUNCIOS_POR_PRECO = URL_BASE + "ads/prices/price";
     private AnuncioEmComumService anuncioEmComumService = new AnuncioEmComumService();
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -92,9 +93,9 @@ public class ClienteService{
     public static boolean addAWishList(List<Ads> listAnunciosSelecPAddWishList) throws IOException {
         String url = URL_CRIAR_LISTA_DESEJOS;
         //de um por um( id do anuncio + token)
-        String token=  "," + "\"token\"" + ":" + SessaoApplication.getInstance().getTokenUser() + "}";
+        String token=  "," + "\"token\"" + ":" + "\""+SessaoApplication.getInstance().getTokenUser() +"\"" +"}";
         for (Ads c: listAnunciosSelecPAddWishList){
-            String jsonAMao ="{" + "\"ad:\""+c.get_id()+"\""+ token;
+            String jsonAMao ="{" + "\"ad\":"+"\""+c.get_id()+"\""+ token;
             Log.d(TAG, "JSON a mao: " + jsonAMao);
             String respostaServidorAoAdd= ConectarServidor.post(url,jsonAMao);
             Log.d(TAG, "JSON a mao: " + jsonAMao);
@@ -139,6 +140,7 @@ public class ClienteService{
         // A fazer
         return true;
     }
+
 
 
 }

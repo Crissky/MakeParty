@@ -55,6 +55,9 @@ public class AnunciosOutroFragment extends BaseFragment {
     public static AnunciosOutroFragment newInstance(String tipo) {
         Bundle args = new Bundle();
         args.putString("tipo", tipo);
+        Log.d("tipoRecebido",tipo);
+        //D/gralloc_ranchu: gralloc_unregister_buffer: exiting HostConnection (is buffer-handling thread)
+        Log.i("tipoOuuu",tipo);
         AnunciosOutroFragment f = new AnunciosOutroFragment();
         f.setArguments(args);
         return f;
@@ -66,6 +69,7 @@ public class AnunciosOutroFragment extends BaseFragment {
         if (getArguments() != null) {
             // Lê o tipo dos argumentos.
             this.tipo = getArguments().getString("tipo");
+            Log.i("oxente",getArguments().getString("tipo"));
         }else{
             //POR ENQ AQ TA FESTA VIU, MAS TEM Q MUDARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR ,
             this.tipo = "festa";

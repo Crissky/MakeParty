@@ -151,6 +151,11 @@
     <string name="text_view_data_avaliacao_cliente_coment">Data: xx/xx/xxxx</string>
     <string name="action_opcoes_coment">Opções referentes ao comentário</string>
     <string name="action_delete_item_lista">Delete item da lista</string>
+    <string name="label_alterando_dados">Alterando dados</string>
+    <string name="edit_text_email_alterando_perfil">Digite seu novo email aqui</string>
+    <string name="edit_text_nome_alterando_perfil">Digite seu novo nome de usuário</string>
+    <string name="edit_text_senha_atual_alterando_perfil">Digite aqui sua senha atual</string>
+    <string name="edit_text_nova_senha_alterando_perfil">Digite aqui sua nova senha</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>
