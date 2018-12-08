@@ -22,7 +22,10 @@ import android.view.MenuItem;
 
 import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
+import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
+import com.inovaufrpe.makeparty.usuario.gui.EscolhaTipoUserActivity;
 import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
 import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -65,15 +68,6 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
             //AnunciosFragment frag = new AnunciosFragment();
             frag.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().replace(R.id.container, frag).commit();
-        }
-    }
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
     @Override
@@ -186,13 +180,30 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
     public void irParaTelaConfiguracoesCliente(){
         this.mudarTela(AtualizarPerfilClienteActivity.class);
     }
+    public void exibirMsgEAgirSeQuiserSairRealmente(){
+        SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja realmente sair da sua conta ?", new SimOuNaoDialog.Callback() {
+            @Override
+            public void metodoSimAoDialog() {
+                SessaoApplication.getInstance().onTerminate();
+                mudarTela(EscolhaTipoUserActivity.class);
+            }
+        });
+    }
     public void irParaTelaListaDeDesejos(){
         this.mudarTela(ListaDesejosClienteActivity.class);
     }
     public void irParaTelaEntrarOuCadastrar(){
         this.mudarTela(EntrarOuCadastrarActivity.class);
 
+    }}
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+            //exibirMsgEAgirSeQuiserSairRealmente();
+        }
     }
-
-
 }

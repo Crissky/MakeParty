@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.usuario.gui.EscolhaTipoUserActivity;
 import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
+import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 
 
 public class TelaInicialFornecedorActivity extends AppCompatActivity {
@@ -55,6 +57,15 @@ public class TelaInicialFornecedorActivity extends AppCompatActivity {
         anuncios = findViewById(R.id.anunciosId);
 
     }
+    public void exibirMsgEAgirSeQuiserSairRealmente(){
+        SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja realmente sair da sua conta ?", new SimOuNaoDialog.Callback() {
+            @Override
+            public void metodoSimAoDialog() {
+                SessaoApplication.getInstance().onTerminate();
+                mudarTela(EscolhaTipoUserActivity.class);
+            }
+        });
+    }
     private void mudarTela(Class tela){
         Intent intent=new Intent(this, tela);
         startActivity(intent);
@@ -63,8 +74,7 @@ public class TelaInicialFornecedorActivity extends AppCompatActivity {
 
    @Override // por enq dando o back e só fechando
     public void onBackPressed() {
-        finish();
-        //super.onBackPressed();
+        exibirMsgEAgirSeQuiserSairRealmente();
     }
 
 
