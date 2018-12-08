@@ -14,13 +14,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
+import com.inovaufrpe.makeparty.usuario.dominio.Address;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Mask;
-import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
 import java.util.ArrayList;
@@ -151,12 +150,12 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         String rua = edtRua.getText().toString().trim();
         String numero = edtNumero.getText().toString().trim();
 
-        Endereco endereco = new Endereco();
-        endereco.setCity(cidade);
-        endereco.setNeighborhood(bairro);
-        endereco.setZipcode(cep);
-        endereco.setStreet(rua);
-        endereco.setNumber(numero);
+        Address address = new Address();
+        address.setCity(cidade);
+        address.setNeighborhood(bairro);
+        address.setZipcode(cep);
+        address.setStreet(rua);
+        address.setNumber(numero);
 
         String titulo = edtTitulo.getText().toString().trim();
         double valor = Double.parseDouble(edtValor.getText().toString().trim());
@@ -176,7 +175,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         ads.setPhone(telefone);
         String tipo = edtTipoAnuncio.getSelectedItem().toString();
         ads.setType(tipo);
-        ads.setAddress(endereco);
+        ads.setAddress(address);
         String textoTags = edtTags.getText().toString();
         String[] itensDasTags = textoTags.split(",");
         List<String> arrayDasTags = new ArrayList<String>();

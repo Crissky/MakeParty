@@ -1,6 +1,6 @@
 package com.inovaufrpe.makeparty.fornecedor.dominio;
 
-import com.inovaufrpe.makeparty.cliente.dominio.PessoaFisica;
+import com.inovaufrpe.makeparty.cliente.dominio.Customer;
 
 import java.util.Date;
 
@@ -8,14 +8,14 @@ public class Agendamento {
     private Date dateInicio;
     private Date dateFim;
     private Ads anuncio;
-    private PessoaFisica pessoaFisica;
+    private Customer customer;
     private String situacao;
 
-    public Agendamento(Date dateInicio, Date dateFim, Ads anuncio, PessoaFisica pessoaFisica, String situacao) {
+    public Agendamento(Date dateInicio, Date dateFim, Ads anuncio, Customer customer, String situacao) {
         this.dateInicio = dateInicio;
         this.dateFim = dateFim;
         this.anuncio = anuncio;
-        this.pessoaFisica = pessoaFisica;
+        this.customer = customer;
         this.situacao = situacao;
     }
 
@@ -46,12 +46,12 @@ public class Agendamento {
         this.anuncio = anuncio;
     }
 
-    public PessoaFisica getPessoaFisica() {
-        return pessoaFisica;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setPessoaFisica(PessoaFisica pessoaFisica) {
-        this.pessoaFisica = pessoaFisica;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getSituacao() {

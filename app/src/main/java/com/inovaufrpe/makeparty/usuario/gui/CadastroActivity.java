@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.dominio.PessoaFisica;
+import com.inovaufrpe.makeparty.cliente.dominio.Customer;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
@@ -240,10 +240,10 @@ public class CadastroActivity extends AppCompatActivity {
         String dataNasc = edtNasc.getText().toString();
 
         Usuario usuario = new Usuario(email, senha);
-        PessoaFisica pessoaFisica = new PessoaFisica(usuario,nome,cpf,validacaoGuiRapida.dataFormatoBanco(dataNasc),telefone);
+        Customer customer = new Customer(usuario,nome,cpf,validacaoGuiRapida.dataFormatoBanco(dataNasc),telefone);
 
         Gson gson = new Gson();
-        String pf = gson.toJson(pessoaFisica);
+        String pf = gson.toJson(customer);
         return pf;
     }
     private void cadastrar(String json) throws InterruptedException{

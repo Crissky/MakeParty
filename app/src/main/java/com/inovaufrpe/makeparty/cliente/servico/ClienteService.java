@@ -3,7 +3,7 @@ package com.inovaufrpe.makeparty.cliente.servico;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.inovaufrpe.makeparty.cliente.dominio.PessoaFisica;
+import com.inovaufrpe.makeparty.cliente.dominio.Customer;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService.conectarServidorGet;
-import static com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService.conectarServidorPost;
 
 public class ClienteService{
 
@@ -46,8 +45,8 @@ public class ClienteService{
     }
 
     //converte um json para objeto
-    public PessoaFisica criarObjeto(String json) {
-        return gson.fromJson(json, PessoaFisica.class);
+    public Customer criarObjeto(String json) {
+        return gson.fromJson(json, Customer.class);
     }
 
 

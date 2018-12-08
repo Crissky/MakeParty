@@ -2,7 +2,7 @@ package com.inovaufrpe.makeparty.cliente.dominio;
 
 import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
 
-public class PessoaFisica {
+public class Customer {
 
     private String name;
     private String cpf;
@@ -12,7 +12,7 @@ public class PessoaFisica {
     //private Byte photo;
     //private String photo;
 
-    public PessoaFisica(Usuario usuario, String name, String cpf, String birthdate, String phone) {
+    public Customer(Usuario usuario, String name, String cpf, String birthdate, String phone) {
         this.name = name;
         this.cpf = cpf;
         this.birthdate = birthdate;

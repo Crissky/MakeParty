@@ -37,7 +37,7 @@
         android:id="@+id/criarEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Criar evento/indisponibilidade"
+        android:text="Criar event/indisponibilidade"
         android:background="@color/colorButoes"
         android:textColor="@color/colorTextoBut"
         android:layout_margin="8dp"/>

@@ -2,7 +2,7 @@ package com.inovaufrpe.makeparty.fornecedor.dominio;
 
 import java.util.Date;
 
-public class Agenda {
+public class Schedule {
 
     private Date dateAvailable;
 

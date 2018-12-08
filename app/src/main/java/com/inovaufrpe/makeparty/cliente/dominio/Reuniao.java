@@ -6,16 +6,16 @@ import java.util.Date;
 
 public class Reuniao {
 
-    private PessoaFisica name;
+    private Customer name;
     private Owner socialname;
     private Date date;
     private String typeSolicitation;
 
-    public PessoaFisica getName() {
+    public Customer getName() {
         return name;
     }
 
-    public void setName(PessoaFisica name) {
+    public void setName(Customer name) {
         this.name = name;
     }
 

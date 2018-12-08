@@ -1,6 +1,6 @@
 package com.inovaufrpe.makeparty.usuario.dominio;
 
-public class Endereco {
+public class Address {
 
     private String street;
     private String neighborhood;
@@ -61,7 +61,7 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return "Endereco[" +
+        return "Address[" +
                 "street='" + street + '\'' +
                 ", neighborhood='" + neighborhood + '\'' +
                 ", number='" + number + '\'' +

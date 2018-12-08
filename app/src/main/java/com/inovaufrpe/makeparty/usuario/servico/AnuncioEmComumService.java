@@ -135,7 +135,7 @@ public class AnuncioEmComumService {
                 //c.setCreatedAt(jsonAnuncio.getLong("createdAt"));
                 //c.setUpdatedAt();
                 //objetoJson3.getJSONObject("adress");
-                //c.setAddress((Endereco) jsonAnuncio.opt("address"));
+                //c.setAddress((Address) jsonAnuncio.opt("address"));
 
                 if (LOG_ON) {
                     Log.d(TAG, "Ads" + c.getDescription() + ">");

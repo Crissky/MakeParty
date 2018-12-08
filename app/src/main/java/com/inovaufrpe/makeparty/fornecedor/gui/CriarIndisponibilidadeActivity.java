@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Evento;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,7 +45,7 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
         hFim = findViewById(R.id.horaFim);
         mInicio = findViewById(R.id.minInicio);
         mFim = findViewById(R.id.minFim);
-        endereco = findViewById(R.id.endereco);
+        endereco = findViewById(R.id.address);
         nomeCliente = findViewById(R.id.nomeCliente);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -102,11 +102,12 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
         }else {
             montarDiaTodo();
         }
-        Evento evento = new Evento();
-        evento.setObs(obs.getText().toString().trim());
-        evento.setDateInicio(dateInicio);
-        evento.setDateFim(dateFim);
-        evento.setEndereco(endereco.getText().toString().trim());
+        Event event = new Event();
+        event.setDescription(obs.getText().toString().trim());
+        event.setStartDate(String.valueOf(dateInicio));
+        event.setEndDate(String.valueOf(dateFim));
+        //MUDAR ESSA LINHA AQUI EM BAIXO:
+       // event.setEndereco(endereco.getText().toString().trim());
         Toast.makeText(this, "Foi", Toast.LENGTH_SHORT).show();
     }
 
@@ -120,10 +121,10 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
         }else {
             montarDiaTodo();
         }
-        Evento evento = new Evento();
-        evento.setObs(obs.getText().toString().trim());
-        evento.setDateInicio(dateInicio);
-        evento.setDateFim(dateFim);
+        Event event = new Event();
+        event.setDescription(obs.getText().toString().trim());
+        event.setStartDate(String.valueOf(dateInicio));
+        event.setEndDate(String.valueOf(dateFim));
         Toast.makeText(this, "Foi", Toast.LENGTH_SHORT).show();
     }
 

@@ -3,14 +3,13 @@ package com.inovaufrpe.makeparty.fornecedor.dominio;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.inovaufrpe.makeparty.usuario.dominio.Address;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+
+//TEM QUE MUDAR AQUI DEPOIS, PARA "AD" MAS TEM QUE ADAPTAR
 public class Ads implements Parcelable {
 
     public String _id;
@@ -19,7 +18,7 @@ public class Ads implements Parcelable {
     private Date updatedAt;
     private String description;
     private double price;
-    private Endereco address;
+    private Address address;
     private String phone;
     private String type;
     private ArrayList tags;
@@ -79,12 +78,12 @@ public class Ads implements Parcelable {
         this.price = price;
     }
 
-    public Endereco getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Endereco endereco) {
-        this.address = endereco;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getPhone() {

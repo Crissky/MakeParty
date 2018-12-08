@@ -14,11 +14,10 @@ import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
-import com.inovaufrpe.makeparty.usuario.dominio.Endereco;
+import com.inovaufrpe.makeparty.usuario.dominio.Address;
 import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
 
 import java.util.ArrayList;
@@ -144,7 +143,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         Collections.addAll(arrayDasTags, itensDasTags);
         anuncioASerEnviadoPUT.setTags((ArrayList) arrayDasTags);
 
-        Endereco endAnuncioEditado = new Endereco();
+        Address endAnuncioEditado = new Address();
         endAnuncioEditado.setStreet(editTextRuaAnuncio.getText().toString());
         endAnuncioEditado.setNeighborhood(editTextBairroEndAnuncio.getText().toString());
         endAnuncioEditado.setCity(editTextCidadeEndAnuncio.getText().toString());

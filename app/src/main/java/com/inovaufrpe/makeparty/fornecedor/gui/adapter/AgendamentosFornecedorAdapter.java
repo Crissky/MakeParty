@@ -36,7 +36,7 @@ public class AgendamentosFornecedorAdapter extends ArrayAdapter<Agendamento> {
         TextView horario = view.findViewById(R.id.horario);
         TextView situacao = view.findViewById(R.id.situacao);
 
-        nome.setText(agendamentos.get(position).getPessoaFisica().getName());
+        nome.setText(agendamentos.get(position).getCustomer().getName());
         servico.setText(agendamentos.get(position).getAnuncio().getTitle());
 
         String inicio = sdf.format(agendamentos.get(position).getDateInicio());

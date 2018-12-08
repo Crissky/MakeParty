@@ -4,10 +4,10 @@ import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 import java.util.ArrayList;
 
-public class ListaDesejos {
+public class Wishlists {
 
     private ArrayList<Ads> ad;
-    private PessoaFisica nomesocial;
+    private Customer nomesocial;
 
     public ArrayList<Ads> getAd() {
         return ad;
@@ -17,11 +17,11 @@ public class ListaDesejos {
         this.ad = ad;
     }
 
-    public PessoaFisica getNomesocial() {
+    public Customer getNomesocial() {
         return nomesocial;
     }
 
-    public void setNomesocial(PessoaFisica nomesocial) {
+    public void setNomesocial(Customer nomesocial) {
         this.nomesocial = nomesocial;
     }
 

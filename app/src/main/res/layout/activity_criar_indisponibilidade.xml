@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Adicionar evento de horário"
+                android:text="Adicionar event de horário"
                 android:textSize="20sp"
                 android:layout_margin="28dp"/>
 
@@ -183,7 +183,7 @@
                     android:layout_marginTop="18dp"/>
 
                 <EditText
-                    android:id="@+id/endereco"
+                    android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"/>
@@ -213,7 +213,7 @@
                 android:layout_margin="18dp"
                 android:background="@color/colorButoes"
                 android:textColor="@color/colorTextoBut"
-                android:text="Criar evento"/>
+                android:text="Criar event"/>
 
         </LinearLayout>
 

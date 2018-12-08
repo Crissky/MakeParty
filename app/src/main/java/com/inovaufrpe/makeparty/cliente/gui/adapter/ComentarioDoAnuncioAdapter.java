@@ -13,15 +13,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.cliente.dominio.Avaliacao;
+import com.inovaufrpe.makeparty.cliente.dominio.Rating;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ComentarioDoAnuncioAdapter extends RecyclerView.Adapter<ComentarioDoAnuncioAdapter.ComentariosDoAnuncioViewHolder> {
-    private final List<Avaliacao> avaliacaos;
+    private final List<Rating> ratings;
     private final Context context;
     private final ComentarioDoAnuncioAdapter.ComentarioDoAnuncioOnClickListener onClickListener;
 
@@ -31,9 +28,9 @@ public class ComentarioDoAnuncioAdapter extends RecyclerView.Adapter<ComentarioD
     }
     //Aqui esta informando que esse adapter , essa classe ComentarioDoAnuncioAdapter esta personalizando cada item de uma lista
     // uma lista de avaliacoes que no caso ficará "guardada" em Avaliacoes
-    public ComentarioDoAnuncioAdapter(Context context, List<Avaliacao> avaliacaos, ComentarioDoAnuncioAdapter.ComentarioDoAnuncioOnClickListener onClickListener) {
+    public ComentarioDoAnuncioAdapter(Context context, List<Rating> ratings, ComentarioDoAnuncioAdapter.ComentarioDoAnuncioOnClickListener onClickListener) {
         this.context = context;
-        this.avaliacaos =avaliacaos ;
+        this.ratings = ratings;
         this.onClickListener = onClickListener;
     }
     //aqui embaixo esta informando qual xml ta desenhando o item de cada lista, esta personalizando o item
@@ -50,8 +47,8 @@ public class ComentarioDoAnuncioAdapter extends RecyclerView.Adapter<ComentarioD
     //seta os itens view do item, trocando pelas informações corretas em cada campo
     @Override
     public void onBindViewHolder(final ComentarioDoAnuncioAdapter.ComentariosDoAnuncioViewHolder holder, final int position) {
-        // Avaliacao da linha
-        Avaliacao ava = avaliacaos.get(position);
+        // Rating da linha
+        Rating ava = ratings.get(position);
 
         // Atualizada os valores nas views
         //holder.nomeCliente.setText(ava.get);
@@ -84,7 +81,7 @@ public class ComentarioDoAnuncioAdapter extends RecyclerView.Adapter<ComentarioD
     //metodo abaixo retorna quantos itens anuncio tem
     @Override
     public int getItemCount() {
-        return this.avaliacaos != null ? this.avaliacaos.size() : 0;
+        return this.ratings != null ? this.ratings.size() : 0;
     }
 
     //metodo abaixo diz q é classe view e que herda de RecyclerView.ViewHolder

@@ -13,7 +13,7 @@ public class Owner {
     private Usuario usuario;
     private String phone;
     private Plano plan;
-    private Agenda schedule;
+    private Schedule schedule;
 
 
     public Owner() {
@@ -81,11 +81,11 @@ public class Owner {
         this.plan = plan;
     }
 
-    public Agenda getSchedule() {
+    public Schedule getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Agenda schedule) {
+    public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
 
