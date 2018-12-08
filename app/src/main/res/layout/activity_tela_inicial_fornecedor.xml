@@ -37,6 +37,8 @@
         android:orientation="horizontal"
         android:layout_weight="1"
         android:weightSum="2">
+
+
         <ImageView
             android:id="@+id/notificacoesId"
             android:layout_width="match_parent"
@@ -44,7 +46,9 @@
             android:layout_margin="16dp"
             android:layout_weight="1"
             android:contentDescription="@string/img_view_notificacoes"
-            android:src="@drawable/alertred"  />
+            android:src="@drawable/ic_vector_red_notificacao"
+            />
+
 
 
         <ImageView
