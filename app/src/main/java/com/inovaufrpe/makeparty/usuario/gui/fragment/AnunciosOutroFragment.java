@@ -301,6 +301,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                     SimOuNaoDialog.show(getFragmentManager(), "Deseja mesmo excluir esses anúncios da sua lista?", new SimOuNaoDialog.Callback() {
                         @Override
                         public void metodoSimAoDialog() {
+                            Log.i("opaaa a lista aq",selectedAds.toString());
                             startTask("ads", new PostOuDeleteTask(selectedAds,"delete"));
                         }
                     });
@@ -408,11 +409,10 @@ public class AnunciosOutroFragment extends BaseFragment {
                     AnuncioEmComumService.deleteItensLista(selectedAds);
                     snack(recyclerView, "Anúncios excluídos da lista com sucesso.");
                 }
-                //Log.d("tiporetornado",tipo);
-                return AnuncioEmComumService.getAnunciosByTipo(tipo);
-                // Busca os anuncios em background (Thread)
             }
-            return null;
+            //Log.d("tiporetornado",tipo);
+            return AnuncioEmComumService.getAnunciosByTipo(tipo);
+            // Busca os anuncios em background (Thread)
         }
         @Override
         public void updateView(List ads) {

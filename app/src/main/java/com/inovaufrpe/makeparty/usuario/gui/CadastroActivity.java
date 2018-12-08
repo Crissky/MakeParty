@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -257,6 +258,7 @@ public class CadastroActivity extends AppCompatActivity {
                 //no Onclick no caso, e nesse chamar outro metodo p printar a resposta , se foi cadastrado ou n
                 if (tipoDeUserParaCadastro.equals("Cliente")){
                     //esses 2 metodos aq, ambos guardam a resp do servidor/API, mas o primeiro q tenta fazer o post realmente
+                    Log.i("Oq eu to enviando ",data);
                     validar = ConectarServidor.post("https://makepartyserver.herokuapp.com/users/signup/customer",data);
                     if (validar.substring(2,5).equals("err")){
                         validar ="Já existe um usuário com este e-mail ou cpf";

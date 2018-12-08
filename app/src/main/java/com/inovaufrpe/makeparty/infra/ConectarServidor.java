@@ -311,7 +311,7 @@ public class ConectarServidor {
             URL url = new URL(completeUrl);
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
-            conexao.setRequestMethod("delete");
+            conexao.setRequestMethod("DELETE");
             conexao.addRequestProperty("Content-type", "application/json");
             //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
 
