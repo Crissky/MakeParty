@@ -21,11 +21,18 @@
         <item
             android:id="@+id/nav_lista_reunioes_tela_cliente"
             android:icon="@drawable/ic_event_black_24dp"
-            android:title="Reuniões" />
+            android:title="Reuniões"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_lista_chat"
             android:icon="@drawable/ic_chat_24dp"
-            android:title="Chat - DESAB" />
+            android:title="Chat - DESAB"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_lista_convites_festa_cliente"
+            android:icon="@drawable/ic_event_black_24dp"
+            android:title="Gerenciador de convites"
+            android:visible="false"/>
 
         <item
             android:id="@+id/nav_manage"

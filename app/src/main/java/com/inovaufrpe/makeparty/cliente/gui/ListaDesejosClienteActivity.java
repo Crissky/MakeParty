@@ -41,7 +41,6 @@ public class ListaDesejosClienteActivity extends AppCompatActivity {
             AnunciosOutroFragment frag = new AnunciosOutroFragment();
             //AnunciosFragment frag = new AnunciosFragment();
             frag.setArguments(getIntent().getExtras());
-            //getSupportFragmentManager().beginTransaction().add(R.id.container, frag).commit();
             getSupportFragmentManager().beginTransaction().replace(R.id.containerFAV, frag).commit();
         }
     }

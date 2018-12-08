@@ -96,7 +96,6 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         if (id == R.id.action_settings1) {
             return true;
         } else if (id == R.id.action_search) {
-        } else if (id == R.id.action_carrinho) {
         } else if (id == R.id.action_filtrar_por_regiao) {
         } else if (id == R.id.action_filtrar_por_preco) {
         }

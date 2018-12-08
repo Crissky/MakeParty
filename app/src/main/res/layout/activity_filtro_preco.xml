@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".cliente.gui.FIltroPrecoActivity"
+    android:orientation="vertical"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/materialup.appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/materialup.toolbar"
+        style="@style/ToolBarWithNavigationBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/label_filtro_preco"
+        app:titleTextColor="@color/colorFundo" />
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/textViewTituloFiltroPorPreco"
+        android:layout_marginTop="76dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="36dp"
+        android:text="Digite o intervalo que\n você quer pesquisar"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/textViewPrecoInicialFiltroPorPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preço inicial:"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
+        />
+    <EditText
+        android:id="@+id/editTextPrecoInicialFiltroPorPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginRight="76dp"
+        android:hint="@string/edit_text_preco_inicial_filtro_por_preco"
+        android:ems="10"
+         />
+    <TextView
+        android:id="@+id/textViewPrecoFinalFiltroPorPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preço final:"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
+        />
+    <EditText
+        android:id="@+id/editTextPrecoFinalFiltroPorPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginRight="76dp"
+        android:hint="@string/edit_text_preco_final_filtro_por_preco"
+        android:ems="10"
+        />
+    <Button
+        android:id="@+id/btBuscarAnuncio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/text_buscar_anuncios"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center_horizontal"/>
+
+
+
+
+
+
+</LinearLayout>

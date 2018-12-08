@@ -25,6 +25,8 @@ import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
 import com.inovaufrpe.makeparty.cliente.servico.ClienteService;
 import com.inovaufrpe.makeparty.fornecedor.servico.FornecedorService;
+import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
+import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.SDCardUtils;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.AnuncioAdapter;
 import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
@@ -39,7 +41,9 @@ import com.squareup.otto.Subscribe;
 
 import org.json.JSONException;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +59,8 @@ public class AnunciosOutroFragment extends BaseFragment {
     public static AnunciosOutroFragment newInstance(String tipo) {
         Bundle args = new Bundle();
         args.putString("tipo", tipo);
-        Log.d("tipoRecebido",tipo);
-        //D/gralloc_ranchu: gralloc_unregister_buffer: exiting HostConnection (is buffer-handling thread)
-        Log.i("tipoOuuu",tipo);
+        Log.d("tipoRecebido", tipo);
+        Log.i("tipoOuuu", tipo);
         AnunciosOutroFragment f = new AnunciosOutroFragment();
         f.setArguments(args);
         return f;
@@ -69,8 +72,8 @@ public class AnunciosOutroFragment extends BaseFragment {
         if (getArguments() != null) {
             // Lê o tipo dos argumentos.
             this.tipo = getArguments().getString("tipo");
-            Log.i("oxente",getArguments().getString("tipo"));
-        }else{
+            Log.i("oxente", getArguments().getString("tipo"));
+        } else {
             //POR ENQ AQ TA FESTA VIU, MAS TEM Q MUDARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR ,
             this.tipo = "festa";
         }
@@ -97,11 +100,13 @@ public class AnunciosOutroFragment extends BaseFragment {
 
         return view;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         taskAnuncios(false);
     }
+
     // Task para buscar os ads
     private class GetAnunciosTask implements TaskListener<List> {
         private boolean refresh;
@@ -117,6 +122,7 @@ public class AnunciosOutroFragment extends BaseFragment {
             return AnuncioEmComumService.getAnunciosByTipo(tipo);
             // Busca os anuncios em background (Thread)
         }
+
         @Override
         public void updateView(List ads) {
             if (ads != null) {
@@ -126,11 +132,17 @@ public class AnunciosOutroFragment extends BaseFragment {
                 recyclerView.setAdapter(new AnuncioAdapter(getContext(), ads, onClickAnuncio()));
             }
         }
+
         @Override
         public void onError(Exception e) {
             // Qualquer exceção lançada no método execute vai cair aqui.
-            alert("Ocorreu algum erro ao buscar os dados.");
+            if (e instanceof SocketTimeoutException) {
+                alert(getString(R.string.msg_erro_io_timeout));
+            } else {
+                alert(getString(R.string.msg_error_io));
+            }
         }
+
         @Override
         public void onCancelled(String s) {
         }
@@ -206,17 +218,21 @@ public class AnunciosOutroFragment extends BaseFragment {
             }
         };
     }
+
     private void taskAnuncios(boolean pullToRefresh) {
         // Busca os carros: Dispara a Task
         startTask("ads", new GetAnunciosTask(pullToRefresh), pullToRefresh ? R.id.swipeToRefresh : R.id.progress);
     }
+
     // Atualiza o título da action bar (CAB)
     private void updateActionModeTitle() {
         if (actionMode != null) {
             actionMode.setTitle("Selecione os anúncios.");
             actionMode.setSubtitle(null);
             List<Ads> selectedAds = getSelectedAnuncios();
-            if (selectedAds.size() == 1) {
+            if (selectedAds.size() == 0) {
+                actionMode.finish();
+            } else if (selectedAds.size() == 1) {
                 actionMode.setSubtitle("1 anuncio selecionado");
             } else if (selectedAds.size() > 1) {
                 actionMode.setSubtitle(selectedAds.size() + " anúncios selecionados");
@@ -224,6 +240,7 @@ public class AnunciosOutroFragment extends BaseFragment {
             updateShareIntent(selectedAds);
         }
     }
+
     // Atualiza a share intent com os ads selecionados
     private void updateShareIntent(List<Ads> selectedAds) {
         if (shareIntent != null) {
@@ -231,6 +248,7 @@ public class AnunciosOutroFragment extends BaseFragment {
             shareIntent.putExtra(Intent.EXTRA_TEXT, "Anúncios: " + selectedAds);
         }
     }
+
     // Retorna a lista de ads selecionados
     private List<Ads> getSelectedAnuncios() {
         List<Ads> list = new ArrayList<Ads>();
@@ -251,14 +269,15 @@ public class AnunciosOutroFragment extends BaseFragment {
                 inflater.inflate(R.menu.menu_selecao, menu);
                 telaAtualIconesVisivelOuNaoMenuSelecao(menu);
                 MenuItem shareItem = menu.findItem(R.id.action_share);
-                //ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-//                shareIntent = new Intent(Intent.ACTION_SEND);
-//                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-//                shareIntent.setType("text/plain");
-//                share.setShareIntent(shareIntent);
+               /* ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+                shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                shareIntent.setType("text/plain");
+                share.setShareIntent(shareIntent);*/
 
                 return true;
             }
+
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
                 return true;
@@ -272,7 +291,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                         @Override
                         public void metodoSimAoDialog() {
                             if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")) {
-                                chamandoServicoAddListaDesejo(selectedAds);
+                                startTask("ads", new PostOuDeleteTask(selectedAds,"post"));
                             }
                         }
                     });
@@ -280,7 +299,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                     SimOuNaoDialog.show(getFragmentManager(), "Deseja mesmo excluir esses anúncios da sua lista?", new SimOuNaoDialog.Callback() {
                         @Override
                         public void metodoSimAoDialog() {
-                            chamandoServicoExcluirLista(selectedAds);
+                            startTask("ads", new PostOuDeleteTask(selectedAds,"delete"));
                         }
                     });
                 } else if ((item.getItemId() == R.id.action_share)) {
@@ -291,6 +310,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                 mode.finish();
                 return true;
             }
+
             @Override
             public void onDestroyActionMode(ActionMode mode) {
                 // Limpa o estado
@@ -303,6 +323,7 @@ public class AnunciosOutroFragment extends BaseFragment {
             }
         };
     }
+
     private void telaAtualIconesVisivelOuNaoMenuSelecao(Menu menuSelecao) {
         if (SessaoApplication.getInstance().getTelaAtual().equals(TelaInicialClienteActivity.class)) {
             menuSelecao.findItem(R.id.action_delete_item_lista_finalm).setVisible(false);
@@ -311,26 +332,6 @@ public class AnunciosOutroFragment extends BaseFragment {
             menuSelecao.findItem(R.id.action_delete_item_lista_finalm).setVisible(true);
             menuSelecao.findItem(R.id.action_add_lista_desejo_finalm).setVisible(false);
         }
-    }
-    private void chamandoServicoAddListaDesejo(List<Ads> selectedAds){
-            try {
-                AnuncioEmComumService.addItensLista(selectedAds);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            snack(recyclerView, "Anúncios adicionados na lista com sucesso.");
-    }
-    private void chamandoServicoExcluirLista(List<Ads> selectedAds){
-        try {
-            AnuncioEmComumService.deleteItensLista(selectedAds);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        snack(recyclerView, "Anúncios excluídos da lista com sucesso.");
     }
 
     // Task para fazer o download
@@ -349,13 +350,14 @@ public class AnunciosOutroFragment extends BaseFragment {
             if (selectedAds != null) {
                 for (Ads c : selectedAds) {
                     // Faz o download da foto do anuncio para arquivo
-                    //String url = c.urlFoto;
-                    //String fileName = url.substring(url.lastIndexOf("/"));
+                   // String url = c.urlFoto;
+                    String url="http://i.imgur.com/DvpvklR.png";
+                    String fileName = url.substring(url.lastIndexOf("/"));
                     // Cria o arquivo no SD card
-                    //File file = SDCardUtils.getPrivateFile(getContext(), "anuncios", fileName);
-                    //IOUtils.downloadToFile(c.urlFoto, file);
+                    File file = SDCardUtils.getPrivateFile(getContext(), "anuncios", fileName);
+                    IOUtils.downloadToFile(url,file);
                     // Salva a Uri para compartilhar a foto
-                    //imageUris.add(Uri.fromFile(file));
+                    imageUris.add(Uri.fromFile(file));
                 }
             }
             return null;
@@ -383,4 +385,56 @@ public class AnunciosOutroFragment extends BaseFragment {
         public void onCancelled(String s) {
         }
     }
+
+    private class PostOuDeleteTask implements TaskListener<List> {
+        private final List<Ads> selectedAds;
+        private String tipoReq="";
+
+        public PostOuDeleteTask(List<Ads> selectedAds,String tipoReq) {
+            this.selectedAds = selectedAds;
+            this.tipoReq=tipoReq;
+        }
+
+        @Override
+        public List execute() throws Exception {
+            if (selectedAds != null) {
+                Log.d("INTERESSANTE", tipoReq);
+                if (tipoReq.equals("post")){
+                    AnuncioEmComumService.addItensLista(selectedAds);
+                    snack(recyclerView, "Anúncios adicionados na lista de desejo com sucesso.");
+                }else if(tipoReq.equals("delete")){
+                    //AnuncioEmComumService.deleteItensLista(selectedAds);
+                    snack(recyclerView, "Anúncios excluídos da lista com sucesso.");
+                }
+                //Log.d("tiporetornado",tipo);
+                return AnuncioEmComumService.getAnunciosByTipo(tipo);
+                // Busca os anuncios em background (Thread)
+            }
+            return null;
+        }
+        @Override
+        public void updateView(List ads) {
+            if (ads != null) {
+                // Salva a lista de anuncios no atributo da classe
+                AnunciosOutroFragment.this.ads = ads;
+                // Atualiza a view na UI Thread
+                recyclerView.setAdapter(new AnuncioAdapter(getContext(), ads, onClickAnuncio()));
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+            // Qualquer exceção lançada no método execute vai cair aqui.
+            if (e instanceof SocketTimeoutException) {
+                alert(getString(R.string.msg_erro_io_timeout));
+            } else {
+                alert(getString(R.string.msg_error_io));
+            }
+        }
+
+        @Override
+        public void onCancelled(String s) {
+        }
+    }
 }
+

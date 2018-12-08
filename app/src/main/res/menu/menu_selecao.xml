@@ -29,6 +29,7 @@
         android:icon="@drawable/ic_menu_send_white"
         android:orderInCategory="308"
         app:itemIconTint="@color/colorWhite"
-        android:title="Send" />
+        android:title="Send"
+        android:visible="false"/>
 
 </menu>

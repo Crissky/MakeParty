@@ -109,6 +109,10 @@ public class AnuncioEmComumService {
         try {
             JSONObject objetoJson = new JSONObject(json);
             JSONArray jsonAnuncios = objetoJson.getJSONArray("ads");
+            if(SessaoApplication.getInstance().getTelaAtual().equals(ListaDesejosClienteActivity.class)){
+                jsonAnuncios=objetoJson.getJSONArray("wishlists");
+                //depois pedir p edson deixar como ads msm o array la
+            }
 
             //Lê o array de ads do Json
             //JSONArray jsonAnuncios = new JSONArray(json);
