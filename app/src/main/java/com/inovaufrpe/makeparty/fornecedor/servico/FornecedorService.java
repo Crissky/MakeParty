@@ -110,29 +110,22 @@ public class FornecedorService {
         return listaAnunciosFornecedor;
     }
     public static boolean deleteItensListaFornecedor(List<Ads> selectedAds,String tokenOuId) throws IOException, JSONException {
-        ConectarServidor http = new ConectarServidor();
-        http.setContentType("application/json; charset=utf-8");
+        String url = URL_APAGAR_ANUNCIO;
+        //de um por um( id do anuncio + token)
+        String token = "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
         for (Ads c : selectedAds) {
-            // URL para excluir o anúncio
-            //verificar como faz a exclusão do anúncio, n entendi se era pela url ou mandando msg p ele só
-            //Refazer metodo e tbm se é p apagar de um em um, ou mando a lista td
-            //mandar tbm token
-            String url = URL_APAGAR_ANUNCIO + c._id;
-            Log.d(TAG, "Delete anuncio: " + url);
-            // Request HTTP DELETE
-            String json = http.doDelete(url);
-            Log.d(TAG, "JSON delete: " + json);
-            // Parser do JSON
+            String jsonAMao = "{" + "\"_id\":" + "\"" + c.get_id() + "\"" + token;
+            Log.d(TAG, "JSON a mao: " + jsonAMao);
+            String respostaServidorAoExcluir = ConectarServidor.post(url, jsonAMao);///NAOOOOOO É POST, É DELETEEEE
+            Log.d(TAG, "Resposta servidor ao excluir da lista: " + respostaServidorAoExcluir);
             Gson gson = new Gson();
-            Response response = gson.fromJson(json, Response.class);
+            Response response = gson.fromJson(respostaServidorAoExcluir, Response.class);
             if (!response.isOk()) {
-                throw new IOException("Erro ao excluir: " + response.getMsg());
+                throw new IOException("Erro ao excluir da lista " + response.getMsg());
             }
         }
-        // A fazer
         return true;
+
     }
-
-
 
 }

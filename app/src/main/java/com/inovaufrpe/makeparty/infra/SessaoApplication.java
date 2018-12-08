@@ -59,11 +59,11 @@ public class SessaoApplication extends Application {
         this.tipoDeUserLogado = tipoDeUserLogado;
     }
 
-    public String get_id_user() {
+    public String getIdUser() {
         return _id;
     }
 
-    public void set_id_user(String _id) {
+    public void setIdUser(String _id) {
         this._id = _id;
     }
 
@@ -111,6 +111,11 @@ public class SessaoApplication extends Application {
     public void onTerminate() {
         reset();
         super.onTerminate();
+        SessaoApplication.getInstance().setTipoDeUserLogado("null");
+        SessaoApplication.getInstance().setTokenUser("null");
+        SessaoApplication.getInstance().setIdUser("null");
+        SessaoApplication.getInstance().setHoraRecebidoToken(null);
+        SessaoApplication.getInstance().setTelaAnterior(null);
         Log.d(TAG, " SessaoApplication.onTerminate()");
     }
 

@@ -59,8 +59,8 @@ public class AnunciosOutroFragment extends BaseFragment {
     public static AnunciosOutroFragment newInstance(String tipo) {
         Bundle args = new Bundle();
         args.putString("tipo", tipo);
-        Log.d("tipoRecebido", tipo);
         Log.i("tipoOuuu", tipo);
+        Log.i("Args éee", String.valueOf(args));
         AnunciosOutroFragment f = new AnunciosOutroFragment();
         f.setArguments(args);
         return f;
@@ -68,7 +68,9 @@ public class AnunciosOutroFragment extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.i("arg no on createeeeeee", String.valueOf(getArguments()));
         super.onCreate(savedInstanceState);
+        Log.i("arg no on create", String.valueOf(getArguments()));
         if (getArguments() != null) {
             // Lê o tipo dos argumentos.
             this.tipo = getArguments().getString("tipo");
@@ -403,7 +405,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                     AnuncioEmComumService.addItensLista(selectedAds);
                     snack(recyclerView, "Anúncios adicionados na lista de desejo com sucesso.");
                 }else if(tipoReq.equals("delete")){
-                    //AnuncioEmComumService.deleteItensLista(selectedAds);
+                    AnuncioEmComumService.deleteItensLista(selectedAds);
                     snack(recyclerView, "Anúncios excluídos da lista com sucesso.");
                 }
                 //Log.d("tiporetornado",tipo);

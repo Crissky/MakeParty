@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
+import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
+import com.inovaufrpe.makeparty.fornecedor.gui.TelaInicialFornecedorActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 public class EscolhaTipoUserActivity extends AppCompatActivity {
@@ -16,6 +18,14 @@ public class EscolhaTipoUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escolha_tipo_user);
         SessaoApplication.getInstance().setTelaAtual(EscolhaTipoUserActivity.class);
+        bloqueandoTelaClienteParaFornecedorELoginNovoClienteSemSair();
+    }
+    private void bloqueandoTelaClienteParaFornecedorELoginNovoClienteSemSair(){
+        if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
+            this.mudarTela(TelaInicialFornecedorActivity.class);
+        }else if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
+            this.mudarTela(TelaInicialClienteActivity.class);
+        }
     }
 
     private void mudarTela(Class proximaTela){

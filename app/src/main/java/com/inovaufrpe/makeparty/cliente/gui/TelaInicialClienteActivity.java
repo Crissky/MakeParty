@@ -60,7 +60,6 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         navigationView.setNavigationItemSelectedListener(this);
     }
     private void criarFragment(Bundle savedInstanceState) {
-        //getSupportActionBar().setTitle(getString(getIntent().getIntExtra("tipo",6)));
         if (savedInstanceState == null) {
             AnunciosOutroFragment frag = new AnunciosOutroFragment();
             //AnunciosFragment frag = new AnunciosFragment();
