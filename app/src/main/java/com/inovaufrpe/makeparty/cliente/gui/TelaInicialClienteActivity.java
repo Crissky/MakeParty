@@ -195,7 +195,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
     public void irParaTelaEntrarOuCadastrar(){
         this.mudarTela(EntrarOuCadastrarActivity.class);
 
-    }}
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
