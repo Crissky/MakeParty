@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
+import com.inovaufrpe.makeparty.user.gui.fragment.AnunciosOutroFragment;
 
 public class ListaDesejosClienteActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui.dialog;
+package com.inovaufrpe.makeparty.user.gui.dialog;
 
 
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 
 public class ItemAtualizandoPerfilDialog extends DialogFragment {
     //private Callback callback;
-    //private Usuario usuario;
+    //private User usuario;
     //private TextView nome;
 
     //Interface para retornar o resultado

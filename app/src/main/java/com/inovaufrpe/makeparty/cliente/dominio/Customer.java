@@ -1,6 +1,6 @@
 package com.inovaufrpe.makeparty.cliente.dominio;
 
-import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
+import com.inovaufrpe.makeparty.user.dominio.User;
 
 public class Customer {
 
@@ -8,16 +8,16 @@ public class Customer {
     private String cpf;
     private String birthdate;
     private String phone;
-    private Usuario usuario;
+    private User user;
     //private Byte photo;
     //private String photo;
 
-    public Customer(Usuario usuario, String name, String cpf, String birthdate, String phone) {
+    public Customer(User user, String name, String cpf, String birthdate, String phone) {
         this.name = name;
         this.cpf = cpf;
         this.birthdate = birthdate;
         this.phone = phone;
-        this.usuario = usuario;
+        this.user = user;
     }
 
     public String getName() {
@@ -52,12 +52,12 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     //public String getPhotos() {

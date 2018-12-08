@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 public class DispDiaSelecPeloClienteActivity extends AppCompatActivity {

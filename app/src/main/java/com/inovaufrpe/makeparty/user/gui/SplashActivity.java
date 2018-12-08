@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui;
+package com.inovaufrpe.makeparty.user.gui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Bundle;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.usuario.gui.EscolhaTipoUserActivity;
 
 
 public class SplashActivity extends Activity implements Runnable {

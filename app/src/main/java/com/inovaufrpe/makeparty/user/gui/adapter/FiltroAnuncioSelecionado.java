@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui.adapter;
+package com.inovaufrpe.makeparty.user.gui.adapter;
 
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 

@@ -3,7 +3,7 @@ package com.inovaufrpe.makeparty.fornecedor.dominio;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.inovaufrpe.makeparty.usuario.dominio.Address;
+import com.inovaufrpe.makeparty.user.dominio.Address;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui;
+package com.inovaufrpe.makeparty.user.gui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,10 +14,10 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
 import com.inovaufrpe.makeparty.fornecedor.gui.TelaInicialFornecedorActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
+import com.inovaufrpe.makeparty.user.dominio.User;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.ServicoDownload;
-import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
+import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
 import java.text.SimpleDateFormat;
 
@@ -98,10 +98,10 @@ public class LoginActivity extends AppCompatActivity{
         Gson gson = new Gson();
         //SessionApi sessionApi = gson.fromJson(Sessao.instance.getResposta(), SessionApi.class);
         //Sessao.instance.setSession(sessionApi);
-       // setMApi(sessionApi.getUsuario());
+       // setMApi(sessionApi.getUser());
     }
 
-    /*private void setMApi(final Usuario usuario) throws InterruptedException {
+    /*private void setMApi(final User usuario) throws InterruptedException {
         final ServicoHttpM servicoHttpM = new ServicoHttpM();
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private String setarUsuario(String email, String senha){
-        Usuario usuario = new Usuario();
+        User usuario = new User();
         usuario.setPassword(senha);
         usuario.setEmail(email);
         Gson gson = new Gson();

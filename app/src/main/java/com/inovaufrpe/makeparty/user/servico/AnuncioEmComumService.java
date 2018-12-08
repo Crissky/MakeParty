@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.servico;
+package com.inovaufrpe.makeparty.user.servico;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,7 +13,6 @@ import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
 import com.inovaufrpe.makeparty.cliente.servico.ClienteService;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
 import com.inovaufrpe.makeparty.fornecedor.servico.FornecedorService;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
@@ -22,7 +21,7 @@ import com.inovaufrpe.makeparty.infra.ResponseWithURL;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.FileUtils;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
-import com.inovaufrpe.makeparty.usuario.dominio.Data;
+import com.inovaufrpe.makeparty.user.dominio.Data;
 
 import org.json.JSONArray;
 import org.json.JSONException;

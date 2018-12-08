@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui.fragment;
+package com.inovaufrpe.makeparty.user.gui.fragment;
 
 
 import android.content.Intent;
@@ -22,25 +22,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.infra.ConectarServidor;
-import com.inovaufrpe.makeparty.infra.Response;
-import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
-import com.inovaufrpe.makeparty.usuario.gui.adapter.AnuncioAdapter;
+import com.inovaufrpe.makeparty.user.gui.adapter.AnuncioAdapter;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.event.BusEvent;
-import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
+import com.inovaufrpe.makeparty.user.gui.event.BusEvent;
+import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.fragment.BaseFragment;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.task.TaskListener;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.AndroidUtils;
 import com.squareup.otto.Subscribe;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;

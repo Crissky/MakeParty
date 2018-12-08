@@ -1,16 +1,14 @@
-package com.inovaufrpe.makeparty.usuario.gui.fragment;
+package com.inovaufrpe.makeparty.user.gui.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,28 +19,22 @@ import android.view.ViewGroup;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
-import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
-import com.inovaufrpe.makeparty.cliente.servico.ClienteService;
-import com.inovaufrpe.makeparty.fornecedor.servico.FornecedorService;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.SDCardUtils;
-import com.inovaufrpe.makeparty.usuario.gui.adapter.AnuncioAdapter;
-import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
-import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.user.gui.adapter.AnuncioAdapter;
+import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.gui.EditarAnuncioActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
+import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.fragment.BaseFragment;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.task.TaskListener;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.AndroidUtils;
 import com.squareup.otto.Subscribe;
 
-import org.json.JSONException;
-
 import java.io.File;
-import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;

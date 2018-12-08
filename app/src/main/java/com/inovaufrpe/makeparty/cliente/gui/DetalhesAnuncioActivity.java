@@ -17,16 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
-import com.inovaufrpe.makeparty.usuario.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
-import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
-import com.inovaufrpe.makeparty.usuario.gui.dialog.CalendarioDialog;
-import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.user.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
+import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.user.gui.dialog.CalendarioDialog;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;
-import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
+import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
+import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 
 import java.text.DateFormat;
 import java.util.Calendar;

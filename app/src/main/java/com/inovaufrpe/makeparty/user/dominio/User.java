@@ -1,15 +1,15 @@
-package com.inovaufrpe.makeparty.usuario.dominio;
+package com.inovaufrpe.makeparty.user.dominio;
 
 import java.io.Serializable;
 
-public class Usuario implements Serializable {
+public class User implements Serializable {
     private String _id;
     private String email;
     private String password;
 
 
-    public Usuario(){}
-    public Usuario(String email, String senha){
+    public User(){}
+    public User(String email, String senha){
         setEmail(email);
         setPassword(senha);
     }
@@ -39,7 +39,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario[" +
+        return "User[" +
                 "_id='" + _id + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

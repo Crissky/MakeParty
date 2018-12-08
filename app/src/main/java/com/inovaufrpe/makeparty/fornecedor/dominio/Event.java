@@ -1,8 +1,6 @@
 package com.inovaufrpe.makeparty.fornecedor.dominio;
 
-import com.inovaufrpe.makeparty.usuario.dominio.Address;
-
-import java.util.Date;
+import com.inovaufrpe.makeparty.user.dominio.Address;
 
 public class Event {
 

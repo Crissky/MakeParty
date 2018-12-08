@@ -8,7 +8,7 @@ import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService;
+import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 
 import org.json.JSONException;
 
@@ -16,8 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService.conectarServidorGet;
-import static com.inovaufrpe.makeparty.usuario.servico.AnuncioEmComumService.getAnunciosByTipo;
+import static com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService.conectarServidorGet;
 
 public class FornecedorService {
 

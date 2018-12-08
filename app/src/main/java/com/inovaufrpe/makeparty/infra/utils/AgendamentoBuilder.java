@@ -3,7 +3,7 @@ package com.inovaufrpe.makeparty.infra.utils;
 import com.inovaufrpe.makeparty.cliente.dominio.Customer;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Agendamento;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
-import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
+import com.inovaufrpe.makeparty.user.dominio.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,7 +20,7 @@ public class AgendamentoBuilder {
         anuncio.setTitle("Buffet para festa infantil");
         for (int i = 0; i < 4; i++) {
             agendamento = new Agendamento();
-            agendamento.setCustomer(new Customer(new Usuario(), nomes[i], "", "", ""));
+            agendamento.setCustomer(new Customer(new User(), nomes[i], "", "", ""));
             agendamento.setAnuncio(anuncio);
             agendamento.setSituacao("Confirmado");
             List<Date> list1;

@@ -10,8 +10,7 @@ import android.widget.ListView;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
-import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
+import com.inovaufrpe.makeparty.user.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 import java.util.ArrayList;

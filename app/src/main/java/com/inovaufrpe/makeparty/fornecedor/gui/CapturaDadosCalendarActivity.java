@@ -2,7 +2,6 @@ package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.inovaufrpe.makeparty.fornecedor.dominio.Agendamento;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.AgendamentosFornecedorAdapter;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.AgendamentoBuilder;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

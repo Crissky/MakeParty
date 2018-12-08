@@ -14,13 +14,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.usuario.dominio.Address;
-import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.user.dominio.Address;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Mask;
-import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
+import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
 import java.util.ArrayList;
 import java.util.Collections;

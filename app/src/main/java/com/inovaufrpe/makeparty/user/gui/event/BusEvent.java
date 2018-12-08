@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui.event;
+package com.inovaufrpe.makeparty.user.gui.event;
 
 /**
  * Created by rlech on 10/5/2015.

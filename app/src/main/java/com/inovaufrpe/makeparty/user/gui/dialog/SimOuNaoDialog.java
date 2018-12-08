@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui.dialog;
+package com.inovaufrpe.makeparty.user.gui.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

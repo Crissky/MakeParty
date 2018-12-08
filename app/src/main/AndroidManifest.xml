@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Abaixo para fazer a leitura dos dados do SD card -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- To auto-complete the email text field in the login form with the usuario's emails -->
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -46,39 +46,39 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".usuario.gui.SplashActivity">
+        <activity android:name=".user.gui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".usuario.gui.EscolhaTipoUserActivity" />
+        <activity android:name=".user.gui.EscolhaTipoUserActivity" />
         <activity
-            android:name=".usuario.gui.CadastroActivity"
+            android:name=".user.gui.CadastroActivity"
             android:label="@string/label_cadastro"
-            android:parentActivityName=".usuario.gui.EntrarOuCadastrarActivity">
+            android:parentActivityName=".user.gui.EntrarOuCadastrarActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".usuario.gui.EntrarOuCadastrarActivity" />
+                android:value=".user.gui.EntrarOuCadastrarActivity" />
         </activity>
         <activity android:name=".fornecedor.gui.TelaInicialFornecedorActivity" />
         <activity android:name=".cliente.gui.TelaInicialClienteActivity" />
         <activity
-            android:name=".usuario.gui.EntrarOuCadastrarActivity"
+            android:name=".user.gui.EntrarOuCadastrarActivity"
             android:label="@string/label_entrar_ou_cadastrar"
-            android:parentActivityName=".usuario.gui.EscolhaTipoUserActivity">
+            android:parentActivityName=".user.gui.EscolhaTipoUserActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".usuario.gui.EscolhaTipoUserActivity" />
+                android:value=".user.gui.EscolhaTipoUserActivity" />
         </activity>
         <activity
-            android:name=".usuario.gui.LoginActivity"
+            android:name=".user.gui.LoginActivity"
             android:label="@string/label_login"
-            android:parentActivityName=".usuario.gui.EntrarOuCadastrarActivity">
+            android:parentActivityName=".user.gui.EntrarOuCadastrarActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".usuario.gui.EntrarOuCadastrarActivity" />
+                android:value=".user.gui.EntrarOuCadastrarActivity" />
         </activity>
         <activity android:name=".cliente.gui.FiltroInicialActivity" />
         <activity android:name=".cliente.gui.MostraGPSActivity" />

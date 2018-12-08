@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui;
+package com.inovaufrpe.makeparty.user.gui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,9 +17,9 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.dominio.Customer;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
+import com.inovaufrpe.makeparty.user.dominio.User;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
-import com.inovaufrpe.makeparty.usuario.servico.ValidacaoGuiRapida;
+import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 import com.inovaufrpe.makeparty.infra.utils.Mask;
 
 import java.io.IOException;
@@ -223,8 +223,8 @@ public class CadastroActivity extends AppCompatActivity {
         String telefone = edtTelefone.getText().toString().trim().replace(".","").replace("-","").replace("(","").replace(")","");
         String cnpj = edtCnpj.getText().toString().trim().replace(".","").replace("-","").replace("/","");
 
-        Usuario usuario = new Usuario(email, senha);
-        Owner owner = new Owner(usuario, razaoSocial,cnpj,telefone);
+        User user = new User(email, senha);
+        Owner owner = new Owner(user, razaoSocial,cnpj,telefone);
         //FornecedorService fornecedor = new FornecedorService();
         //fornecedor.criarFornecedor(owner);
         Gson gson = new Gson();
@@ -239,8 +239,8 @@ public class CadastroActivity extends AppCompatActivity {
         String cpf = edtCpf.getText().toString().trim().replace(".","").replace("-","");
         String dataNasc = edtNasc.getText().toString();
 
-        Usuario usuario = new Usuario(email, senha);
-        Customer customer = new Customer(usuario,nome,cpf,validacaoGuiRapida.dataFormatoBanco(dataNasc),telefone);
+        User user = new User(email, senha);
+        Customer customer = new Customer(user,nome,cpf,validacaoGuiRapida.dataFormatoBanco(dataNasc),telefone);
 
         Gson gson = new Gson();
         String pf = gson.toJson(customer);

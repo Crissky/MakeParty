@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
+import com.inovaufrpe.makeparty.user.dominio.User;
 import com.squareup.otto.Bus;
 
 import java.util.Date;
@@ -20,7 +20,7 @@ public class SessaoApplication extends Application {
     private String tipoDeUserLogado = "null";
     private String token = "null";
     private String _id = "null";
-    private Usuario usuario;
+    private User user;
     private Date horaRecebidoToken = null;
     private Class telaAtual =null;
     private Class telaAnterior =null;
@@ -67,12 +67,12 @@ public class SessaoApplication extends Application {
         this._id = _id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTokenUser() {

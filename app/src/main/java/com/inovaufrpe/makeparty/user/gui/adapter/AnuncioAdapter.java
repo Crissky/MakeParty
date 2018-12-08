@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.gui.adapter;
+package com.inovaufrpe.makeparty.user.gui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.ImageUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

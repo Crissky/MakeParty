@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.usuario.dominio;
+package com.inovaufrpe.makeparty.user.dominio;
 
 import android.support.annotation.NonNull;
 

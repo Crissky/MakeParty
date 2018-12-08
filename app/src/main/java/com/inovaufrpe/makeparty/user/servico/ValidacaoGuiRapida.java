@@ -1,6 +1,5 @@
-package com.inovaufrpe.makeparty.usuario.servico;
+package com.inovaufrpe.makeparty.user.servico;
 
-import android.text.TextUtils;
 import android.util.Patterns;
 
 import java.text.SimpleDateFormat;

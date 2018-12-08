@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
-import com.inovaufrpe.makeparty.usuario.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 public class AvaliacaoNotaActivity extends AppCompatActivity {

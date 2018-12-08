@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
-import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
 public class PlanoEscolhaActivity extends AppCompatActivity {
     private ImageView versaoGratuita, planoBronzeMensal,planoBronzeAnual,planoPrataMensal,planoPrataAnual;

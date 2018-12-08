@@ -16,20 +16,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
-import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
-import com.inovaufrpe.makeparty.usuario.gui.EscolhaTipoUserActivity;
-import com.inovaufrpe.makeparty.usuario.gui.LoginActivity;
-import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
-import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
-import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosOutroFragment;
+import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.user.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;
+import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
 
 public class TelaInicialClienteActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private BottomNavigationView bottomNavigationView;
@@ -77,7 +73,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
             //nomeUsuario = findViewById(R.id.nomeView);
             //email = findViewById(R.id.emailView);
             //nomeUsuario.setText(SessaoApplication.instance.getPessoa().getNome());
-            //email.setText(SessaoApplication.instance.getPessoa().getUsuario().getEmail());
+            //email.setText(SessaoApplication.instance.getPessoa().getUser().getEmail());
         }
 
         getMenuInflater().inflate(R.menu.menu_main, menu);

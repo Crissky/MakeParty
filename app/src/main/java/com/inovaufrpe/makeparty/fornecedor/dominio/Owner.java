@@ -1,7 +1,7 @@
 package com.inovaufrpe.makeparty.fornecedor.dominio;
 
 
-import com.inovaufrpe.makeparty.usuario.dominio.Usuario;
+import com.inovaufrpe.makeparty.user.dominio.User;
 
 public class Owner {
 
@@ -10,7 +10,7 @@ public class Owner {
     private String authorization;
     private String photo;
     //private Byte photo;
-    private Usuario usuario;
+    private User user;
     private String phone;
     private Plano plan;
     private Schedule schedule;
@@ -18,10 +18,10 @@ public class Owner {
 
     public Owner() {
     }
-    public Owner(Usuario usuario, String socialname, String cnpj, String phone) {
+    public Owner(User user, String socialname, String cnpj, String phone) {
         this.socialname = socialname;
         this.cnpj = cnpj;
-        this.usuario = usuario;
+        this.user = user;
         this.phone = phone;
     }
 
@@ -57,12 +57,12 @@ public class Owner {
         this.photo = photo;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getPhone() {
@@ -97,7 +97,7 @@ public class Owner {
                 ", cnpj='" + cnpj + '\'' +
                 ", authorization='" + authorization + '\'' +
                 ", photo='" + photo + '\'' +
-                ", usuario=" + usuario +
+                ", user=" + user +
                 ", phone='" + phone + '\'' +
                 ", plan=" + plan +
                 ", schedule=" + schedule +

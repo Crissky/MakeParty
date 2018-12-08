@@ -17,13 +17,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
-import com.inovaufrpe.makeparty.fornecedor.gui.CriarAnuncioActivity;
-import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.utils.Permissoes;
-import com.inovaufrpe.makeparty.usuario.gui.EntrarOuCadastrarActivity;
-import com.inovaufrpe.makeparty.usuario.gui.EscolhaTipoUserActivity;
-import com.inovaufrpe.makeparty.usuario.gui.dialog.SimOuNaoDialog;
+import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
+import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 public class AtualizarPerfilClienteActivity extends AppCompatActivity {
