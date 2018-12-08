@@ -38,11 +38,11 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial_cliente);
+        SessaoApplication.getInstance().setTelaAtual(TelaInicialClienteActivity.class);
         acoesReferentesAoBottomNavigation();
         toolbarComMenuNavAbreEFecha();
         viewDoMenuNavListaClicavel();
         criarFragment(savedInstanceState);
-        SessaoApplication.getInstance().setTelaAtual(TelaInicialClienteActivity.class);
 
 
     }

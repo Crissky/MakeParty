@@ -23,9 +23,9 @@ public class DispDiaSelecPeloClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disp_dia_selec_pelo_cliente);
+        SessaoApplication.getInstance().setTelaAtual(DispDiaSelecPeloClienteActivity.class);
         setUpToolbar();
         procurandoItensView();
-        SessaoApplication.getInstance().setTelaAtual(DispDiaSelecPeloClienteActivity.class);
     }
     protected void setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

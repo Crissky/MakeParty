@@ -17,9 +17,9 @@ public class ListaDesejosClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_desejos_cliente);
+        SessaoApplication.getInstance().setTelaAtual(ListaDesejosClienteActivity.class);
         criarFragment(savedInstanceState);
         setUpToolbar();
-        SessaoApplication.getInstance().setTelaAtual(ListaDesejosClienteActivity.class);
     }
     protected void setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

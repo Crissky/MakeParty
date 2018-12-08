@@ -123,7 +123,7 @@ public class ClienteService{
         for (Ads c : selectedAds) {
             String jsonAMao = "{" + "\"ad\":" + "\"" + c.get_id() + "\"" + token;
             Log.d(TAG, "JSON a mao: " + jsonAMao);
-            String respostaServidorAoExcluir = ConectarServidor.post(url, jsonAMao);///NAOOOOOO É POST, É DELETEEEE
+            String respostaServidorAoExcluir = ConectarServidor.deleteDeJadiel(url, jsonAMao);///NAOOOOOO É POST, É DELETEEEE
             Log.d(TAG, "Resposta servidor ao excluir da lista: " + respostaServidorAoExcluir);
             Gson gson = new Gson();
             Response response = gson.fromJson(respostaServidorAoExcluir, Response.class);

@@ -155,7 +155,7 @@ public class ConectarServidor {
         return answer;
     }
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void sendPutTeste(String json, URL url) throws Exception {
+    public void sendPutTeste(URL url,String json) throws Exception {
 
         try {
 
@@ -304,7 +304,7 @@ public class ConectarServidor {
         return jsonResposta;
     }
 
-    private String deleteDeJadiel(String completeUrl, String body) {
+    public static String deleteDeJadiel(String completeUrl, String body) {
         String jsonResposta = null;
 
         try {
@@ -313,13 +313,13 @@ public class ConectarServidor {
 
             conexao.setRequestMethod("delete");
             conexao.addRequestProperty("Content-type", "application/json");
-            conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
+            //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
 
             conexao.setDoOutput(true);
             conexao.setDoInput(true);
 
             PrintStream printStream = new PrintStream(conexao.getOutputStream());
-            //printStream.println(strings[ZERO]);
+            printStream.println(body);
 
             conexao.connect();
 
@@ -340,7 +340,7 @@ public class ConectarServidor {
         }
 
         //usuarioService.setRespostaServidor(jsonResposta);
-
+        SessaoApplication.getInstance().setResposta(jsonResposta);
         return jsonResposta;
     }
 
