@@ -177,13 +177,17 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         this.mudarTela(AtualizarPerfilClienteActivity.class);
     }
     public void exibirMsgEAgirSeQuiserSairRealmente(){
-        SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja realmente sair da sua conta ?", new SimOuNaoDialog.Callback() {
-            @Override
-            public void metodoSimAoDialog() {
-                SessaoApplication.getInstance().onTerminate();
-                mudarTela(EscolhaTipoUserActivity.class);
-            }
-        });
+        if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")) {
+            SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja realmente sair da sua conta ?", new SimOuNaoDialog.Callback() {
+                @Override
+                public void metodoSimAoDialog() {
+                    SessaoApplication.getInstance().onTerminate();
+                    mudarTela(EscolhaTipoUserActivity.class);
+                }
+            });
+        }else{
+            mudarTela(EscolhaTipoUserActivity.class);
+        }
     }
     public void irParaTelaListaDeDesejos(){
         this.mudarTela(ListaDesejosClienteActivity.class);
@@ -198,8 +202,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
-            //exibirMsgEAgirSeQuiserSairRealmente();
+            exibirMsgEAgirSeQuiserSairRealmente();
         }
     }
 }

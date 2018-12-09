@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Adicionar event de horário"
+                android:text="@string/text_view_add_evento"
                 android:textSize="20sp"
                 android:layout_margin="28dp"/>
 
@@ -36,7 +36,11 @@
                 android:text="Data"
                 android:textSize="17sp"
                 android:layout_margin="15dp"/>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/text_view_tipo_evento_criado_forn"/>
             <RadioGroup
                 android:id="@+id/tipoGroup"
                 android:layout_width="match_parent"
@@ -46,11 +50,11 @@
                 android:layout_margin="15dp">
 
                 <RadioButton
-                    android:id="@+id/tipoEvento"
+                    android:id="@+id/RadioGrouptipoEventoCriarEventoForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Evento"
+                    android:text="@string/radio_button_evento"
                     android:checked="true"/>
 
                 <RadioButton
@@ -58,8 +62,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Indisponibilidade"/>
+                    android:text="@string/radio_button_indisp"/>
             </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/text_view_selecione_hor_criar_evento_forn"/>
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -70,18 +79,18 @@
                 android:layout_margin="15dp">
 
                 <RadioButton
-                    android:id="@+id/parteDia"
+                    android:id="@+id/RadioButtonParteDiaCriarEv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Parte do dia"
+                    android:text="@string/radio_button_parte_do_dia"
                     android:layout_weight="1"
                     android:checked="true"/>
 
                 <RadioButton
-                    android:id="@+id/todoDia"
+                    android:id="@+id/RadioButtonTodoDiaCriarEv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dia todo"
+                    android:text="@string/radio_button_dia_todo"
                     android:layout_weight="1"/>
 
             </RadioGroup>
@@ -102,7 +111,7 @@
                     android:orientation="horizontal"
                     android:weightSum="2">
                     <EditText
-                        android:id="@+id/horaInicio"
+                        android:id="@+id/editTextHoraInicioCriandoEvento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -113,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:text=":"/>
                     <EditText
-                        android:id="@+id/minInicio"
+                        android:id="@+id/editTextMinInicioCriandoEvento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -157,6 +166,12 @@
                         android:maxLength="2"/>
                 </LinearLayout>
             </LinearLayout>
+            <CheckBox
+                android:id="@+id/checkBoxPergCriarEventoHorFimOutroDia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/checkbox_perg_vai_ate_outro_dia"/>
 
             <LinearLayout
                 android:id="@+id/eventoLayout"
@@ -204,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginEnd="18dp"
-                android:inputType="text"/>
+                android:inputType="textMultiLine"/>
 
             <Button
                 android:id="@+id/criar"

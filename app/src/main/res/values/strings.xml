@@ -160,6 +160,14 @@
     <string name="edit_text_preco_inicial_filtro_por_preco">Digite o preço aqui</string>
     <string name="edit_text_preco_final_filtro_por_preco">Digite o preço aqui</string>
     <string name="text_buscar_anuncios">Buscar Anúncios</string>
+    <string name="checkbox_perg_vai_ate_outro_dia">Horário de fim é do outro dia(dia após esse)</string>
+    <string name="text_view_add_evento">Adicionar evento ou indisponibilidade</string>
+    <string name="text_view_tipo_evento_criado_forn">Selecione o tipo: </string>
+    <string name="text_view_selecione_hor_criar_evento_forn">Selecione o horário :</string>
+    <string name="radio_button_evento">Evento</string>
+    <string name="radio_button_indisp">Indisponibilidade</string>
+    <string name="radio_button_dia_todo">Dia todo</string>
+    <string name="radio_button_parte_do_dia">Parte do dia</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>

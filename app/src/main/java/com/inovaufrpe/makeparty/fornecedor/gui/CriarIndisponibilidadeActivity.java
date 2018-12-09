@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,16 +24,32 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
     private Button criar;
     private EditText obs, hInicio, mInicio, hFim, mFim, endereco, nomeCliente;
     private Date date = new Date(), dateInicio = new Date(), dateFim = new Date();
+    private CheckBox horFimAteOutroDia;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criar_indisponibilidade);
-
+        encontrandoViews();
+        Bundle bundle = getIntent().getExtras();
+        date.setTime(bundle.getLong("timeLong"));
+        data.setText(sdf.format(date));
+        tempoRadioGroupListener();
+        tipoRadioGroupListener();
+    }
+    private void encontrandoViews(){
         data = findViewById(R.id.data);
         group = findViewById(R.id.radioGroup);
         tipo = findViewById(R.id.tipoGroup);
+        obs = findViewById(R.id.obs);
+        hInicio = findViewById(R.id.editTextHoraInicioCriandoEvento);
+        hFim = findViewById(R.id.horaFim);
+        mInicio = findViewById(R.id.editTextMinInicioCriandoEvento);
+        mFim = findViewById(R.id.minFim);
+        endereco = findViewById(R.id.address);
+        nomeCliente = findViewById(R.id.nomeCliente);
+        horFimAteOutroDia = findViewById(R.id.checkBoxPergCriarEventoHorFimOutroDia);
         criar = findViewById(R.id.criar);
         criar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,30 +57,16 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
                 clickCriar();
             }
         });
-        obs = findViewById(R.id.obs);
-        hInicio = findViewById(R.id.horaInicio);
-        hFim = findViewById(R.id.horaFim);
-        mInicio = findViewById(R.id.minInicio);
-        mFim = findViewById(R.id.minFim);
-        endereco = findViewById(R.id.address);
-        nomeCliente = findViewById(R.id.nomeCliente);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
-        Bundle bundle = getIntent().getExtras();
-        date.setTime(bundle.getLong("timeLong"));
-        data.setText(sdf.format(date));
-        tempoRadioGroupListener();
-        tipoRadioGroupListener();
     }
-
     private void tempoRadioGroupListener(){
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.parteDia){
+                if (checkedId == R.id.RadioButtonParteDiaCriarEv){
                     findViewById(R.id.inicio).setVisibility(View.VISIBLE);
                     findViewById(R.id.fim).setVisibility(View.VISIBLE);
-                }else if (checkedId == R.id.todoDia){
+                }else if (checkedId == R.id.RadioButtonTodoDiaCriarEv){
                     findViewById(R.id.inicio).setVisibility(View.GONE);
                     findViewById(R.id.fim).setVisibility(View.GONE);
                 }
@@ -75,7 +78,7 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
         tipo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.tipoEvento){
+                if (checkedId == R.id.RadioGrouptipoEventoCriarEventoForn){
                     findViewById(R.id.eventoLayout).setVisibility(View.VISIBLE);
                 }else {
                     findViewById(R.id.eventoLayout).setVisibility(View.GONE);
@@ -85,7 +88,7 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
     }
 
     private void clickCriar(){
-       if (tipo.getCheckedRadioButtonId() == R.id.tipoEvento){
+       if (tipo.getCheckedRadioButtonId() == R.id.RadioGrouptipoEventoCriarEventoForn){
            criarEvento();
        }else {
            criarInd();
@@ -93,7 +96,7 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
     }
 
     private void criarEvento(){
-        if (group.getCheckedRadioButtonId() == R.id.parteDia) {
+        if (group.getCheckedRadioButtonId() == R.id.RadioButtonParteDiaCriarEv) {
             if (verificarHorario()) {
                 montarHorario();
             }else {
@@ -112,7 +115,7 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
     }
 
     private void criarInd(){
-        if (group.getCheckedRadioButtonId() == R.id.parteDia) {
+        if (group.getCheckedRadioButtonId() == R.id.RadioButtonParteDiaCriarEv) {
             if (verificarHorario()) {
                 montarHorario();
             }else {

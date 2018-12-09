@@ -29,7 +29,10 @@ import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
 import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -147,16 +150,22 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         titleAds.setText(anuncioSelecionado.getTitle());
         nomeFornecedor.setText(("Nome do fornecedor(a) :" +anuncioSelecionado.getOwner().getSocialname()));
-        //datapub.setText(anuncioSelecionado.getCreatedAt().toString());
+        String myFormat = "dd/MM/yyyy HH:mm"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("pt","BR"));
+        //String createdAtEmString = sdf.format(anuncioSelecionado.getCreatedAt().toString());
+        //datapub.setText(("Data de publicação :"+createdAtEmString));
+        /*String dateStr = obj.getString("birthdate");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date birthDate = sdf.parse(dateStr);*/
         descriptionAds.setText(("Descrição: " + anuncioSelecionado.getDescription()));
         phoneAds.setText(("Telefone :" + anuncioSelecionado.getPhone()));
         String priceAnuncioStr = Double.toString(anuncioSelecionado.getPrice());
         Log.d("pricw",priceAnuncioStr);
-        priceAds.setText(("Preço :R$"+priceAnuncioStr));
+        priceAds.setText(("Preço R$:"+priceAnuncioStr));
         addressAds.setText(("Endereço : "+anuncioSelecionado.getAddress().getStreet()
-                +","+ anuncioSelecionado.getAddress().getNeighborhood()+","+ "Número:"
-                +anuncioSelecionado.getAddress().getNumber()+ anuncioSelecionado.getAddress().getCity()
-                +","+anuncioSelecionado.getAddress().getState()
+                +", "+ "Bairro :"+anuncioSelecionado.getAddress().getNeighborhood()+", "+ "Número :"
+                +anuncioSelecionado.getAddress().getNumber()+", "+"Cidade :" +anuncioSelecionado.getAddress().getCity()
+                //+","+anuncioSelecionado.getAddress().getState()
                 +", CEP :"+anuncioSelecionado.getAddress().getZipcode()
         ));
 

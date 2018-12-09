@@ -2,6 +2,7 @@ package com.inovaufrpe.makeparty.user.servico;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.icu.text.DateFormat;
 import android.util.Base64;
 import android.util.Log;
 
@@ -36,11 +37,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class AnuncioEmComumService {
@@ -166,13 +170,18 @@ public class AnuncioEmComumService {
                 Log.d("oi",c.toString());
 
                 //ta errado aq embaixo
-                /*String createdAt = jsonAnuncio.optString("createdAt");
+               /* String dateStr = jsonAnuncio.getString("createdAt");
+                Date sdf =  new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr);
+                long createdAtDate = sdf.parse(dateStr);
+                Log.d("dataveae", String.valueOf(createdAtDate)); */
+                //c.setCreatedAt(createdAtDate);
+                //Log.d("dataveae",c.getCreatedAt().toString());
+
+                //c.setUpdatedAt();
+               /* Long createdAt = jsonAnuncio.optLong("createdAt");
                 Date createdAtConv = new Date(createdAt);
                 c.setCreatedAt(createdAtConv);
-                Log.d("dataveae",c.getCreatedAt().toString());
                 */
-                //c.setUpdatedAt();
-
                 Address addressAnuncio = new Address();
                 JSONObject objetoEndAnuncio = jsonAnuncio.getJSONObject("address");
                 //LEMBRANDO Q ESSES OBJ N PODEM FICAR NULL EXPLIC , SE N, DA ERROO NA CONV

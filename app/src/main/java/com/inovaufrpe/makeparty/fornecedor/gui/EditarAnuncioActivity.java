@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
@@ -33,7 +36,8 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     private Button buttonAtualizarAnuncio,buttonExcluirAnuncio;
     private ImageButton ImgButtonGalFotosAnex;
     ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
-    boolean isValido=false;
+    private String validar = "";
+    boolean isValido = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,26 +107,28 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         SimOuNaoDialog.show(getSupportFragmentManager(),"Deseja confirmar a atualização desse anúncio?", new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {
-                //
-                //
-             /*   if(verficarCampos()) {
-                    //Ads anuncioParaAtualizar = retornandoAnuncioComNovosDadosParaAtualizar();
-                    try {
-                        showProgressDialogWithTitle("Por favor, espere", "atualizando dados do anúncio");
-                        //atualizarAnuncio(anuncioParaAtualizar);
+                if(verficarCampos()) {
+                    Ads anuncioParaAtualizar = retornandoAnuncioComNovosDadosParaAtualizar();
+                    Gson gson= new Gson();
+                    String ad = gson.toJson(anuncioParaAtualizar);
+                    ad=ad.substring(0,ad.length()-1)+","+"\"token\""+":"+ "\""+SessaoApplication.getInstance().getTokenUser()+"\""+ "}";
+                    Log.i("Script", "OLHAAA: "+ ad);
+                    ///EEEEEEEEEEEEEEEEEERRRADO AI EMBAIXXXXXXXXXXXO, CONFUNDI COM DELETE
+                    showProgressDialogWithTitle("Por favor, espere", "atualizando dados do anúncio");
+                    try{
+                        editarAnuncioOficial(ad);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                exibirMsgSeValidouAtualizao();
+                exibirMsgSeValidouAtualizaoOuExclusao();
 
                 if (isValido){
                     msgToast("Anúncio atualizado com sucesso");
                     mudarTela(AnunciosFornecedorActivity.class);
                 }else{
                     msgToast("Erro");
-                }
-              */
+                };
             }
 
         });
@@ -164,20 +170,29 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     }
 
     public void cliqueExcluindoAnuncio() {
+        final Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja mesmo excluir esse anúncio ?", new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {
-                //
-                //
-
+                String tokenJsonAmao = ","+"\"token\":"+ "\""+ SessaoApplication.getInstance().getTokenUser() +"\""+"}";
+                String jsonAnuncioParaDeletarComToken = "{"+"\"_id\":"+ "\""+ anuncioSelecionado.get_id()+"\""+tokenJsonAmao;
                 showProgressDialogWithTitle("Por favor, espere", "excluindo anúncio");
-                msgToast("Anúncio excluído com sucesso");
-                msgToast("Erro");
-                mudarTela(AnunciosFornecedorActivity.class);
+                try{
+                    excluirAnuncioOficial(jsonAnuncioParaDeletarComToken);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                exibirMsgSeValidouAtualizaoOuExclusao();
 
-            }
-        });
-    }
+                if (isValido){
+                        msgToast("Anúncio excluído com sucesso");
+                        mudarTela(AnunciosFornecedorActivity.class);
+                    }else{
+                        msgToast("Erro");
+                    };
+                }
+            });
+        }
     private boolean verficarCampos(){
         String cidade = editTextCidadeEndAnuncio.getText().toString().trim();
         String bairro = editTextBairroEndAnuncio.getText().toString().trim();
@@ -229,13 +244,53 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         progressDialog.setMessage(msgEmbaixo);
         progressDialog.show();
     }
+    private void editarAnuncioOficial(String json) throws InterruptedException{
+        callServer("PUT",json);
+    }
+    private void excluirAnuncioOficial(String json) throws InterruptedException{
+        callServer("DELETE",json);
+    }
+
+    private void callServer(final String method, final String data) throws InterruptedException{
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (method.equals("PUT")){
+                    validar = ConectarServidor.putJadiel("https://makepartyserver.herokuapp.com/ads", data);
+                    Log.i("Script", "OLHAAA: "+ validar);
+                    if (validar.substring(2, 5).equals("err")){
+                        // Não sei qual o erro
+                        validar = "Não foi possível editar o anúncio";
+                        // Rever a mensagem
+                    }else{
+                        validar = "Anúncio editado com sucesso";
+                        isValido = true;
+                    }
+                }else{
+                    validar = ConectarServidor.deleteDeJadiel("https://makepartyserver.herokuapp.com/ads", data);
+                    Log.i("Script", "OLHAAA: "+ validar);
+                    if (validar.substring(2, 5).equals("err")){
+                        // Não sei qual o erro
+                        validar = "Não foi possível excluir o anúncio";
+                        // Rever a mensagem
+                    }else{
+                        validar = "Anúncio excluido com sucesso";
+                        isValido = true;
+                    }
+                }
+            }
+        });
+        thread.start();
+        thread.join();
+    }
     public void msgToast(String msgToast){
         Toast.makeText(this, msgToast, Toast.LENGTH_SHORT).show();
         finish();
     }
-    public void exibirMsgSeValidouAtualizao(){
-
+    public void exibirMsgSeValidouAtualizaoOuExclusao(){
+        Toast.makeText(getApplicationContext(), validar, Toast.LENGTH_SHORT).show();
     }
+
     public void mudarTela(Class tela){
         Intent intent=new Intent(this, tela);
         startActivity(intent);
