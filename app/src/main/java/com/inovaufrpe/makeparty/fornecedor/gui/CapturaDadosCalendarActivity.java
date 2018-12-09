@@ -65,18 +65,8 @@ public class CapturaDadosCalendarActivity extends Activity {
             }
         });
         ListView listView = findViewById(R.id.listView);
-        escolherAgendamentos();
         AgendamentosFornecedorAdapter adapter = new AgendamentosFornecedorAdapter(CapturaDadosCalendarActivity.this, agendamentos);
         listView.setAdapter(adapter);
-    }
-
-    private void escolherAgendamentos(){
-        List<Agendamento> list = AgendamentoBuilder.gerarAgendamentos();
-        for (Agendamento agendamento: list){
-            if (sdf.format(agendamento.getDateInicio()).equals(sdf.format(date))){
-                agendamentos.add(agendamento);
-            }
-        }
     }
 
     private void irTelaCriarEvento(){

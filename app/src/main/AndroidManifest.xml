@@ -99,7 +99,8 @@
         <activity android:name=".cliente.gui.AlterandoDadosPerfilClienteActivity" />
         <activity android:name=".cliente.gui.FIltroPrecoActivity" />
         <activity android:name=".fornecedor.gui.DetalhesEventoActivity" />
-        <activity android:name=".fornecedor.gui.TesteCapturaGaleriaActivity"></activity>
+        <activity android:name=".fornecedor.gui.TesteCapturaGaleriaActivity" />
+        <activity android:name=".fornecedor.gui.CriarHorarioDisponivelActivity"></activity>
     </application>
 
 </manifest>

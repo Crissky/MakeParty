@@ -62,16 +62,6 @@ public class CalendarActivity extends AppCompatActivity {
                 textView.setText(sdf.format(calendarView.getFirstDayOfCurrentMonth()));
             }
         });
-        configurarEventos();
-    }
-
-    private void configurarEventos(){
-        List<Agendamento> list = AgendamentoBuilder.gerarAgendamentos();
-        List<Event> events = new ArrayList<>();
-        for (Agendamento agendamento: list){
-            events.add(new Event(Color.parseColor("#006400"), agendamento.getDateInicio().getTime()));
-        }
-        calendarView.addEvents(events);
     }
 }
 

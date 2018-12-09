@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fornecedor.gui.CriarHorarioDisponivelActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Criar Horário Disponível"
+                android:gravity="center"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horário de início"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/horaInicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLength="2"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"/>
+                <EditText
+                    android:id="@+id/minutoInicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLength="2"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horário de fim"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/horaFim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLength="2"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"/>
+                <EditText
+                    android:id="@+id/minutoFim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLength="2"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dias"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"/>
+
+            <CheckBox
+                android:id="@+id/checkboxDomingo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Domingo"/>
+
+            <CheckBox
+                android:id="@+id/checkboxSegunda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Segunda-feira"/>
+
+            <CheckBox
+                android:id="@+id/checkboxTerca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terça-feira"/>
+
+            <CheckBox
+                android:id="@+id/checkboxQuarta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quarta-feira"/>
+
+            <CheckBox
+                android:id="@+id/checkboxQuinta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quinta-feira"/>
+
+            <CheckBox
+                android:id="@+id/checkboxSexta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sexta-feira"/>
+
+            <CheckBox
+                android:id="@+id/checkboxSabado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sábado"/>
+
+            <Button
+                android:id="@+id/buttonCriarHorario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorButoes"
+                android:textColor="@color/colorTextoBut"
+                android:text="Criar Horário Disponível"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</ScrollView>
