@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -145,19 +146,20 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
     public void setarInfoView() {
         Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         titleAds.setText(anuncioSelecionado.getTitle());
-        //nomeFornecedor.setText(("Nome do fornecedor :" +anuncioSelecionado.getOwner().getSocialname()));
+        nomeFornecedor.setText(("Nome do fornecedor(a) :" +anuncioSelecionado.getOwner().getSocialname()));
         //datapub.setText(anuncioSelecionado.getCreatedAt().toString());
         descriptionAds.setText(("Descrição: " + anuncioSelecionado.getDescription()));
         phoneAds.setText(("Telefone :" + anuncioSelecionado.getPhone()));
-        //String priceAnuncioStr = Double.toString(anuncioSelecionado.getPrice());
-        //priceAds.setText(priceAnuncioStr);
-        /*addressAds.setText(("Endereço : "+anuncioSelecionado.getAddress().getStreet()
+        String priceAnuncioStr = Double.toString(anuncioSelecionado.getPrice());
+        Log.d("pricw",priceAnuncioStr);
+        priceAds.setText(("Preço :R$"+priceAnuncioStr));
+        addressAds.setText(("Endereço : "+anuncioSelecionado.getAddress().getStreet()
                 +","+ anuncioSelecionado.getAddress().getNeighborhood()+","+ "Número:"
                 +anuncioSelecionado.getAddress().getNumber()+ anuncioSelecionado.getAddress().getCity()
                 +","+anuncioSelecionado.getAddress().getState()
                 +", CEP :"+anuncioSelecionado.getAddress().getZipcode()
         ));
-        */
+
         //adsTags.setText(("Tags : " +anuncioSelecionado.getTags().toString())); ---ERRO NA CONVERSAO METODO TA ERRADO
         setUpViewPagerGaleriaFotos();
         buscarComentariosEAvaliacoes();

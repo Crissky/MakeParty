@@ -5,6 +5,7 @@ import com.inovaufrpe.makeparty.user.dominio.User;
 
 public class Owner {
 
+    private String _id;
     private String socialname;
     private String cnpj;
     private String authorization;
@@ -23,6 +24,13 @@ public class Owner {
         this.cnpj = cnpj;
         this.user = user;
         this.phone = phone;
+    }
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getSocialname() {

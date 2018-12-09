@@ -111,9 +111,10 @@ public class FornecedorService {
     public static boolean deleteItensListaFornecedor(List<Ads> selectedAds,String tokenOuId) throws IOException, JSONException {
         String url = URL_APAGAR_ANUNCIO;
         //de um por um( id do anuncio + token)
+        Log.d("ListaDeleteForne",selectedAds.toString());
         String token = "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
-        for (Ads c : selectedAds) {
-            String jsonAMao = "{" + "\"_id\":" + "\"" + c.get_id() + "\"" + token;
+        for(int i = 0 ; i < selectedAds.size(); i++){
+            String jsonAMao = "{" + "\"_id\":" + "\"" + selectedAds.get(i).get_id() + "\"" + token;
             Log.d(TAG, "JSON a mao: " + jsonAMao);
             String respostaServidorAoExcluir = ConectarServidor.deleteDeJadiel(url, jsonAMao);///NAOOOOOO É POST, É DELETEEEE
             Log.d(TAG, "Resposta servidor ao excluir da lista: " + respostaServidorAoExcluir);

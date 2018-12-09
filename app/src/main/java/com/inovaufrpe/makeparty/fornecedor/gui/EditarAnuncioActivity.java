@@ -87,14 +87,14 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         editTextDescAnuncio.setText(anuncioSelecionado.getDescription());
         //editTextTagsAnuncio.setText((anuncioSelecionado.getTags().toString()));
         editTextTelefoneAnuncio.setText((anuncioSelecionado.getPhone()));
-        /*editTextRuaAnuncio.setText(anuncioSelecionado.getAddress().getStreet());
+        editTextRuaAnuncio.setText(anuncioSelecionado.getAddress().getStreet());
         editTextNumeroEndAnuncio.setText(anuncioSelecionado.getAddress().getNumber());
         editTextBairroEndAnuncio.setText(anuncioSelecionado.getAddress().getNeighborhood());
         editTextCidadeEndAnuncio .setText(anuncioSelecionado.getAddress().getCity());
         editTextCepEndAnuncio.setText(anuncioSelecionado.getAddress().getZipcode());
         textViewLimitesAnuncio.setText("");
         ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
-        buscarAntigasImgAntesEdicao(); */
+        //buscarAntigasImgAntesEdicao();
     }
     public void buscarAntigasImgAntesEdicao(){
 

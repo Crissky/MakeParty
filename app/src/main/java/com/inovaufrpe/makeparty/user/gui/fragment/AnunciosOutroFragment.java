@@ -51,6 +51,7 @@ public class AnunciosOutroFragment extends BaseFragment {
     public static AnunciosOutroFragment newInstance(String tipo) {
         Bundle args = new Bundle();
         args.putString("tipo", tipo);
+        args.putString("kimLinda","kimhahahaha");
         Log.i("tipoOuuu", tipo);
         Log.i("Args éee", String.valueOf(args));
         AnunciosOutroFragment f = new AnunciosOutroFragment();

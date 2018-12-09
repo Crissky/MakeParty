@@ -154,6 +154,164 @@ public class ConectarServidor {
         }
         return answer;
     }
+    public static String deleteDeJadiel(String completeUrl, String body) {
+        String jsonResposta = null;
+
+        try {
+            URL url = new URL(completeUrl);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod("DELETE");
+            conexao.addRequestProperty("Content-type", "application/json");
+            //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
+
+            conexao.setDoOutput(true);
+            conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(body);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while ((linha = reader.readLine()) != null) {
+                sbHtml.append(linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //usuarioService.setRespostaServidor(jsonResposta);
+        SessaoApplication.getInstance().setResposta(jsonResposta);
+        return jsonResposta;
+    }
+    public static String putJadiel(String completeUrl, String body) {
+        String jsonResposta = null;
+
+        try {
+            URL url = new URL(completeUrl);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod("PUT");
+            conexao.addRequestProperty("Content-type", "application/json");
+            //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
+
+            conexao.setDoOutput(true);
+            conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(body);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while ((linha = reader.readLine()) != null) {
+                sbHtml.append(linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //usuarioService.setRespostaServidor(jsonResposta);
+        SessaoApplication.getInstance().setResposta(jsonResposta);
+        return jsonResposta;
+    }
+    public static String postJadiel(String completeUrl, String body) {
+        String jsonResposta = null;
+
+        try {
+            URL url = new URL(completeUrl);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod("POST");
+            conexao.addRequestProperty("Content-type", "application/json");
+            //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
+
+            conexao.setDoOutput(true);
+            conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(body);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while ((linha = reader.readLine()) != null) {
+                sbHtml.append(linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //usuarioService.setRespostaServidor(jsonResposta);
+        SessaoApplication.getInstance().setResposta(jsonResposta);
+        return jsonResposta;
+    }
+    public static String getJadiel(String completeUrl, String body) {
+        String jsonResposta = null;
+
+        try {
+            URL url = new URL(completeUrl);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+            conexao.setRequestMethod("GET");
+            conexao.addRequestProperty("Content-type", "application/json");
+            //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
+
+            conexao.setDoOutput(true);
+            conexao.setDoInput(true);
+
+            PrintStream printStream = new PrintStream(conexao.getOutputStream());
+            printStream.println(body);
+
+            conexao.connect();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+            StringBuilder sbHtml = new StringBuilder();
+            String linha;
+
+            while ((linha = reader.readLine()) != null) {
+                sbHtml.append(linha);
+            }
+            jsonResposta = sbHtml.toString();
+            reader.close();
+            printStream.close();
+            conexao.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //usuarioService.setRespostaServidor(jsonResposta);
+        SessaoApplication.getInstance().setResposta(jsonResposta);
+        return jsonResposta;
+    }
+
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void sendPutTeste(URL url,String json) throws Exception {
 
@@ -304,45 +462,6 @@ public class ConectarServidor {
         return jsonResposta;
     }
 
-    public static String deleteDeJadiel(String completeUrl, String body) {
-        String jsonResposta = null;
-
-        try {
-            URL url = new URL(completeUrl);
-            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-
-            conexao.setRequestMethod("DELETE");
-            conexao.addRequestProperty("Content-type", "application/json");
-            //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
-
-            conexao.setDoOutput(true);
-            conexao.setDoInput(true);
-
-            PrintStream printStream = new PrintStream(conexao.getOutputStream());
-            printStream.println(body);
-
-            conexao.connect();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
-            StringBuilder sbHtml = new StringBuilder();
-            String linha;
-
-            while ((linha = reader.readLine()) != null) {
-                sbHtml.append(linha);
-            }
-            jsonResposta = sbHtml.toString();
-            reader.close();
-            printStream.close();
-            conexao.disconnect();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        //usuarioService.setRespostaServidor(jsonResposta);
-        SessaoApplication.getInstance().setResposta(jsonResposta);
-        return jsonResposta;
-    }
 
     public static String postComToken(String url, String body) {
         HttpClient httpClient = new DefaultHttpClient();

@@ -6,6 +6,8 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
@@ -13,6 +15,7 @@ import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
 import com.inovaufrpe.makeparty.cliente.servico.ClienteService;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
 import com.inovaufrpe.makeparty.fornecedor.servico.FornecedorService;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
@@ -21,7 +24,9 @@ import com.inovaufrpe.makeparty.infra.ResponseWithURL;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.FileUtils;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
+import com.inovaufrpe.makeparty.user.dominio.Address;
 import com.inovaufrpe.makeparty.user.dominio.Data;
+import com.inovaufrpe.makeparty.user.dominio.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +37,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,20 +128,61 @@ public class AnuncioEmComumService {
                 //Lê as info de cada anuncio
                 c.setDescription(jsonAnuncio.optString("description"));
                 c.setPrice(jsonAnuncio.optDouble("price"));
-                //JSONArray arrayListEmJson=jsonAnuncio.getJSONArray("tags");
-                //c.setPhotos((ArrayList) jsonAnuncio.opt("photos"));
+                //TAGS N TA FUNCIONANDO DIREITO
+                JSONArray tagsArray = jsonAnuncio.getJSONArray("tags");
+                List<String> listTags = new ArrayList<String>();
+                for (int e=0;i<tagsArray.length();i++){
+                    listTags.add(tagsArray.getString(e));
+                }
+                Log.d("tagsss",listTags.toString());
+                c.setTags((ArrayList) listTags);
+
+
+                JSONArray fotosArrayJson = jsonAnuncio.getJSONArray("photos");
+                List<String> listFotos = new ArrayList<String>();
+                for (int e=0;i<fotosArrayJson.length();i++){
+                    listFotos.add(fotosArrayJson.getString(e));
+                }
+                Log.d("fotoooosArray",listFotos.toString());
+                c.setPhotos((ArrayList) listFotos);
+
                 c.set_id(jsonAnuncio.optString("_id"));
                 c.setTitle(jsonAnuncio.optString("title"));
                 c.setType(jsonAnuncio.optString("type"));
                 c.setPhone(jsonAnuncio.optString("phone"));
-                //JSONObject objetoJson2 = new JSONObject(json);
-                //objetoJson2.getJSONObject("owner");
-                // c.setOwner(jsonAnuncios.getJSONObject("owner")));
-                //JSONObject objetoJson3 = new JSONObject(json);
-                //c.setCreatedAt(jsonAnuncio.getLong("createdAt"));
+
+                Owner ownerAqui=new Owner();
+                JSONObject objetoOwner = jsonAnuncio.getJSONObject("owner");
+                ownerAqui.setSocialname(objetoOwner.getString("socialname"));
+                ownerAqui.setCnpj(objetoOwner.getString("cnpj"));
+                ownerAqui.set_id(objetoOwner.getString("_id"));
+
+                User userOwner = new User();
+                JSONObject objetoUserOwner =objetoOwner.getJSONObject("user");
+                userOwner.setEmail(objetoUserOwner.getString("email"));
+                userOwner.set_id(objetoUserOwner.getString("_id"));
+                ownerAqui.setUser(userOwner);
+                c.setOwner(ownerAqui);
+                Log.d("oi",c.toString());
+
+                //ta errado aq embaixo
+                /*String createdAt = jsonAnuncio.optString("createdAt");
+                Date createdAtConv = new Date(createdAt);
+                c.setCreatedAt(createdAtConv);
+                Log.d("dataveae",c.getCreatedAt().toString());
+                */
                 //c.setUpdatedAt();
-                //objetoJson3.getJSONObject("adress");
-                //c.setAddress((Address) jsonAnuncio.opt("address"));
+
+                Address addressAnuncio = new Address();
+                JSONObject objetoEndAnuncio = jsonAnuncio.getJSONObject("address");
+                //LEMBRANDO Q ESSES OBJ N PODEM FICAR NULL EXPLIC , SE N, DA ERROO NA CONV
+                addressAnuncio.setCity(objetoEndAnuncio.getString("city"));
+                addressAnuncio.setNeighborhood(objetoEndAnuncio.getString("neighborhood"));
+                addressAnuncio.setNumber(objetoEndAnuncio.getString("number"));
+                addressAnuncio.setStreet(objetoEndAnuncio.getString("street"));
+                addressAnuncio.setZipcode(objetoEndAnuncio.getString("zipcode"));
+                c.setAddress(addressAnuncio);
+
 
                 if (LOG_ON) {
                     Log.d(TAG, "Ads" + c.getDescription() + ">");

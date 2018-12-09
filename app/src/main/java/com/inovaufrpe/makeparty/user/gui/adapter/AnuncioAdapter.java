@@ -3,6 +3,7 @@ package com.inovaufrpe.makeparty.user.gui.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,9 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
 
         // Atualizada os valores nas views
         holder.title.setText(c.getTitle());
-        holder.tDesc.setText(c.getDescription());
+        holder.tAdvName.setText(c.getOwner().getSocialname());
+        String priceAnuncioStr = Double.toString(c.getPrice());
+        holder.tPrice.setText(("Preço :R$"+priceAnuncioStr));
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView); HMMMMMMM
 
         // Foto do Ads
@@ -91,7 +94,8 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
          CardView cardView;
         public ImageView img;
         public TextView title;
-        public TextView tDesc;
+        public TextView tAdvName;
+        public TextView tPrice;
         private ProgressBar progress;
         public View view;
 
@@ -103,7 +107,8 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
             cardView = view.findViewById(R.id.card_view);
             img = (ImageView) view.findViewById(R.id.img);
             title = (TextView) view.findViewById(R.id.textViewTitleAnuncio);
-            tDesc = (TextView) view.findViewById(R.id.textViewRazaoSocialFornecedor);
+            tAdvName = (TextView) view.findViewById(R.id.textViewRazaoSocialFornecedor);
+            tPrice =(TextView) view.findViewById(R.id.textViewPrecoAnuncio);
             progress = (ProgressBar) view.findViewById(R.id.progress);
             cardView = (CardView) view.findViewById(R.id.card_view);
 

@@ -125,10 +125,10 @@ public class ClienteService{
             String respostaServidorAoExcluir = ConectarServidor.deleteDeJadiel(url, jsonAMao);///NAOOOOOO É POST, É DELETEEEE
             Log.d(TAG, "Resposta servidor ao excluir da lista: " + respostaServidorAoExcluir);
             Gson gson = new Gson();
-            Response response = gson.fromJson(respostaServidorAoExcluir, Response.class);
+            /*Response response = gson.fromJson(respostaServidorAoExcluir, Response.class);
             if (!response.isOk()) {
                 throw new IOException("Erro ao excluir da lista " + response.getMsg());
-            }
+            }*/
         }
         return true;
     }
