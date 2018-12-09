@@ -2,6 +2,11 @@ package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,6 +28,9 @@ import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Mask;
 import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -38,6 +47,8 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     private ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +61,9 @@ public class CriarAnuncioActivity extends AppCompatActivity {
                 onClickCriarAnuncio();
            }
        });
+
     }
+
     public void opcoesSpinner(){
         // Ainda tem que setar isso daqui
         // setei no xml strings
@@ -74,6 +87,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         imgButtonImgsAnex = findViewById(R.id.imgButtonGalFotosAnexAn);
         imgButtonAnexMaisFt = findViewById(R.id.imgButtonAnexarMaisFtAn);
     }
+
     public void onClickCriarAnuncio(){
         SimOuNaoDialog.show(getSupportFragmentManager(),"Você confirma os dados desse anúncio?", new SimOuNaoDialog.Callback() {
             @Override
@@ -99,6 +113,12 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         });
     }
 
+    //JÁ SETADO NA XML (PARA O TESTE)*******
+    public void onClickPegarFotosGaleria(View View){
+    this.mudarTela(TesteCapturaGaleriaActivity.class);
+
+
+    }
 
     private boolean verficarCampos(){
         String cidade = edtCidade.getText().toString().trim();
@@ -234,4 +254,6 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     public void onBackPressed() {
         this.mudarTela(AnunciosFornecedorActivity.class);
     }
+
+
 }

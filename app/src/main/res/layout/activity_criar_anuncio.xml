@@ -240,13 +240,15 @@
                         android:layout_height="150dp"
                         android:layout_margin="16dp"
                         android:layout_weight="1" />
+
                     <ImageButton
-                        android:layout_weight="1"
                         android:id="@+id/imgButtonAnexarMaisFtAn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
-                        android:src="@drawable/ic_control_point_24dp"/>
+                        android:layout_weight="1"
+                        android:onClick="onClickPegarFotosGaleria"
+                        android:src="@drawable/ic_control_point_24dp" />
                 </LinearLayout>
 
 

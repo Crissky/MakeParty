@@ -98,7 +98,8 @@
         <activity android:name=".fornecedor.gui.CriarIndisponibilidadeActivity" />
         <activity android:name=".cliente.gui.AlterandoDadosPerfilClienteActivity" />
         <activity android:name=".cliente.gui.FIltroPrecoActivity" />
-        <activity android:name=".fornecedor.gui.DetalhesEventoActivity"></activity>
+        <activity android:name=".fornecedor.gui.DetalhesEventoActivity" />
+        <activity android:name=".fornecedor.gui.TesteCapturaGaleriaActivity"></activity>
     </application>
 
 </manifest>
