@@ -3,7 +3,7 @@ package com.inovaufrpe.makeparty.fornecedor.servico;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
@@ -108,7 +108,7 @@ public class FornecedorService {
         List listaAnunciosFornecedor = AnuncioEmComumService.parserJSONListaAnunciosComFor(json);
         return listaAnunciosFornecedor;
     }
-    public static boolean deleteItensListaFornecedor(List<Ads> selectedAds,String tokenOuId) throws IOException, JSONException {
+    public static boolean deleteItensListaFornecedor(List<Ad> selectedAds, String tokenOuId) throws IOException, JSONException {
         String url = URL_APAGAR_ANUNCIO;
         //de um por um( id do anuncio + token)
         Log.d("ListaDeleteForne",selectedAds.toString());

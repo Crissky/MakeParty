@@ -2,20 +2,20 @@ package com.inovaufrpe.makeparty.user.dominio;
 
 import android.support.annotation.NonNull;
 
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class Data implements List<com.inovaufrpe.makeparty.fornecedor.dominio.Ads> {
-    private List<Ads> Ads;
+public class Data implements List<Ad> {
+    private List<Ad> Ads;
 
     @Override
     public String toString() {
         return "Data[" +
-                "Ads=" + Ads +
+                "Ad=" + Ads +
                 ']';
     }
 
@@ -35,7 +35,7 @@ public class Data implements List<com.inovaufrpe.makeparty.fornecedor.dominio.Ad
     }
 
     @Override
-    public Iterator<com.inovaufrpe.makeparty.fornecedor.dominio.Ads> iterator() {
+    public Iterator<Ad> iterator() {
         return null;
     }
 
@@ -50,7 +50,7 @@ public class Data implements List<com.inovaufrpe.makeparty.fornecedor.dominio.Ad
     }
 
     @Override
-    public boolean add(com.inovaufrpe.makeparty.fornecedor.dominio.Ads ads) {
+    public boolean add(Ad ads) {
         return false;
     }
 
@@ -65,12 +65,12 @@ public class Data implements List<com.inovaufrpe.makeparty.fornecedor.dominio.Ad
     }
 
     @Override
-    public boolean addAll(Collection<? extends com.inovaufrpe.makeparty.fornecedor.dominio.Ads> c) {
+    public boolean addAll(Collection<? extends Ad> c) {
         return false;
     }
 
     @Override
-    public boolean addAll(int index, @NonNull Collection<? extends com.inovaufrpe.makeparty.fornecedor.dominio.Ads> c) {
+    public boolean addAll(int index, @NonNull Collection<? extends Ad> c) {
         return false;
     }
 
@@ -90,22 +90,22 @@ public class Data implements List<com.inovaufrpe.makeparty.fornecedor.dominio.Ad
     }
 
     @Override
-    public com.inovaufrpe.makeparty.fornecedor.dominio.Ads get(int index) {
+    public Ad get(int index) {
         return null;
     }
 
     @Override
-    public com.inovaufrpe.makeparty.fornecedor.dominio.Ads set(int index, com.inovaufrpe.makeparty.fornecedor.dominio.Ads element) {
+    public Ad set(int index, Ad element) {
         return null;
     }
 
     @Override
-    public void add(int index, com.inovaufrpe.makeparty.fornecedor.dominio.Ads element) {
+    public void add(int index, Ad element) {
 
     }
 
     @Override
-    public com.inovaufrpe.makeparty.fornecedor.dominio.Ads remove(int index) {
+    public Ad remove(int index) {
         return null;
     }
 
@@ -121,19 +121,19 @@ public class Data implements List<com.inovaufrpe.makeparty.fornecedor.dominio.Ad
 
     @NonNull
     @Override
-    public ListIterator<com.inovaufrpe.makeparty.fornecedor.dominio.Ads> listIterator() {
+    public ListIterator<Ad> listIterator() {
         return null;
     }
 
     @NonNull
     @Override
-    public ListIterator<com.inovaufrpe.makeparty.fornecedor.dominio.Ads> listIterator(int index) {
+    public ListIterator<Ad> listIterator(int index) {
         return null;
     }
 
     @NonNull
     @Override
-    public List<com.inovaufrpe.makeparty.fornecedor.dominio.Ads> subList(int fromIndex, int toIndex) {
+    public List<Ad> subList(int fromIndex, int toIndex) {
         return null;
     }
 }

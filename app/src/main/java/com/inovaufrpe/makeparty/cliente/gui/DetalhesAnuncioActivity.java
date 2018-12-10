@@ -18,13 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
-import com.inovaufrpe.makeparty.user.gui.CadastroActivity;
 import com.inovaufrpe.makeparty.user.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.CalendarioDialog;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
@@ -33,7 +32,6 @@ import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -152,7 +150,7 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
     }
 
     public void setarInfoView() {
-        Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        Ad anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         titleAds.setText(anuncioSelecionado.getTitle());
         nomeFornecedor.setText(("Nome do fornecedor(a) :" +anuncioSelecionado.getOwner().getSocialname()));
         String myFormat = "dd/MM/yyyy HH:mm"; //In which you need put here

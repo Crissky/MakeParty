@@ -20,12 +20,13 @@ import android.view.ViewGroup;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.IOUtils;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.utils.SDCardUtils;
+import com.inovaufrpe.makeparty.user.gui.LoginActivity;
 import com.inovaufrpe.makeparty.user.gui.adapter.AnuncioAdapter;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.gui.EditarAnuncioActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
@@ -42,7 +43,7 @@ import java.util.List;
 public class AnunciosOutroFragment extends BaseFragment {
     protected RecyclerView recyclerView;
     private String tipo;
-    private List<Ads> ads;
+    private List<Ad> ads;
     private SwipeRefreshLayout swipeLayout;
     private ActionMode actionMode;
     private Intent shareIntent;
@@ -147,7 +148,7 @@ public class AnunciosOutroFragment extends BaseFragment {
         return new AnuncioAdapter.AnuncioOnClickListener() {
             @Override
             public void onClickAnuncio(AnuncioAdapter.AnunciosViewHolder holder, int indexAnuncio) {
-                Ads c = ads.get(indexAnuncio);
+                Ad c = ads.get(indexAnuncio);
                 FiltroAnuncioSelecionado.instance.setAnuncioSelecionado(c);
                 if (actionMode == null) {
                     if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")) {
@@ -175,7 +176,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                 // Liga a action bar de contexto (CAB)
                 actionMode = getAppCompatActivity().
                         startSupportActionMode(getActionModeCallback());
-                Ads c = ads.get(indexAnuncio);
+                Ad c = ads.get(indexAnuncio);
                 c.selected = true; // Seleciona o anuncio
                 // Solicita ao Android para desenhar a lista novamente
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -224,7 +225,7 @@ public class AnunciosOutroFragment extends BaseFragment {
         if (actionMode != null) {
             actionMode.setTitle("Selecione os anúncios.");
             actionMode.setSubtitle(null);
-            List<Ads> selectedAds = getSelectedAnuncios();
+            List<Ad> selectedAds = getSelectedAnuncios();
             if (selectedAds.size() == 0) {
                 actionMode.finish();
             } else if (selectedAds.size() == 1) {
@@ -237,7 +238,7 @@ public class AnunciosOutroFragment extends BaseFragment {
     }
 
     // Atualiza a share intent com os ads selecionados
-    private void updateShareIntent(List<Ads> selectedAds) {
+    private void updateShareIntent(List<Ad> selectedAds) {
         if (shareIntent != null) {
             // Texto com os anúncios
             shareIntent.putExtra(Intent.EXTRA_TEXT, "Anúncios: " + selectedAds);
@@ -245,9 +246,9 @@ public class AnunciosOutroFragment extends BaseFragment {
     }
 
     // Retorna a lista de ads selecionados
-    private List<Ads> getSelectedAnuncios() {
-        List<Ads> list = new ArrayList<Ads>();
-        for (Ads c : ads) {
+    private List<Ad> getSelectedAnuncios() {
+        List<Ad> list = new ArrayList<Ad>();
+        for (Ad c : ads) {
             if (c.selected) {
                 list.add(c);
             }
@@ -280,13 +281,16 @@ public class AnunciosOutroFragment extends BaseFragment {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                final List<Ads> selectedAds = getSelectedAnuncios();
+                final List<Ad> selectedAds = getSelectedAnuncios();
                 if (item.getItemId() == R.id.action_add_lista_desejo_finalm) {
                     SimOuNaoDialog.show(getFragmentManager(), "Deseja adicionar esses anúncios que foram selecionados a sua lista de desejos?", new SimOuNaoDialog.Callback() {
                         @Override
                         public void metodoSimAoDialog() {
                             if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")) {
                                 startTask("ads", new PostOuDeleteTask(selectedAds,"post"));
+                            }else{
+                                Intent intent = new Intent(getContext(), LoginActivity.class);
+                                startActivity(intent);
                             }
                         }
                     });
@@ -312,7 +316,7 @@ public class AnunciosOutroFragment extends BaseFragment {
                 // Limpa o estado
                 actionMode = null;
                 // Configura todos os anuncios para não selecionados
-                for (Ads c : ads) {
+                for (Ad c : ads) {
                     c.selected = false;
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -333,18 +337,18 @@ public class AnunciosOutroFragment extends BaseFragment {
     // Task para fazer o download
     // Faça import da classe android.net.Uri;
     private class CompartilharTask implements TaskListener {
-        private final List<Ads> selectedAds;
+        private final List<Ad> selectedAds;
         // Lista de arquivos para compartilhar
         ArrayList<Uri> imageUris = new ArrayList<Uri>();
 
-        public CompartilharTask(List<Ads> selectedAds) {
+        public CompartilharTask(List<Ad> selectedAds) {
             this.selectedAds = selectedAds;
         }
 
         @Override
         public Object execute() throws Exception {
             if (selectedAds != null) {
-                for (Ads c : selectedAds) {
+                for (Ad c : selectedAds) {
                     // Faz o download da foto do anuncio para arquivo
                    // String url = c.urlFoto;
                     String url="http://i.imgur.com/DvpvklR.png";
@@ -383,10 +387,10 @@ public class AnunciosOutroFragment extends BaseFragment {
     }
 
     private class PostOuDeleteTask implements TaskListener<List> {
-        private final List<Ads> selectedAds;
+        private final List<Ad> selectedAds;
         private String tipoReq="";
 
-        public PostOuDeleteTask(List<Ads> selectedAds,String tipoReq) {
+        public PostOuDeleteTask(List<Ad> selectedAds, String tipoReq) {
             this.selectedAds = selectedAds;
             this.tipoReq=tipoReq;
         }

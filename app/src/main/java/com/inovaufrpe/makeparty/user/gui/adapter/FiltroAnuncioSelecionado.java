@@ -1,6 +1,6 @@
 package com.inovaufrpe.makeparty.user.gui.adapter;
 
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,27 +21,27 @@ public class FiltroAnuncioSelecionado {
     public void setTipoListaPraMostrarSubCategoriaBottomNavCliente(String tipoSubCategoriaBottomNav){
         this.tipoAnuncioBottomNavSoPCliente= tipoSubCategoriaBottomNav;
     }
-    public void setAnunciosList(ArrayList<Ads> anunciosList) {
+    public void setAnunciosList(ArrayList<Ad> anunciosList) {
         setValor("FiltroAnuncioSelecionado.anunciosList", anunciosList);
     }
 
-    public ArrayList<Ads> getAnunciosList() {
-        return (ArrayList<Ads>) values.get("FiltroAnuncioSelecionado.anunciosList");
+    public ArrayList<Ad> getAnunciosList() {
+        return (ArrayList<Ad>) values.get("FiltroAnuncioSelecionado.anunciosList");
     }
 
-    public Ads getAnuncioSelecionado() {
-        return (Ads) values.get("sessao.AnuncioSelecionado");
+    public Ad getAnuncioSelecionado() {
+        return (Ad) values.get("sessao.AnuncioSelecionado");
     }
 
-    public void setAnuncioSelecionado(Ads anuncioSelecionado) {
+    public void setAnuncioSelecionado(Ad anuncioSelecionado) {
         setValor("sessao.AnuncioSelecionado", anuncioSelecionado);
     }
 
-    public Ads getTipoAnuncioSelecionado() {
-        return (Ads) values.get("sessao.AnuncioSelecionado");
+    public Ad getTipoAnuncioSelecionado() {
+        return (Ad) values.get("sessao.AnuncioSelecionado");
     }
 
-    public void setTipoAnuncioSelecionado(Ads anuncioSelecionado) {
+    public void setTipoAnuncioSelecionado(Ad anuncioSelecionado) {
         setValor("sessao.AnuncioSelecionado", anuncioSelecionado);
     }
     public String getDiaSelecionadoPeloClienteDisp(){

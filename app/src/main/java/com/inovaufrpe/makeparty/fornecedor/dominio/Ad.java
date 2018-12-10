@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 //TEM QUE MUDAR AQUI DEPOIS, PARA "AD" MAS TEM QUE ADAPTAR
-public class Ads implements Parcelable {
+public class Ad implements Parcelable {
 
     public String _id;
     private String title;
@@ -171,23 +171,23 @@ public class Ads implements Parcelable {
 
     }
 
-    public static final Parcelable.Creator<Ads> CREATOR = new Parcelable.Creator<Ads>() {
+    public static final Parcelable.Creator<Ad> CREATOR = new Parcelable.Creator<Ad>() {
         @Override
-        public Ads createFromParcel(Parcel p) {
-            Ads c = new Ads();
+        public Ad createFromParcel(Parcel p) {
+            Ad c = new Ad();
             c.readFromParcel(p);
             return c;
         }
         @Override
-        public Ads[] newArray(int size) {
-            return new Ads[size];
+        public Ad[] newArray(int size) {
+            return new Ad[size];
         }
     };
 
 
     @Override
     public String toString() {
-        return "Ads[" +
+        return "Ad[" +
                 "_id='" + _id + '\'' +
                 ", title='" + title + '\'' +
                 ", createdAt=" + createdAt +

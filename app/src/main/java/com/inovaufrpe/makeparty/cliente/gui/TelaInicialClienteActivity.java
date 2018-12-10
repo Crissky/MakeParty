@@ -137,19 +137,24 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
                     //tive q fazer:
                     //tbm como n tem pacote no momento, pq é recomendação , mudei p retornar so festa de vez de pacote
                     FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("festa");
+                    return true;
 
                 }else if (item.getItemId()==R.id.action_casa_festa){
                     trocarFragmento("casadefesta");
                     FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("casadefesta");
+                    return true;
                 }else if (item.getItemId()==R.id.action_buffet){
                     trocarFragmento("buffet");
                     FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("buffet");
+                    return true;
                 }else if (item.getItemId()==R.id.action_decoracao){
                     trocarFragmento("decoracao");
                     FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("decoracao");
-                }else if (item.getItemId()==R.id.action_animacao){
+                    return true;
+                }else if(item.getItemId()==R.id.action_animacao){
                     trocarFragmento("animacao");
                     FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("animacao");
+                    return true;
                 }
                 return false;
             }

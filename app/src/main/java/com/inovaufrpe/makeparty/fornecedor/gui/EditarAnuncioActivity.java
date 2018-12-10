@@ -15,12 +15,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Mask;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.user.dominio.Address;
 import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
@@ -91,7 +91,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     }
 
     public void setandoInfoItensViewAntesEdicao(){
-        Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        Ad anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
 
         //spinnerTipoAnuncio.setOnItemSelectedListener(anuncioSelecionado.getType());
         //spinnerTipoAnuncio.setSelection(adapter.getPosition("SP"))
@@ -119,7 +119,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
             @Override
             public void metodoSimAoDialog() {
                 if(verficarCampos()) {
-                    Ads anuncioParaAtualizar = retornandoAnuncioComNovosDadosParaAtualizar();
+                    Ad anuncioParaAtualizar = retornandoAnuncioComNovosDadosParaAtualizar();
                     Gson gson= new Gson();
                     String ad = gson.toJson(anuncioParaAtualizar);
                     ad=ad.substring(0,ad.length()-1)+","+"\"token\""+":"+ "\""+SessaoApplication.getInstance().getTokenUser()+"\""+ "}";
@@ -145,9 +145,9 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         });
 
     }
-    public Ads retornandoAnuncioComNovosDadosParaAtualizar(){
-        Ads dadosAnuncioSelecionadoAntesEdicao = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
-        Ads anuncioASerEnviadoPUT =  new Ads();
+    public Ad retornandoAnuncioComNovosDadosParaAtualizar(){
+        Ad dadosAnuncioSelecionadoAntesEdicao = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        Ad anuncioASerEnviadoPUT =  new Ad();
         anuncioASerEnviadoPUT.set_id( dadosAnuncioSelecionadoAntesEdicao.get_id());
         String tipo = spinnerTipoAnuncio.getSelectedItem().toString().trim();
         tipo=ValidacaoGuiRapida.deAccent(tipo);
@@ -184,7 +184,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     }
 
     public void cliqueExcluindoAnuncio() {
-        final Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        final Ad anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja mesmo excluir esse anúncio ?", new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {

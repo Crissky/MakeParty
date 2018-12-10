@@ -1,8 +1,6 @@
 package com.inovaufrpe.makeparty.fornecedor.gui.adapter;
 
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
-import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 
 import java.util.ArrayList;
 import java.util.HashMap;

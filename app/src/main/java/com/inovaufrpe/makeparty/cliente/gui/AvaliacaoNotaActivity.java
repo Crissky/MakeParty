@@ -12,9 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 
 public class AvaliacaoNotaActivity extends AppCompatActivity {
     private RatingBar ratingBar;
@@ -71,9 +71,9 @@ public class AvaliacaoNotaActivity extends AppCompatActivity {
             }
         });
     }
-    public void avaliar(Ads ads, Double nota, String comentario) {
+    public void avaliar(Ad ads, Double nota, String comentario) {
         comentarioAvaliacao= findViewById(R.id.editTextDescricaoComentAnuncAdd);
-        Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        Ad anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         //TUDO DO HAMBA , AINDA P ADAPTAR
         //ServicoTitulo servicoTitulo = new ServicoTitulo();
         //servicoTitulo.avaliar(ads, nota);

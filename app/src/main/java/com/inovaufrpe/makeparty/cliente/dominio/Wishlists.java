@@ -1,20 +1,21 @@
 package com.inovaufrpe.makeparty.cliente.dominio;
 
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Wishlists {
 
-    private ArrayList<Ads> ad;
+    public List<Ad> ads;
+    //public List<Ad> ads;
     private Customer nomesocial;
 
-    public ArrayList<Ads> getAd() {
-        return ad;
+    public List<Ad> getAd() {
+        return ads;
     }
-
-    public void setAd(ArrayList<Ads> ad) {
-        this.ad = ad;
+    public void setAd(List<Ad> ads) {
+        this.ads = ads;
     }
 
     public Customer getNomesocial() {
@@ -24,11 +25,5 @@ public class Wishlists {
     public void setNomesocial(Customer nomesocial) {
         this.nomesocial = nomesocial;
     }
-
-
-
-
-
-
 
 }
