@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
+import com.inovaufrpe.makeparty.user.gui.CadastroActivity;
 import com.inovaufrpe.makeparty.user.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.CalendarioDialog;
@@ -46,6 +48,9 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
     private FloatingActionButton floatingAddListaDesejo;
     private FrameLayout containerComentarios;
     private TextView textViewPergJaConhece;
+    private String validar = "";
+    boolean isValido = false;
+    private ProgressDialog mprogressDialog;
     private View v;
 
     @Override
@@ -152,8 +157,11 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         nomeFornecedor.setText(("Nome do fornecedor(a) :" +anuncioSelecionado.getOwner().getSocialname()));
         String myFormat = "dd/MM/yyyy HH:mm"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("pt","BR"));
+        String[] createdAtEmString = anuncioSelecionado.getCreatedAt().toString().split("T");
+        StringBuffer diaMesAnoCreated = new StringBuffer(createdAtEmString[0]);
+        diaMesAnoCreated.reverse();
         //String createdAtEmString = sdf.format(anuncioSelecionado.getCreatedAt().toString());
-        //datapub.setText(("Data de publicação :"+createdAtEmString));
+        datapub.setText(("Data de publicação :"+diaMesAnoCreated));
         /*String dateStr = obj.getString("birthdate");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date birthDate = sdf.parse(dateStr);*/
@@ -182,29 +190,25 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja adicionar esse anúncio a sua lista de desejo ?", new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {
-                //
-                //
-                //
                 if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("null")){
                     mudarTela(EntrarOuCadastrarActivity.class);
                 }else if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
-                    showProgressDialogWithTitle("Por favor, espere", "adicionano esse anúncio a sua lista de desejo");
-                    msgToast("Anúncio adicionado a lista de desejos com sucesso");
-                    msgToast("Erro"); /////////////ERRRRRRRRRRRRRRRRRRRRRO PQ AINDA N ADD ND, TENHO Q ACRESC OS METOOOOOOODOSS DE ADD
+                    mprogressDialog = new ProgressDialog(DetalhesAnuncioActivity.this);
+                    mprogressDialog.setMessage("Adicionando esse anúncio a sua lista de desejo");
+                    mprogressDialog.show();
+                    try{
+                        addAnuncioAListaDeDesejoOficial();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                   exibirMsgSeValidouadd();
+                    mprogressDialog.dismiss();
                 } else if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
                     msgToast("Método negado, entre com uma conta do tipo cliente para fazer essa ação");
                 }
             }
         });
 
-    }
-    public void showProgressDialogWithTitle(String title, String msgEmbaixo) {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(false);
-        progressDialog.setTitle(title);
-        progressDialog.setMessage(msgEmbaixo);
-        progressDialog.show();
     }
     public void msgToast(String msgToast){
         Toast.makeText(this, msgToast, Toast.LENGTH_SHORT).show();
@@ -220,6 +224,43 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         Intent intent = new Intent(this, tela);
         startActivity(intent);
         finish();
+    }
+    private void addAnuncioAListaDeDesejoOficial() throws InterruptedException{
+        String token=  "," + "\"token\"" + ":" + "\""+SessaoApplication.getInstance().getTokenUser() +"\"" +"}";
+        String jsonAMao ="{" + "\"ad\":"+"\""+FiltroAnuncioSelecionado.instance.getAnuncioSelecionado().get_id()+"\""+ token;
+        callServer("POST",jsonAMao);
+    }
+    private void excluindoComentario(String json) throws InterruptedException{
+        callServer("DELETE",json);
+    }
+    private void modificandoComentario(String json) throws InterruptedException{
+        callServer("PUT",json);
+    }
+
+    private void callServer(final String method, final String data) throws InterruptedException{
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (method.equals("POST")) {
+                    validar = ConectarServidor.post("https://makepartyserver.herokuapp.com/wishlists", data);
+                    Log.i("Script", "OLHAAA: " + validar);
+                    Log.i("ddd",validar.substring(2, 5));
+                    if (validar.substring(2, 5).equals("err")) {
+                        // Não sei qual o erro
+                        validar = "Não foi possível adicionar o anúncio ou ela já está na sua lista de desejo";
+                        // Rever a mensagem
+                    } else {
+                        validar = "Anúncio adicionado com sucesso";
+                        isValido = true;
+                    }
+                }
+            }
+        });
+        thread.start();
+        thread.join();
+    }
+    public void exibirMsgSeValidouadd(){
+        Toast.makeText(getApplicationContext(), validar, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -185,6 +185,13 @@
     <string name="button_criar_evento_forn">Criar evento/indisponibilidade</string>
     <string name="text_view_editar_evento_forn">Editar evento ou indisponibilidade</string>
     <string name="text_view_tipo_evento_editar_forn">Selecione o tipo :</string>
+    <string name="text_view_tipo_evento_forn">Tipo do evento : Aniversário</string>
+    <string name="text_view_data_inicio_evento_lista_forn">Data de inicio: XX/XX/XXXX às XX:XX</string>
+    <string name="text_view_data_fim_evento_lista_forn">Data fim : XX/XX/XXXX às XX:XX</string>
+    <string name="text_view_situacao_evento_lista_forn">Situação : Já pago</string>
+    <string name="button_editar_evento_forn">Atualizar evento</string>
+    <string name="button_excluir_evento_forn">Excluir evento</string>
+    <string name="button_editar_evento">Editar evento</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>

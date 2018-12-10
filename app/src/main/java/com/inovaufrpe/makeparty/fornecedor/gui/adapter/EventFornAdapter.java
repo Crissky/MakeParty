@@ -19,55 +19,52 @@ import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventsViewHolder> {
+public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.EventsFornViewHolder> {
     private final List<Event> events;
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     private final Context context;
-    private final EventAdapter.EventOnClickListener onClickListener;
+    private final EventFornAdapter.EventFornOnClickListener onClickListener;
 
     //abaixo metodos que devem ser implementados para ter diferentes respostas dependendo do clique
-    public interface EventOnClickListener {
-        void onClickEvent(EventAdapter.EventsViewHolder holder, int indexEvent);
+    public interface EventFornOnClickListener {
+        void onClickEvent(EventFornAdapter.EventsFornViewHolder holder, int indexEvent);
     }
-    //Aqui esta informando que esse adapter , essa classe EventAdapter esta personalizando cada item de uma lista
+    //Aqui esta informando que esse adapter , essa classe EventFornAdapter esta personalizando cada item de uma lista
     // uma lista de avaliacoes que no caso ficará "guardada" em Events
-    public EventAdapter(Context context, List<Event> events, EventAdapter.EventOnClickListener onClickListener) {
+    public EventFornAdapter(Context context, List<Event> events, EventFornAdapter.EventFornOnClickListener onClickListener) {
         this.context = context;
         this.events = events;
         this.onClickListener = onClickListener;
     }
     //aqui embaixo esta informando qual xml ta desenhando o item de cada lista, esta personalizando o item
     @Override
-    public EventAdapter.EventsViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public EventFornAdapter.EventsFornViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Este método cria uma subclasse de RecyclerView.ViewHolder
         // Infla a view do layout
-        //ESSE VIEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW AQ DEBAXO TA ERRADO NEHH
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_comentario_anuncio, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_evento_forn, viewGroup, false);
         // Cria a classe do ViewHolder
-        EventAdapter.EventsViewHolder holder = new EventAdapter.EventsViewHolder(view);
+        EventFornAdapter.EventsFornViewHolder holder = new EventFornAdapter.EventsFornViewHolder(view);
         return holder;
     }
     //aqui embaixo "implementa" parte 1 doq acontece ao selecionar um item clique normal
     //seta os itens view do item, trocando pelas informações corretas em cada campo
     @Override
-    public void onBindViewHolder(final EventAdapter.EventsViewHolder holder, final int position) {
-        // Rating da linha
-        Event eventw = events.get(position);
+    public void onBindViewHolder(final EventFornAdapter.EventsFornViewHolder holder, final int position) {
+        // evento da linha
+        Event eventoGet = events.get(position);
 
         // Atualizada os valores nas views
-        //holder.nomeCliente.setText(ava.get);
-        // holder.tDescComent.setText(("Descrição:"+ava.getDescriptionComment()));
+        holder.tipoEvento.setText(("Tipo do evento :"+eventoGet.getType()));
+        holder.nomeCliente.setText(("Nome do cliente :"+eventoGet.getClient()));
+        holder.dataInicioEvento.setText(("Data de ínicio :"+eventoGet.getStartDate()));
+        holder.dataFimEvento.setText(("Data fim do evento :"+eventoGet.getEndDate()));
+        holder.situacaoEvento.setText(("Situação: "));
 
         /*SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy",new Locale("pt","BR"));
         String result = out.format(new Date(String.valueOf(ava.getDateComment())));
         holder.dataComentCliente.setText(("Data: "+ result));
         */
-        //holder.estrelasNotaAvaliacaoCliente.setRating(ava.getRatingUser().intValue());
-        //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView); HMMMMMMM
 
-        // Foto do perfil da pessoa?
-        //ImageUtils.setImage(context,"http://i.imgur.com/DvpvklR.png", holder.img);
-        //holder.menuMiniOpcoesComentEspecif.                      -- nn, n sei como fazer p mostrar aq nesse menuMini
 
         if (onClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -77,10 +74,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventsViewHo
                 }
             });
         }
-        //ads.get(position).getSelecionado()
-        //int corFundo = context.getResources().getColor(ava.selected ? R.color.colorRosaClaro : R.color.colorWhite);
+        int corFundo = context.getResources().getColor(eventoGet.selected ? R.color.colorRosaClaro : R.color.colorWhite);
 
-        //holder.cardView.setCardBackgroundColor(corFundo);
+        holder.cardView.setCardBackgroundColor(corFundo);
     }
     //metodo abaixo retorna quantos itens anuncio tem
     @Override
@@ -90,33 +86,30 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventsViewHo
 
     //metodo abaixo diz q é classe view e que herda de RecyclerView.ViewHolder
     //declara os itens view do adapter de anuncio (o que tem de view em cada item da lista )
-    public static class EventsViewHolder extends RecyclerView.ViewHolder {
+    public static class EventsFornViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        public ImageView img;
+        public TextView tipoEvento;
         public TextView nomeCliente;
-        public TextView tDescComent;
-        public RatingBar estrelasNotaAvaliacaoCliente;
-        public TextView dataComentCliente;
-        ImageButton menuMiniOpcoesComentEspecif;
-
+        public TextView dataInicioEvento;
+        public TextView dataFimEvento;
+        public TextView situacaoEvento;
 
         private ProgressBar progress;
         public View view;
 
-        public EventsViewHolder(View view) {
+        public EventsFornViewHolder(View view) {
             super(view);
             this.view = view;
 
             //// Cria as views para salvar no ViewHolder
             cardView = view.findViewById(R.id.card_view);
-            img = (ImageView) view.findViewById(R.id.img);
-            nomeCliente = (TextView) view.findViewById(R.id.textView);
-            tDescComent = (TextView) view.findViewById(R.id.text);
-            estrelasNotaAvaliacaoCliente = (RatingBar) view.findViewById(R.id.ratingBarJaAvaliadoComent);
-            dataComentCliente = (TextView) view.findViewById(R.id.textViewDataAvaliacaoAnuncioCliente);
+            tipoEvento = (TextView) view.findViewById(R.id.textViewTipoEventoForn);
+            nomeCliente = (TextView) view.findViewById(R.id.textViewNomeClienteEvento);
+            dataInicioEvento =(TextView) view.findViewById(R.id.textViewDataInicioEventoListaForn);
+            dataFimEvento = (TextView) view.findViewById(R.id.textViewDataFimEventoListaForn);
+            situacaoEvento = (TextView) view.findViewById(R.id.textViewSituacaoEventoListaForn);
             progress = (ProgressBar) view.findViewById(R.id.progress);
             cardView = (CardView) view.findViewById(R.id.card_view);
-            menuMiniOpcoesComentEspecif =(ImageButton) view.findViewById(R.id.menuMiniOpcoesComentEspecif);
 
         }
 

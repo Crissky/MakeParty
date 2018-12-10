@@ -178,10 +178,10 @@ public class AnuncioEmComumService {
                 //Log.d("dataveae",c.getCreatedAt().toString());
 
                 //c.setUpdatedAt();
-               /* Long createdAt = jsonAnuncio.optLong("createdAt");
+                Long createdAt = jsonAnuncio.optLong("createdAt");
                 Date createdAtConv = new Date(createdAt);
                 c.setCreatedAt(createdAtConv);
-                */
+
                 Address addressAnuncio = new Address();
                 JSONObject objetoEndAnuncio = jsonAnuncio.getJSONObject("address");
                 //LEMBRANDO Q ESSES OBJ N PODEM FICAR NULL EXPLIC , SE N, DA ERROO NA CONV

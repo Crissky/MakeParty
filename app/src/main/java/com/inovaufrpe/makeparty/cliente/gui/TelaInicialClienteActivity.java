@@ -18,9 +18,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;

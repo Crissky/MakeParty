@@ -85,11 +85,11 @@
         <activity android:name=".cliente.gui.DetalhesAnuncioActivity" />
         <activity android:name=".cliente.gui.AvaliacaoNotaActivity" />
         <activity android:name=".cliente.gui.AtualizarPerfilClienteActivity" />
-        <activity android:name=".fornecedor.gui.CalendarActivity" />
+        <activity android:name=".fornecedor.gui.CalendarFornActivity" />
         <activity android:name=".fornecedor.gui.NotificacoesActivity" />
         <activity android:name=".fornecedor.gui.ConfiguracoesFornecedorActivity" />
         <activity android:name=".fornecedor.gui.AnunciosFornecedorActivity" />
-        <activity android:name=".fornecedor.gui.CapturaDadosCalendarActivity" />
+        <activity android:name=".fornecedor.gui.CapturaDadosCalendarFornActivity" />
         <activity android:name=".cliente.gui.ListaDesejosClienteActivity" />
         <activity android:name=".fornecedor.gui.CriarAnuncioActivity" />
         <activity android:name=".cliente.gui.DispDiaSelecPeloClienteActivity" />

@@ -352,7 +352,15 @@
                 android:layout_margin="18dp"
                 android:background="@color/colorButoes"
                 android:textColor="@color/colorTextoBut"
-                android:text="@string/button_criar_evento_forn"/>
+                android:text="@string/button_editar_evento_forn"/>
+            <Button
+                android:id="@+id/excluirEvFornTelaEditarEv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:background="@color/colorButoes"
+                android:textColor="@color/colorTextoBut"
+                android:text="@string/button_excluir_evento_forn"/>
 
         </LinearLayout>
 

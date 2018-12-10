@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Agendamento;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.AgendamentosFornecedorAdapter;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
@@ -19,17 +20,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CapturaDadosCalendarActivity extends Activity {
+public class CapturaDadosCalendarFornActivity extends Activity {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private Date date;
-    private List<Agendamento> agendamentos = new ArrayList<>();
+    private List<Event> events = new ArrayList<>();
     private Button btCriarEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_captura_dados_calendar);
-        SessaoApplication.getInstance().setTelaAtual(CapturaDadosCalendarActivity.class);
+        setContentView(R.layout.activity_captura_dados_calendar_forn);
+        SessaoApplication.getInstance().setTelaAtual(CapturaDadosCalendarFornActivity.class);
         pegarIntent();
         setUpToolbar();
         configurarTela();
@@ -63,13 +64,16 @@ public class CapturaDadosCalendarActivity extends Activity {
                 irTelaCriarEvento();
             }
         });
-        ListView listView = findViewById(R.id.listView);
-        AgendamentosFornecedorAdapter adapter = new AgendamentosFornecedorAdapter(CapturaDadosCalendarActivity.this, agendamentos);
-        listView.setAdapter(adapter);
+        //ListView listView = findViewById(R.id.listView);
+        //AgendamentosFornecedorAdapter adapter = new AgendamentosFornecedorAdapter(CapturaDadosCalendarFornActivity.this, events);
+        //listView.setAdapter(adapter);
+    }
+    private void criarFrag(){
+
     }
 
     private void irTelaCriarEvento(){
-        Intent intent = new Intent(CapturaDadosCalendarActivity.this, CriarEventoFornActivity.class);
+        Intent intent = new Intent(CapturaDadosCalendarFornActivity.this, CriarEventoFornActivity.class);
         intent.putExtra("timeLong", date.getTime());
         startActivity(intent);
     }

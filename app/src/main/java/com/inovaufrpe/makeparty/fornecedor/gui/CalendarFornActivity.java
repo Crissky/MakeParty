@@ -1,7 +1,6 @@
 package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,18 +8,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
-import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Agendamento;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.infra.utils.AgendamentoBuilder;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarFornActivity extends AppCompatActivity {
     private CompactCalendarView calendarView;
     private SimpleDateFormat sdf = new SimpleDateFormat("MMMM/yyyy");
     private TextView textView;
@@ -28,8 +22,8 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
-        SessaoApplication.getInstance().setTelaAtual(CalendarActivity.class);
+        setContentView(R.layout.activity_calendar_forn);
+        SessaoApplication.getInstance().setTelaAtual(CalendarFornActivity.class);
         setUpToolbar();
         configurarTela();
     }
@@ -52,7 +46,7 @@ public class CalendarActivity extends AppCompatActivity {
         calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                Intent intent = new Intent(CalendarActivity.this, CapturaDadosCalendarActivity.class);
+                Intent intent = new Intent(CalendarFornActivity.this, CapturaDadosCalendarFornActivity.class);
                 intent.putExtra("dataLongMiliseconds", dateClicked.getTime());
                 startActivity(intent);
             }

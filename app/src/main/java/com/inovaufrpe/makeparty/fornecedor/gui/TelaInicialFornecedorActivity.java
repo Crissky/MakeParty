@@ -32,7 +32,7 @@ public class TelaInicialFornecedorActivity extends AppCompatActivity {
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TelaInicialFornecedorActivity.this,CalendarActivity.class));
+                startActivity(new Intent(TelaInicialFornecedorActivity.this,CalendarFornActivity.class));
             }
         });
         configuracoes.setOnClickListener(new View.OnClickListener() {

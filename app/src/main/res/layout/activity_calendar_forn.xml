@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fornecedor.gui.CalendarActivity">
+    tools:context=".fornecedor.gui.CalendarFornActivity">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/materialup.appbar"
         android:layout_width="match_parent"

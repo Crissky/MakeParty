@@ -36,7 +36,7 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
         tipoEventoFornSelecionado = findViewById(R.id.textViewTipoEouIEventoSelecionado);
         enderecoEventoForn = findViewById(R.id.textViewDescricaoEventoSelecionado);
         descricaoEventoFornSelecionado = findViewById(R.id.textViewDescricaoEventoSelecionado);
-        btAtualizarEventoForn = findViewById(R.id.buttonAtualizarEventoForn);
+        btAtualizarEventoForn = findViewById(R.id.buttonEditarEventoForn);
         btExcluirEventoForn = findViewById(R.id.buttonExcluirEventoForn);
     }
 

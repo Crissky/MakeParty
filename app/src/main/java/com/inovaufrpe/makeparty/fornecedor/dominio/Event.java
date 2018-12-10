@@ -12,6 +12,8 @@ public class Event {
     private String description;
     private String type;
     private Address address;
+    //esse atributo de selecionado n é p ta ai, mas funciona p saber se foi selecionado ou n
+    public boolean selected;
 
     public Event(Owner owner, String advertiser, String client, String startDate, String endDate, String description, String type, Address address) {
         this.owner = owner;

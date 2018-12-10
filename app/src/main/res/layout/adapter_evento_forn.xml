@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardElevation="3dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="false"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="6dp">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="215dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTipoEventoForn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/text_view_tipo_evento_forn"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/textViewNomeClienteEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="9dp"
+                android:text="@string/text_view_nome_cliente_evento_selec"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewDataInicioEventoListaForn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/text_view_data_inicio_evento_lista_forn"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/textViewDataFimEventoListaForn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/text_view_data_fim_evento_lista_forn"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/textViewSituacaoEventoListaForn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/text_view_situacao_evento_lista_forn"
+                android:textSize="14sp"
+                android:visibility="invisible"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>
