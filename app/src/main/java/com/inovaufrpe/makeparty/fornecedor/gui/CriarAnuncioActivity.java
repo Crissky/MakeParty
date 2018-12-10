@@ -40,7 +40,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     private EditText edtTitulo, edtValor, edtDescricao, edtTags, edtTelefone, edtRua, edtNumero, edtBairro, edtCidade, edtCep;
     private Spinner edtTipoAnuncio;
     private Button cadastroAnuncio;
-    private ImageButton imgButtonImgsAnex,imgButtonAnexMaisFt;
+    private ImageButton imgButtonAnexMaisFt;
     private String validar = "";
     private boolean isValido = false;
     private ProgressDialog mprogressDialog;
@@ -61,6 +61,12 @@ public class CriarAnuncioActivity extends AppCompatActivity {
                 onClickCriarAnuncio();
            }
        });
+        imgButtonAnexMaisFt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickPegarFotosGaleria(v);
+            }
+        });
 
     }
 
@@ -84,7 +90,6 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         edtCep.addTextChangedListener(Mask.insert("#####-###",edtCep));
         cadastroAnuncio = findViewById(R.id.button_criar_anuncio);
         edtTipoAnuncio = findViewById(R.id.spinnertipoAnuncio);
-        imgButtonImgsAnex = findViewById(R.id.imgButtonGalFotosAnexAn);
         imgButtonAnexMaisFt = findViewById(R.id.imgButtonAnexarMaisFtAn);
     }
 

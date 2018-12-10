@@ -206,17 +206,33 @@
                     android:visibility="visible"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="783dp" />
-                <TextView
-                    android:id="@+id/textViewAnexarImgAnuncio"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_marginTop="36dp"
-                    android:text="@string/text_view_anexar_img_an"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="19sp"
-                    tools:layout_editor_absoluteX="95dp"
-                    tools:layout_editor_absoluteY="46dp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/textViewAnexarImgAnuncio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="16dp"
+                        android:layout_marginTop="36dp"
+                        android:text="@string/text_view_anexar_img_an"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="19sp"
+                        tools:layout_editor_absoluteX="95dp"
+                        tools:layout_editor_absoluteY="46dp"
+                        android:layout_weight="1"/>
+                    <ImageButton
+                        android:id="@+id/imgButtonAnexarMaisFtAn"
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:onClick="onClickPegarFotosGaleria"
+                        android:src="@drawable/ic_control_point_24dp" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/textViewObsLimitesAnuncioForn"
                     android:layout_width="match_parent"
@@ -230,25 +246,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="1"
-                    android:weightSum="2">
+                    android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/imgButtonGalFotosAnexAn"
-                        android:layout_width="5dp"
-                        android:layout_height="150dp"
-                        android:layout_margin="16dp"
-                        android:layout_weight="1" />
-
-                    <ImageButton
-                        android:id="@+id/imgButtonAnexarMaisFtAn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:layout_weight="1"
-                        android:onClick="onClickPegarFotosGaleria"
-                        android:src="@drawable/ic_control_point_24dp" />
                 </LinearLayout>
 
 

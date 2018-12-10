@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".fornecedor.gui.TesteCapturaGaleriaActivity">
 
+    <Button
+        android:id="@+id/botao"
+        android:layout_width="178dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Selecionar Imagem"
+        android:background="@color/colorButoes"
+        android:textColor="@color/colorTextoBut"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,9 +25,7 @@
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_margin="8dp"
-            android:src="@drawable/placeholder"
             tools:layout_editor_absoluteX="221dp"
             tools:layout_editor_absoluteY="183dp" />
 
@@ -48,14 +55,6 @@
             tools:layout_editor_absoluteY="698dp" />
 
     </LinearLayout>
-    <Button
-        android:id="@+id/botao"
-        android:layout_width="178dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center"
-        android:layout_margin="8dp"
-        android:text="Selecionar Imagem"
-        android:background="@color/colorButoes"
-        android:textColor="@color/colorTextoBut"/>
+
 
 </LinearLayout>

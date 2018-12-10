@@ -5,20 +5,26 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class TesteCapturaGaleriaActivity extends AppCompatActivity {
-
+    public static final int IMAGE_GALLERY_REQUEST = 20;
+    public static final int CAMERA_REQUEST_CODE = 228;
     private ImageView imagem1;
     private ImageView imagem2;
     private ImageView imagem3;
@@ -27,51 +33,55 @@ public class TesteCapturaGaleriaActivity extends AppCompatActivity {
     private final int GALERIA_IMAGENS = 1;
     private ArrayList<ImageView> listaImagens;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teste_captura_galeria);
         SessaoApplication.getInstance().setTelaAtual(TesteCapturaGaleriaActivity.class);
-
-        imagem1= (ImageView) findViewById(R.id.imageView1);
-        imagem2= (ImageView) findViewById(R.id.imageView2);
-        imagem3= (ImageView) findViewById(R.id.imageView3);
-        imagem4= (ImageView) findViewById(R.id.imageView4);
-        botao = (Button) findViewById(R.id.botao);
-
+        setTela();
         botao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new   Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,GALERIA_IMAGENS);
+                onGaleriaClicked(v);
             }
         });
         }
-
+    public void setTela(){
+        imagem1= findViewById(R.id.imageView1);
+        imagem2= findViewById(R.id.imageView2);
+        imagem3= findViewById(R.id.imageView3);
+        imagem4= findViewById(R.id.imageView4);
+        botao = findViewById(R.id.botao);
+    }
+    public void onGaleriaClicked(View v) {
+        Intent selecionarFoto = new Intent(Intent.ACTION_PICK);
+        File diretorioImagem = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        String diretorioImagemPath = diretorioImagem.getPath();
+        Uri data = Uri.parse(diretorioImagemPath);
+        selecionarFoto.setDataAndType(data, "image/*");
+        startActivityForResult(selecionarFoto, IMAGE_GALLERY_REQUEST);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    if (resultCode== RESULT_OK && requestCode== GALERIA_IMAGENS) {
-        Uri selectedImage= data.getData();
-        String[] filePath= { MediaStore.Images.Media.DATA};
-        Cursor c = getContentResolver().query(selectedImage,filePath, null, null, null);
-        c.moveToFirst();
-        int columnIndex= c.getColumnIndex(filePath[0]);
-        String picturePath= c.getString(columnIndex);c.close();
-        Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-        imagem1.setImageBitmap(thumbnail);      /// imagem sendo setado na tela
-        imagem2.setImageBitmap(thumbnail);      /// imagem setado na tela
-        imagem3.setImageBitmap(thumbnail);      /// imagem setado na tela
-        imagem4.setImageBitmap(thumbnail);      /// imagem setado na tela
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST_CODE) {
+                Toast.makeText(this, "Imagem salva", Toast.LENGTH_LONG).show();
+            }
+            if (requestCode == IMAGE_GALLERY_REQUEST) {
+                Uri imageUri = data.getData();
+                InputStream inputStream;
+                try {
+                    inputStream = getContentResolver().openInputStream(imageUri);
+                    Bitmap image = BitmapFactory.decodeStream(inputStream);
+                    imagem1.setImageBitmap(image);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Não foi possível abrir a imagem", Toast.LENGTH_LONG).show();
+                }
 
-
+            }
+        }
     }
-
-
-
-    }
-
     private void mudarTela(Class proximaTela){
         Intent intent = new Intent( TesteCapturaGaleriaActivity.this, proximaTela);
         startActivity(intent);
@@ -79,8 +89,9 @@ public class TesteCapturaGaleriaActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed(){
         this.mudarTela(SessaoApplication.getInstance().getTelaAnterior());
     }
 
 }
+
