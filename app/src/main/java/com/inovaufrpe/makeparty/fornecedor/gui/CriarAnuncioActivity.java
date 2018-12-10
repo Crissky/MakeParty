@@ -125,7 +125,9 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         String bairro = edtBairro.getText().toString().trim();
         String cep = edtCep.getText().toString().trim();
         String rua = edtRua.getText().toString().trim();
+        String numero = edtNumero.getText().toString().trim();
         String titulo = edtTitulo.getText().toString().trim();
+        String valor = edtValor.getText().toString().trim();
 //        double valor = Double.parseDouble(edtValor.getText().toString().trim());
         String descricao = edtDescricao.getText().toString().trim();
         String telefone = edtTelefone.getText().toString().trim();
@@ -138,6 +140,10 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         }else if(!validacaoGuiRapida.isCampoAceitavel(descricao)){
             this.edtDescricao.setError("Descreva melhor o seu serviço");
             this.edtDescricao.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isDouble(valor)){
+            this.edtValor.setError("Digite o valor do seu serviço");
+            this.edtValor.requestFocus();
             return false;
         }else if(!validacaoGuiRapida.isTelefoneValido(telefone)){
             this.edtTelefone.setError("Telefone Invalido ou sem ddd");

@@ -245,6 +245,15 @@ public class ValidacaoGuiRapida {
         String dataFormatada = dataNova.substring(SEIS, TAMANHO_DATA_SB) + "/" + dataNova.substring(QUATRO, SEIS) + "/" + dataNova.substring(ZERO, QUATRO);
         return dataFormatada;
     }
+    public boolean isDouble(String valor){
+        try {
+            Double valorDouble = Double.parseDouble(valor);
+        } catch (NumberFormatException e) {
+            //Se chegou aqui, não é um double!
+            return false;
+        }
+        return true;
+    }
     //metodo abaixo para tirar acento
     public static String deAccent(String str) {
         String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);

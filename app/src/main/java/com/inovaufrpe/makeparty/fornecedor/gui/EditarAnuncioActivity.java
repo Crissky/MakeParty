@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.infra.utils.Mask;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
@@ -34,7 +35,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     private EditText editTextRuaAnuncio,editTextNumeroEndAnuncio,editTextBairroEndAnuncio,editTextCidadeEndAnuncio,editTextCepEndAnuncio;
     private TextView textViewLimitesAnuncio;
     private Button buttonAtualizarAnuncio,buttonExcluirAnuncio;
-    private ImageButton ImgButtonGalFotosAnex;
+    private ImageButton ImgButtonGalFotosAnex,imgButtonAnexarMaisFtAnEdit;
     ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
     private String validar = "";
     boolean isValido = false;
@@ -60,6 +61,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         editTextCepEndAnuncio = findViewById(R.id.editTextCepEditarAnuncio);
         textViewLimitesAnuncio= findViewById(R.id. textViewObsLimitesAnuncioForn);
         ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
+        imgButtonAnexarMaisFtAnEdit =findViewById(R.id.imgButtonAnexarMaisFtAnEdit);
         buttonAtualizarAnuncio = findViewById(R.id.button_atualizar_anuncio);
         buttonExcluirAnuncio = findViewById(R.id.button_excluir_anuncio);
         acoesButoesAtualizarOuExcluirAnuncio();
@@ -79,23 +81,32 @@ public class EditarAnuncioActivity extends AppCompatActivity {
                 cliqueExcluindoAnuncio();
             }
         });
+        imgButtonAnexarMaisFtAnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudarTela(TesteCapturaGaleriaActivity.class);
+            }
+        });
+
     }
 
     public void setandoInfoItensViewAntesEdicao(){
         Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
 
         //spinnerTipoAnuncio.setOnItemSelectedListener(anuncioSelecionado.getType());
-
+        //spinnerTipoAnuncio.setSelection(adapter.getPosition("SP"))
         editTextTituloAnuncio.setText(anuncioSelecionado.getTitle());
-        //editTextValorAnuncio.setText((int) anuncioSelecionado.getPrice());
+        editTextValorAnuncio.setText((String.valueOf(anuncioSelecionado.getPrice())));
         editTextDescAnuncio.setText(anuncioSelecionado.getDescription());
         //editTextTagsAnuncio.setText((anuncioSelecionado.getTags().toString()));
         editTextTelefoneAnuncio.setText((anuncioSelecionado.getPhone()));
+        editTextTelefoneAnuncio.addTextChangedListener(Mask.insert("(##)#####-####",editTextTelefoneAnuncio));
         editTextRuaAnuncio.setText(anuncioSelecionado.getAddress().getStreet());
         editTextNumeroEndAnuncio.setText(anuncioSelecionado.getAddress().getNumber());
         editTextBairroEndAnuncio.setText(anuncioSelecionado.getAddress().getNeighborhood());
         editTextCidadeEndAnuncio .setText(anuncioSelecionado.getAddress().getCity());
         editTextCepEndAnuncio.setText(anuncioSelecionado.getAddress().getZipcode());
+        editTextCepEndAnuncio.addTextChangedListener(Mask.insert("#####-###",editTextCepEndAnuncio));
         textViewLimitesAnuncio.setText("");
         ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
         //buscarAntigasImgAntesEdicao();
@@ -138,6 +149,9 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         Ads dadosAnuncioSelecionadoAntesEdicao = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         Ads anuncioASerEnviadoPUT =  new Ads();
         anuncioASerEnviadoPUT.set_id( dadosAnuncioSelecionadoAntesEdicao.get_id());
+        String tipo = spinnerTipoAnuncio.getSelectedItem().toString().trim();
+        tipo=ValidacaoGuiRapida.deAccent(tipo);
+        anuncioASerEnviadoPUT.setType(tipo);
         anuncioASerEnviadoPUT.setTitle(editTextTituloAnuncio.getText().toString());
         anuncioASerEnviadoPUT.setPrice(Double.parseDouble(editTextValorAnuncio.getText().toString().trim()));
         anuncioASerEnviadoPUT.setDescription(editTextDescAnuncio.getText().toString());
@@ -187,9 +201,9 @@ public class EditarAnuncioActivity extends AppCompatActivity {
                 if (isValido){
                         msgToast("Anúncio excluído com sucesso");
                         mudarTela(AnunciosFornecedorActivity.class);
-                    }else{
-                        msgToast("Erro");
-                    };
+                }else{
+                    msgToast("Erro");
+                };
                 }
             });
         }
@@ -198,8 +212,10 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         String bairro = editTextBairroEndAnuncio.getText().toString().trim();
         String cep = editTextCepEndAnuncio.getText().toString().trim();
         String rua = editTextRuaAnuncio.getText().toString().trim();
+        String numero = editTextNumeroEndAnuncio.getText().toString().trim();
         String titulo = editTextTituloAnuncio.getText().toString().trim();
-//        double valor = Double.parseDouble(edtValor.getText().toString().trim());
+        String valor = editTextValorAnuncio.getText().toString().trim();
+        //double valor = Double.parseDouble(editTextValorAnuncio.getText().toString().trim());
         String descricao = editTextDescAnuncio.getText().toString().trim();
         String telefone = editTextTelefoneAnuncio.getText().toString().trim();
 
@@ -208,9 +224,13 @@ public class EditarAnuncioActivity extends AppCompatActivity {
             this.editTextTituloAnuncio.setError(("Digite o título do seu anúncio"));
             this.editTextTituloAnuncio.requestFocus();
             return false;
-        }else if(!validacaoGuiRapida.isCampoAceitavel(descricao)){
+        }else if(!validacaoGuiRapida.isCampoAceitavel(descricao)) {
             this.editTextDescAnuncio.setError("Descreva melhor o seu serviço");
             this.editTextDescAnuncio.requestFocus();
+            return false;
+        }else if(!validacaoGuiRapida.isDouble(valor)){
+            this.editTextValorAnuncio.setError("Digite o valor do seu serviço");
+            this.editTextValorAnuncio.requestFocus();
             return false;
         }else if(!validacaoGuiRapida.isTelefoneValido(telefone)){
             this.editTextTelefoneAnuncio.setError("Telefone Invalido ou sem ddd");

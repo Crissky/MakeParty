@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class TesteCapturaGaleriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teste_captura_galeria);
+        SessaoApplication.getInstance().setTelaAtual(TesteCapturaGaleriaActivity.class);
 
         imagem1= (ImageView) findViewById(R.id.imageView1);
         imagem2= (ImageView) findViewById(R.id.imageView2);
@@ -68,7 +70,6 @@ public class TesteCapturaGaleriaActivity extends AppCompatActivity {
 
 
 
-
     }
 
     private void mudarTela(Class proximaTela){
@@ -79,7 +80,7 @@ public class TesteCapturaGaleriaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        this.mudarTela(CriarAnuncioActivity.class);
+        this.mudarTela(SessaoApplication.getInstance().getTelaAnterior());
     }
 
 }

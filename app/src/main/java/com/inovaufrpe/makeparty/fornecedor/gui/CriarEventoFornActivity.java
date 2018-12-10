@@ -23,6 +23,9 @@ public class CriarEventoFornActivity extends AppCompatActivity {
     private RadioGroup group, tipo;
     private Button criar;
     private EditText obs, hInicio, mInicio, hFim, mFim, endereco, nomeCliente;
+    private EditText ruaIdCriarEvForn,numeroCriarEvForn,
+            bairroCriarEvForn,cidadeCriarEvForn,cepCriarEvForn;
+
     private Date date = new Date(), dateInicio = new Date(), dateFim = new Date();
     private CheckBox horFimAteOutroDia;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -51,6 +54,11 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         nomeCliente = findViewById(R.id.nomeClienteDoCriarEventoFornSeta);
         horFimAteOutroDia = findViewById(R.id.checkBoxPergCriarEventoHorFimOutroDia);
         textViewDataNTermMsmDiaDigDataFim=findViewById(R.id.textViewDataNTermMsmDiaDigDataFim);
+        ruaIdCriarEvForn =findViewById(R.id.editTextRuaIdCriarEvForn);
+        bairroCriarEvForn =findViewById(R.id.editTextBairroCriarEvForn);
+        cidadeCriarEvForn =findViewById(R.id.editTextCidadeCriarEvForn);
+        cepCriarEvForn =findViewById(R.id.editTextCepCriarEvForn);
+        numeroCriarEvForn =findViewById(R.id.editTextNumeroCriarEvForn);
 
         criar = findViewById(R.id.criarEvForn);
         criar.setOnClickListener(new View.OnClickListener() {

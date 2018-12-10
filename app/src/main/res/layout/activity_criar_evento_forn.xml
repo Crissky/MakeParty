@@ -226,81 +226,106 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Endereço"
+                    android:gravity="center_horizontal"
+                    android:text="Endereço do evento"
                     android:textSize="18sp"
-                    android:layout_marginTop="18dp"/>
+                    android:layout_marginTop="35dp"/>
 
                 <EditText
                     android:id="@+id/addressCriarEventoForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rua do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
                 <EditText
-                    android:id="@+id/RuaIdCriarAnuncio"
+                    android:id="@+id/editTextRuaIdCriarEvForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="27dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="5dp"
                     android:ems="10"
                     android:hint="@string/edit_text_rua_criar_anuncio"
                     android:inputType="text"
                     tools:layout_editor_absoluteX="17dp"
                     tools:layout_editor_absoluteY="646dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Número do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
 
                 <EditText
-                    android:id="@+id/editTextNumeroCriarAnuncio"
+                    android:id="@+id/editTextNumeroCriarEvForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="16dp"
+                    android:layout_marginTop="5dp"
                     android:hint="@string/edit_text_numero_an"
                     android:inputType="number"
-                    android:maxLength="6"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="502dp" />
+                    android:maxLength="6" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bairro do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
 
 
                 <EditText
-                    android:id="@+id/editTextBairroCriarAnuncio"
+                    android:id="@+id/editTextBairroCriarEvForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="16dp"
                     android:ems="10"
                     android:hint="@string/edit_text_bairro_criar_an"
                     android:inputType="text"
                     android:visibility="visible"
+                    android:layout_marginTop="5dp"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="715dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cidade do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
 
                 <EditText
-                    android:id="@+id/editTextCidadeCriarAnuncio"
+                    android:id="@+id/editTextCidadeCriarEvForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="16dp"
                     android:ems="10"
                     android:hint="@string/edit_text_cidade_criar_an"
                     android:inputType="text"
                     android:visibility="visible"
+                    android:layout_marginTop="5dp"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="783dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CEP do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
 
                 <EditText
                     android:id="@+id/editTextCepCriarEvForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="16dp"
                     android:ems="10"
                     android:hint="@string/edit_text_cep_anuncio"
                     android:inputType="number"
-                    android:visibility="visible"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="783dp" />
+                    android:visibility="visible" />
 
             </LinearLayout>
 

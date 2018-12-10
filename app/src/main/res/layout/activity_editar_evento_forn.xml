@@ -224,16 +224,106 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Endereço"
+                    android:gravity="center_horizontal"
+                    android:text="Endereço do evento"
                     android:textSize="18sp"
-                    android:layout_marginTop="18dp"/>
+                    android:layout_marginTop="35dp"/>
 
                 <EditText
                     android:id="@+id/addressEditarEventoForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rua do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
+                <EditText
+                    android:id="@+id/editTextRuaIdEditarEvForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_rua_criar_anuncio"
+                    android:inputType="text"
+                    tools:layout_editor_absoluteX="17dp"
+                    tools:layout_editor_absoluteY="646dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Número do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
+
+                <EditText
+                    android:id="@+id/editTextNumeroEditarEvForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:hint="@string/edit_text_numero_an"
+                    android:inputType="number"
+                    android:maxLength="6" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bairro do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
+
+
+                <EditText
+                    android:id="@+id/editTextBairroEditarEvForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:hint="@string/edit_text_bairro_criar_an"
+                    android:inputType="text"
+                    android:visibility="visible"
+                    android:layout_marginTop="5dp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="715dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cidade do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
+
+                <EditText
+                    android:id="@+id/editTextCidadeEditarEvForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:hint="@string/edit_text_cidade_criar_an"
+                    android:inputType="text"
+                    android:visibility="visible"
+                    android:layout_marginTop="5dp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="783dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CEP do evento :"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
+
+                <EditText
+                    android:id="@+id/editTextCepEditarEvForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:hint="@string/edit_text_cep_anuncio"
+                    android:inputType="number"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
