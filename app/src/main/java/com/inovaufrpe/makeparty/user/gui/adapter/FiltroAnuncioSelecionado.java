@@ -9,7 +9,18 @@ import java.util.Map;
 public class FiltroAnuncioSelecionado {
     public static final FiltroAnuncioSelecionado instance = new FiltroAnuncioSelecionado();
     private final Map<String, Object> values = new HashMap<>();
+    private String tipoAnuncioBottomNavSoPCliente ="null";
 
+    public String getTipoListaPraMostrarSubCategoriaBottomNavCliente(){
+        if (tipoAnuncioBottomNavSoPCliente.equals("null")){
+            //tem q definir aq como o primeiro tipo q aparece no bottom navig
+            this.tipoAnuncioBottomNavSoPCliente="festa";
+        }
+        return tipoAnuncioBottomNavSoPCliente;
+    }
+    public void setTipoListaPraMostrarSubCategoriaBottomNavCliente(String tipoSubCategoriaBottomNav){
+        this.tipoAnuncioBottomNavSoPCliente= tipoSubCategoriaBottomNav;
+    }
     public void setAnunciosList(ArrayList<Ads> anunciosList) {
         setValor("FiltroAnuncioSelecionado.anunciosList", anunciosList);
     }

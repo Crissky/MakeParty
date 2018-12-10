@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fornecedor.gui.CriarEventoFornActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="@dimen/card_border"
+        app:cardElevation="@dimen/card_elevation"
+        android:padding="@dimen/card_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/text_view_add_evento"
+                android:textSize="20sp"
+                android:layout_margin="28dp"/>
+
+            <TextView
+                android:id="@+id/dataSelecionadaCriarEventoForn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Data"
+                android:textSize="18sp"
+                android:layout_margin="15dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="18sp"
+                android:text="@string/text_view_tipo_evento_criado_forn"/>
+            <RadioGroup
+                android:id="@+id/tipoGroupCriarEventoForn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_margin="15dp">
+
+                <RadioButton
+                    android:id="@+id/RadioGrouptipoEventoCriarEventoForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/radio_button_evento"
+                    android:textSize="16sp"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/TipoIndCriarEventoForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:text="@string/radio_button_indisp"/>
+            </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/text_view_selecione_hor_criar_evento_forn"
+                android:textSize="18sp"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroupSelecHorCriarEventoForn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_margin="15dp">
+
+                <RadioButton
+                    android:id="@+id/RadioButtonParteDiaCriarEv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_button_parte_do_dia"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/RadioButtonTodoDiaCriarEv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_button_dia_todo"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/inicioEventoFornCriar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Horário de inicio"
+                    android:textSize="18sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <EditText
+                        android:id="@+id/editTextHoraInicioCriandoEvento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"/>
+                    <EditText
+                        android:id="@+id/editTextMinInicioCriandoEvento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:maxLength="2"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Horário de fim"
+                    android:textSize="18sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <EditText
+                        android:id="@+id/horaFimCriarEventoForn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:inputType="number"
+                        android:maxLength="2"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"/>
+                    <EditText
+                        android:id="@+id/minFimCriarEventoForn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:maxLength="2"/>
+                </LinearLayout>
+            </LinearLayout>
+            <CheckBox
+                android:id="@+id/checkBoxPergCriarEventoHorFimOutroDia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="16sp"
+                android:text="@string/checkbox_perg_vai_ate_outro_dia"/>
+            <TextView
+                android:id="@+id/textViewDataNTermMsmDiaDigDataFim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/text_view_dig_dia_fim_abaixo_criar_ev"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/dataFimCriarEventoForn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="16dp"
+                android:hint="@string/edit_text_formato_data_fim_criar_ev_forn"
+                android:inputType="date"
+                android:maxLength="10"
+                android:textSize="16sp"/>
+            <LinearLayout
+                android:id="@+id/eventoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nome do cliente"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:id="@+id/nomeClienteDoCriarEventoFornSeta"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Endereço"
+                    android:textSize="18sp"
+                    android:layout_marginTop="18dp"/>
+
+                <EditText
+                    android:id="@+id/addressCriarEventoForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textSize="16sp"/>
+                <EditText
+                    android:id="@+id/RuaIdCriarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_rua_criar_anuncio"
+                    android:inputType="text"
+                    tools:layout_editor_absoluteX="17dp"
+                    tools:layout_editor_absoluteY="646dp" />
+
+                <EditText
+                    android:id="@+id/editTextNumeroCriarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:hint="@string/edit_text_numero_an"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="502dp" />
+
+
+                <EditText
+                    android:id="@+id/editTextBairroCriarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_bairro_criar_an"
+                    android:inputType="text"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="715dp" />
+
+                <EditText
+                    android:id="@+id/editTextCidadeCriarAnuncio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_cidade_criar_an"
+                    android:inputType="text"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="783dp" />
+
+                <EditText
+                    android:id="@+id/editTextCepCriarEvForn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="@string/edit_text_cep_anuncio"
+                    android:inputType="number"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="783dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descrição/Observações"
+                android:textSize="18sp"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="5dp"/>
+
+            <EditText
+                android:id="@+id/obsCriarEventoForn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:inputType="textMultiLine"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/criarEvForn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:background="@color/colorButoes"
+                android:textColor="@color/colorTextoBut"
+                android:text="@string/button_criar_evento_forn"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</ScrollView>

@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.inovaufrpe.makeparty.R;
 
-public class DetalhesEventoActivity extends AppCompatActivity {
+public class EditarEventoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalhes_evento);
+        setContentView(R.layout.activity_editar_evento_forn);
     }
 }

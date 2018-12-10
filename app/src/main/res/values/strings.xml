@@ -160,7 +160,7 @@
     <string name="edit_text_preco_inicial_filtro_por_preco">Digite o preço aqui</string>
     <string name="edit_text_preco_final_filtro_por_preco">Digite o preço aqui</string>
     <string name="text_buscar_anuncios">Buscar Anúncios</string>
-    <string name="checkbox_perg_vai_ate_outro_dia">Horário de fim é do outro dia(dia após esse)</string>
+    <string name="checkbox_perg_vai_ate_outro_dia">Horário do evento não termina no mesmo dia em que ele começou </string>
     <string name="text_view_add_evento">Adicionar evento ou indisponibilidade</string>
     <string name="text_view_tipo_evento_criado_forn">Selecione o tipo: </string>
     <string name="text_view_selecione_hor_criar_evento_forn">Selecione o horário :</string>
@@ -168,6 +168,23 @@
     <string name="radio_button_indisp">Indisponibilidade</string>
     <string name="radio_button_dia_todo">Dia todo</string>
     <string name="radio_button_parte_do_dia">Parte do dia</string>
+    <string name="text_view_evento_selec_titulo">Evento selecionado</string>
+    <string name="text_view_nome_cliente_evento_selec">Nome do cliente : Kimbelly Ferraz</string>
+    <string name="text_view_desc_evento_selecionado">Descrição/obs : Evento tem que ter muito bolo, muita coxinha, muita diversão
+    telefone dela: (xx)xxxxxxxx</string>
+    <string name="text_view_tipo_ev_ind_evento_selec">Evento  : FestaOuIndisp</string>
+    <string name="text_view_end_evento_det_ev">Endereço : Rua prof General Fagundes Inventei Ol Mag, Olinda 2000, casa 6, Pernambuco,Brasil</string>
+    <string name="button_excluir_evento">Excluir evento</string>
+    <string name="button_atualizar_evento">Atualizar evento</string>
+    <string name="text_view_data_inicio_evento_selec">Data de inicio: XX/XX/XXXX às XX:XX</string>
+    <string name="text_view_data_fim_evento_selec">Data de fim: XX/XX/XXXX às XX:XX</string>
+    <string name="label_dia_selecionado_forn_evento">Detalhes do evento</string>
+    <string name="text_view_data_fim_termina_em_outro_dia_perg_evento_selec">Data fim termina em outro dia : TruFa </string>
+    <string name="edit_text_formato_data_fim_criar_ev_forn">Digite o formato semelhante a XX/XX/XXXX</string>
+    <string name="text_view_dig_dia_fim_abaixo_criar_ev">Digite a data de fim do evento/indisponibilidade abaixo :</string>
+    <string name="button_criar_evento_forn">Criar evento/indisponibilidade</string>
+    <string name="text_view_editar_evento_forn">Editar evento ou indisponibilidade</string>
+    <string name="text_view_tipo_evento_editar_forn">Selecione o tipo :</string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>

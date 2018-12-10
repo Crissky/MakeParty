@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fornecedor.gui.CriarIndisponibilidadeActivity">
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -24,25 +23,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/text_view_add_evento"
+                android:text="@string/text_view_editar_evento_forn"
                 android:textSize="20sp"
                 android:layout_margin="28dp"/>
 
             <TextView
-                android:id="@+id/data"
+                android:id="@+id/dataSelecionadaEditarEventoForn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Data"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 android:layout_margin="15dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/text_view_tipo_evento_criado_forn"/>
+                android:textSize="18sp"
+                android:text="@string/text_view_tipo_evento_editar_forn"/>
             <RadioGroup
-                android:id="@+id/tipoGroup"
+                android:id="@+id/tipoGroupEditarEventoForn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -50,28 +50,31 @@
                 android:layout_margin="15dp">
 
                 <RadioButton
-                    android:id="@+id/RadioGrouptipoEventoCriarEventoForn"
+                    android:id="@+id/RadioGrouptipoEventoEditarEventoForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/radio_button_evento"
+                    android:textSize="16sp"
                     android:checked="true"/>
 
                 <RadioButton
-                    android:id="@+id/TipoInd"
+                    android:id="@+id/TipoIndEditarEventoForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:text="@string/radio_button_indisp"/>
             </RadioGroup>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/text_view_selecione_hor_criar_evento_forn"/>
+                android:text="@string/text_view_selecione_hor_criar_evento_forn"
+                android:textSize="18sp"/>
 
             <RadioGroup
-                android:id="@+id/radioGroup"
+                android:id="@+id/radioGroupSelecHorEditarEventoForn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -79,24 +82,26 @@
                 android:layout_margin="15dp">
 
                 <RadioButton
-                    android:id="@+id/RadioButtonParteDiaCriarEv"
+                    android:id="@+id/RadioButtonParteDiaEditarEvForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/radio_button_parte_do_dia"
+                    android:textSize="16sp"
                     android:layout_weight="1"
                     android:checked="true"/>
 
                 <RadioButton
-                    android:id="@+id/RadioButtonTodoDiaCriarEv"
+                    android:id="@+id/RadioButtonTodoDiaEditarEvForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/radio_button_dia_todo"
+                    android:textSize="16sp"
                     android:layout_weight="1"/>
 
             </RadioGroup>
 
             <LinearLayout
-                android:id="@+id/inicio"
+                android:id="@+id/inicioEventoFornEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
@@ -104,35 +109,38 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Horário de inicio"/>
+                    android:text="Horário de inicio"
+                    android:textSize="18sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2">
                     <EditText
-                        android:id="@+id/editTextHoraInicioCriandoEvento"
+                        android:id="@+id/editTextHoraInicioEditandoEventoForn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:maxLength="2"/>
+                        android:maxLength="2"
+                        android:textSize="16sp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=":"/>
                     <EditText
-                        android:id="@+id/editTextMinInicioCriandoEvento"
+                        android:id="@+id/editTextMinInicioEditandoEventoForn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:inputType="number"
+                        android:textSize="16sp"
                         android:maxLength="2"/>
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/fim"
+                android:id="@+id/fimEditarEvForn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
@@ -140,17 +148,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Horário de fim"/>
+                    android:text="Horário de fim"
+                    android:textSize="18sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2">
                     <EditText
-                        android:id="@+id/horaFim"
+                        android:id="@+id/horaFimEditarEventoForn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:inputType="number"
                         android:maxLength="2"/>
                     <TextView
@@ -158,21 +168,39 @@
                         android:layout_height="wrap_content"
                         android:text=":"/>
                     <EditText
-                        android:id="@+id/minFim"
+                        android:id="@+id/minFimEditarEventoForn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:inputType="number"
+                        android:textSize="16sp"
                         android:maxLength="2"/>
                 </LinearLayout>
             </LinearLayout>
             <CheckBox
-                android:id="@+id/checkBoxPergCriarEventoHorFimOutroDia"
+                android:id="@+id/checkBoxPergEditarEventoHorFimOutroDia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="16sp"
+                android:text="@string/checkbox_perg_vai_ate_outro_dia"/>
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/checkbox_perg_vai_ate_outro_dia"/>
+                android:text="@string/text_view_dig_dia_fim_abaixo_criar_ev"
+                android:textSize="18sp"/>
 
+            <EditText
+                android:id="@+id/dataFimEditarEventoForn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="16dp"
+                android:hint="@string/edit_text_formato_data_fim_criar_ev_forn"
+                android:inputType="date"
+                android:maxLength="10"
+                android:textSize="16sp"/>
             <LinearLayout
                 android:id="@+id/eventoLayout"
                 android:layout_width="match_parent"
@@ -183,10 +211,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nome do cliente"/>
+                    android:text="Nome do cliente"
+                    android:textSize="18sp"/>
 
                 <EditText
-                    android:id="@+id/nomeCliente"
+                    android:id="@+id/nomeClienteDoEditarEventoFornSeta"
+                    android:textSize="16sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"/>
@@ -195,13 +225,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Endereço"
+                    android:textSize="18sp"
                     android:layout_marginTop="18dp"/>
 
                 <EditText
-                    android:id="@+id/address"
+                    android:id="@+id/addressEditarEventoForn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -209,26 +241,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Descrição/Observações"
+                android:textSize="18sp"
                 android:layout_marginStart="18dp"
                 android:layout_marginEnd="18dp"
                 android:layout_marginBottom="5dp"/>
 
             <EditText
-                android:id="@+id/obs"
+                android:id="@+id/obsCriarEventoForn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginEnd="18dp"
-                android:inputType="textMultiLine"/>
+                android:inputType="textMultiLine"
+                android:textSize="16sp"/>
 
             <Button
-                android:id="@+id/criar"
+                android:id="@+id/editarEvForn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
                 android:background="@color/colorButoes"
                 android:textColor="@color/colorTextoBut"
-                android:text="Criar event"/>
+                android:text="@string/button_criar_evento_forn"/>
 
         </LinearLayout>
 

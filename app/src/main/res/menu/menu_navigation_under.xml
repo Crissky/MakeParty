@@ -2,12 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="all">
         <item
             android:id="@+id/action_pacotes"
             android:title="@string/ic_pacotes"
             android:icon="@drawable/ic_package_black_and_white"
             app:showAsAction="always|withText"
+            android:visible="false"
             />
         <item
             android:id="@+id/action_casa_festa"

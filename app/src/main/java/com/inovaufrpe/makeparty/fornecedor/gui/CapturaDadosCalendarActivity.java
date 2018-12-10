@@ -13,7 +13,6 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Agendamento;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.AgendamentosFornecedorAdapter;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.infra.utils.AgendamentoBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ public class CapturaDadosCalendarActivity extends Activity {
     }
 
     private void irTelaCriarEvento(){
-        Intent intent = new Intent(CapturaDadosCalendarActivity.this, CriarIndisponibilidadeActivity.class);
+        Intent intent = new Intent(CapturaDadosCalendarActivity.this, CriarEventoFornActivity.class);
         intent.putExtra("timeLong", date.getTime());
         startActivity(intent);
     }

@@ -18,8 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CriarIndisponibilidadeActivity extends AppCompatActivity {
-    private TextView data;
+public class CriarEventoFornActivity extends AppCompatActivity {
+    private TextView data,textViewDataNTermMsmDiaDigDataFim;
     private RadioGroup group, tipo;
     private Button criar;
     private EditText obs, hInicio, mInicio, hFim, mFim, endereco, nomeCliente;
@@ -30,7 +30,7 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_criar_indisponibilidade);
+        setContentView(R.layout.activity_criar_evento_forn);
         encontrandoViews();
         Bundle bundle = getIntent().getExtras();
         date.setTime(bundle.getLong("timeLong"));
@@ -39,18 +39,20 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
         tipoRadioGroupListener();
     }
     private void encontrandoViews(){
-        data = findViewById(R.id.data);
-        group = findViewById(R.id.radioGroup);
-        tipo = findViewById(R.id.tipoGroup);
-        obs = findViewById(R.id.obs);
+        data = findViewById(R.id.dataSelecionadaCriarEventoForn);
+        group = findViewById(R.id.radioGroupSelecHorCriarEventoForn);
+        tipo = findViewById(R.id.tipoGroupCriarEventoForn);
+        obs = findViewById(R.id.obsCriarEventoForn);
         hInicio = findViewById(R.id.editTextHoraInicioCriandoEvento);
-        hFim = findViewById(R.id.horaFim);
+        hFim = findViewById(R.id.horaFimCriarEventoForn);
         mInicio = findViewById(R.id.editTextMinInicioCriandoEvento);
-        mFim = findViewById(R.id.minFim);
-        endereco = findViewById(R.id.address);
-        nomeCliente = findViewById(R.id.nomeCliente);
+        mFim = findViewById(R.id.minFimCriarEventoForn);
+        endereco = findViewById(R.id.addressCriarEventoForn);
+        nomeCliente = findViewById(R.id.nomeClienteDoCriarEventoFornSeta);
         horFimAteOutroDia = findViewById(R.id.checkBoxPergCriarEventoHorFimOutroDia);
-        criar = findViewById(R.id.criar);
+        textViewDataNTermMsmDiaDigDataFim=findViewById(R.id.textViewDataNTermMsmDiaDigDataFim);
+
+        criar = findViewById(R.id.criarEvForn);
         criar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,10 +66,10 @@ public class CriarIndisponibilidadeActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.RadioButtonParteDiaCriarEv){
-                    findViewById(R.id.inicio).setVisibility(View.VISIBLE);
+                    findViewById(R.id.inicioEventoFornCriar).setVisibility(View.VISIBLE);
                     findViewById(R.id.fim).setVisibility(View.VISIBLE);
                 }else if (checkedId == R.id.RadioButtonTodoDiaCriarEv){
-                    findViewById(R.id.inicio).setVisibility(View.GONE);
+                    findViewById(R.id.inicioEventoFornCriar).setVisibility(View.GONE);
                     findViewById(R.id.fim).setVisibility(View.GONE);
                 }
             }

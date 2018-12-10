@@ -193,7 +193,8 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         ads.setCreatedAt(new Date());
         ads.setDescription(descricao);
         ads.setPhone(telefone);
-        String tipo = edtTipoAnuncio.getSelectedItem().toString();
+        String tipo = edtTipoAnuncio.getSelectedItem().toString().trim();
+        tipo=ValidacaoGuiRapida.deAccent(tipo);
         ads.setType(tipo);
         ads.setAddress(address);
         String textoTags = edtTags.getText().toString();

@@ -114,7 +114,7 @@ public class AnunciosOutroFragment extends BaseFragment {
         public List execute() throws Exception {
             Log.d("Olhaa quem logou", SessaoApplication.getInstance().getTipoDeUserLogado());
             //Log.d("tiporetornado",tipo);
-            return AnuncioEmComumService.getAnunciosByTipo(tipo);
+            return AnuncioEmComumService.getAnunciosByTipo(FiltroAnuncioSelecionado.instance.getTipoListaPraMostrarSubCategoriaBottomNavCliente());
             // Busca os anuncios em background (Thread)
         }
 

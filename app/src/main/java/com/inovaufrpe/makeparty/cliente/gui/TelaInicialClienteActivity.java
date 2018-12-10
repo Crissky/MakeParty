@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
 import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
+import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.user.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -113,21 +114,6 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         } else if (id == R.id.nav_share) {
         } else if (id == R.id.nav_exit) {
             SessaoApplication.instance.onTerminate();
-            String qmsetado= SessaoApplication.getInstance().getTipoDeUserLogado();
-            mudarTela(EntrarOuCadastrarActivity.class);
-            SessaoApplication.getInstance().getTipoDeUserLogado();
-            Log.i("Script", "OLHAAA esse era antes" + qmsetado);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                finishAffinity();
-            }
-            Log.i("Script", "OLHAAA: "+ qmsetado);
-            String qmsetadohehe= SessaoApplication.instance.getTipoDeUserLogado();
-            Log.i("Script", "OLHAAA: "+ qmsetadohehe);
-            //finish();
-            //System.exit(0);
-            //SessaoApplication.instance.onTerminate();
-            Log.i("Script", "OLHAAA: "+ qmsetadohehe);
-            //finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -144,15 +130,24 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId()==R.id.action_pacotes){
+                    //Por algum motivo o oncreate n pega o bundle(fica dando nul), mas o newinstance ele reconhece sim
                     trocarFragmento("pacotes");
+                    //tive q fazer:
+                    //tbm como n tem pacote no momento, pq é recomendação , mudei p retornar so festa de vez de pacote
+                    FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("festa");
+
                 }else if (item.getItemId()==R.id.action_casa_festa){
                     trocarFragmento("casadefesta");
+                    FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("casadefesta");
                 }else if (item.getItemId()==R.id.action_buffet){
                     trocarFragmento("buffet");
+                    FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("buffet");
                 }else if (item.getItemId()==R.id.action_decoracao){
                     trocarFragmento("decoracao");
+                    FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("decoracao");
                 }else if (item.getItemId()==R.id.action_animacao){
                     trocarFragmento("animacao");
+                    FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("animacao");
                 }
                 return false;
             }

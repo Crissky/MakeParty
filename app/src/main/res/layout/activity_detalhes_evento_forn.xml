@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fornecedor.gui.DetalhesEventoFornActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/toolbar"
+                style="@style/ToolBarWithNavigationBack"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="@string/label_dia_selecionado_forn_evento" />
+
+            <TextView
+                android:id="@+id/textViewEventoSelecionadoTituloSimples"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/toolbar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="38dp"
+                android:text="@string/text_view_evento_selec_titulo"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="82dp" />
+
+            <TextView
+                android:id="@+id/textViewNomeClienteEventoSelecionado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewDataFimTerminaEmQueDiaEventoSelecionado"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:text="@string/text_view_nome_cliente_evento_selec"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="132dp" />
+
+            <TextView
+                android:id="@+id/textViewDataInicioEventoSelecionado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewTipoEouIEventoSelecionado"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:text="@string/text_view_data_inicio_evento_selec"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="132dp" />
+
+            <TextView
+                android:id="@+id/textViewDataFimEventoSelecionado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewDataInicioEventoSelecionado"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:text="@string/text_view_data_fim_evento_selec"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="132dp" />
+
+            <TextView
+                android:id="@+id/textViewDataFimTerminaEmQueDiaEventoSelecionado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewDataFimEventoSelecionado"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:text="@string/text_view_data_fim_termina_em_outro_dia_perg_evento_selec"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="132dp" />
+
+            <TextView
+                android:id="@+id/textViewTipoEouIEventoSelecionado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewEventoSelecionadoTituloSimples"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:text="@string/text_view_tipo_ev_ind_evento_selec"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="132dp" />
+
+            <TextView
+                android:id="@+id/textViewEndCriarEvnNada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewDescricaoEventoSelecionado"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="29dp"
+                android:layout_marginRight="29dp"
+                android:text="@string/text_view_end_evento_det_ev"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="132dp" />
+
+            <TextView
+                android:id="@+id/textViewDescricaoEventoSelecionado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewNomeClienteEventoSelecionado"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="29dp"
+                android:text="@string/text_view_desc_evento_selecionado"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="132dp" />
+
+            <Button
+                android:id="@+id/buttonAtualizarEventoForn"
+                android:layout_width="376dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewEndCriarEvnNada"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="23dp"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="95dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/colorButoes"
+                android:text="@string/button_atualizar_evento"
+                android:textColor="@color/colorTextoBut"
+                tools:layout_editor_absoluteX="46dp"
+                tools:layout_editor_absoluteY="878dp" />
+
+            <Button
+                android:id="@+id/buttonExcluirEventoForn"
+                android:layout_width="377dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/buttonAtualizarEventoForn"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@color/colorButoes"
+                android:text="@string/button_excluir_evento"
+                android:textColor="@color/colorTextoBut" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

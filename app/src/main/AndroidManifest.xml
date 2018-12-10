@@ -95,12 +95,13 @@
         <activity android:name=".cliente.gui.DispDiaSelecPeloClienteActivity" />
         <activity android:name=".fornecedor.gui.PlanoEscolhaActivity" />
         <activity android:name=".fornecedor.gui.EditarAnuncioActivity" />
-        <activity android:name=".fornecedor.gui.CriarIndisponibilidadeActivity" />
+        <activity android:name=".fornecedor.gui.CriarEventoFornActivity" />
         <activity android:name=".cliente.gui.AlterandoDadosPerfilClienteActivity" />
         <activity android:name=".cliente.gui.FIltroPrecoActivity" />
-        <activity android:name=".fornecedor.gui.DetalhesEventoActivity" />
+        <activity android:name=".fornecedor.gui.DetalhesEventoFornActivity" />
         <activity android:name=".fornecedor.gui.TesteCapturaGaleriaActivity" />
-        <activity android:name=".fornecedor.gui.CriarHorarioDisponivelActivity"></activity>
+        <activity android:name=".fornecedor.gui.CriarHorarioDisponivelActivity" />
+        <activity android:name=".fornecedor.gui.EditarEventoActivity"></activity>
     </application>
 
 </manifest>

@@ -2,9 +2,11 @@ package com.inovaufrpe.makeparty.user.servico;
 
 import android.util.Patterns;
 
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
+import java.util.regex.Pattern;
 
 public class ValidacaoGuiRapida {
     private static final String DATA_COMUM_CB   = "dd/MM/yyyy";
@@ -242,5 +244,11 @@ public class ValidacaoGuiRapida {
         String dataNova = data.replace("-", "");
         String dataFormatada = dataNova.substring(SEIS, TAMANHO_DATA_SB) + "/" + dataNova.substring(QUATRO, SEIS) + "/" + dataNova.substring(ZERO, QUATRO);
         return dataFormatada;
+    }
+    //metodo abaixo para tirar acento
+    public static String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 }
