@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.cliente.dominio.Customer;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.cliente.dominio.WishListService;
+import com.inovaufrpe.makeparty.cliente.dominio.Wishlists;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -15,6 +17,11 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService.conectarServidorGet;
 
@@ -89,11 +96,11 @@ public class ClienteService{
         return URL_BASE;
     }
 
-    public static boolean addAWishList(List<Ads> listAnunciosSelecPAddWishList) throws IOException {
+    public static boolean addAWishList(List<Ad> listAnunciosSelecPAddWishList) throws IOException {
         String url = URL_CRIAR_LISTA_DESEJOS;
         //de um por um( id do anuncio + token)
         String token=  "," + "\"token\"" + ":" + "\""+SessaoApplication.getInstance().getTokenUser() +"\"" +"}";
-        for (Ads c: listAnunciosSelecPAddWishList){
+        for (Ad c: listAnunciosSelecPAddWishList){
             String jsonAMao ="{" + "\"ad\":"+"\""+c.get_id()+"\""+ token;
             Log.d(TAG, "JSON a mao: " + jsonAMao);
             String respostaServidorAoAdd= ConectarServidor.post(url,jsonAMao);
@@ -115,11 +122,11 @@ public class ClienteService{
         return listaDesejosCliente;
 
     }
-    public static boolean deleteItensListaDesejoCliente(List<Ads> selectedAds,String tokenOuId) throws IOException, JSONException {
+    public static boolean deleteItensListaDesejoCliente(List<Ad> selectedAds, String tokenOuId) throws IOException, JSONException {
         String url = URL_LISTA_DESEJOS;
         //de um por um( id do anuncio + token)
         String token = "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
-        for (Ads c : selectedAds) {
+        for (Ad c : selectedAds) {
             String jsonAMao = "{" + "\"ad\":" + "\"" + c.get_id() + "\"" + token;
             Log.d(TAG, "JSON a mao: " + jsonAMao);
             String respostaServidorAoExcluir = ConectarServidor.deleteDeJadiel(url, jsonAMao);///NAOOOOOO É POST, É DELETEEEE
@@ -132,6 +139,40 @@ public class ClienteService{
         }
         return true;
     }
+    public void getUserWishListComRetrofit(String tokenOuId) throws IOException {
+        String url = URL_LISTA_DESEJOS.replace(":tokenAqui", tokenOuId);
+        //String json =conectarServidorGet(url);
+        //Log.d("um json ai", json);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(WishListService.URL_BASE)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        WishListService service = retrofit.create(WishListService.class);
+        Call<Wishlists> requestWishlists = service.wishListUser();
+        requestWishlists.enqueue(new Callback<Wishlists>() {
+            @Override
+            public void onResponse(Call<Wishlists> call, retrofit2.Response<Wishlists> response) {
+                if (!response.isSuccessful()) {
+                    Log.i("RETROFITCODSUF", "Erro:" + response.code());
+                } else {
+                    //Requisicao retornou com sucesso
+                    Wishlists wishlists = response.body();
+                    for (Ad df : wishlists.ads) {
+                        Log.i("jjRetrofit", String.format("%s:%s", df.get_id(), df.getPrice()));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Wishlists> call, Throwable t) {
+                Log.i("opaRetrofit", t.getMessage());
+            }
+        });
+
+
+    }
+       // return listaDesejosCliente;
 
 
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Rating {
 
 
-    //private Ads ad;
+    //private Ad ad;
     private String ad;
     private String comment;
     private String rating;

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 
 public class DispDiaSelecPeloClienteActivity extends AppCompatActivity {
     TextView textViewDataSelecionadaNaTelaDetalhes;
@@ -61,7 +61,7 @@ public class DispDiaSelecPeloClienteActivity extends AppCompatActivity {
         textView.setText(diaSelecionadoPeloClienteDisp);
     }
     public void procurandoHorariosDispDoFornecNoDiaSelecPeloCliente(){
-        Ads anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        Ad anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         //Date aq viu ainda transf aq embaixo
         // Calendar diaSelecionadoPeloClienteDispParaBuscarNaAPI = FiltroAnuncioSelecionado.instance.getDiaSelecionadoPeloClienteDisp();
         //FALTA

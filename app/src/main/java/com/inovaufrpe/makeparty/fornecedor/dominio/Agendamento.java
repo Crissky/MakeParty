@@ -7,11 +7,11 @@ import java.util.Date;
 public class Agendamento {
     private Date dateInicio;
     private Date dateFim;
-    private Ads anuncio;
+    private Ad anuncio;
     private Customer customer;
     private String situacao;
 
-    public Agendamento(Date dateInicio, Date dateFim, Ads anuncio, Customer customer, String situacao) {
+    public Agendamento(Date dateInicio, Date dateFim, Ad anuncio, Customer customer, String situacao) {
         this.dateInicio = dateInicio;
         this.dateFim = dateFim;
         this.anuncio = anuncio;
@@ -38,11 +38,11 @@ public class Agendamento {
         this.dateFim = dateFim;
     }
 
-    public Ads getAnuncio() {
+    public Ad getAnuncio() {
         return anuncio;
     }
 
-    public void setAnuncio(Ads anuncio) {
+    public void setAnuncio(Ad anuncio) {
         this.anuncio = anuncio;
     }
 

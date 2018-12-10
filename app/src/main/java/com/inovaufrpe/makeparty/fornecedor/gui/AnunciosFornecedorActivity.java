@@ -11,13 +11,13 @@ import android.widget.ListView;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.fragment.AnunciosOutroFragment;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 
 import java.util.ArrayList;
 
 
 public class AnunciosFornecedorActivity extends AppCompatActivity {
-    private ArrayList<Ads> lista;
+    private ArrayList<Ad> lista;
     private ListView listaAnuncios;
     private Button btVisualAnuncio,btCriarAnuncio;
 

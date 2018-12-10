@@ -3,7 +3,6 @@ package com.inovaufrpe.makeparty.user.gui.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.utils.bibliotecalivroandroid.ImageUtils;
 
 import java.util.List;
 
 public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnunciosViewHolder> {
-    private final List<Ads> ads;
+    private final List<Ad> ads;
     private final Context context;
     private final AnuncioOnClickListener onClickListener;
 
@@ -30,7 +29,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
 
     //Aqui esta informando que esse adapter , essa classe AnuncioAdapter esta personalizando cada item de uma lista
     // uma lista de ads que no caso ficará "guardada" em AnuncioView
-    public AnuncioAdapter(Context context, List<Ads> ads, AnuncioOnClickListener onClickListener) {
+    public AnuncioAdapter(Context context, List<Ad> ads, AnuncioOnClickListener onClickListener) {
         this.context = context;
         this.ads = ads;
         this.onClickListener = onClickListener;
@@ -49,8 +48,8 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
     //seta os itens view do item, trocando pelas informações corretas em cada campo
     @Override
     public void onBindViewHolder(final AnunciosViewHolder holder, final int position) {
-        // Ads da linha
-        Ads c = ads.get(position);
+        // Ad da linha
+        Ad c = ads.get(position);
 
         // Atualizada os valores nas views
         holder.title.setText(c.getTitle());
@@ -59,7 +58,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.Anuncios
         holder.tPrice.setText(("Preço :R$"+priceAnuncioStr));
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView); HMMMMMMM
 
-        // Foto do Ads
+        // Foto do Ad
         ImageUtils.setImage(context,"http://i.imgur.com/DvpvklR.png", holder.img);
 
         if (onClickListener != null) {

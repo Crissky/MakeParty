@@ -23,8 +23,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
 import com.inovaufrpe.makeparty.user.gui.adapter.AnuncioAdapter;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -45,7 +45,7 @@ import java.util.List;
 public class AnunciosFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
-    private List<Ads> ads;
+    private List<Ad> ads;
     private String tipo;
     private SwipeRefreshLayout swipeLayout;
 
@@ -102,7 +102,7 @@ public class AnunciosFragment extends BaseFragment {
     }
 
     // Task para buscar os ads
-    private class GetAnunciosTask implements TaskListener<List<Ads>> {
+    private class GetAnunciosTask implements TaskListener<List<Ad>> {
         private String nome;
 
         public GetAnunciosTask(String nome) {
@@ -110,7 +110,7 @@ public class AnunciosFragment extends BaseFragment {
         }
 
         @Override
-        public List<Ads> execute() throws Exception {
+        public List<Ad> execute() throws Exception {
             Log.d("Olhaa quem logou",SessaoApplication.getInstance().getTipoDeUserLogado());
             // Busca os Anuncios em background
             if (nome != null) {
@@ -125,7 +125,7 @@ public class AnunciosFragment extends BaseFragment {
         }
 
         @Override
-        public void updateView(List<Ads> ads) {
+        public void updateView(List<Ad> ads) {
             if (ads != null) {
                 AnunciosFragment.this.ads = ads;
 
@@ -156,7 +156,7 @@ public class AnunciosFragment extends BaseFragment {
         return new AnuncioAdapter.AnuncioOnClickListener() {
             @Override
             public void onClickAnuncio(AnuncioAdapter.AnunciosViewHolder holder, int idx) {
-                Ads c = ads.get(idx);
+                Ad c = ads.get(idx);
 
                 if (actionMode == null) {
                     ImageView img = holder.img;
@@ -185,7 +185,7 @@ public class AnunciosFragment extends BaseFragment {
                 Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
                 actionMode = getAppCompatActivity().startSupportActionMode(getActionModeCallback());
 
-                Ads c = ads.get(idx);
+                Ad c = ads.get(idx);
                 c.selected = true;
                 recyclerView.getAdapter().notifyDataSetChanged();
 
@@ -281,7 +281,7 @@ public class AnunciosFragment extends BaseFragment {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                List<Ads> selectedAds = getSelectedAnuncios();
+                List<Ad> selectedAds = getSelectedAnuncios();
                 if (item.getItemId()==R.id.action_add_lista_desejo_finalm){
                     SimOuNaoDialog.show(getFragmentManager(),"Deseja adicionar esses anúncios que foram selecionados a sua lista de desejos?", new SimOuNaoDialog.Callback() {
                         @Override
@@ -304,7 +304,7 @@ public class AnunciosFragment extends BaseFragment {
             public void onDestroyActionMode(ActionMode mode) {
                 // Limpa o ActionMode e ads selecionados
                 actionMode = null;
-                for (Ads c : ads) {
+                for (Ad c : ads) {
                     c.selected = false;
                 }
                 // Atualiza a lista
@@ -315,7 +315,7 @@ public class AnunciosFragment extends BaseFragment {
 
     // Deletar ads selecionados ao abrir a CAB
     private void deletarAnunciosSelecionados() {
-        final List<Ads> selectedAds = getSelectedAnuncios();
+        final List<Ad> selectedAds = getSelectedAnuncios();
 
         if(selectedAds.size() > 0) {
             startTask("deletar",new BaseTask(){
@@ -324,7 +324,7 @@ public class AnunciosFragment extends BaseFragment {
                     boolean ok = AnuncioEmComumService.deleteItensLista(selectedAds);
                     if(ok) {
                         // Se excluiu do banco, remove da lista da tela.
-                        for (Ads c : selectedAds) {
+                        for (Ad c : selectedAds) {
                             ads.remove(c);
                         }
                     }
@@ -345,9 +345,9 @@ public class AnunciosFragment extends BaseFragment {
         }
     }
 
-    private List<Ads> getSelectedAnuncios() {
-        List<Ads> list = new ArrayList<Ads>();
-        for (Ads c : ads) {
+    private List<Ad> getSelectedAnuncios() {
+        List<Ad> list = new ArrayList<Ad>();
+        for (Ad c : ads) {
             if (c.selected) {
                 list.add(c);
             }
@@ -359,11 +359,11 @@ public class AnunciosFragment extends BaseFragment {
         if (actionMode != null) {
             actionMode.setTitle("Selecione os ads.");
             actionMode.setSubtitle(null);
-            List<Ads> selectedAds = getSelectedAnuncios();
+            List<Ad> selectedAds = getSelectedAnuncios();
             if (selectedAds.size() == 0) {
                 actionMode.finish();
             } else if (selectedAds.size() == 1) {
-                actionMode.setSubtitle("1 Ads selecionado");
+                actionMode.setSubtitle("1 Ad selecionado");
             } else if (selectedAds.size() > 1) {
                 actionMode.setSubtitle(selectedAds.size() + " ads selecionados");
             }

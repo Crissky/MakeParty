@@ -28,6 +28,8 @@ public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.Even
     //abaixo metodos que devem ser implementados para ter diferentes respostas dependendo do clique
     public interface EventFornOnClickListener {
         void onClickEvent(EventFornAdapter.EventsFornViewHolder holder, int indexEvent);
+
+        void onClickEventForn(EventsFornViewHolder holder, int idx);
     }
     //Aqui esta informando que esse adapter , essa classe EventFornAdapter esta personalizando cada item de uma lista
     // uma lista de avaliacoes que no caso ficará "guardada" em Events

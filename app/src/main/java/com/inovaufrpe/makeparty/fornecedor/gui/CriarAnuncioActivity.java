@@ -2,11 +2,6 @@ package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,15 +16,12 @@ import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.user.dominio.Address;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
-import com.inovaufrpe.makeparty.fornecedor.dominio.Ads;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.infra.utils.Mask;
 import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -193,7 +184,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
 //
 ////        ArrayList<String> tags = new ArrayList<>(stringTags.split(","));
 
-        Ads ads = new Ads();
+        Ad ads = new Ad();
         ads.setTitle(titulo);
         ads.setPrice(valor);
         ads.setCreatedAt(new Date());
