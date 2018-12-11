@@ -101,7 +101,8 @@
         <activity android:name=".fornecedor.gui.DetalhesEventoFornActivity" />
         <activity android:name=".fornecedor.gui.TesteCapturaGaleriaActivity" />
         <activity android:name=".fornecedor.gui.CriarHorarioDisponivelActivity" />
-        <activity android:name=".fornecedor.gui.EditarEventoActivity"></activity>
+        <activity android:name=".fornecedor.gui.EditarEventoActivity" />
+        <activity android:name=".fornecedor.gui.adapter.FotosAnuncioAdapter"></activity>
     </application>
 
 </manifest>

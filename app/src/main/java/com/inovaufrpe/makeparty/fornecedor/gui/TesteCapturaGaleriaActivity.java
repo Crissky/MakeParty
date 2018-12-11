@@ -1,45 +1,45 @@
 package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FotosAnuncioAdapter;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TesteCapturaGaleriaActivity extends AppCompatActivity {
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public static final int CAMERA_REQUEST_CODE = 228;
-    private ImageView imagem1;
-    private ImageView imagem2;
-    private ImageView imagem3;
-    private ImageView imagem4;
-    private Button botao ;
-    private final int GALERIA_IMAGENS = 1;
-    private ArrayList<ImageView> listaImagens;
-
+    private Button botaoSelecionarFoto;
+    private List<Bitmap> bitmaps = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private Bitmap bitmap;
+        
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teste_captura_galeria);
         SessaoApplication.getInstance().setTelaAtual(TesteCapturaGaleriaActivity.class);
         setTela();
-        botao.setOnClickListener(new View.OnClickListener() {
+        botaoSelecionarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onGaleriaClicked(v);
@@ -47,11 +47,12 @@ public class TesteCapturaGaleriaActivity extends AppCompatActivity {
         });
         }
     public void setTela(){
-        imagem1= findViewById(R.id.imageView1);
-        imagem2= findViewById(R.id.imageView2);
-        imagem3= findViewById(R.id.imageView3);
-        imagem4= findViewById(R.id.imageView4);
-        botao = findViewById(R.id.botao);
+        botaoSelecionarFoto = findViewById(R.id.botao);
+        recyclerView = findViewById(R.id.view);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new FotosAnuncioAdapter(bitmaps);
+        recyclerView.setAdapter(adapter);
     }
     public void onGaleriaClicked(View v) {
         Intent selecionarFoto = new Intent(Intent.ACTION_PICK);
@@ -72,8 +73,9 @@ public class TesteCapturaGaleriaActivity extends AppCompatActivity {
                 InputStream inputStream;
                 try {
                     inputStream = getContentResolver().openInputStream(imageUri);
-                    Bitmap image = BitmapFactory.decodeStream(inputStream);
-                    imagem1.setImageBitmap(image);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    bitmaps.add(bitmap);
+                    adapter.notifyDataSetChanged();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "Não foi possível abrir a imagem", Toast.LENGTH_LONG).show();
