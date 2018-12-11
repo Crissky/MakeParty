@@ -160,7 +160,7 @@
     <string name="edit_text_preco_inicial_filtro_por_preco">Digite o preço aqui</string>
     <string name="edit_text_preco_final_filtro_por_preco">Digite o preço aqui</string>
     <string name="text_buscar_anuncios">Buscar Anúncios</string>
-    <string name="checkbox_perg_vai_ate_outro_dia">Horário do evento não termina no mesmo dia em que ele começou </string>
+    <string name="checkbox_perg_vai_ate_outro_dia">Horário do evento/indisponibilidade não termina no mesmo dia em que ele começou </string>
     <string name="text_view_add_evento">Adicionar evento ou indisponibilidade</string>
     <string name="text_view_tipo_evento_criado_forn">Selecione o tipo: </string>
     <string name="text_view_selecione_hor_criar_evento_forn">Selecione o horário :</string>

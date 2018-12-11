@@ -20,6 +20,7 @@ import com.inovaufrpe.makeparty.infra.ServicoDownload;
 import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity{
     private EditText edtEmail, edtSenha;
@@ -32,7 +33,6 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //SessaoApplication.getInstance().setTelaAtual(LoginActivity.class);
         encontrandoElementosView();
 
     }
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity{
                     tipoUserLogou = parts[1].substring(8,parts[1].length()-2);
                     SessaoApplication.instance.setTokenUser(token);
                     SessaoApplication.instance.setTipoDeUserLogado(tipoUserLogou);
-                    SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy HH:mm-",new Locale("pt","BR"));
                     //Date data = new Date();
                     java.util.Date dataUtil = new java.util.Date();
                     //String dataFormatada = formataData.format(data);

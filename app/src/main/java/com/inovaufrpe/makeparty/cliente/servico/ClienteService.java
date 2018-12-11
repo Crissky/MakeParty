@@ -45,6 +45,7 @@ public class ClienteService{
     private static final String URL_ATUALIZAR_TOKEN = URL_BASE + "users/refresh-token";
     private static final String URL_AUTENTICAR_USUARIO = URL_BASE + "/users/authenticate";
     private static final String URL_PESQUISAR_PF_PELO_ID = URL_BASE + "customers/:id";
+    private static final String URL_PESQUISAR_PF_PELO_TOKEN = URL_BASE + "customers/token?token=:tokenAqui";
     private static final String URL_LISTAR_USUARIOS = URL_BASE + "users";
     private static final String URL_CRIAR_LISTA_DESEJOS = URL_BASE + "wishlists";
     private static final String URL_LISTA_DESEJOS = URL_BASE + "wishlists"+"?token=:tokenAqui";

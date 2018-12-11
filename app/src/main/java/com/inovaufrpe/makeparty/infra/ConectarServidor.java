@@ -139,10 +139,10 @@ public class ConectarServidor {
         HttpClient httpClient = new DefaultHttpClient();
         String answer;
         HttpPost httpPost = new HttpPost(completeUrl);
-        httpPost.setHeader("Content-type", "application/json");
+        httpPost.setHeader("Content-type", "application/json; charset=utf-8");
 
         try {
-            StringEntity stringEntity = new StringEntity(body);
+            StringEntity stringEntity = new StringEntity(body,"utf-8");
             httpPost.getRequestLine();
             httpPost.setEntity(stringEntity);
 
@@ -162,7 +162,8 @@ public class ConectarServidor {
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
             conexao.setRequestMethod("DELETE");
-            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.addRequestProperty("Content-type", "application/json; charset=utf-8");
+
             //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
 
             conexao.setDoOutput(true);
@@ -201,7 +202,7 @@ public class ConectarServidor {
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
             conexao.setRequestMethod("PUT");
-            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.addRequestProperty("Content-type", "application/json;charset=utf-8");
             //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
 
             conexao.setDoOutput(true);
@@ -240,7 +241,7 @@ public class ConectarServidor {
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
             conexao.setRequestMethod("POST");
-            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.addRequestProperty("Content-type", "application/json;charset=utf-8");
             //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
 
             conexao.setDoOutput(true);
@@ -279,7 +280,7 @@ public class ConectarServidor {
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
             conexao.setRequestMethod("GET");
-            conexao.addRequestProperty("Content-type", "application/json");
+            conexao.addRequestProperty("Content-type", "application/json;charset=utf-8");
             //conexao.setRequestProperty("authorization", "\"token\"" + ":\"" + SessaoApplication.instance.getTokenUser() + "\"");
 
             conexao.setDoOutput(true);
@@ -502,7 +503,7 @@ public class ConectarServidor {
     private static String put(String url, String body) {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPut httpPut = new HttpPut(url);
-        httpPut.setHeader("Content-type", "application/json");
+        httpPut.setHeader("Content-type", "application/json;charset=utf-8");
         //httpPut.addHeader("Authorization", "Bearer "+ Sessao.instance.getSession().getToken());
         String answer = null;
         String erro = null;

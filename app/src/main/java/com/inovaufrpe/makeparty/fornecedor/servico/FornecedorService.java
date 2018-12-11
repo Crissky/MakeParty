@@ -28,6 +28,7 @@ public class FornecedorService {
     private static final String URL_ATUALIZAR_TOKEN = URL_BASE + "users/refresh-token";
     private static final String URL_AUTENTICAR_USUARIO = URL_BASE + "/users/authenticate";
     private static final String URL_PESQUISAR_PJ_PELO_ID = URL_BASE + "advertisers/:id";
+    private static final String URL_PESQUISAR_PJ_PELO_TOKEN = URL_BASE + "advertisers/token?token=:tokenAqui";
     private static final String URL_LISTAR_PJS = URL_BASE + "advertisers";
     private static final String URL_LISTAR_USUARIOS = URL_BASE +"users";
     //POST, PUT, DELETE E GET

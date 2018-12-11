@@ -16,7 +16,6 @@ public class EscolhaTipoUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escolha_tipo_user);
-        //SessaoApplication.getInstance().setTelaAtual(EscolhaTipoUserActivity.class);
         bloqueandoTelaClienteParaFornecedorELoginNovoClienteSemSair();
     }
     private void bloqueandoTelaClienteParaFornecedorELoginNovoClienteSemSair(){

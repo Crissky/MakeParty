@@ -141,7 +141,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/fim"
+                android:id="@+id/fimEventoFornLinearGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
@@ -184,14 +184,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:textSize="16sp"
-                android:text="@string/checkbox_perg_vai_ate_outro_dia"/>
+                android:text="@string/checkbox_perg_vai_ate_outro_dia"
+                android:checked="false"/>
+
             <TextView
                 android:id="@+id/textViewDataNTermMsmDiaDigDataFim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="@string/text_view_dig_dia_fim_abaixo_criar_ev"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:visibility="invisible"/>
 
             <EditText
                 android:id="@+id/dataFimCriarEventoForn"
@@ -202,7 +205,8 @@
                 android:hint="@string/edit_text_formato_data_fim_criar_ev_forn"
                 android:inputType="date"
                 android:maxLength="10"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:visibility="invisible"/>
             <LinearLayout
                 android:id="@+id/eventoLayout"
                 android:layout_width="match_parent"

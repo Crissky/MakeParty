@@ -1,10 +1,9 @@
 package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.content.Intent;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
 import java.text.SimpleDateFormat;
@@ -30,22 +28,23 @@ public class CriarEventoFornActivity extends AppCompatActivity {
     private Button criar;
     private EditText obs, hInicio, mInicio, hFim, mFim, endereco, nomeCliente;
     private EditText ruaIdCriarEvForn,numeroCriarEvForn,
-            bairroCriarEvForn,cidadeCriarEvForn,cepCriarEvForn;
+            bairroCriarEvForn,cidadeCriarEvForn,cepCriarEvForn,dataFimCriarEventoForn;
 
     private Date date = new Date(), dateInicio = new Date(), dateFim = new Date();
-    private CheckBox horFimAteOutroDia;
+    private CheckBox checkBoxHorFimAteOutroDia;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criar_evento_forn);
+        SessaoApplication.getInstance().setTelaAtual(CriarEventoFornActivity.class);
         encontrandoViews();
         Bundle bundle = getIntent().getExtras();
         date.setTime(bundle.getLong("timeLong"));
         data.setText(sdf.format(date));
-        tempoRadioGroupListener();
-        tipoRadioGroupListener();
+        tempoEventoRadioGroupListener();
+        tipoEventoRadioGroupListener();
     }
     private void encontrandoViews(){
         data = findViewById(R.id.dataSelecionadaCriarEventoForn);
@@ -58,14 +57,18 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         mFim = findViewById(R.id.minFimCriarEventoForn);
         endereco = findViewById(R.id.addressCriarEventoForn);
         nomeCliente = findViewById(R.id.nomeClienteDoCriarEventoFornSeta);
-        horFimAteOutroDia = findViewById(R.id.checkBoxPergCriarEventoHorFimOutroDia);
+        checkBoxHorFimAteOutroDia = findViewById(R.id.checkBoxPergCriarEventoHorFimOutroDia);
         textViewDataNTermMsmDiaDigDataFim=findViewById(R.id.textViewDataNTermMsmDiaDigDataFim);
+        dataFimCriarEventoForn = findViewById(R.id.dataFimCriarEventoForn);
         ruaIdCriarEvForn =findViewById(R.id.editTextRuaIdCriarEvForn);
         bairroCriarEvForn =findViewById(R.id.editTextBairroCriarEvForn);
         cidadeCriarEvForn =findViewById(R.id.editTextCidadeCriarEvForn);
         cepCriarEvForn =findViewById(R.id.editTextCepCriarEvForn);
         numeroCriarEvForn =findViewById(R.id.editTextNumeroCriarEvForn);
-
+        acoesButton();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+    private void acoesButton(){
         criar = findViewById(R.id.criarEvForn);
         criar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,24 +76,30 @@ public class CriarEventoFornActivity extends AppCompatActivity {
                 clickCriar();
             }
         });
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        if (checkBoxHorFimAteOutroDia.isSelected()){
+            textViewDataNTermMsmDiaDigDataFim.setVisibility(View.VISIBLE);
+            dataFimCriarEventoForn.setVisibility(View.VISIBLE);
+        }else{
+            textViewDataNTermMsmDiaDigDataFim.setVisibility(View.GONE);
+            dataFimCriarEventoForn.setVisibility(View.GONE);
+        }
     }
-    private void tempoRadioGroupListener(){
+    private void tempoEventoRadioGroupListener(){
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.RadioButtonParteDiaCriarEv){
                     findViewById(R.id.inicioEventoFornCriar).setVisibility(View.VISIBLE);
-                    findViewById(R.id.fim).setVisibility(View.VISIBLE);
+                    findViewById(R.id.fimEventoFornLinearGroup).setVisibility(View.VISIBLE);
                 }else if (checkedId == R.id.RadioButtonTodoDiaCriarEv){
                     findViewById(R.id.inicioEventoFornCriar).setVisibility(View.GONE);
-                    findViewById(R.id.fim).setVisibility(View.GONE);
+                    findViewById(R.id.fimEventoFornLinearGroup).setVisibility(View.GONE);
                 }
             }
         });
     }
 
-    private void tipoRadioGroupListener(){
+    private void tipoEventoRadioGroupListener(){
         tipo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -126,6 +135,8 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         event.setDescription(obs.getText().toString().trim());
         event.setStartDate(String.valueOf(dateInicio));
         event.setEndDate(String.valueOf(dateFim));
+        Log.d("DATAINICIOCOMOTA",event.getStartDate().toString());
+        Log.d("DataFIMCOMOTA",event.getEndDate());
         //MUDAR ESSA LINHA AQUI EM BAIXO:
        // event.setEndereco(endereco.getText().toString().trim());
         pergSeConfirmaCriacaoEventoDoForn();
