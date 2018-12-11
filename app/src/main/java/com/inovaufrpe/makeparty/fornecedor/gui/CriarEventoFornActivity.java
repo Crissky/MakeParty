@@ -1,5 +1,8 @@
 package com.inovaufrpe.makeparty.fornecedor.gui;
 
+import android.content.Intent;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +16,9 @@ import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -98,6 +104,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
     }
 
     private void clickCriar(){
+        pergSeConfirmaCriacaoEventoDoForn();
        if (tipo.getCheckedRadioButtonId() == R.id.RadioGrouptipoEventoCriarEventoForn){
            criarEvento();
        }else {
@@ -121,6 +128,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         event.setEndDate(String.valueOf(dateFim));
         //MUDAR ESSA LINHA AQUI EM BAIXO:
        // event.setEndereco(endereco.getText().toString().trim());
+        pergSeConfirmaCriacaoEventoDoForn();
         Toast.makeText(this, "Foi", Toast.LENGTH_SHORT).show();
     }
 
@@ -203,5 +211,20 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         calendar.set(Calendar.SECOND, 59);
         calendar.set(Calendar.MILLISECOND, 999);
         dateFim.setTime(calendar.getTimeInMillis());
+
+    } private void mudarTela(Class tela){
+        Intent intent=new Intent(this, tela);
+        startActivity(intent);
+        finish();
+    }
+
+    public void pergSeConfirmaCriacaoEventoDoForn(){
+        SimOuNaoDialog.show(getSupportFragmentManager(), "Você confirma os dados e a criação desse evento ?", new SimOuNaoDialog.Callback() {
+            @Override
+            public void metodoSimAoDialog() {
+
+
+            }
+        });
     }
 }

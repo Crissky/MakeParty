@@ -114,6 +114,11 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         } else if (id == R.id.nav_manage) {
             if (!SessaoApplication.instance.getTipoDeUserLogado().equals("null")) { irParaTelaConfiguracoesCliente(); }else { irParaTelaEntrarOuCadastrar(); }
         } else if (id == R.id.nav_share) {
+            //Share text:
+            Intent intent2 = new Intent(); intent2.setAction(Intent.ACTION_SEND).setType("text/plain");
+            intent2.putExtra(Intent.EXTRA_TEXT, "Conheça o MakeParty e monte sua festa! Link : https://sites.google.com/s/1C1pE2cz49wasqvC1-bJ_CTzQ3wHzIIST/p/1_7go55opFtDbwijzmpPFD6ZTT0g89jrd/edit" );
+            startActivity(Intent.createChooser(intent2, "Share via"));
+
         } else if (id == R.id.nav_exit) {
             SessaoApplication.instance.onTerminate();
         }

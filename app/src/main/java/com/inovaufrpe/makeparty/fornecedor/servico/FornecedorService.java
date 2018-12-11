@@ -125,7 +125,5 @@ public class FornecedorService {
             }
         }
         return true;
-
     }
-
 }

@@ -15,6 +15,7 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
 public class AvaliacaoNotaActivity extends AppCompatActivity {
     private RatingBar ratingBar;
@@ -34,6 +35,15 @@ public class AvaliacaoNotaActivity extends AppCompatActivity {
         setUpToolbar();
         resgatarFotoTituloAvaliado();
         mostrarNotaAtual();
+    }
+    protected void setUpToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.materialup_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     public void setRatingBar() {
         ratingBar = findViewById(R.id.ratingBarUserAvaliar);
@@ -64,10 +74,8 @@ public class AvaliacaoNotaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //DO HAMBA, AINDA P ADAPTAR P O NOSSO
-                //avaliar(FiltroTitulo.instance.getTituloSelecionado(), nota);
-                Toast.makeText(AvaliacaoNotaActivity.this, "Avaliação feita com sucesso " + nota, Toast.LENGTH_SHORT).show();
-               // Toast.makeText(AvaliacaoActivity.this, "Avaliação feita com sucesso para o título: " + FiltroTitulo.instance.getTituloSelecionado().getNome(), Toast.LENGTH_SHORT).show();
-                finish();
+                pergSeConfirmaAvaliacaoDoForn();
+
             }
         });
     }
@@ -78,18 +86,25 @@ public class AvaliacaoNotaActivity extends AppCompatActivity {
         //ServicoTitulo servicoTitulo = new ServicoTitulo();
         //servicoTitulo.avaliar(ads, nota);
     }
-    protected void setUpToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.materialup_toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-    }
+
     public void resgatarFotoTituloAvaliado(){
         imageViewFornecedorAvaliar = findViewById(R.id.imageViewFornecedorAvaliar);
         //parametro abaixo do hamba, nos usamos uma classe filtro p pegar o titulo q tinha sido selecionado na lista, dps pegavamos a img dele e trocavamos
         //imageViewFornecedorAvaliar.setImageBitmap(FiltroTitulo.instance.getTituloSelecionado().getImagemBitmap());
+    }
+    public void pergSeConfirmaAvaliacaoDoForn(){
+        SimOuNaoDialog.show(getSupportFragmentManager(), "Você confirma a avaliação para esse fornecedor ?", new SimOuNaoDialog.Callback() {
+            @Override
+            public void metodoSimAoDialog() {
+                ///FAZER AQ O SETAR E P ENVIAR ETC
+                //avaliar(FiltroTitulo.instance.getTituloSelecionado(), nota);
+                Toast.makeText(AvaliacaoNotaActivity.this, "Avaliação feita com sucesso " + nota
+                        + FiltroAnuncioSelecionado.instance.getAnuncioSelecionado().getOwner().getSocialname(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(AvaliacaoActivity.this, "Avaliação feita com sucesso para o título: " + FiltroTitulo.instance.getTituloSelecionado().getNome(), Toast.LENGTH_SHORT).show();
+                finish();
+
+
+            }
+        });
     }
 }

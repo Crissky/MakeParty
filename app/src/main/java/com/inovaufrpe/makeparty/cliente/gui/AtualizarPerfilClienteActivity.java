@@ -17,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.gui.NotificacoesActivity;
+import com.inovaufrpe.makeparty.fornecedor.gui.TelaInicialFornecedorActivity;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.utils.Permissoes;
 import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
 import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
@@ -60,7 +63,27 @@ public class AtualizarPerfilClienteActivity extends AppCompatActivity {
         mudarSenha = findViewById(R.id.button_modificar_senha_cliente);
         apagarConta = findViewById(R.id.button_modificar_apagar_conta_cliente);
         sair = findViewById(R.id.button_modificar_sair_cliente);
+        acoesButton();
 
+    }
+    private void acoesButton(){
+        mudarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        mudarNome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudarTela(AlterandoDadosPerfilClienteActivity.class);
+            }
+        });
+        mudarEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudarTela(AlterandoDadosPerfilClienteActivity.class);
+            }
+        });
     }
     //Metodos da foto ainda falta setar e enviar para a API, fora retornar a img da API(CASO LOGADO) no icone do user
     public void telaMudarFotoCliente(View view) {
@@ -188,7 +211,8 @@ public class AtualizarPerfilClienteActivity extends AppCompatActivity {
                     //validar = ConectarServidor.put("https://makepartyserver.herokuapp.com/customers", data);
                     Log.i("Script", "OLHAAA: "+ validar);
                 }else if(method.equals("DELETE")){
-                    //validar = ConectarServidor.delete("https://makepartyserver.herokuapp.com/customers", data);
+                    validar = ConectarServidor.deleteDeJadiel("https://makepartyserver.herokuapp.com/customers", data);
+                    SessaoApplication.getInstance().onTerminate();
                     Log.i("Script", "OLHAAA: "+ validar);
                 }
                 if (validar.substring(2, 5).equals("err")){

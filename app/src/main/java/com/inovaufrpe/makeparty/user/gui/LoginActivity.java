@@ -59,8 +59,11 @@ public class LoginActivity extends AppCompatActivity{
                 String usuario = setarUsuario(edtEmail.getText().toString().trim(), edtSenha.getText().toString().trim());
                 logar(usuario);
                 //Toast.makeText(this, Sessao.instance.getResposta(), Toast.LENGTH_SHORT).show();
-                if(SessaoApplication.instance.getResposta().contains("E-mail ou senha incorretos")){
+                if(SessaoApplication.instance.getResposta().contains("E-mail ou senha incorretos")) {
                     Toast.makeText(this, "E-mail ou senha incorretos", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }else if(SessaoApplication.instance.getResposta().substring(2, 5).equals("err")) {
+                    Toast.makeText(this, "Não encontramos o seu cadastro", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 } else {
                     //getSessaoApi();
