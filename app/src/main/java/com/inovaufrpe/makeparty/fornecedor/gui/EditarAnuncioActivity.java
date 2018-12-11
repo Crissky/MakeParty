@@ -35,7 +35,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     private EditText editTextRuaAnuncio,editTextNumeroEndAnuncio,editTextBairroEndAnuncio,editTextCidadeEndAnuncio,editTextCepEndAnuncio;
     private TextView textViewLimitesAnuncio;
     private Button buttonAtualizarAnuncio,buttonExcluirAnuncio;
-    private ImageButton ImgButtonGalFotosAnex,imgButtonAnexarMaisFtAnEdit;
+    private ImageButton imgButtonAnexarMaisFtAnEdit;
     ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
     private String validar = "";
     boolean isValido = false;
@@ -60,7 +60,6 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         editTextCidadeEndAnuncio = findViewById(R.id.editTextCidadeEditarAnuncio);
         editTextCepEndAnuncio = findViewById(R.id.editTextCepEditarAnuncio);
         textViewLimitesAnuncio= findViewById(R.id. textViewObsLimitesAnuncioForn);
-        ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
         imgButtonAnexarMaisFtAnEdit =findViewById(R.id.imgButtonAnexarMaisFtAnEdit);
         buttonAtualizarAnuncio = findViewById(R.id.button_atualizar_anuncio);
         buttonExcluirAnuncio = findViewById(R.id.button_excluir_anuncio);
@@ -108,7 +107,6 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         editTextCepEndAnuncio.setText(anuncioSelecionado.getAddress().getZipcode());
         editTextCepEndAnuncio.addTextChangedListener(Mask.insert("#####-###",editTextCepEndAnuncio));
         textViewLimitesAnuncio.setText("");
-        ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
         //buscarAntigasImgAntesEdicao();
     }
     public void buscarAntigasImgAntesEdicao(){
@@ -174,7 +172,6 @@ public class EditarAnuncioActivity extends AppCompatActivity {
 
 
         //textViewLimitesAnuncio.setText("");
-        ImgButtonGalFotosAnex = findViewById(R.id.imgButtonGalFotosAnexAnEdit);
         guardandoNovasImgsSelecionadasEditadas();
 
         return anuncioASerEnviadoPUT;

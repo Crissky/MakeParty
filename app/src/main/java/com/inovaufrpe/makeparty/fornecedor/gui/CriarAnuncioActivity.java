@@ -49,7 +49,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public static final int CAMERA_REQUEST_CODE = 228;
     private Button botaoSelecionarFoto;
-    private List<Bitmap> bitmaps = new ArrayList<>();
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -240,6 +240,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         ads.setCreatedAt(new Date());
         ads.setDescription(descricao);
         ads.setPhone(telefone);
+        ads.setPhotos(bitmaps);
         String tipo = edtTipoAnuncio.getSelectedItem().toString().trim();
         tipo=ValidacaoGuiRapida.deAccent(tipo);
         ads.setType(tipo);
