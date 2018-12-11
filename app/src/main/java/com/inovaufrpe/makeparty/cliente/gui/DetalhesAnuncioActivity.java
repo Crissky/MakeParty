@@ -155,7 +155,8 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         nomeFornecedor.setText(("Nome do fornecedor(a) :" +anuncioSelecionado.getOwner().getSocialname()));
         String myFormat = "dd/MM/yyyy HH:mm"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("pt","BR"));
-        String[] createdAtEmString = anuncioSelecionado.getCreatedAt().toString().split("T");
+
+        /*String[] createdAtEmString = anuncioSelecionado.getCreatedAt().toString().split("T");
         StringBuffer diaMesAnoCreated = new StringBuffer(createdAtEmString[0]);
         diaMesAnoCreated.reverse();
         //String createdAtEmString = sdf.format(anuncioSelecionado.getCreatedAt().toString());
