@@ -51,7 +51,7 @@ public class TesteCapturaGaleriaActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.view);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new FotosAnuncioAdapter(bitmaps);
+        //adapter = new FotosAnuncioAdapter(bitmaps);
         recyclerView.setAdapter(adapter);
     }
     public void onGaleriaClicked(View v) {

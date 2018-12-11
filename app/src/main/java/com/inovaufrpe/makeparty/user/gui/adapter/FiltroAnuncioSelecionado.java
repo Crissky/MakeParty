@@ -1,6 +1,8 @@
 package com.inovaufrpe.makeparty.user.gui.adapter;
 
+import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
+import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +14,7 @@ public class FiltroAnuncioSelecionado {
     private String tipoAnuncioBottomNavSoPCliente ="null";
 
     public String getTipoListaPraMostrarSubCategoriaBottomNavCliente(){
-        if (tipoAnuncioBottomNavSoPCliente.equals("null")){
+        if ((tipoAnuncioBottomNavSoPCliente.equals("null")|(!SessaoApplication.getInstance().getTelaAtual().equals(TelaInicialClienteActivity.class)))){
             //tem q definir aq como o primeiro tipo q aparece no bottom navig
             this.tipoAnuncioBottomNavSoPCliente="festa";
         }

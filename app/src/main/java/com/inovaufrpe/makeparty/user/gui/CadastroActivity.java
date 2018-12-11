@@ -37,10 +37,10 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+       // SessaoApplication.getInstance().setTelaAtual(CadastroActivity.class);
         listandoOpçoesSpinner();
         encontrandoViews();
         saberQualTipoDeUser();
-        SessaoApplication.getInstance().setTelaAtual(CadastroActivity.class);
 
     }
     public void listandoOpçoesSpinner() {

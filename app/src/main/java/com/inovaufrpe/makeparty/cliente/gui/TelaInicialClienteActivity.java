@@ -140,8 +140,8 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
                     return true;
 
                 }else if (item.getItemId()==R.id.action_casa_festa){
-                    trocarFragmento("casadefesta");
-                    FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("casadefesta");
+                    trocarFragmento("casa de festa");
+                    FiltroAnuncioSelecionado.instance.setTipoListaPraMostrarSubCategoriaBottomNavCliente("casa de festa");
                     return true;
                 }else if (item.getItemId()==R.id.action_buffet){
                     trocarFragmento("buffet");

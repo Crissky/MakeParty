@@ -32,8 +32,9 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //SessaoApplication.getInstance().setTelaAtual(LoginActivity.class);
         encontrandoElementosView();
-        SessaoApplication.getInstance().setTelaAtual(LoginActivity.class);
+
     }
     private void encontrandoElementosView(){
         edtEmail= findViewById(R.id.editTextEmail);

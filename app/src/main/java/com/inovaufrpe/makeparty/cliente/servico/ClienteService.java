@@ -71,6 +71,7 @@ public class ClienteService{
         String novoJson = criarJson(objeto);
 
     }
+
     private static List<Ad> parserJSONListaAnunciosWishComFor(String json) throws IOException {
         List<Ad> ads = new ArrayList<Ad>();
         try {

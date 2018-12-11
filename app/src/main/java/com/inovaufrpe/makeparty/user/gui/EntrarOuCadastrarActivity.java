@@ -13,8 +13,8 @@ public class EntrarOuCadastrarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //SessaoApplication.getInstance().setTelaAtual(EntrarOuCadastrarActivity.class);
         setContentView(R.layout.activity_entrar_ou_cadastrar);
-        SessaoApplication.getInstance().setTelaAtual(EntrarOuCadastrarActivity.class);
     }
 
     private void mudarTela(Class proximaTela){

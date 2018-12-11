@@ -139,7 +139,7 @@ public class AnuncioEmComumService {
                 Log.d("tagsss",listTags.toString());
                 c.setTags((ArrayList) listTags);
 
-
+                /*
                 JSONArray fotosArrayJson = jsonAnuncio.getJSONArray("photos");
                 List<String> listFotos = new ArrayList<String>();
                 for (int e=0;i<fotosArrayJson.length();i++){
@@ -147,7 +147,7 @@ public class AnuncioEmComumService {
                 }
                 Log.d("fotoooosArray",listFotos.toString());
                 c.setPhotos((ArrayList) listFotos);
-
+                */
 
                 c.set_id(jsonAnuncio.optString("_id"));
                 c.setTitle(jsonAnuncio.optString("title"));
