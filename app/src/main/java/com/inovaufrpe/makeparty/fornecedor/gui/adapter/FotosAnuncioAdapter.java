@@ -9,10 +9,11 @@ import android.widget.ImageView;
 
 import com.inovaufrpe.makeparty.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FotosAnuncioAdapter extends RecyclerView.Adapter<FotosAnuncioAdapter.MyViewHolder> {
-    private List<Bitmap> bitmaps;
+    private ArrayList<Bitmap> bitmaps;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public ImageView imageView;
@@ -23,7 +24,7 @@ public class FotosAnuncioAdapter extends RecyclerView.Adapter<FotosAnuncioAdapte
         }
     }
 
-    public FotosAnuncioAdapter(List<Bitmap> bitmaps) {
+    public FotosAnuncioAdapter(ArrayList<Bitmap> bitmaps) {
         this.bitmaps = bitmaps;
     }
 
