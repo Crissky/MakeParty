@@ -26,12 +26,12 @@ public class ListaDesejosClienteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_desejos_cliente);
         SessaoApplication.getInstance().setTelaAtual(ListaDesejosClienteActivity.class);
-        //criarFragment(savedInstanceState);
+        criarFragment(savedInstanceState);
         setUpToolbar();
 
         //String json =conectarServidorGet(url);
         //Log.d("um json ai", json);
-        Retrofit retrofit = new Retrofit.Builder()
+        /*Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(WishListService.URL_BASE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -57,6 +57,7 @@ public class ListaDesejosClienteActivity extends AppCompatActivity {
                 Log.i("opaRetrofit", t.getMessage());
             }
         });
+        */
 
     }
     protected void setUpToolbar() {

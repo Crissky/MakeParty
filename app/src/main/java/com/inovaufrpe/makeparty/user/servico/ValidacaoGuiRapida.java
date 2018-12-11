@@ -3,9 +3,11 @@ package com.inovaufrpe.makeparty.user.servico;
 import android.util.Patterns;
 
 import java.text.Normalizer;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 public class ValidacaoGuiRapida {
@@ -254,6 +256,27 @@ public class ValidacaoGuiRapida {
         }
         return true;
     }
+    public String metodoFormataDataComTeZEmStringDiaMesAnoHorasMinSeg(Date data){
+        //METODO INCOMPLETO NO MOMENTO E AINDA PRECISA DE TESTES VIU
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        String dateInString = "2014-10-05T15:23:01Z";
+        String formatoDataQueQuero = "null";
+
+        try {
+
+            Date date = formatter.parse(dateInString.replaceAll("Z$", "+0000"));
+            System.out.println(date);
+
+            System.out.println("time zone : " + TimeZone.getDefault().getID());
+            //System.out.println(formatter.format(date));
+            formatoDataQueQuero =formatter.format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formatoDataQueQuero;
+    }
+
     //metodo abaixo para tirar acento
     public static String deAccent(String str) {
         String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);

@@ -6,15 +6,25 @@ import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.cliente.dominio.Customer;
 import com.inovaufrpe.makeparty.cliente.dominio.WishListService;
 import com.inovaufrpe.makeparty.cliente.dominio.Wishlists;
+import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.user.dominio.Address;
+import com.inovaufrpe.makeparty.user.dominio.User;
 import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +69,110 @@ public class ClienteService{
 
     public void criarCliente(Object objeto) throws IOException {
         String novoJson = criarJson(objeto);
+
+    }
+    private static List<Ad> parserJSONListaAnunciosWishComFor(String json) throws IOException {
+        List<Ad> ads = new ArrayList<Ad>();
+        try {
+            JSONObject objetoJson = new JSONObject(json);
+            JSONArray jsonAnuncios = null;
+            if(SessaoApplication.getInstance().getTelaAtual().equals(ListaDesejosClienteActivity.class)){
+                jsonAnuncios=objetoJson.getJSONArray("wishlists");
+            }else{
+                jsonAnuncios = objetoJson.getJSONArray("ads");
+            }
+
+            //Lê o array de ads do Json
+            //JSONArray jsonAnuncios = new JSONArray(json);
+            for (int i = 0; i < jsonAnuncios.length(); i++) {
+                JSONObject jsonAnuncio = jsonAnuncios.getJSONObject(i);
+                Wishlists wish = new Wishlists();
+                Ad adWi = new Ad();
+                JSONObject objetoAd = jsonAnuncio.getJSONObject("ad");
+                adWi.setDescription(jsonAnuncio.optString("description"));
+                adWi.setPrice(jsonAnuncio.optDouble("price"));
+                //Lê as info de cada anuncio
+
+                //TAGS N TA FUNCIONANDO DIREITO
+
+                JSONArray tagsArray = objetoAd.getJSONArray("tags");
+                List<String> listTags = new ArrayList<String>();
+                for (int e=0;i<tagsArray.length();i++){
+                    listTags.add(tagsArray.getString(e));
+                }
+                Log.d("tagsss",listTags.toString());
+                adWi.setTags((ArrayList) listTags);
+
+
+                JSONArray fotosArrayJson = objetoAd.getJSONArray("photos");
+                List<String> listFotos = new ArrayList<String>();
+                for (int e=0;i<fotosArrayJson.length();i++){
+                    listFotos.add(fotosArrayJson.getString(e));
+                }
+                Log.d("fotoooosArray",listFotos.toString());
+                adWi.setPhotos((ArrayList) listFotos);
+
+
+                adWi.set_id(objetoAd.optString("_id"));
+                adWi.setTitle(objetoAd.optString("title"));
+                adWi.setType(objetoAd.optString("type"));
+                adWi.setPhone(objetoAd.optString("phone"));
+
+                Owner ownerAqui=new Owner();
+                JSONObject objetoOwnerDentro = objetoAd.getJSONObject("owner");
+                ownerAqui.setSocialname(objetoOwnerDentro.getString("socialname"));
+                ownerAqui.setCnpj(objetoOwnerDentro.getString("cnpj"));
+                ownerAqui.set_id(objetoOwnerDentro.getString("_id"));
+
+                User userOwner = new User();
+                JSONObject objetoUserOwner =objetoOwnerDentro.getJSONObject("user");
+                userOwner.setEmail(objetoUserOwner.getString("email"));
+                userOwner.set_id(objetoUserOwner.getString("_id"));
+                ownerAqui.setUser(userOwner);
+                adWi.setOwner(ownerAqui);
+                Log.d("oi",adWi.toString());
+
+                //ta errado aq embaixo
+               /* String dateStr = objetoAd.getString("createdAt");
+                Date sdf =  new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr);
+                long createdAtDate = sdf.parse(dateStr);
+                Log.d("dataveae", String.valueOf(createdAtDate));
+                //c.setCreatedAt(createdAtDate);
+                //Log.d("dataveae",c.getCreatedAt().toString());
+
+                //c.setUpdatedAt();
+                Long createdAt = objetoAd.optLong("createdAt");
+                Date createdAtConv = new Date(createdAt);
+                adWi.setCreatedAt(createdAtConv);
+                */
+
+
+                Address addressAnuncio = new Address();
+                JSONObject objetoEndAnuncio = objetoAd.getJSONObject("address");
+                //LEMBRANDO Q ESSES OBJ N PODEM FICAR NULL EXPLIC , SE N, DA ERROO NA CONV
+                addressAnuncio.setCity(objetoEndAnuncio.getString("city"));
+                addressAnuncio.setNeighborhood(objetoEndAnuncio.getString("neighborhood"));
+                addressAnuncio.setNumber(objetoEndAnuncio.getString("number"));
+                addressAnuncio.setStreet(objetoEndAnuncio.getString("street"));
+                addressAnuncio.setZipcode(objetoEndAnuncio.getString("zipcode"));
+                adWi.setAddress(addressAnuncio);
+
+
+                if (LOG_ON) {
+                    Log.d(TAG, "Ad" + adWi.getDescription() + ">");
+
+                }
+                ads.add(adWi);
+            }
+            if (LOG_ON) {
+                Log.d(TAG, ads.size() + "encontrados");
+            }
+        } catch (JSONException e) {
+            throw new IOException(e.getMessage(), e);
+       /* } catch (ParseException e) {
+            e.printStackTrace();*/
+        }
+        return ads;
 
     }
 
@@ -118,7 +232,7 @@ public class ClienteService{
         String url = URL_LISTA_DESEJOS.replace(":tokenAqui",tokenOuId);
         String json =conectarServidorGet(url);
         Log.d("um json ai", json);
-        List listaDesejosCliente = AnuncioEmComumService.parserJSONListaAnunciosComFor(json);
+        List listaDesejosCliente = parserJSONListaAnunciosWishComFor(json);
         return listaDesejosCliente;
 
     }

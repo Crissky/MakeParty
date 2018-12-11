@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.dominio.Wishlists;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
 import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
 import com.inovaufrpe.makeparty.cliente.gui.TelaInicialClienteActivity;
@@ -34,6 +35,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -111,16 +114,18 @@ public class AnuncioEmComumService {
         List<Ad> ads = new ArrayList<Ad>();
         try {
             JSONObject objetoJson = new JSONObject(json);
-            JSONArray jsonAnuncios = objetoJson.getJSONArray("ads");
+            JSONArray jsonAnuncios = null;
             if(SessaoApplication.getInstance().getTelaAtual().equals(ListaDesejosClienteActivity.class)){
                 jsonAnuncios=objetoJson.getJSONArray("wishlists");
-                //depois pedir p edson deixar como ads msm o array la
+            }else{
+                jsonAnuncios = objetoJson.getJSONArray("ads");
             }
 
             //Lê o array de ads do Json
             //JSONArray jsonAnuncios = new JSONArray(json);
             for (int i = 0; i < jsonAnuncios.length(); i++) {
                 JSONObject jsonAnuncio = jsonAnuncios.getJSONObject(i);
+                Wishlists wish = new Wishlists();
                 Ad c = new Ad();
                 //Lê as info de cada anuncio
                 c.setDescription(jsonAnuncio.optString("description"));
@@ -142,6 +147,7 @@ public class AnuncioEmComumService {
                 }
                 Log.d("fotoooosArray",listFotos.toString());
                 c.setPhotos((ArrayList) listFotos);
+
 
                 c.set_id(jsonAnuncio.optString("_id"));
                 c.setTitle(jsonAnuncio.optString("title"));
@@ -166,14 +172,14 @@ public class AnuncioEmComumService {
                /* String dateStr = jsonAnuncio.getString("createdAt");
                 Date sdf =  new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr);
                 long createdAtDate = sdf.parse(dateStr);
-                Log.d("dataveae", String.valueOf(createdAtDate)); */
+                Log.d("dataveae", String.valueOf(createdAtDate));
                 //c.setCreatedAt(createdAtDate);
                 //Log.d("dataveae",c.getCreatedAt().toString());
 
                 //c.setUpdatedAt();
                 Long createdAt = jsonAnuncio.optLong("createdAt");
                 Date createdAtConv = new Date(createdAt);
-                c.setCreatedAt(createdAtConv);
+                c.setCreatedAt(createdAtConv); */
 
                 Address addressAnuncio = new Address();
                 JSONObject objetoEndAnuncio = jsonAnuncio.getJSONObject("address");
@@ -197,6 +203,8 @@ public class AnuncioEmComumService {
             }
         } catch (JSONException e) {
             throw new IOException(e.getMessage(), e);
+        //} catch (ParseException e) {
+          //  e.printStackTrace();
         }
         return ads;
 

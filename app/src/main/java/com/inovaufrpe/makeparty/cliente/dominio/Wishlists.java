@@ -11,6 +11,13 @@ public class Wishlists {
     //public List<Ad> ads;
     private Customer nomesocial;
 
+
+    public Wishlists(List<Ad> ads) {
+        this.ads = ads;
+    }
+    public Wishlists() {
+    }
+
     public List<Ad> getAd() {
         return ads;
     }
