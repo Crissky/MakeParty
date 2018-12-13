@@ -32,6 +32,7 @@ import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -153,17 +154,21 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         Ad anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         titleAds.setText(anuncioSelecionado.getTitle());
         nomeFornecedor.setText(("Nome do fornecedor(a) :" +anuncioSelecionado.getOwner().getSocialname()));
-        String myFormat = "dd/MM/yyyy HH:mm"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("pt","BR"));
-
-        /*String[] createdAtEmString = anuncioSelecionado.getCreatedAt().toString().split("T");
-        StringBuffer diaMesAnoCreated = new StringBuffer(createdAtEmString[0]);
-        diaMesAnoCreated.reverse();
-        //String createdAtEmString = sdf.format(anuncioSelecionado.getCreatedAt().toString());
-        datapub.setText(("Data de publicação :"+diaMesAnoCreated));
-        /*String dateStr = obj.getString("birthdate");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date birthDate = sdf.parse(dateStr);*/
+//        String myFormat = "dd/MM/yyyy HH:mm"; //In which you need put here
+//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("pt","BR"));
+//
+//        String[] createdAtEmString = anuncioSelecionado.getCreatedAt().toString().split("T");
+//        StringBuffer diaMesAnoCreated = new StringBuffer(createdAtEmString[0]);
+//        diaMesAnoCreated.reverse();
+//        String createdAtEmString = sdf.format(anuncioSelecionado.getCreatedAt().toString());
+        SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm");
+        String diaMesAnoCreated = sdfDiaMesAno.format(anuncioSelecionado.getCreatedAt());
+        String horaMinCreated = sdfHoraMin.format(anuncioSelecionado.getCreatedAt());
+        datapub.setText(("Data de publicação: "+diaMesAnoCreated+" às "+horaMinCreated));
+//        String dateStr = obj.getString("birthdate");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date birthDate = sdf.parse(dateStr);
         descriptionAds.setText(("Descrição: " + anuncioSelecionado.getDescription()));
         phoneAds.setText(("Telefone :" + anuncioSelecionado.getPhone()));
         String priceAnuncioStr = Double.toString(anuncioSelecionado.getPrice());

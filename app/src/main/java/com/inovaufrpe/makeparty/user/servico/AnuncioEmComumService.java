@@ -35,7 +35,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,17 +169,23 @@ public class AnuncioEmComumService {
                 Log.d("oi",c.toString());
 
                 //ta errado aq embaixo
-               /* String dateStr = jsonAnuncio.getString("createdAt");
-                Date sdf =  new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr);
-                long createdAtDate = sdf.parse(dateStr);
-                Log.d("dataveae", String.valueOf(createdAtDate));
-                //c.setCreatedAt(createdAtDate);
-                //Log.d("dataveae",c.getCreatedAt().toString());
+                try {
+                    String dateStr = jsonAnuncio.getString("createdAt");
+                    Date sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(dateStr);
+//                    long createdAtDate = sdf.parse(dateStr);
+//                    Log.d("dataveae", String.valueOf(createdAtDate));
+//                    Date date = new Date();
+//                    date.setTime(createdAtDate);
+                    c.setCreatedAt(sdf);
+                    Log.d("dataveae", c.getCreatedAt().toString());
+                }catch (ParseException e){
+                    Log.d("erro da data:", e.getMessage());
+                }
 
                 //c.setUpdatedAt();
-                Long createdAt = jsonAnuncio.optLong("createdAt");
-                Date createdAtConv = new Date(createdAt);
-                c.setCreatedAt(createdAtConv); */
+//                Long createdAt = jsonAnuncio.optLong("createdAt");
+//                Date createdAtConv = new Date(createdAt);
+//                c.setCreatedAt(createdAtConv);
 
                 Address addressAnuncio = new Address();
                 JSONObject objetoEndAnuncio = jsonAnuncio.getJSONObject("address");
