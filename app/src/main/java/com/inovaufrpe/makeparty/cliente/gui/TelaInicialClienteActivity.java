@@ -18,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
@@ -71,12 +73,20 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!SessaoApplication.instance.getTipoDeUserLogado().equals("null"));{
-            //TextView nomeUsuario, email;
-            //nomeUsuario = findViewById(R.id.nomeView);
-            //email = findViewById(R.id.emailView);
-            //nomeUsuario.setText(SessaoApplication.instance.getPessoa().getNome());
-            //email.setText(SessaoApplication.instance.getPessoa().getUser().getEmail());
+        ImageView fotoUsuario;
+        TextView nomeUsuario, email;
+        fotoUsuario =findViewById(R.id.imageViewNavHeader);
+        nomeUsuario = findViewById(R.id.nomeTextNavHeader);
+        email = findViewById(R.id.textViewEmailNavHeader);
+        if (SessaoApplication.instance.getTipoDeUserLogado().equals("customer")) {
+            nomeUsuario.setText(SessaoApplication.instance.getObjCustomerSeEleForTipoLogado().getName());
+            email.setText(SessaoApplication.instance.getObjCustomerSeEleForTipoLogado().getUser().getEmail());
+        }else if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")){
+            nomeUsuario.setText(SessaoApplication.instance.getObjOwnerSeEleForTipoLogado().getSocialname());
+            email.setText(SessaoApplication.instance.getObjOwnerSeEleForTipoLogado().getUser().getEmail());
+        }else{
+            nomeUsuario.setText("Cliente sem login");
+            email.setText("clientesemlogin@makeparty.com");
         }
 
         getMenuInflater().inflate(R.menu.menu_main, menu);

@@ -106,7 +106,7 @@ public class ComentarioDoAnuncioAdapter extends RecyclerView.Adapter<ComentarioD
             //// Cria as views para salvar no ViewHolder
             cardView = view.findViewById(R.id.card_view);
             img = (ImageView) view.findViewById(R.id.img);
-            nomeCliente = (TextView) view.findViewById(R.id.textView);
+            nomeCliente = (TextView) view.findViewById(R.id.textViewNomeCliente);
             tDescComent = (TextView) view.findViewById(R.id.text);
             estrelasNotaAvaliacaoCliente = (RatingBar) view.findViewById(R.id.ratingBarJaAvaliadoComent);
             dataComentCliente = (TextView) view.findViewById(R.id.textViewDataAvaliacaoAnuncioCliente);
