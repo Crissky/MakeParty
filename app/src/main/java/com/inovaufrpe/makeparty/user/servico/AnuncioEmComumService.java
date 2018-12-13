@@ -35,10 +35,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -302,7 +299,7 @@ public class AnuncioEmComumService {
         }
         else if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")&&(SessaoApplication.getInstance().getTelaAtual().equals(AnunciosFornecedorActivity.class))){
             //ta dizendo q é do item dele neh, falta verificar se ele ta na tela meus anuncios
-            FornecedorService.deleteItensListaFornecedor(selectedAds,SessaoApplication.getInstance().getTokenUser());
+            FornecedorService.deleteItensListaAnunciosFornecedor(selectedAds,SessaoApplication.getInstance().getTokenUser());
         }else{
             return false;
         }

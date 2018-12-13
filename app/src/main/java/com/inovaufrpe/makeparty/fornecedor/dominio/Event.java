@@ -1,9 +1,13 @@
 package com.inovaufrpe.makeparty.fornecedor.dominio;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.inovaufrpe.makeparty.user.dominio.Address;
 
-public class Event {
+public class Event implements Parcelable {
 
+    private String _id;
     private Owner owner;
     private String advertiser;
     private String client;
@@ -28,6 +32,13 @@ public class Event {
 
     public Event(){
 
+    }
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public Owner getOwner() {
@@ -95,7 +106,44 @@ public class Event {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // Escreve os dados para serem serializados
+        dest.writeString(_id);
+        dest.writeString(this.client);
+        dest.writeString(this.description);
+        dest.writeString(this.type);
+        dest.writeString(this.startDate);
+        dest.writeString(this.endDate);
+        dest.writeString(String.valueOf(this.address));
+    }
 
+    public void readFromParcel(Parcel parcel) {
+        // Lê os dados na mesma ordem em que foram escritos
+        this._id = parcel.readString();
+        this.client = parcel.readString();
+        this.description = parcel.readString();
+        this.type = parcel.readString();
+        this.startDate = parcel.readString();
+        this.endDate = parcel.readString();
 
+    }
+
+    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel p) {
+            Event c = new Event();
+            c.readFromParcel(p);
+            return c;
+        }
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 }

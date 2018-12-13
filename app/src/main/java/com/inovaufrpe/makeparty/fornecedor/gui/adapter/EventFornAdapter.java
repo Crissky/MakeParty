@@ -27,9 +27,9 @@ public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.Even
 
     //abaixo metodos que devem ser implementados para ter diferentes respostas dependendo do clique
     public interface EventFornOnClickListener {
-        void onClickEvent(EventFornAdapter.EventsFornViewHolder holder, int indexEvent);
+        void onClickEventForn(EventFornAdapter.EventsFornViewHolder holder, int indexEvent);
 
-        void onClickEventForn(EventsFornViewHolder holder, int idx);
+        void onLongClickEventForn(EventsFornViewHolder holder, int idx);
     }
     //Aqui esta informando que esse adapter , essa classe EventFornAdapter esta personalizando cada item de uma lista
     // uma lista de avaliacoes que no caso ficará "guardada" em Events
@@ -72,7 +72,14 @@ public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.Even
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickListener.onClickEvent(holder, position);
+                    onClickListener.onClickEventForn(holder, position);
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onClickListener.onLongClickEventForn(holder, position);
+                    return true;
                 }
             });
         }

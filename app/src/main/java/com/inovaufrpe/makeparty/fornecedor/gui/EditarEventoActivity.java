@@ -14,4 +14,5 @@ public class EditarEventoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_evento_forn);
     }
+
 }

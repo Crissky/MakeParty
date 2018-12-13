@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.user.dominio.Address;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +35,8 @@ public class CriarEventoFornActivity extends AppCompatActivity {
     private Date date = new Date(), dateInicio = new Date(), dateFim = new Date();
     private CheckBox checkBoxHorFimAteOutroDia;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private String validar = "";
+    private boolean isValido = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +139,16 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         event.setDescription(obs.getText().toString().trim());
         event.setStartDate(String.valueOf(dateInicio));
         event.setEndDate(String.valueOf(dateFim));
+        Address address = new Address();
+        /*
+        address.setStreet();
+        address.setNumber();
+        address.setZipcode();
+        address.setNeighborhood();
+        address.setCity();
+        address.setState();
+        event.setAddress(address);
+        */
         Log.d("DATAINICIOCOMOTA",event.getStartDate().toString());
         Log.d("DataFIMCOMOTA",event.getEndDate());
         //MUDAR ESSA LINHA AQUI EM BAIXO:
@@ -157,6 +171,18 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         event.setDescription(obs.getText().toString().trim());
         event.setStartDate(String.valueOf(dateInicio));
         event.setEndDate(String.valueOf(dateFim));
+        Log.d("DATAINICIOCOMOTA",event.getStartDate().toString());
+        Log.d("DataFIMCOMOTA",event.getEndDate());
+        Address address = new Address();
+        /*
+        address.setStreet();
+        address.setNumber();
+        address.setZipcode();
+        address.setNeighborhood();
+        address.setCity();
+        address.setState();
+        event.setAddress(address);
+        */
         Toast.makeText(this, "Foi", Toast.LENGTH_SHORT).show();
     }
 
@@ -237,5 +263,32 @@ public class CriarEventoFornActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void criarEventoNoServidor(String json) throws InterruptedException{
+        callServer("POST",json);
+    }
+
+    private void callServer(final String method, final String data) throws InterruptedException{
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                validar = ConectarServidor.post("https://makepartyserver.herokuapp.com/events", data);
+                Log.i("Script", "OLHAAA: "+ validar);
+                if (validar.substring(2, 5).equals("err")){
+                    // Não sei qual o erro
+                    validar = "Não foi possível criar o evento";
+                    // Rever a mensagem
+                }else{
+                    validar = "Evento criado com sucesso";
+                    isValido = true;
+                }
+            }
+        });
+        thread.start();
+        thread.join();
+    }
+
+    private void exibirMensagemSeValidouCriacaoEvento() {
+        Toast.makeText(getApplicationContext(), validar, Toast.LENGTH_SHORT).show();
     }
 }

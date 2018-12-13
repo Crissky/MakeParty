@@ -3,6 +3,7 @@ package com.inovaufrpe.makeparty.fornecedor.gui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -13,14 +14,16 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Agendamento;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.AgendamentosFornecedorAdapter;
+import com.inovaufrpe.makeparty.fornecedor.gui.fragment.EventsFragment;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.user.gui.fragment.AnunciosOutroFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CapturaDadosCalendarFornActivity extends Activity {
+public class CapturaDadosCalendarFornActivity extends AppCompatActivity {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private Date date;
     private List<Event> events = new ArrayList<>();
@@ -34,8 +37,7 @@ public class CapturaDadosCalendarFornActivity extends Activity {
         pegarIntent();
         setUpToolbar();
         configurarTela();
-
-
+        criarFragment(savedInstanceState);
     }
     protected void setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.materialup_toolbar);
@@ -64,12 +66,14 @@ public class CapturaDadosCalendarFornActivity extends Activity {
                 irTelaCriarEvento();
             }
         });
-        //ListView listView = findViewById(R.id.listView);
-        //AgendamentosFornecedorAdapter adapter = new AgendamentosFornecedorAdapter(CapturaDadosCalendarFornActivity.this, events);
-        //listView.setAdapter(adapter);
     }
-    private void criarFrag(){
-
+    private void criarFragment(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            EventsFragment frag = new EventsFragment();
+            //AnunciosFragment frag = new AnunciosFragment();
+            frag.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().replace(R.id.containerMeusEventos, frag).commit();
+        }
     }
 
     private void irTelaCriarEvento(){
