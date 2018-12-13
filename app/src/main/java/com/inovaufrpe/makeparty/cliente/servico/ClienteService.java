@@ -72,6 +72,15 @@ public class ClienteService{
         String novoJson = criarJson(objeto);
 
     }
+    public String pegarDadosDoCliente(String tokenOuId) throws IOException{
+        String url = URL_PESQUISAR_PF_PELO_TOKEN.replace(":tokenAqui",tokenOuId);
+        String json =conectarServidorGet(url);
+        ///Converte String JSON para objeto Java
+        Gson gson = new Gson();
+        Customer customer = gson.fromJson(json,Customer.class);
+        SessaoApplication.getInstance().setObjCustomerSeEleForTipoLogado(customer);
+        return json;
+    }
 
     private static List<Ad> parserJSONListaAnunciosWishComFor(String json) throws IOException {
         List<Ad> ads = new ArrayList<Ad>();

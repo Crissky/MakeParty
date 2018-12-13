@@ -17,8 +17,10 @@ import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.dominio.User;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.ServicoDownload;
+import com.inovaufrpe.makeparty.user.servico.UsuarioService;
 import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -28,6 +30,7 @@ public class LoginActivity extends AppCompatActivity{
     private ProgressDialog dialog;
     private ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
     private String tipoUserLogou ="";
+    private String resgateDadosJsonRespServ ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,15 +81,17 @@ public class LoginActivity extends AppCompatActivity{
                     //String dataFormatada = formataData.format(data);
                     SessaoApplication.instance.setHoraRecebidoToken(dataUtil);
                     //Toast.makeText(this, tipoUserLogou, Toast.LENGTH_SHORT).show();
-
-                    Toast.makeText(this, "Logado", Toast.LENGTH_SHORT).show();
-                    if (tipoUserLogou.equals("customer")){
-                        irParaTelaInicialCliente();
+                    pesquisarDados(SessaoApplication.getInstance().getTokenUser());
+                    if (resgateDadosJsonRespServ.substring(2, 5).equals("err")){
+                        Toast.makeText(this, "Erro ao procurar seus dados", Toast.LENGTH_SHORT).show();
                     }else{
-                        irParaTelaInicialFornecedor();
+                        Toast.makeText(this, "Logado", Toast.LENGTH_SHORT).show();
+                        if (tipoUserLogou.equals("customer")){
+                            irParaTelaInicialCliente();
+                        }else {
+                            irParaTelaInicialFornecedor();
+                        }
                     }
-
-
                 }
             } else {
                 Toast.makeText(this, "Sem conexão com a internet", Toast.LENGTH_SHORT).show();
@@ -98,39 +103,31 @@ public class LoginActivity extends AppCompatActivity{
 
     }
 
-    private void getSessaoApi() throws InterruptedException {
-        Gson gson = new Gson();
-        //SessionApi sessionApi = gson.fromJson(Sessao.instance.getResposta(), SessionApi.class);
-        //Sessao.instance.setSession(sessionApi);
-       // setMApi(sessionApi.getUser());
-    }
-
-    /*private void setMApi(final User usuario) throws InterruptedException {
-        final ServicoHttpM servicoHttpM = new ServicoHttpM();
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                M m = servicoHttpM.getMByUser(usuario);
-                Sessao.instance.setM(m);
-            }
-        });
-        thread.start();
-        thread.join();
-    }*/
-
-
     private void logar(String jason)  throws InterruptedException {
-        callServer(jason);
-
+        callServer( "POST",jason);
+    }
+    private void pesquisarDados(String token)  throws InterruptedException {
+            callServer( "GET",token);
     }
 
-    private void callServer(final String data) throws InterruptedException{
+    private void callServer(final String method, final String data) throws InterruptedException{
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                SessaoApplication.instance.setResposta(ConectarServidor.post("https://makepartyserver.herokuapp.com/users/authenticate", data));
-                Log.i("Script", "OLHAAA: "+ SessaoApplication.instance
-                        .getResposta());
+                if (method.equals("POST")) {
+                    SessaoApplication.instance.setResposta(ConectarServidor.post("https://makepartyserver.herokuapp.com/users/authenticate", data));
+                    Log.i("Script", "OLHAAA: " + SessaoApplication.instance.getResposta());
+                }else if(method.equals("GET")){
+                    UsuarioService usuarioService = new UsuarioService();
+                    try {
+                        //Para resgatar , fazer verif .getTipoDeUserLogado, dependendo se for customer ou adversiter ai pode chamar o metodo
+                        //p pegar ownerIsLogado ou customerIsLogado q eles retornam o objeto
+                        resgateDadosJsonRespServ = usuarioService.verificarTipoUserPegarDadosDeleEGuardarNaSessao(data);
+                        SessaoApplication.instance.setResposta(resgateDadosJsonRespServ);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
         thread.start();
@@ -161,8 +158,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private boolean isOnline() {
-        if(ServicoDownload.isNetworkAvailable(getApplicationContext()))
-        {
+        if(ServicoDownload.isNetworkAvailable(getApplicationContext())) {
             return true;
         }else{
             return false;

@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.inovaufrpe.makeparty.cliente.dominio.Customer;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.user.dominio.User;
 import com.squareup.otto.Bus;
 
@@ -22,6 +24,8 @@ public class SessaoApplication extends Application {
     private String _id = "null";
     private User user;
     private Date horaRecebidoToken = null;
+    private Owner ownerIsLogado = null;
+    private Customer customerIsLogado =null;
     private Class telaAtual =null;
     private Class telaAnterior =null;
     private static Context mContext;
@@ -59,6 +63,7 @@ public class SessaoApplication extends Application {
         this.tipoDeUserLogado = tipoDeUserLogado;
     }
 
+
     public String getIdUser() {
         return _id;
     }
@@ -89,6 +94,18 @@ public class SessaoApplication extends Application {
     public Date getHoraRecebidoToken() {
         return horaRecebidoToken;
     }
+    public Owner getObjOwnerSeEleForTipoLogado(){
+        return ownerIsLogado;
+    }
+    public void setObjOwnerSeEleForTipoLogado(Owner owner){
+        ownerIsLogado=owner;
+    }
+    public Customer getObjCustomerSeEleForTipoLogado(){
+        return customerIsLogado;
+    }
+    public void setObjCustomerSeEleForTipoLogado(Customer customer){
+        customerIsLogado=customer;
+    }
 
     public void setTelaAtual(Class telaAtual) {
         setTelaAnterior(this.telaAtual);
@@ -116,6 +133,8 @@ public class SessaoApplication extends Application {
         SessaoApplication.getInstance().setIdUser("null");
         SessaoApplication.getInstance().setHoraRecebidoToken(null);
         SessaoApplication.getInstance().setTelaAnterior(null);
+        SessaoApplication.getInstance().setObjOwnerSeEleForTipoLogado(null);
+        SessaoApplication.getInstance().setObjCustomerSeEleForTipoLogado(null);
         Log.d(TAG, " SessaoApplication.onTerminate()");
     }
 

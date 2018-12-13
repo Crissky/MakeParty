@@ -3,6 +3,7 @@ package com.inovaufrpe.makeparty.fornecedor.servico;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.inovaufrpe.makeparty.cliente.dominio.Wishlists;
 import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
@@ -111,6 +112,15 @@ public class FornecedorService {
 
     public void criarAnuncio(Object objeto) throws IOException {
         String novoJson = criarJson(objeto);
+    }
+    public String pegarDadosDoFornecedor(String tokenOuId) throws IOException{
+        String url = URL_PESQUISAR_PJ_PELO_TOKEN.replace(":tokenAqui",tokenOuId);
+        String json =conectarServidorGet(url);
+        ///Converte String JSON para objeto Java
+        Gson gson = new Gson();
+        Owner owner = gson.fromJson(json,Owner.class);
+        SessaoApplication.getInstance().setObjOwnerSeEleForTipoLogado(owner);
+        return json;
     }
 
     public static List getAnunciosDeUmFornecedor(String tokenOuId) throws IOException {
