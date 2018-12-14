@@ -187,8 +187,8 @@ public class EditarAnuncioActivity extends AppCompatActivity {
                 exibirMsgSeValidouAtualizaoOuExclusao();
 
                 if (isValido){
-                    msgToast("Perfil atualizado com sucesso");
-                    mudarTela(AtualizarPerfilClienteActivity.class);
+                    msgToast("Anúncio atualizado com sucesso");
+                    mudarTela(AnunciosFornecedorActivity.class);
                 }else{
                     msgToast("Erro");
                 };

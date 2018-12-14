@@ -12,6 +12,8 @@ public class Rating {
     private Customer nameClient;
     private String descriptionComment;
     private Date dateComment;
+    // Flag para a action bar de contexto
+    public boolean selected;
 
     public Rating(String ad, String comment, String rating, Customer nameClient, String descriptionComment, Date dateComment) {
         this.ad = ad;

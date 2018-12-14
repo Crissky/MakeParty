@@ -67,6 +67,17 @@
                     android:textSize="16sp"
                     android:text="@string/radio_button_indisp"/>
             </RadioGroup>
+
+            <EditText
+                android:id="@+id/editTextNomeParaEvForn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="10"
+                android:hint="@string/edit_text_nome_criar_ev_forn"
+                android:inputType="text"
+                android:visibility="visible" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -194,7 +205,7 @@
                 android:layout_margin="16dp"
                 android:text="@string/text_view_dig_dia_fim_abaixo_criar_ev"
                 android:textSize="18sp"
-                android:visibility="invisible"/>
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/dataFimCriarEventoForn"
@@ -206,7 +217,7 @@
                 android:inputType="date"
                 android:maxLength="10"
                 android:textSize="16sp"
-                android:visibility="invisible"/>
+                android:visibility="gone"/>
             <LinearLayout
                 android:id="@+id/eventoLayout"
                 android:layout_width="match_parent"
