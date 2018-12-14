@@ -381,11 +381,12 @@ public class EventsFragment extends BaseFragment {
         }
     }
     private class PostOuDeleteTask implements TaskListener<List> {
-        //private final List<Event> selectedEvents;
+        private final List<Event> selectedEvents;
         private String tipoReq="";
 
         public PostOuDeleteTask(List<Event> selectedEvents) {
-            EventsFragment.this.events =getSelectedEventsForn();
+            this.selectedEvents = selectedEvents;
+            //EventsFragment.this.events =getSelectedEventsForn();
         }
 
         @Override

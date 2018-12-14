@@ -35,7 +35,7 @@
         android:gravity="center"/>
 
     <FrameLayout
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="27dp"
         android:id="@+id/containerMeusEventos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
