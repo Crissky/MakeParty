@@ -26,81 +26,89 @@
             app:title="@string/label_alterando_dados"
             app:titleTextColor="@color/colorFundo" />
     </android.support.design.widget.AppBarLayout>
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textViewNomeAlterandoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome:"
+                android:textSize="18sp"
+                android:layout_margin="16dp"/>
 
-    <TextView
-        android:id="@+id/textViewNomeAlterandoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nome:"
-        android:textSize="18sp"
-        android:layout_margin="16dp"/>
-
-    <EditText
-        android:id="@+id/editTextNomeAlterandoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="@string/edit_text_nome_alterando_perfil"
-        android:ems="10"/>
-    <TextView
-        android:id="@+id/textViewEmailAlterandoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="E-mail:"
-        android:textSize="18sp"
-        android:layout_margin="16dp"/>
+            <EditText
+                android:id="@+id/editTextNomeAlterandoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="@string/edit_text_nome_alterando_perfil"
+                android:ems="10"/>
+            <TextView
+                android:id="@+id/textViewEmailAlterandoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="E-mail:"
+                android:textSize="18sp"
+                android:layout_margin="16dp"/>
 
 
-    <EditText
-        android:id="@+id/editTextEmailAlterandoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="@string/edit_text_email_alterando_perfil"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/editTextEmailAlterandoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="@string/edit_text_email_alterando_perfil"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
 
-    <TextView
-        android:id="@+id/textViewSenhaAtualAlterandoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Senha atual:"
-        android:textSize="18sp"
-        android:layout_margin="16dp"/>
+            <TextView
+                android:id="@+id/textViewSenhaAtualAlterandoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Senha atual:"
+                android:textSize="18sp"
+                android:layout_margin="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextSenhaAtualAlterandoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="@string/edit_text_senha_atual_alterando_perfil"
-        android:ems="10"
-        android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/editTextSenhaAtualAlterandoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="@string/edit_text_senha_atual_alterando_perfil"
+                android:ems="10"
+                android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/textViewNovaSenhaAlterandoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Senha nova:"
-        android:textSize="18sp"
-        android:layout_margin="16dp"/>
+            <TextView
+                android:id="@+id/textViewNovaSenhaAlterandoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Senha nova:"
+                android:textSize="18sp"
+                android:layout_margin="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextNovaNovaSenhaAlterandoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="@string/edit_text_nova_senha_alterando_perfil"
-        android:ems="10"
-        android:inputType="textPassword" />
-    <Button
-        android:id="@+id/btAtualizandoDadosCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/text_atualizar"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorWhite"
-        android:layout_gravity="center_horizontal"/>
+            <EditText
+                android:id="@+id/editTextNovaNovaSenhaAlterandoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="@string/edit_text_nova_senha_alterando_perfil"
+                android:ems="10"
+                android:inputType="textPassword" />
+            <Button
+                android:id="@+id/btAtualizandoDadosCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/text_atualizar"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
 
+</ScrollView>
 </LinearLayout>

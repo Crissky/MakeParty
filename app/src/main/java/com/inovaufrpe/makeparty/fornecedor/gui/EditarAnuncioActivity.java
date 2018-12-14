@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.AtualizarPerfilClienteActivity;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FotosAnuncioAdapter;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
@@ -186,8 +187,8 @@ public class EditarAnuncioActivity extends AppCompatActivity {
                 exibirMsgSeValidouAtualizaoOuExclusao();
 
                 if (isValido){
-                    msgToast("Anúncio atualizado com sucesso");
-                    mudarTela(AnunciosFornecedorActivity.class);
+                    msgToast("Perfil atualizado com sucesso");
+                    mudarTela(AtualizarPerfilClienteActivity.class);
                 }else{
                     msgToast("Erro");
                 };
