@@ -133,13 +133,14 @@ public class AnuncioEmComumService {
                 c.setDescription(jsonAnuncio.optString("description"));
                 c.setPrice(jsonAnuncio.optDouble("price"));
                 //TAGS N TA FUNCIONANDO DIREITO
-                JSONArray tagsArray = jsonAnuncio.getJSONArray("tags");
+               /* JSONArray tagsArray = jsonAnuncio.getJSONArray("tags");
                 List<String> listTags = new ArrayList<String>();
                 for (int e=0;i<tagsArray.length();i++){
                     listTags.add(tagsArray.getString(e));
                 }
                 Log.d("tagsss",listTags.toString());
                 c.setTags((ArrayList) listTags);
+                */
 
                 /*
                 JSONArray fotosArrayJson = jsonAnuncio.getJSONArray("photos");
@@ -297,18 +298,15 @@ public class AnuncioEmComumService {
         List litaAnunciosPorNome = parserJSONListaAnunciosComFor(json);
         return litaAnunciosPorNome;
     }
-    public static boolean addItensLista(List<Ad> selectedAds) throws IOException, JSONException {
+    public static void addItensLista(List<Ad> selectedAds) throws IOException, JSONException {
         if ((SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer") &&
                 ((SessaoApplication.getInstance().getTelaAtual().equals(TelaInicialClienteActivity.class)
                         | SessaoApplication.getInstance().getTelaAtual().equals(DetalhesAnuncioActivity.class))))) {
 
-            Boolean a = clienteService.addAWishList(selectedAds);
+            Boolean a = ClienteService.addAWishList(selectedAds);
             //aqui embaixo esse metodo acho q n é a melhor forma de implementar, talvez o wishlist? chamando ele?
             //setar ainda qual tela ta
-
-        } else {
-            return false;
-        }return true;
+        }
     }
 
     public static boolean deleteItensLista(List<Ad> selectedAds) throws IOException, JSONException {
@@ -345,7 +343,7 @@ public class AnuncioEmComumService {
                 c.setDescription(jsonAnuncio.optString("description"));
                 c.setPrice(jsonAnuncio.optDouble("price"));
                 //TAGS N TA FUNCIONANDO DIREITO
-                JSONArray tagsArray = jsonAnuncio.getJSONArray("tags");
+                /*JSONArray tagsArray = jsonAnuncio.getJSONArray("tags");
                 List<String> listTags = new ArrayList<String>();
                 for (int e=0;i<tagsArray.length();i++){
                     listTags.add(tagsArray.getString(e));

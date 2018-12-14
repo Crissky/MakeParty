@@ -66,6 +66,17 @@
                     android:textSize="16sp"
                     android:text="@string/radio_button_indisp"/>
             </RadioGroup>
+
+            <EditText
+                android:id="@+id/editTextNomeParaEvFornEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:ems="10"
+                android:hint="@string/edit_text_nome_criar_ev_forn"
+                android:inputType="text"
+                android:visibility="visible" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -337,7 +348,7 @@
                 android:layout_marginBottom="5dp"/>
 
             <EditText
-                android:id="@+id/obsCriarEventoForn"
+                android:id="@+id/obseEditarEventoForn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
@@ -353,14 +364,6 @@
                 android:background="@color/colorButoes"
                 android:textColor="@color/colorTextoBut"
                 android:text="@string/button_editar_evento_forn"/>
-            <Button
-                android:id="@+id/excluirEvFornTelaEditarEv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="18dp"
-                android:background="@color/colorButoes"
-                android:textColor="@color/colorTextoBut"
-                android:text="@string/button_excluir_evento_forn"/>
 
         </LinearLayout>
 

@@ -106,7 +106,7 @@ public class ClienteService{
 
                 //TAGS N TA FUNCIONANDO DIREITO
 
-                JSONArray tagsArray = objetoAd.getJSONArray("tags");
+                /*JSONArray tagsArray = objetoAd.getJSONArray("tags");
                 List<String> listTags = new ArrayList<String>();
                 for (int e=0;i<tagsArray.length();i++){
                     listTags.add(tagsArray.getString(e));
@@ -122,8 +122,7 @@ public class ClienteService{
                 }
                 Log.d("fotoooosArray",listFotos.toString());
                 adWi.setPhotos((ArrayList) listFotos);
-
-
+                */
                 adWi.set_id(objetoAd.optString("_id"));
                 adWi.setTitle(objetoAd.optString("title"));
                 adWi.setType(objetoAd.optString("type"));

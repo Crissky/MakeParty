@@ -1,5 +1,6 @@
 package com.inovaufrpe.makeparty.fornecedor.gui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,11 +9,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FiltroEventoSelecionado;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.user.gui.CadastroActivity;
+import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
+import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +31,9 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
             enderecoEventoForn, descricaoEventoFornSelecionado;
     private Button btAtualizarEventoForn, btExcluirEventoForn;
     private SimpleDateFormat sdfServerPatern = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    private String validar = "";
+    private boolean isValido = false;
+    private ProgressDialog mprogressDialog;
 
 
     @Override
@@ -81,7 +91,7 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
     }
     private void setandoInfoDetalhes(){
         Event eventoSelecionado= FiltroEventoSelecionado.instance.getEventoSelecionado();
-        nomeClienteEventoSelecionado.setText(eventoSelecionado.getClient());
+        nomeClienteEventoSelecionado.setText(("Nome do cliente :"+eventoSelecionado.getClient()));
         try {
             Date dateInicio = sdfServerPatern.parse(eventoSelecionado.getStartdate());
             Date dateFim = sdfServerPatern.parse(eventoSelecionado.getEnddate());
@@ -93,22 +103,71 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
             String diaMesAnoFimEvento = sdfDiaMesAno.format(dateFim);
             String horaMinFimEvento = sdfHoraMin.format(dateFim);
             dataFimEventoSelecionado.setText(("Data de fim: " + diaMesAnoFimEvento + " às " + horaMinFimEvento));
+
         }catch (ParseException p){
             Log.d("ParseException", p.getMessage());
         }
-        tipoEventoFornSelecionado.setText(eventoSelecionado.getType());
+        tipoEventoFornSelecionado.setText(("Tipo/título do evento :"+eventoSelecionado.getType()));
         enderecoEventoForn.setText(("Endereço : "+eventoSelecionado.getAddress().getStreet()
                 +", "+ "Bairro :"+eventoSelecionado.getAddress().getNeighborhood()+", "+ "Número :"
                 +eventoSelecionado.getAddress().getNumber()+", "+"Cidade :" +eventoSelecionado.getAddress().getCity()
                 //+","+anuncioSelecionado.getAddress().getState()
                 +", CEP :"+eventoSelecionado.getAddress().getZipcode()));
-        descricaoEventoFornSelecionado.setText(eventoSelecionado.getDescription());
+        descricaoEventoFornSelecionado.setText(("Descrição/Obs.:"+eventoSelecionado.getDescription()));
 
     }
 
     private void excluirEvento() {
+        final Ad anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
+        SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja mesmo excluir esse anúncio ?", new SimOuNaoDialog.Callback() {
+            @Override
+            public void metodoSimAoDialog() {
+                String tokenJsonAmao = ","+"\"token\":"+ "\""+ SessaoApplication.getInstance().getTokenUser() +"\""+"}";
+                String jsonAnuncioParaDeletarComToken = "{"+"\"_id\":"+ "\""+ anuncioSelecionado.get_id()+"\""+tokenJsonAmao;
+                mprogressDialog = new ProgressDialog(DetalhesEventoFornActivity.this);
+                mprogressDialog.setMessage("Por favor espere, excluindo anúncio");
+                mprogressDialog.show();
+                try{
+                    excluirEventoOficialNoServ(jsonAnuncioParaDeletarComToken);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                exibirMsgSeValidouExclusaoEvento();
+
+                if (isValido) {
+                    mudarTela(CapturaDadosCalendarFornActivity.class);
+                }
+            }
+        });
 
     }
+    private void excluirEventoOficialNoServ(String json) throws InterruptedException{
+        callServer("DELETE",json);
+    }
+
+    private void callServer(final String method, final String data) throws InterruptedException{
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                validar = ConectarServidor.deleteDeJadiel("https://makepartyserver.herokuapp.com/events", data);
+                Log.i("Script", "OLHAAA: "+ validar);
+                if (validar.substring(2, 5).equals("err")){
+                    // Não sei qual o erro
+                    validar = "Não foi possível excluir o evento";
+                    // Rever a mensagem
+                }else{
+                    validar = "Evento excluido com sucesso";
+                    isValido = true;
+                    }
+                }
+        });
+        thread.start();
+        thread.join();
+    }
+    public void exibirMsgSeValidouExclusaoEvento(){
+        Toast.makeText(getApplicationContext(), validar, Toast.LENGTH_SHORT).show();
+    }
+
 
     public void mudarTela(Class tela) {
         Intent intent = new Intent(this, tela);
@@ -116,9 +175,5 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        this.mudarTela(CapturaDadosCalendarFornActivity.class);
-    }
 }
 

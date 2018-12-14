@@ -80,6 +80,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         bairroCriarEvForn = findViewById(R.id.editTextBairroCriarEvForn);
         cidadeCriarEvForn = findViewById(R.id.editTextCidadeCriarEvForn);
         cepCriarEvForn = findViewById(R.id.editTextCepCriarEvForn);
+        cepCriarEvForn.addTextChangedListener(Mask.insert("########", cepCriarEvForn));
         numeroCriarEvForn = findViewById(R.id.editTextNumeroCriarEvForn);
         acoesButton();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -156,7 +157,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
     }
 
     private void criarEvento() {
-        if (!verficarCamposParaEvento()){
+        if (!verficarCamposParaEvento()) {
             return;
         }
         if (group.getCheckedRadioButtonId() == R.id.RadioButtonParteDiaCriarEv) {
@@ -199,9 +200,12 @@ public class CriarEventoFornActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         exibirMensagemSeValidouCriacaoEvento();
-        Log.i("RESPSERV",validar);
-
+        Log.i("RESPSERV", validar);
+        if (isValido) {
+            mudarTela(CapturaDadosCalendarFornActivity.class);
+        }
     }
+
     private boolean verficarCamposParaEvento(){
         String titulo = tituloETipoDoEvento.getText().toString().trim();
         //String nomeCliente = nomeCliente.getText().toString().trim();
@@ -290,6 +294,9 @@ public class CriarEventoFornActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         exibirMensagemSeValidouCriacaoEvento();
+        if(isValido){
+            mudarTela(CapturaDadosCalendarFornActivity.class);
+        }
     }
 
 

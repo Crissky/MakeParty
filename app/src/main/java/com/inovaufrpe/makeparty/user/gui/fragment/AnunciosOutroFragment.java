@@ -427,7 +427,7 @@ public class AnunciosOutroFragment extends BaseFragment {
             if (e instanceof SocketTimeoutException) {
                 alert(getString(R.string.msg_erro_io_timeout));
             } else {
-                alert(getString(R.string.msg_error_io));
+               // alert(getString(R.string.msg_error_io));
             }
         }
 
