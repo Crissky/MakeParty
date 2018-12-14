@@ -19,6 +19,7 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.infra.utils.Mask;
 import com.inovaufrpe.makeparty.user.dominio.Address;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
@@ -41,6 +42,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
     private Date date = new Date(), dateInicio = new Date(), dateFim = new Date();
     private CheckBox checkBoxHorFimAteOutroDia;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private String isDataFimOutroDia = "false";
     private String validar = "";
     private ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
     private boolean isValido = false;
@@ -73,6 +75,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         checkBoxHorFimAteOutroDia = findViewById(R.id.checkBoxPergCriarEventoHorFimOutroDia);
         textViewDataNTermMsmDiaDigDataFim = findViewById(R.id.textViewDataNTermMsmDiaDigDataFim);
         dataFimCriarEventoForn = findViewById(R.id.dataFimCriarEventoForn);
+        dataFimCriarEventoForn.addTextChangedListener(Mask.insert("##/##/####",dataFimCriarEventoForn));
         ruaIdCriarEvForn = findViewById(R.id.editTextRuaIdCriarEvForn);
         bairroCriarEvForn = findViewById(R.id.editTextBairroCriarEvForn);
         cidadeCriarEvForn = findViewById(R.id.editTextCidadeCriarEvForn);
@@ -99,9 +102,11 @@ public class CriarEventoFornActivity extends AppCompatActivity {
                 if(isChecked){
                     textViewDataNTermMsmDiaDigDataFim.setVisibility(View.VISIBLE);
                     dataFimCriarEventoForn.setVisibility(View.VISIBLE);
+                    isDataFimOutroDia="true";
                 } else {
                     textViewDataNTermMsmDiaDigDataFim.setVisibility(View.GONE);
                     dataFimCriarEventoForn.setVisibility(View.GONE);
+                    isDataFimOutroDia="false";
                 }
             }
         });
@@ -202,15 +207,25 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         String cep = cepCriarEvForn.getText().toString().trim();
         String rua = ruaIdCriarEvForn.getText().toString().trim();
         String numero = numeroCriarEvForn.getText().toString().trim();
+        //String dataEv = dataFimCriarEventoForn
         //String titulo = edtTitulo.getText().toString().trim();
 
         //String descricao = .getText().toString().trim();
 
         Boolean camposOk = true;
-        if (!validacaoGuiRapida.isCampoAceitavel(titulo)){
+        if (!validacaoGuiRapida.isCampoAceitavel(titulo)) {
             this.tituloETipoDoEvento.setError(("Digite um título para seu evento"));
             this.tituloETipoDoEvento.requestFocus();
             return false;
+        }else if(isDataFimOutroDia.equals("true")){
+            String dataEv = dataFimCriarEventoForn.getText().toString().trim().replace("/","");
+            boolean campoEspecOk=true;
+            if (!validacaoGuiRapida.isDataValida(dataEv)){
+                this.dataFimCriarEventoForn.setError(("Data inválida, digite uma data válida"));
+                campoEspecOk= false;
+            }
+            return campoEspecOk;
+
         }else if(validacaoGuiRapida.isCampoVazio(cidade)){
             this.cidadeCriarEvForn.setError("Favor insira a cidade");
             this.cidadeCriarEvForn.requestFocus();

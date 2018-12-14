@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.AlterandoDadosPerfilClienteActivity;
 import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -66,6 +67,21 @@ public class ConfiguracoesFornecedorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mudarTela(PlanoEscolhaActivity.class);
             }
+        });
+        mudarNome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudarTela(AlterandoDadosPerfilFornecedorActivity.class); }
+        });
+        mudarEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudarTela(AlterandoDadosPerfilFornecedorActivity.class); }
+        });
+        mudarSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudarTela(AlterandoDadosPerfilFornecedorActivity.class); }
         });
     }
 
