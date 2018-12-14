@@ -12,7 +12,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
@@ -46,6 +45,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
     private String validar = "";
     private ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
     private boolean isValido = false;
+    private SimpleDateFormat sdfServerPattern = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,8 +156,11 @@ public class CriarEventoFornActivity extends AppCompatActivity {
     }
 
     private void criarEvento() {
+        if (!verficarCamposParaEvento()){
+            return;
+        }
         if (group.getCheckedRadioButtonId() == R.id.RadioButtonParteDiaCriarEv) {
-            if ((verificarHorario())&& verficarCamposParaEvento()) {
+            if ((verificarHorario())) {
                 montarHorario();
             } else {
                 return;
@@ -167,8 +170,8 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         }
         Event event = new Event();
         event.setDescription(obs.getText().toString().trim());
-        event.setStartDate(String.valueOf(dateInicio));
-        event.setEndDate(String.valueOf(dateFim));
+        event.setStartdate(sdfServerPattern.format(dateInicio));
+        event.setEnddate(sdfServerPattern.format(dateFim));
         event.setType(tituloETipoDoEvento.getText().toString().trim());
         event.setAdvertiser(SessaoApplication.getInstance().getObjOwnerSeEleForTipoLogado().get_id());
         event.setClient(nomeCliente.getText().toString().trim());
@@ -182,8 +185,8 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         address.setState("Pernambuco");
         event.setAddress(address);
 
-        Log.d("DATAINICIOCOMOTA", event.getStartDate().toString());
-        Log.d("DataFIMCOMOTA", event.getEndDate());
+        Log.d("DATAINICIOCOMOTA", event.getStartdate().toString());
+        Log.d("DataFIMCOMOTA", event.getEnddate());
         //MUDAR ESSA LINHA AQUI EM BAIXO:
         Gson gson = new Gson();
         String eventAqui = gson.toJson(event);
@@ -258,11 +261,11 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         }
         Event event = new Event();
         event.setDescription(obs.getText().toString().trim());
-        event.setStartDate(String.valueOf(dateInicio));
-        event.setEndDate(String.valueOf(dateFim));
+        event.setStartdate(sdfServerPattern.format(dateInicio));
+        event.setEnddate(sdfServerPattern.format(dateFim));
         event.setType("Indisponibilidade");
-        Log.d("DATAINICIOCOMOTA", event.getStartDate().toString());
-        Log.d("DataFIMCOMOTA", event.getEndDate());
+        Log.d("DATAINICIOCOMOTA", event.getStartdate().toString());
+        Log.d("DataFIMCOMOTA", event.getEnddate());
         event.setAdvertiser(SessaoApplication.getInstance().getObjOwnerSeEleForTipoLogado().get_id());
         event.setClient("vazio");
         Address address = new Address();
@@ -283,6 +286,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         try {
             criarEventoNoServidor(eventAqui);
         } catch (InterruptedException e) {
+            Log.d("OlhaOErroAqui:", e.getMessage());
             e.printStackTrace();
         }
         exibirMensagemSeValidouCriacaoEvento();
@@ -314,6 +318,10 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         if (!ok) {
             return ok;
         }
+        hi = "00".substring(hi.length()) + hi;
+        hf = "00".substring(hf.length()) + hf;
+        mi = "00".substring(mi.length()) + mi;
+        mf = "00".substring(mf.length()) + mf;
         int horaI = Integer.parseInt(hi);
         int horaF = Integer.parseInt(hf);
         int minI = Integer.parseInt(mi);
@@ -336,7 +344,7 @@ public class CriarEventoFornActivity extends AppCompatActivity {
             ok = false;
             this.mFim.setError("Minuto inválido, digite horários válidos");
             this.mInicio.requestFocus();
-        } else if (hmI >= hmF) {
+        } else if (hmI >= hmF && isDataFimOutroDia.equals("false")) {
             ok = false;
         }
         return ok;

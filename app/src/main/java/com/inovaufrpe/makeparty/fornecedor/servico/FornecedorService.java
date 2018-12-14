@@ -3,9 +3,6 @@ package com.inovaufrpe.makeparty.fornecedor.servico;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.inovaufrpe.makeparty.cliente.dominio.Wishlists;
-import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
@@ -13,7 +10,6 @@ import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.dominio.Address;
-import com.inovaufrpe.makeparty.user.dominio.User;
 import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 
 import org.json.JSONArray;
@@ -174,8 +170,8 @@ public class FornecedorService {
 
                 eventWe.setDescription(jsonEvent.optString("description"));
                 eventWe.setClient(jsonEvent.optString("client"));
-                eventWe.setStartDate(jsonEvent.optString("startdate"));
-                eventWe.setEndDate(jsonEvent.optString("enddate"));
+                eventWe.setStartdate(jsonEvent.optString("startdate"));
+                eventWe.setEnddate(jsonEvent.optString("enddate"));
                 eventWe.setType(jsonEvent.optString("type"));
 
 

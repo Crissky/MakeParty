@@ -12,7 +12,6 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FiltroEventoSelecionado;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 
 import java.text.SimpleDateFormat;
 
@@ -81,11 +80,11 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
         nomeClienteEventoSelecionado.setText(eventoSelecionado.getClient());
         SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm");
-        String diaMesAnoInicioEvento = sdfDiaMesAno.format(eventoSelecionado.getStartDate());
-        String horaMinInicioEvento = sdfHoraMin.format(eventoSelecionado.getStartDate());
+        String diaMesAnoInicioEvento = sdfDiaMesAno.format(eventoSelecionado.getStartdate());
+        String horaMinInicioEvento = sdfHoraMin.format(eventoSelecionado.getStartdate());
         dataInicioEventoSelecionado.setText(("Data de inicio: "+diaMesAnoInicioEvento+" às "+horaMinInicioEvento));
-        String diaMesAnoFimEvento = sdfDiaMesAno.format(eventoSelecionado.getEndDate());
-        String horaMinFimEvento = sdfHoraMin.format(eventoSelecionado.getEndDate());
+        String diaMesAnoFimEvento = sdfDiaMesAno.format(eventoSelecionado.getEnddate());
+        String horaMinFimEvento = sdfHoraMin.format(eventoSelecionado.getEnddate());
         dataFimEventoSelecionado.setText(("Data de fim: "+diaMesAnoFimEvento+" às "+horaMinFimEvento));
         tipoEventoFornSelecionado.setText(eventoSelecionado.getType());
         enderecoEventoForn.setText(("Endereço : "+eventoSelecionado.getAddress().getStreet()
