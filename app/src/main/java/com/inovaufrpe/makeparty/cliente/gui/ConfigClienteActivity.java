@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
-import com.inovaufrpe.makeparty.fornecedor.gui.NotificacoesActivity;
-import com.inovaufrpe.makeparty.fornecedor.gui.TelaInicialFornecedorActivity;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.utils.Permissoes;
 import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
@@ -26,7 +24,7 @@ import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
-public class AtualizarPerfilClienteActivity extends AppCompatActivity {
+public class ConfigClienteActivity extends AppCompatActivity {
 
     private ImageView fotoAvatarCliente;
     private FloatingActionButton mudarFoto;
@@ -40,7 +38,7 @@ public class AtualizarPerfilClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atualizar_perfil_cliente);
-        SessaoApplication.getInstance().setTelaAtual(AtualizarPerfilClienteActivity.class);
+        SessaoApplication.getInstance().setTelaAtual(ConfigClienteActivity.class);
         setUpToolbar();
         procurandoViews();
     }
@@ -155,7 +153,7 @@ public class AtualizarPerfilClienteActivity extends AppCompatActivity {
         SimOuNaoDialog.show(getSupportFragmentManager(),"Deseja mesmo apagar sua conta?", new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {
-                mprogressDialog = new ProgressDialog(AtualizarPerfilClienteActivity.this);
+                mprogressDialog = new ProgressDialog(ConfigClienteActivity.this);
                 mprogressDialog.setMessage("Apagando conta...");
                 mprogressDialog.show();
                 String tokenClienteASerExcluido ="{" + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";

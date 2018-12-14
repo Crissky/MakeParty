@@ -1,4 +1,4 @@
-package com.inovaufrpe.makeparty.cliente.gui;
+package com.inovaufrpe.makeparty.fornecedor.gui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,15 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.AlterandoDadosPerfilClienteActivity;
+import com.inovaufrpe.makeparty.cliente.gui.ConfigClienteActivity;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
-public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
+public class AlterandoDadosPerfilFornecedorActivity extends AppCompatActivity {
+
     public EditText nomeAlterar;
     public EditText emailAlterar;
     public EditText senhaAtual;
@@ -32,7 +34,7 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alterando_dados_perfil_cliente);
+        setContentView(R.layout.activity_alterando_dados_perfil_fornecedor);
         SessaoApplication.getInstance().setTelaAtual(AlterandoDadosPerfilClienteActivity.class);
         setUpToolbar();
         setTela();
@@ -50,11 +52,11 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
     }
 
     public void setTela() {
-        nomeAlterar = findViewById(R.id.editTextNomeAlterandoPerfil);
-        emailAlterar = findViewById(R.id.editTextEmailAlterandoPerfil);
+        nomeAlterar = findViewById(R.id.editTextNomeAlterandoPerfilForn);
+        emailAlterar = findViewById(R.id.editTextEmailAlterandoPerfilForn);
         senhaAtual = findViewById(R.id.editTextSenhaAtualAlterandoPerfil);
-        novaSenhaAlterar = findViewById(R.id.editTextNovaNovaSenhaAlterandoPerfil);
-        botaoAlterarPerfil = findViewById(R.id.btAtualizandoDadosCliente);
+        novaSenhaAlterar = findViewById(R.id.editTextNovaNovaSenhaAlterandoPerfilForn);
+        botaoAlterarPerfil = findViewById(R.id.btAtualizandoDadosForn);
     }
 
     public void acaoAlterar() {
@@ -96,15 +98,15 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
 
     public boolean verificarCampos() {
         String email = emailAlterar.getText().toString().trim();
-       // String senha = novaSenhaAlterar.getText().toString().trim();
+        // String senha = novaSenhaAlterar.getText().toString().trim();
         Boolean camposOk = true;
         if (!validacaoGuiRapida.isEmailValido(email)) {
             this.emailAlterar.setError(("Digite um email válido"));
             this.emailAlterar.requestFocus();
             return false;
-       // } else if (!validacaoGuiRapida.isSenhaValida(senha)) {
-         //   this.novaSenhaAlterar.setError("Digite uma senha válida");
-           // this.novaSenhaAlterar.requestFocus();
+            // } else if (!validacaoGuiRapida.isSenhaValida(senha)) {
+            //   this.novaSenhaAlterar.setError("Digite uma senha válida");
+            // this.novaSenhaAlterar.requestFocus();
             //return false;
         } else
             return true;
@@ -141,8 +143,8 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
                 if(verificarCampos()){
                     //Customer perfil = retornandoPerfilComNovosDadosParaAtualizar();
                     Gson gson = new Gson();
-                   // String perfilParaAtualizar = gson.toJson(perfil);
-                   // perfilParaAtualizar = perfilParaAtualizar.substring(0, perfilParaAtualizar.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
+                    // String perfilParaAtualizar = gson.toJson(perfil);
+                    // perfilParaAtualizar = perfilParaAtualizar.substring(0, perfilParaAtualizar.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
                     //Log.i("Script", "OLHAAA: " + perfil);
                     showProgressDialogWithTitle("Por favor, espere", "atualizando dados do perfil");
                     /*try {
@@ -157,7 +159,7 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
                     mudarTela(ConfigClienteActivity.class);
                 } else {
                     msgToast("Erro"); }
-                }
+            }
         });
     }
     public void exibirMsgSeValidouAlteracaoDados(){
@@ -170,9 +172,8 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        this.mudarTela(ConfigClienteActivity.class);
+        this.mudarTela(ConfiguracoesFornecedorActivity.class);
 
     }
-
 
 }

@@ -2,7 +2,6 @@ package com.inovaufrpe.makeparty.cliente.gui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
@@ -15,16 +14,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
-import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
@@ -191,7 +187,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         finish();
     }
     public void irParaTelaConfiguracoesCliente(){
-        this.mudarTela(AtualizarPerfilClienteActivity.class);
+        this.mudarTela(ConfigClienteActivity.class);
     }
     public void exibirMsgEAgirSeQuiserSairRealmente(){
         if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")) {

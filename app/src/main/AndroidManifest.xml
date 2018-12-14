@@ -84,7 +84,7 @@
         <activity android:name=".cliente.gui.MostraGPSActivity" />
         <activity android:name=".cliente.gui.DetalhesAnuncioActivity" />
         <activity android:name=".cliente.gui.AvaliacaoNotaActivity" />
-        <activity android:name=".cliente.gui.AtualizarPerfilClienteActivity" />
+        <activity android:name=".cliente.gui.ConfigClienteActivity" />
         <activity android:name=".fornecedor.gui.CalendarFornActivity" />
         <activity android:name=".fornecedor.gui.NotificacoesActivity" />
         <activity android:name=".fornecedor.gui.ConfiguracoesFornecedorActivity" />
@@ -102,7 +102,8 @@
         <activity android:name=".fornecedor.gui.TesteCapturaGaleriaActivity" />
         <activity android:name=".fornecedor.gui.CriarHorarioDisponivelActivity" />
         <activity android:name=".fornecedor.gui.EditarEventoActivity" />
-        <activity android:name=".fornecedor.gui.adapter.FotosAnuncioAdapter"></activity>
+        <activity android:name=".fornecedor.gui.adapter.FotosAnuncioAdapter" />
+        <activity android:name=".fornecedor.gui.AlterandoDadosPerfilFornecedorActivity"></activity>
     </application>
 
 </manifest>
