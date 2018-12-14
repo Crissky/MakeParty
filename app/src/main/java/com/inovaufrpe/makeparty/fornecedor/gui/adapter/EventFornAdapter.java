@@ -7,10 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
@@ -61,11 +58,11 @@ public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.Even
         holder.nomeCliente.setText(("Nome do cliente :"+eventoGet.getClient()));
         SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy",new Locale("pt","BR"));
         SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm",new Locale("pt","BR"));
-        String diaMesAnoEventoInicio = sdfDiaMesAno.format(eventoGet.getStartDate());
-        String horaMinEventoInicio = sdfHoraMin.format(eventoGet.getStartDate());
+        String diaMesAnoEventoInicio = sdfDiaMesAno.format(eventoGet.getStartdate());
+        String horaMinEventoInicio = sdfHoraMin.format(eventoGet.getStartdate());
         holder.dataInicioEvento.setText(("Data de ínicio :"+ diaMesAnoEventoInicio+" às "+horaMinEventoInicio));
-        String diaMesAnoEventoFim = sdfDiaMesAno.format(eventoGet.getStartDate());
-        String horaMinEventoFim = sdfHoraMin.format(eventoGet.getStartDate());
+        String diaMesAnoEventoFim = sdfDiaMesAno.format(eventoGet.getStartdate());
+        String horaMinEventoFim = sdfHoraMin.format(eventoGet.getStartdate());
         holder.dataFimEvento.setText(("Data fim do evento :"+ diaMesAnoEventoFim+" às "+horaMinEventoFim));
         holder.situacaoEvento.setText(("Situação: "));
 

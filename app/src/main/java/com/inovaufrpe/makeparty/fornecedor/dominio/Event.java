@@ -11,20 +11,20 @@ public class Event implements Parcelable {
     private Owner owner;
     private String advertiser;
     private String client;
-    private String startDate;
-    private String endDate;
+    private String startdate;
+    private String enddate;
     private String description;
     private String type;
     private Address address;
     //esse atributo de selecionado n é p ta ai, mas funciona p saber se foi selecionado ou n
     public boolean selected;
 
-    public Event(Owner owner, String advertiser, String client, String startDate, String endDate, String description, String type, Address address) {
+    public Event(Owner owner, String advertiser, String client, String startdate, String enddate, String description, String type, Address address) {
         this.owner = owner;
         this.advertiser = advertiser;
         this.client = client;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startdate = startdate;
+        this.enddate = enddate;
         this.description = description;
         this.type = type;
         this.address = address;
@@ -65,20 +65,20 @@ public class Event implements Parcelable {
         this.client = client;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getStartdate() {
+        return startdate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getEnddate() {
+        return enddate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
     }
 
     public String getDescription() {
@@ -118,8 +118,8 @@ public class Event implements Parcelable {
         dest.writeString(this.client);
         dest.writeString(this.description);
         dest.writeString(this.type);
-        dest.writeString(this.startDate);
-        dest.writeString(this.endDate);
+        dest.writeString(this.startdate);
+        dest.writeString(this.enddate);
         dest.writeString(String.valueOf(this.address));
     }
 
@@ -129,8 +129,8 @@ public class Event implements Parcelable {
         this.client = parcel.readString();
         this.description = parcel.readString();
         this.type = parcel.readString();
-        this.startDate = parcel.readString();
-        this.endDate = parcel.readString();
+        this.startdate = parcel.readString();
+        this.enddate = parcel.readString();
 
     }
 
