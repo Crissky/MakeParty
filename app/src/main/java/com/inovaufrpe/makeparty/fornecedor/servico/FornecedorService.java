@@ -42,7 +42,7 @@ public class FornecedorService {
     private static final String URL_LISTAR_MEUS_ANUNCIOS = URL_LISTAR_ANUNCIOS + "/owners?token=:tokenAqui";
     private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_MEUS_ANUNCIOS+ "/owners/:idDele";
     private static final String URL_LISTAR_EVENTOS = URL_BASE + "events"; //acho q non...pq evento é restrito
-    private static final String URL_LISTAR_MEUS_EVENTOS = URL_LISTAR_EVENTOS + "/advertisers?token=:tokenAqui";
+    private static final String URL_LISTAR_MEUS_EVENTOS = URL_LISTAR_EVENTOS + "/?token=:tokenAqui";
     private static final String URL_DELETE_MEUS_EVENTOS = URL_LISTAR_EVENTOS + "/advertisers?token=:tokenAqui";
     private static final String URL_APAGAR_ANUNCIO = URL_LISTAR_ANUNCIOS;
 
@@ -197,7 +197,7 @@ public class FornecedorService {
         String url = URL_LISTAR_MEUS_EVENTOS.replace(":tokenAqui",tokenOuId);
         String json =conectarServidorGet(url);
         Log.d("um json ai", json);
-        List listaAnunciosFornecedor = AnuncioEmComumService.parserJSONListaAnunciosComFor(json);
+        List listaAnunciosFornecedor =FornecedorService.parserJSONListaEventsComFor(json);
         return listaAnunciosFornecedor;
     }
     public static boolean deleteItensListaEventosFornecedor(List<Event> selectedEvents, String tokenOuId) throws IOException, JSONException {

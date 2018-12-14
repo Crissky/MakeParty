@@ -301,11 +301,12 @@ public class CriarEventoFornActivity extends AppCompatActivity {
         String mf = mFim.getText().toString();
         if (hi.isEmpty()) {
             ok = false;
-
-        } else if (hf.isEmpty()) {
-            ok = false;
             this.hInicio.setError("Horário de inicio vazio, digite horários válidos");
             this.hInicio.requestFocus();
+        } else if (hf.isEmpty()) {
+            ok = false;
+            this.hFim.setError("Horário de Fim vazio, digite horários válidos");
+            this.hFim.requestFocus();
         } else if (mi.isEmpty()) {
             ok = false;
             this.mInicio.setError("Horário de minuto inicial vazio, digite horários válidos");

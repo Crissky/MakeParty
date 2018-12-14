@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,13 +14,16 @@ import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FiltroEventoSelecionado;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DetalhesEventoFornActivity extends AppCompatActivity {
     private TextView nomeClienteEventoSelecionado, dataInicioEventoSelecionado,
             dataFimTerminaEmQueDiaEventoSelecionado, dataFimEventoSelecionado, tipoEventoFornSelecionado,
             enderecoEventoForn, descricaoEventoFornSelecionado;
     private Button btAtualizarEventoForn, btExcluirEventoForn;
+    private SimpleDateFormat sdfServerPatern = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
 
     @Override
@@ -78,14 +82,20 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
     private void setandoInfoDetalhes(){
         Event eventoSelecionado= FiltroEventoSelecionado.instance.getEventoSelecionado();
         nomeClienteEventoSelecionado.setText(eventoSelecionado.getClient());
-        SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm");
-        String diaMesAnoInicioEvento = sdfDiaMesAno.format(eventoSelecionado.getStartdate());
-        String horaMinInicioEvento = sdfHoraMin.format(eventoSelecionado.getStartdate());
-        dataInicioEventoSelecionado.setText(("Data de inicio: "+diaMesAnoInicioEvento+" às "+horaMinInicioEvento));
-        String diaMesAnoFimEvento = sdfDiaMesAno.format(eventoSelecionado.getEnddate());
-        String horaMinFimEvento = sdfHoraMin.format(eventoSelecionado.getEnddate());
-        dataFimEventoSelecionado.setText(("Data de fim: "+diaMesAnoFimEvento+" às "+horaMinFimEvento));
+        try {
+            Date dateInicio = sdfServerPatern.parse(eventoSelecionado.getStartdate());
+            Date dateFim = sdfServerPatern.parse(eventoSelecionado.getEnddate());
+            SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm");
+            String diaMesAnoInicioEvento = sdfDiaMesAno.format(dateInicio);
+            String horaMinInicioEvento = sdfHoraMin.format(dateInicio);
+            dataInicioEventoSelecionado.setText(("Data de inicio: " + diaMesAnoInicioEvento + " às " + horaMinInicioEvento));
+            String diaMesAnoFimEvento = sdfDiaMesAno.format(dateFim);
+            String horaMinFimEvento = sdfHoraMin.format(dateFim);
+            dataFimEventoSelecionado.setText(("Data de fim: " + diaMesAnoFimEvento + " às " + horaMinFimEvento));
+        }catch (ParseException p){
+            Log.d("ParseException", p.getMessage());
+        }
         tipoEventoFornSelecionado.setText(eventoSelecionado.getType());
         enderecoEventoForn.setText(("Endereço : "+eventoSelecionado.getAddress().getStreet()
                 +", "+ "Bairro :"+eventoSelecionado.getAddress().getNeighborhood()+", "+ "Número :"
@@ -108,7 +118,7 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        this.mudarTela(SessaoApplication.getInstance().getTelaAnterior());
+        this.mudarTela(CapturaDadosCalendarFornActivity.class);
     }
 }
 

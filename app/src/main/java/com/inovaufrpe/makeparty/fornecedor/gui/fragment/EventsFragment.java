@@ -37,6 +37,7 @@ import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 import com.squareup.otto.Subscribe;
 
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,6 +121,7 @@ public class EventsFragment extends BaseFragment {
                 // O correto seria validar se excluiu e recarregar a lista.
                 taskEventsForn(true);
                 // Atualiza a view na UI Thread
+
                 recyclerView.setAdapter(new EventFornAdapter(getContext(), events, onClickEventForn()));
 
             }

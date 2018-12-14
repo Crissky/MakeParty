@@ -4,6 +4,7 @@ package com.inovaufrpe.makeparty.fornecedor.gui.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,6 +25,7 @@ public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.Even
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     private final Context context;
     private final EventFornAdapter.EventFornOnClickListener onClickListener;
+    private SimpleDateFormat sdfServerPatern = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
     //abaixo metodos que devem ser implementados para ter diferentes respostas dependendo do clique
     public interface EventFornOnClickListener {
@@ -56,14 +60,20 @@ public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.Even
         // Atualizada os valores nas views
         holder.tipoEvento.setText(("Tipo do evento :"+eventoGet.getType()));
         holder.nomeCliente.setText(("Nome do cliente :"+eventoGet.getClient()));
-        SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy",new Locale("pt","BR"));
-        SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm",new Locale("pt","BR"));
-        String diaMesAnoEventoInicio = sdfDiaMesAno.format(eventoGet.getStartdate());
-        String horaMinEventoInicio = sdfHoraMin.format(eventoGet.getStartdate());
-        holder.dataInicioEvento.setText(("Data de ínicio :"+ diaMesAnoEventoInicio+" às "+horaMinEventoInicio));
-        String diaMesAnoEventoFim = sdfDiaMesAno.format(eventoGet.getStartdate());
-        String horaMinEventoFim = sdfHoraMin.format(eventoGet.getStartdate());
-        holder.dataFimEvento.setText(("Data fim do evento :"+ diaMesAnoEventoFim+" às "+horaMinEventoFim));
+        try {
+            Date dateInicio = sdfServerPatern.parse(eventoGet.getStartdate());
+            Date dateFim = sdfServerPatern.parse(eventoGet.getEnddate());
+            SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+            SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm", new Locale("pt", "BR"));
+            String diaMesAnoEventoInicio = sdfDiaMesAno.format(dateInicio);
+            String horaMinEventoInicio = sdfHoraMin.format(dateInicio);
+            holder.dataInicioEvento.setText(("Data de ínicio :" + diaMesAnoEventoInicio + " às " + horaMinEventoInicio));
+            String diaMesAnoEventoFim = sdfDiaMesAno.format(dateFim);
+            String horaMinEventoFim = sdfHoraMin.format(dateFim);
+            holder.dataFimEvento.setText(("Data fim do evento :"+ diaMesAnoEventoFim+" às "+horaMinEventoFim));
+        }catch (ParseException p){
+            Log.d("ParseException", p.getMessage());
+        }
         holder.situacaoEvento.setText(("Situação: "));
 
 

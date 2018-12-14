@@ -81,4 +81,9 @@ public class CapturaDadosCalendarFornActivity extends AppCompatActivity {
         intent.putExtra("timeLong", date.getTime());
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
