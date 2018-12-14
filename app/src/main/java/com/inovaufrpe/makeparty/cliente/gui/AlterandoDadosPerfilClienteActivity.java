@@ -14,8 +14,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.dominio.Customer;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.user.dominio.User;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.user.servico.ValidacaoGuiRapida;
 
@@ -27,6 +30,7 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
     public Button botaoAlterarPerfil;
     public boolean isValido = false;
     private String validar = "";
+    private String tipoUser = "";
     ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
 
     @Override
@@ -56,7 +60,7 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
         novaSenhaAlterar = findViewById(R.id.editTextNovaNovaSenhaAlterandoPerfil);
         botaoAlterarPerfil = findViewById(R.id.btAtualizandoDadosCliente);
     }
-
+    //    Customer perfilASerEnviadoPUT = new Customer(objetoCompleto.get());
     public void acaoAlterar() {
         botaoAlterarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,31 +88,27 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
-   /* public Customer retornandoPerfilComNovosDadosParaAtualizar() {
-        Customer dadosPerfilSelecionadoAntesEdicao = SessaoApplication.instance.getObjCustomerSeEleForTipoLogado();
-        //User user = SessaoApplication.instance.getUser();
-        //Customer perfilASerEnviadoPUT = new Customer();
-        perfilASerEnviadoPUT.setName(emailAlterar.getText().toString());
-       // perfilASerEnviadoPUT.setPassword(novaSenhaAlterar.getText().toString());
-        return perfilASerEnviadoPUT;
+    public Customer retornandoPerfilClienteParaAtualizar() {
+        Customer perfilAntesEdicao = SessaoApplication.instance.getObjCustomerSeEleForTipoLogado();
+        Customer perfilEnviarPUT = new Customer(perfilAntesEdicao.getUser(),perfilAntesEdicao.getName(),perfilAntesEdicao.getCpf(),perfilAntesEdicao.getBirthdate(),perfilAntesEdicao.getPhone());
+        perfilEnviarPUT.setName(nomeAlterar.getText().toString());
+        return perfilEnviarPUT;
+        //  perfilASerEnviadoPUT.setName(emailAlterar.getText().toString());
+        //return perfilASerEnviadoPUT;
 
+   }
+    /*public Owner retornandoPerfilFornecedorParaAtualizar(){
+
+   // }
+    public void retornandoPorTipoUser(){
+        tipoUser = SessaoApplication.instance.getTipoDeUserLogado();
+        if(tipoUser="Customer"){
+            retornandoPerfilClienteParaAtualizar();
+        }
+        elif (tipoUser="Owner"){
+            retornandoPerfilFornecedorParaAtualizar();
+        }
     }*/
-
-    public boolean verificarCampos() {
-        String email = emailAlterar.getText().toString().trim();
-       // String senha = novaSenhaAlterar.getText().toString().trim();
-        Boolean camposOk = true;
-        if (!validacaoGuiRapida.isEmailValido(email)) {
-            this.emailAlterar.setError(("Digite um email válido"));
-            this.emailAlterar.requestFocus();
-            return false;
-       // } else if (!validacaoGuiRapida.isSenhaValida(senha)) {
-         //   this.novaSenhaAlterar.setError("Digite uma senha válida");
-           // this.novaSenhaAlterar.requestFocus();
-            //return false;
-        } else
-            return true;
-    }
 
     public void editarPerfil(String json) throws InterruptedException {
         callServer("PUT", json);
@@ -139,17 +139,18 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
             @Override
             public void metodoSimAoDialog() {
                 if(verificarCampos()){
-                    //Customer perfil = retornandoPerfilComNovosDadosParaAtualizar();
+                    //Customer perfil = retornandoPorTipoUser();
+                    Customer perfil = retornandoPerfilClienteParaAtualizar();
                     Gson gson = new Gson();
-                   // String perfilParaAtualizar = gson.toJson(perfil);
-                   // perfilParaAtualizar = perfilParaAtualizar.substring(0, perfilParaAtualizar.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
-                    //Log.i("Script", "OLHAAA: " + perfil);
+                    String perfilParaAtualizar = gson.toJson(perfil);
+                    perfilParaAtualizar = perfilParaAtualizar.substring(0, perfilParaAtualizar.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
+                    Log.i("Script", "OLHAAA: " + perfil);
                     showProgressDialogWithTitle("Por favor, espere", "atualizando dados do perfil");
-                    /*try {
+                    try {
                         editarPerfil(perfilParaAtualizar);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }*/
+                    }
                 }
                 exibirMsgSeAlterou();
                 if (isValido) {
@@ -173,6 +174,21 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
         this.mudarTela(ConfigClienteActivity.class);
 
     }
+        public boolean verificarCampos() {
+            String nome = nomeAlterar.getText().toString().trim();
+            // String senha = novaSenhaAlterar.getText().toString().trim();
+            Boolean camposOk = true;
+            if (!validacaoGuiRapida.isCampoAceitavel(nome)) {
+                this.emailAlterar.setError(("Digite um nome válido"));
+                this.emailAlterar.requestFocus();
+                return false;
+                // } else if (!validacaoGuiRapida.isSenhaValida(senha)) {
+                //   this.novaSenhaAlterar.setError("Digite uma senha válida");
+                // this.novaSenhaAlterar.requestFocus();
+                //return false;
+            } else
+                return true;
+        }
 
 
 }
