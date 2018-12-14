@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
+import com.inovaufrpe.makeparty.fornecedor.gui.CapturaDadosCalendarFornActivity;
 import com.inovaufrpe.makeparty.fornecedor.gui.DetalhesEventoFornActivity;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.EventFornAdapter;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FiltroEventoSelecionado;
@@ -39,6 +40,7 @@ import com.squareup.otto.Subscribe;
 import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -49,6 +51,9 @@ public class EventsFragment extends BaseFragment {
     private String tipo;
     private SwipeRefreshLayout swipeLayout;
     private Intent shareIntent;
+    private Date date;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat sdfServerPatern = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
     // Action Bar de Contexto
     private ActionMode actionMode;
@@ -67,6 +72,8 @@ public class EventsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_events_list, container, false);
+
+        date = ((CapturaDadosCalendarFornActivity)getActivity()).getDate();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -101,6 +108,8 @@ public class EventsFragment extends BaseFragment {
         @Override
         public List execute() throws Exception {
             Log.d("Olhaa quem logou",SessaoApplication.getInstance().getTipoDeUserLogado());
+            List<Event> eventTemp = new ArrayList<>();
+            String data = sdf.format(date);
             // Busca os Anuncios em background
             if (nome != null) {
                 // É uma busca por nome
@@ -109,9 +118,23 @@ public class EventsFragment extends BaseFragment {
             } else {
                 // É para listar por tipo
                 //return Retrofit.getAnuncioREST().getAnuncios(tipo);
-                return FornecedorService.getEventosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+                List<Event> tempp = FornecedorService.getEventosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+                for (Event event: tempp){
+                    String dateTemp = sdf.format(sdfServerPatern.parse(event.getStartdate()));
+                    if (data.equals(dateTemp)){
+                        eventTemp.add(event);
+                    }
+                }
+                return eventTemp;
             }
-            return FornecedorService.getEventosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+            List<Event> temp = FornecedorService.getEventosDeUmFornecedor(SessaoApplication.getInstance().getTokenUser());
+            for (Event event: temp){
+                String dateTemp = sdf.format(sdfServerPatern.parse(event.getStartdate()));
+                if (data.equals(dateTemp)){
+                    eventTemp.add(event);
+                }
+            }
+            return eventTemp;
         }
 
         @Override

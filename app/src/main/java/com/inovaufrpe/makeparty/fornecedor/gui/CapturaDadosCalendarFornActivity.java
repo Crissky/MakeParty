@@ -86,4 +86,8 @@ public class CapturaDadosCalendarFornActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
+
+    public Date getDate(){
+        return date;
+    }
 }
