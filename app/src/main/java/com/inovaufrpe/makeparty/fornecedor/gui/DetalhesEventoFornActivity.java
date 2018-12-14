@@ -9,7 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
+import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FiltroEventoSelecionado;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
+import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
+
+import java.text.SimpleDateFormat;
 
 public class DetalhesEventoFornActivity extends AppCompatActivity {
     private TextView nomeClienteEventoSelecionado, dataInicioEventoSelecionado,
@@ -38,6 +43,7 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
         descricaoEventoFornSelecionado = findViewById(R.id.textViewDescricaoEventoSelecionado);
         btAtualizarEventoForn = findViewById(R.id.buttonEditarEventoForn);
         btExcluirEventoForn = findViewById(R.id.buttonExcluirEventoForn);
+        setandoInfoDetalhes();
     }
 
     protected void setUpToolbar() {
@@ -69,6 +75,26 @@ public class DetalhesEventoFornActivity extends AppCompatActivity {
                 excluirEvento();
             }
         });
+    }
+    private void setandoInfoDetalhes(){
+        Event eventoSelecionado= FiltroEventoSelecionado.instance.getEventoSelecionado();
+        nomeClienteEventoSelecionado.setText(eventoSelecionado.getClient());
+        SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm");
+        String diaMesAnoInicioEvento = sdfDiaMesAno.format(eventoSelecionado.getStartDate());
+        String horaMinInicioEvento = sdfHoraMin.format(eventoSelecionado.getStartDate());
+        dataInicioEventoSelecionado.setText(("Data de inicio: "+diaMesAnoInicioEvento+" às "+horaMinInicioEvento));
+        String diaMesAnoFimEvento = sdfDiaMesAno.format(eventoSelecionado.getEndDate());
+        String horaMinFimEvento = sdfHoraMin.format(eventoSelecionado.getEndDate());
+        dataFimEventoSelecionado.setText(("Data de fim: "+diaMesAnoFimEvento+" às "+horaMinFimEvento));
+        tipoEventoFornSelecionado.setText(eventoSelecionado.getType());
+        enderecoEventoForn.setText(("Endereço : "+eventoSelecionado.getAddress().getStreet()
+                +", "+ "Bairro :"+eventoSelecionado.getAddress().getNeighborhood()+", "+ "Número :"
+                +eventoSelecionado.getAddress().getNumber()+", "+"Cidade :" +eventoSelecionado.getAddress().getCity()
+                //+","+anuncioSelecionado.getAddress().getState()
+                +", CEP :"+eventoSelecionado.getAddress().getZipcode()));
+        descricaoEventoFornSelecionado.setText(eventoSelecionado.getDescription());
+
     }
 
     private void excluirEvento() {

@@ -86,14 +86,15 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
-    public Customer retornandoPerfilComNovosDadosParaAtualizar() {
+   /* public Customer retornandoPerfilComNovosDadosParaAtualizar() {
         Customer dadosPerfilSelecionadoAntesEdicao = SessaoApplication.instance.getObjCustomerSeEleForTipoLogado();
-        User user = SessaoApplication.instance.getUser();
-        Customer perfilASerEnviadoPUT = new Customer(user);
+        //User user = SessaoApplication.instance.getUser();
+        //Customer perfilASerEnviadoPUT = new Customer();
         perfilASerEnviadoPUT.setName(emailAlterar.getText().toString());
        // perfilASerEnviadoPUT.setPassword(novaSenhaAlterar.getText().toString());
         return perfilASerEnviadoPUT;
-    }
+
+    }*/
 
     public boolean verificarCampos() {
         String email = emailAlterar.getText().toString().trim();
@@ -136,21 +137,21 @@ public class AlterandoDadosPerfilClienteActivity extends AppCompatActivity {
     }
 
     public void cliqueAtualizarPerfil(){
-        SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja confirmar a atualizaão desse perfil?", new SimOuNaoDialog.Callback() {
+        SimOuNaoDialog.show(getSupportFragmentManager(), "Deseja confirmar a atualização desse perfil?", new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {
                 if(verificarCampos()){
-                    Customer perfil = retornandoPerfilComNovosDadosParaAtualizar();
+                    //Customer perfil = retornandoPerfilComNovosDadosParaAtualizar();
                     Gson gson = new Gson();
-                    String perfilParaAtualizar = gson.toJson(perfil);
-                    perfilParaAtualizar = perfilParaAtualizar.substring(0, perfilParaAtualizar.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
-                    Log.i("Script", "OLHAAA: " + perfil);
+                   // String perfilParaAtualizar = gson.toJson(perfil);
+                   // perfilParaAtualizar = perfilParaAtualizar.substring(0, perfilParaAtualizar.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
+                    //Log.i("Script", "OLHAAA: " + perfil);
                     showProgressDialogWithTitle("Por favor, espere", "atualizando dados do perfil");
-                    try {
+                    /*try {
                         editarPerfil(perfilParaAtualizar);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 }
                 exibirMsgSeAlterou();
                 if (isValido) {

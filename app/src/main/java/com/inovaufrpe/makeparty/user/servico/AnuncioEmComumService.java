@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.dominio.Rating;
 import com.inovaufrpe.makeparty.cliente.dominio.Wishlists;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
 import com.inovaufrpe.makeparty.cliente.gui.ListaDesejosClienteActivity;
@@ -58,6 +59,7 @@ public class AnuncioEmComumService {
     private static final String URL_LISTA_ANUNCIOS_DO_ANUNCIANTE = URL_LISTAR_ANUNCIOS + "/owners/:idOuTokenDele";
     private static final String URL_LISTA_ANUNCIOS_POR_NOME = URL_LISTAR_ANUNCIOS + "titles/:title";
     private static final String URL_LISTA_ANUNCIOS_POR_ID_ANUNCIO = URL_LISTAR_ANUNCIOS + ":id";
+    private static final String URL_BUSCAR_AVALIACOES_PELO_ID_DO_ANUNCIO = URL_BASE +"ratings/:idAdAqui";
 
     private Gson gson = new Gson();
     private String respostaServidor;
@@ -110,8 +112,8 @@ public class AnuncioEmComumService {
         return ads;
     }
 
-    public static List<Ad> parserJSONListaAnunciosComFor(String json) throws IOException {
-        List<Ad> ads = new ArrayList<Ad>();
+    public static List<Rating> parserJSONListaComentariosAnuncioSelecionadoComFor(String json) throws IOException {
+        List<Rating> ratings = new ArrayList<Rating>();
         try {
             JSONObject objetoJson = new JSONObject(json);
             JSONArray jsonAnuncios = null;
@@ -202,18 +204,26 @@ public class AnuncioEmComumService {
                     Log.d(TAG, "Ad" + c.getDescription() + ">");
 
                 }
-                ads.add(c);
+               // ratings.add(c);
             }
             if (LOG_ON) {
-                Log.d(TAG, ads.size() + "encontrados");
+                Log.d(TAG, ratings.size() + "encontrados");
             }
         } catch (JSONException e) {
             throw new IOException(e.getMessage(), e);
         //} catch (ParseException e) {
           //  e.printStackTrace();
         }
-        return ads;
+        return ratings;
 
+    }
+    public static List<Rating> getComentariosDoAnuncioSelecionado(String idDoAnuncioSelecionado) throws IOException {
+        List comentarios = new ArrayList<Rating>();
+        String url = URL_BUSCAR_AVALIACOES_PELO_ID_DO_ANUNCIO.replace(":idAdAqui", idDoAnuncioSelecionado);
+        String json = conectarServidorGet(url);
+        Log.d("um json ai", json);
+        comentarios = parserJSONListaComentariosAnuncioSelecionadoComFor(json);
+        return comentarios;
     }
 
     private static String getTipo(int tipo) {
@@ -313,6 +323,111 @@ public class AnuncioEmComumService {
             return false;
         }
         return true;
+    }
+    public static List<Ad> parserJSONListaAnunciosComFor(String json) throws IOException {
+        List<Ad> ads = new ArrayList<Ad>();
+        try {
+            JSONObject objetoJson = new JSONObject(json);
+            JSONArray jsonAnuncios = null;
+            if(SessaoApplication.getInstance().getTelaAtual().equals(ListaDesejosClienteActivity.class)){
+                jsonAnuncios=objetoJson.getJSONArray("wishlists");
+            }else{
+                jsonAnuncios = objetoJson.getJSONArray("ads");
+            }
+
+            //Lê o array de ads do Json
+            //JSONArray jsonAnuncios = new JSONArray(json);
+            for (int i = 0; i < jsonAnuncios.length(); i++) {
+                JSONObject jsonAnuncio = jsonAnuncios.getJSONObject(i);
+                Wishlists wish = new Wishlists();
+                Ad c = new Ad();
+                //Lê as info de cada anuncio
+                c.setDescription(jsonAnuncio.optString("description"));
+                c.setPrice(jsonAnuncio.optDouble("price"));
+                //TAGS N TA FUNCIONANDO DIREITO
+                JSONArray tagsArray = jsonAnuncio.getJSONArray("tags");
+                List<String> listTags = new ArrayList<String>();
+                for (int e=0;i<tagsArray.length();i++){
+                    listTags.add(tagsArray.getString(e));
+                }
+                Log.d("tagsss",listTags.toString());
+                c.setTags((ArrayList) listTags);
+
+                /*
+                JSONArray fotosArrayJson = jsonAnuncio.getJSONArray("photos");
+                List<String> listFotos = new ArrayList<String>();
+                for (int e=0;i<fotosArrayJson.length();i++){
+                    listFotos.add(fotosArrayJson.getString(e));
+                }
+                Log.d("fotoooosArray",listFotos.toString());
+                c.setPhotos((ArrayList) listFotos);
+                */
+
+                c.set_id(jsonAnuncio.optString("_id"));
+                c.setTitle(jsonAnuncio.optString("title"));
+                c.setType(jsonAnuncio.optString("type"));
+                c.setPhone(jsonAnuncio.optString("phone"));
+
+                Owner ownerAqui=new Owner();
+                JSONObject objetoOwner = jsonAnuncio.getJSONObject("owner");
+                ownerAqui.setSocialname(objetoOwner.getString("socialname"));
+                ownerAqui.setCnpj(objetoOwner.getString("cnpj"));
+                ownerAqui.set_id(objetoOwner.getString("_id"));
+
+                User userOwner = new User();
+                JSONObject objetoUserOwner =objetoOwner.getJSONObject("user");
+                userOwner.setEmail(objetoUserOwner.getString("email"));
+                userOwner.set_id(objetoUserOwner.getString("_id"));
+                ownerAqui.setUser(userOwner);
+                c.setOwner(ownerAqui);
+                Log.d("oi",c.toString());
+
+                //ta errado aq embaixo
+                try {
+                    String dateStr = jsonAnuncio.getString("createdAt");
+                    Date sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(dateStr);
+//                    long createdAtDate = sdf.parse(dateStr);
+//                    Log.d("dataveae", String.valueOf(createdAtDate));
+//                    Date date = new Date();
+//                    date.setTime(createdAtDate);
+                    c.setCreatedAt(sdf);
+                    Log.d("dataveae", c.getCreatedAt().toString());
+                }catch (ParseException e){
+                    Log.d("erro da data:", e.getMessage());
+                }
+
+                //c.setUpdatedAt();
+//                Long createdAt = jsonAnuncio.optLong("createdAt");
+//                Date createdAtConv = new Date(createdAt);
+//                c.setCreatedAt(createdAtConv);
+
+                Address addressAnuncio = new Address();
+                JSONObject objetoEndAnuncio = jsonAnuncio.getJSONObject("address");
+                //LEMBRANDO Q ESSES OBJ N PODEM FICAR NULL EXPLIC , SE N, DA ERROO NA CONV
+                addressAnuncio.setCity(objetoEndAnuncio.getString("city"));
+                addressAnuncio.setNeighborhood(objetoEndAnuncio.getString("neighborhood"));
+                addressAnuncio.setNumber(objetoEndAnuncio.getString("number"));
+                addressAnuncio.setStreet(objetoEndAnuncio.getString("street"));
+                addressAnuncio.setZipcode(objetoEndAnuncio.getString("zipcode"));
+                c.setAddress(addressAnuncio);
+
+
+                if (LOG_ON) {
+                    Log.d(TAG, "Ad" + c.getDescription() + ">");
+
+                }
+                ads.add(c);
+            }
+            if (LOG_ON) {
+                Log.d(TAG, ads.size() + "encontrados");
+            }
+        } catch (JSONException e) {
+            throw new IOException(e.getMessage(), e);
+            //} catch (ParseException e) {
+            //  e.printStackTrace();
+        }
+        return ads;
+
     }
 
 

@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.dominio.Rating;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ComentarioDoAnuncioAdapter extends RecyclerView.Adapter<ComentarioDoAnuncioAdapter.ComentariosDoAnuncioViewHolder> {
     private final List<Rating> ratings;
@@ -51,14 +53,14 @@ public class ComentarioDoAnuncioAdapter extends RecyclerView.Adapter<ComentarioD
         Rating ava = ratings.get(position);
 
         // Atualizada os valores nas views
-        //holder.nomeCliente.setText(ava.get);
-       // holder.tDescComent.setText(("Descrição:"+ava.getDescriptionComment()));
-
-        /*SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy",new Locale("pt","BR"));
-        String result = out.format(new Date(String.valueOf(ava.getDateComment())));
-        holder.dataComentCliente.setText(("Data: "+ result));
-        */
-        //holder.estrelasNotaAvaliacaoCliente.setRating(ava.getRatingUser().intValue());
+        holder.nomeCliente.setText(ava.getNameClient().toString());
+        holder.tDescComent.setText(("Descrição:"+ava.getDescriptionComment()));
+        SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy",new Locale("pt","BR"));
+        SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm",new Locale("pt","BR"));
+        String diaMesAnoCriadoComent = sdfDiaMesAno.format(ava.getDateComment());
+        String horaMinCriadoComent = sdfHoraMin.format(ava.getDateComment());
+        holder.dataComentCliente.setText(("Data de inicio: "+ diaMesAnoCriadoComent+" às "+horaMinCriadoComent));
+        holder.estrelasNotaAvaliacaoCliente.setRating(ava.getRating());
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView); HMMMMMMM
 
         // Foto do perfil da pessoa?
@@ -74,9 +76,9 @@ public class ComentarioDoAnuncioAdapter extends RecyclerView.Adapter<ComentarioD
             });
         }
         //ads.get(position).getSelecionado()
-        //int corFundo = context.getResources().getColor(ava.selected ? R.color.colorRosaClaro : R.color.colorWhite);
+        int corFundo = context.getResources().getColor(ava.selected ? R.color.colorRosaClaro : R.color.colorWhite);
 
-        //holder.cardView.setCardBackgroundColor(corFundo);
+        holder.cardView.setCardBackgroundColor(corFundo);
     }
     //metodo abaixo retorna quantos itens anuncio tem
     @Override

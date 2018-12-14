@@ -18,6 +18,7 @@ import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.EventsFornViewHolder> {
     private final List<Event> events;
@@ -58,14 +59,15 @@ public class EventFornAdapter extends RecyclerView.Adapter<EventFornAdapter.Even
         // Atualizada os valores nas views
         holder.tipoEvento.setText(("Tipo do evento :"+eventoGet.getType()));
         holder.nomeCliente.setText(("Nome do cliente :"+eventoGet.getClient()));
-        holder.dataInicioEvento.setText(("Data de ínicio :"+eventoGet.getStartDate()));
-        holder.dataFimEvento.setText(("Data fim do evento :"+eventoGet.getEndDate()));
+        SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy",new Locale("pt","BR"));
+        SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm",new Locale("pt","BR"));
+        String diaMesAnoEventoInicio = sdfDiaMesAno.format(eventoGet.getStartDate());
+        String horaMinEventoInicio = sdfHoraMin.format(eventoGet.getStartDate());
+        holder.dataInicioEvento.setText(("Data de ínicio :"+ diaMesAnoEventoInicio+" às "+horaMinEventoInicio));
+        String diaMesAnoEventoFim = sdfDiaMesAno.format(eventoGet.getStartDate());
+        String horaMinEventoFim = sdfHoraMin.format(eventoGet.getStartDate());
+        holder.dataFimEvento.setText(("Data fim do evento :"+ diaMesAnoEventoFim+" às "+horaMinEventoFim));
         holder.situacaoEvento.setText(("Situação: "));
-
-        /*SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy",new Locale("pt","BR"));
-        String result = out.format(new Date(String.valueOf(ava.getDateComment())));
-        holder.dataComentCliente.setText(("Data: "+ result));
-        */
 
 
         if (onClickListener != null) {

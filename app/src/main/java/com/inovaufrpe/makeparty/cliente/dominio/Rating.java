@@ -8,14 +8,14 @@ public class Rating {
     //private Ad ad;
     private String ad;
     private String comment;
-    private String rating;
+    private Integer rating;
     private Customer nameClient;
     private String descriptionComment;
     private Date dateComment;
     // Flag para a action bar de contexto
     public boolean selected;
 
-    public Rating(String ad, String comment, String rating, Customer nameClient, String descriptionComment, Date dateComment) {
+        public Rating(String ad, String comment, Integer rating, Customer nameClient, String descriptionComment, Date dateComment) {
         this.ad = ad;
         this.comment = comment;
         this.rating = rating;
@@ -43,11 +43,11 @@ public class Rating {
         this.comment = comment;
     }
 
-    public String getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 

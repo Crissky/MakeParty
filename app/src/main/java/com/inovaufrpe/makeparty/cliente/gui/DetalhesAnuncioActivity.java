@@ -18,8 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.cliente.gui.fragment.ComentariosFragment;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
+import com.inovaufrpe.makeparty.user.gui.LoginActivity;
 import com.inovaufrpe.makeparty.user.gui.adapter.DetalheAnuncioSlideFotos.GaleriaFotosAdapter;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.CalendarioDialog;
@@ -27,6 +29,7 @@ import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.fornecedor.gui.AnunciosFornecedorActivity;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
+import com.inovaufrpe.makeparty.user.gui.fragment.AnunciosOutroFragment;
 import com.inovaufrpe.makeparty.user.servico.AnuncioEmComumService;
 
 import java.text.DateFormat;
@@ -58,6 +61,7 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         setContentView(R.layout.activity_detalhes_anuncio);
         setUpToolbar();
         encontrandoItensViews();
+       // buscarComentariosEAvaliacoes(savedInstanceState);
 
     }
     protected void setUpToolbar() {
@@ -120,7 +124,11 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         avaliarAquiText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                telaAvaliarAnuncio();
+                if(SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")){
+                    telaAvaliarAnuncio();
+                }else{
+                    mudarTela(LoginActivity.class);
+                }
             }
         });
         floatingAddListaDesejo.setOnClickListener(new View.OnClickListener() {
@@ -154,21 +162,11 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
         Ad anuncioSelecionado = FiltroAnuncioSelecionado.instance.getAnuncioSelecionado();
         titleAds.setText(anuncioSelecionado.getTitle());
         nomeFornecedor.setText(("Nome do fornecedor(a) :" +anuncioSelecionado.getOwner().getSocialname()));
-//        String myFormat = "dd/MM/yyyy HH:mm"; //In which you need put here
-//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("pt","BR"));
-//
-//        String[] createdAtEmString = anuncioSelecionado.getCreatedAt().toString().split("T");
-//        StringBuffer diaMesAnoCreated = new StringBuffer(createdAtEmString[0]);
-//        diaMesAnoCreated.reverse();
-//        String createdAtEmString = sdf.format(anuncioSelecionado.getCreatedAt().toString());
         SimpleDateFormat sdfDiaMesAno = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdfHoraMin = new SimpleDateFormat("HH:mm");
         String diaMesAnoCreated = sdfDiaMesAno.format(anuncioSelecionado.getCreatedAt());
         String horaMinCreated = sdfHoraMin.format(anuncioSelecionado.getCreatedAt());
         datapub.setText(("Data de publicação: "+diaMesAnoCreated+" às "+horaMinCreated));
-//        String dateStr = obj.getString("birthdate");
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        Date birthDate = sdf.parse(dateStr);
         descriptionAds.setText(("Descrição: " + anuncioSelecionado.getDescription()));
         phoneAds.setText(("Telefone :" + anuncioSelecionado.getPhone()));
         String priceAnuncioStr = Double.toString(anuncioSelecionado.getPrice());
@@ -183,11 +181,15 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
 
         //adsTags.setText(("Tags : " +anuncioSelecionado.getTags().toString())); ---ERRO NA CONVERSAO METODO TA ERRADO
         setUpViewPagerGaleriaFotos();
-        buscarComentariosEAvaliacoes();
 
     }
 
-    public void buscarComentariosEAvaliacoes() {
+    public void buscarComentariosEAvaliacoes(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            ComentariosFragment frag = new ComentariosFragment();
+            frag.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().replace(R.id.containerComentariosAnuncio, frag).commit();
+        }
     }
 
     public void addItemAnuncioAListaDesejo() {
