@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.cliente.gui.DetalhesAnuncioActivity;
@@ -47,6 +48,7 @@ public class AnunciosOutroFragment extends BaseFragment {
     private SwipeRefreshLayout swipeLayout;
     private ActionMode actionMode;
     private Intent shareIntent;
+    private List<Ad> tempAds;
 
     // Método para instanciar esse fragment pelo tipo.
     public static AnunciosOutroFragment newInstance(String tipo) {
@@ -434,6 +436,24 @@ public class AnunciosOutroFragment extends BaseFragment {
         @Override
         public void onCancelled(String s) {
         }
+    }
+
+    public void search(String texto){
+        tempAds = new ArrayList<>();
+        for (Ad ad: ads){
+            if (ad.getTitle().toLowerCase().contains(texto)){
+                tempAds.add(ad);
+            }
+        }
+        if (tempAds.size() == 0){
+            Toast.makeText(getActivity(), "Nenhum anúncio encontrado", Toast.LENGTH_SHORT).show();
+        }
+        recyclerView.setAdapter(new AnuncioAdapter(getContext(), tempAds, onClickAnuncio()));
+    }
+
+    public void closeSearch(){
+        tempAds = null;
+        recyclerView.setAdapter(new AnuncioAdapter(getContext(), ads, onClickAnuncio()));
     }
 }
 

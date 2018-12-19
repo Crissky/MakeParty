@@ -13,9 +13,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +34,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
     private BottomNavigationView bottomNavigationView;
     private CoordinatorLayout coordinatorLayout;
     private ViewPager viewPager;
+    private Toolbar toolbar;
 
 
     @Override
@@ -47,7 +50,7 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
 
     }
     private void toolbarComMenuNavAbreEFecha(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -86,6 +89,33 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         }
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                AnunciosOutroFragment fragment = (AnunciosOutroFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+                fragment.search(query.toLowerCase());
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                AnunciosOutroFragment fragment = (AnunciosOutroFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+                fragment.closeSearch();
+            }
+        });
+
         return true;
     }
     @Override
@@ -178,7 +208,12 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
         frag =AnunciosOutroFragment.newInstance(tipo);
         frag.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().replace(R.id.container, frag).commit();
-
+        try {
+            toolbar.collapseActionView();
+            toolbarComMenuNavAbreEFecha();
+        }catch (Error error){
+            error.printStackTrace();
+        }
     }
 
     private void mudarTela(Class tela){
