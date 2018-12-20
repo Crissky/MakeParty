@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.inovaufrpe.makeparty.R;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Plano;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
@@ -32,25 +34,49 @@ public class PlanoEscolhaActivity extends AppCompatActivity {
         planoOuroMensal = findViewById(R.id.planoOuroMensalId);
         planoOuroAnual = findViewById(R.id.planoOuroAnualId);
         versaoGratuita = findViewById(R.id.versaoGratuitaId);
-
+        comparacoesPlanoAntigoENovo();
     }
     public void comparacoesPlanoAntigoENovo(){
         versaoGratuita.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                atualizarPlanoDeAnuncioFornecedor();
+                atualizarPlanoDeAnuncioFornecedor("Plano Gratuito");
             }
         });
         planoBronzeMensal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                atualizarPlanoDeAnuncioFornecedor();
+                atualizarPlanoDeAnuncioFornecedor("Plano Bronze Mensal");
             }
         });
         planoBronzeAnual.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                atualizarPlanoDeAnuncioFornecedor();
+                atualizarPlanoDeAnuncioFornecedor("Plano Bronze Anual");
+            }
+        });
+        planoPrataMensal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                atualizarPlanoDeAnuncioFornecedor("Plano Prata Mensal");
+            }
+        });
+        planoPrataAnual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                atualizarPlanoDeAnuncioFornecedor("Plano Prata Anual");
+            }
+        });
+        planoOuroMensal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                atualizarPlanoDeAnuncioFornecedor("Plano Ouro Mensal");
+            }
+        });
+        planoOuroAnual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                atualizarPlanoDeAnuncioFornecedor("Plano Ouro Anual");
             }
         });
 
@@ -66,18 +92,31 @@ public class PlanoEscolhaActivity extends AppCompatActivity {
         });
 
     }
-    public void atualizarPlanoDeAnuncioFornecedor(){
-        String planoAntigo="null";
-        String planoClicado="null";
-        SimOuNaoDialog.show(getSupportFragmentManager(),"Deseja confirmar a mudança do plano" +planoAntigo+" -> "+planoClicado, new SimOuNaoDialog.Callback() {
+    public void atualizarPlanoDeAnuncioFornecedor(final String planoClicado){
+        final Owner owner = SessaoApplication.getInstance().getObjOwnerSeEleForTipoLogado();
+        final String planoAntigo="null";
+        SimOuNaoDialog.show(getSupportFragmentManager(),"Deseja confirmar a aquisição do " +planoClicado, new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {
                 //
                 //
                 showProgressDialogWithTitle("Por favor, espere", "atualizando dados do anúncio");
-                //msgToast("Plano de anúncios modificado com sucesso");
+                Plano plano;
+                if (owner.getPlan() == null){
+                    plano = new Plano();
+                    plano.setType(planoClicado);
+                    plano.setNumberAdActive(0);
+                    plano.setNumberPhotos(0);
+                }else {
+                    plano = owner.getPlan();
+                    plano.setType(planoClicado);
+                    plano.setNumberPhotos(0);
+                    plano.setNumberAdActive(0);
+                }
+                owner.setPlan(plano);
+                msgToast("Plano de anúncios modificado com sucesso");
                 //msgToast("Erro");
-                //mudarTela(ConfiguracoesFornecedorActivity.class);
+                mudarTela(ConfiguracoesFornecedorActivity.class);
             }
         });
     }

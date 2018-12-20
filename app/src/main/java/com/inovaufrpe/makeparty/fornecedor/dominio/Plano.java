@@ -1,6 +1,6 @@
 package com.inovaufrpe.makeparty.fornecedor.dominio;
 
-class Plano {
+public class Plano {
 
     private String type;
     private int numberAdActive;

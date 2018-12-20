@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FotosAnuncioAdapter;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -57,6 +58,8 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private Bitmap bitmap;
+    private Owner owner;
+    private int limiteFotos, limiteAds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,15 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         editTextCidadeEndAnuncio = findViewById(R.id.editTextCidadeEditarAnuncio);
         editTextCepEndAnuncio = findViewById(R.id.editTextCepEditarAnuncio);
         textViewLimitesAnuncio= findViewById(R.id. textViewObsLimitesAnuncioForn);
+        try{
+            owner = SessaoApplication.getInstance().getObjOwnerSeEleForTipoLogado();
+            if (owner.getPlan() != null) {
+                calcularLimites();
+                textViewLimitesAnuncio.setText("Você ainda pode postar " + (limiteFotos - owner.getPlan().getNumberPhotos()) + " fotos e " + (limiteAds - owner.getPlan().getNumberAdActive()) + " anúncios");
+            }
+        }catch (Error e){
+            e.printStackTrace();
+        }
         imgButtonAnexarMaisFtAnEdit =findViewById(R.id.imgButtonAnexarMaisFtAnEdit);
         buttonAtualizarAnuncio = findViewById(R.id.button_atualizar_anuncio);
         buttonExcluirAnuncio = findViewById(R.id.button_excluir_anuncio);
@@ -169,28 +181,40 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         SimOuNaoDialog.show(getSupportFragmentManager(),"Deseja confirmar a atualização desse anúncio?", new SimOuNaoDialog.Callback() {
             @Override
             public void metodoSimAoDialog() {
-                if(verficarCampos()) {
-                    Ad anuncioParaAtualizar = retornandoAnuncioComNovosDadosParaAtualizar();
-                    Gson gson= new Gson();
-                    String ad = gson.toJson(anuncioParaAtualizar);
-                    ad=ad.substring(0,ad.length()-1)+","+"\"token\""+":"+ "\""+SessaoApplication.getInstance().getTokenUser()+"\""+ "}";
-                    Log.i("Script", "OLHAAA: "+ ad);
-                    ///EEEEEEEEEEEEEEEEEERRRADO AI EMBAIXXXXXXXXXXXO, CONFUNDI COM DELETE
-                    showProgressDialogWithTitle("Por favor, espere", "atualizando dados do anúncio");
-                    try{
-                        editarAnuncioOficial(ad);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                boolean estourouLimite = false;
+                try {
+                    if (limiteFotos - owner.getPlan().getNumberPhotos() < 0) {
+                        Toast.makeText(EditarAnuncioActivity.this, "Você não tem limite suficiente para postar este anúncio", Toast.LENGTH_SHORT).show();
+                        estourouLimite = true;
                     }
+                }catch (Error e){
+                    e.printStackTrace();
                 }
-                exibirMsgSeValidouAtualizaoOuExclusao();
+                if (!estourouLimite) {
+                    if (verficarCampos()) {
+                        Ad anuncioParaAtualizar = retornandoAnuncioComNovosDadosParaAtualizar();
+                        Gson gson = new Gson();
+                        String ad = gson.toJson(anuncioParaAtualizar);
+                        ad = ad.substring(0, ad.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
+                        Log.i("Script", "OLHAAA: " + ad);
+                        ///EEEEEEEEEEEEEEEEEERRRADO AI EMBAIXXXXXXXXXXXO, CONFUNDI COM DELETE
+                        showProgressDialogWithTitle("Por favor, espere", "atualizando dados do anúncio");
+                        try {
+                            editarAnuncioOficial(ad);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    exibirMsgSeValidouAtualizaoOuExclusao();
 
-                if (isValido){
-                    msgToast("Anúncio atualizado com sucesso");
-                    mudarTela(AnunciosFornecedorActivity.class);
-                }else{
-                    msgToast("Erro");
-                };
+                    if (isValido) {
+                        msgToast("Anúncio atualizado com sucesso");
+                        mudarTela(AnunciosFornecedorActivity.class);
+                    } else {
+                        msgToast("Erro");
+                    }
+                    ;
+                }
             }
 
         });
@@ -370,6 +394,22 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     public void onBackPressed() {
         this.mudarTela(AnunciosFornecedorActivity.class);
 
+    }
+
+    private void calcularLimites(){
+        if (owner.getPlan().getType().equals("Plano Gratuito")){
+            limiteFotos = 1;
+            limiteAds = 1;
+        }else if (owner.getPlan().getType().equals("Plano Bronze Mensal") || owner.getPlan().getType().equals("Plano Bronze Anual")){
+            limiteFotos = 50;
+            limiteAds = 10;
+        }else if (owner.getPlan().getType().equals("Plano Prata Mensal") || owner.getPlan().getType().equals("Plano Prata Anual")){
+            limiteFotos = 100;
+            limiteAds = 20;
+        }else if (owner.getPlan().getType().equals("Plano Ouro Mensal") || owner.getPlan().getType().equals("Plano Ouro Anual")){
+            limiteAds = 40;
+            limiteFotos = 200;
+        }
     }
 
 }
