@@ -2,42 +2,42 @@ package com.inovaufrpe.makeparty.fornecedor.dominio;
 
 public class Plano {
 
-    private String type;
-    private int numberAdActive;
-    private int numberPhotos;
+    private String name;
+    private int totalad;
+    private int totalphoto;
 
 
     public String getType() {
-        return type;
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(String name) {
+        this.name = name;
     }
 
-    public int getNumberAdActive() {
-        return numberAdActive;
+    public int getTotalad() {
+        return totalad;
     }
 
-    public void setNumberAdActive(int numberAdActive) {
-        this.numberAdActive = numberAdActive;
+    public void setTotalad(int totalad) {
+        this.totalad = totalad;
     }
 
-    public int getNumberPhotos() {
-        return numberPhotos;
+    public int getTotalphoto() {
+        return totalphoto;
     }
 
-    public void setNumberPhotos(int numberPhotos) {
-        this.numberPhotos = numberPhotos;
+    public void setTotalphoto(int totalphoto) {
+        this.totalphoto = totalphoto;
     }
 
 
     @Override
     public String toString() {
         return "Plano[" +
-                "type='" + type + '\'' +
-                ", numberAdActive=" + numberAdActive +
-                ", numberPhotos=" + numberPhotos +
+                "type='" + name + '\'' +
+                ", totalad=" + totalad +
+                ", totalphoto=" + totalphoto +
                 ']';
     }
 }

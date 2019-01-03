@@ -109,7 +109,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
             owner = SessaoApplication.getInstance().getObjOwnerSeEleForTipoLogado();
             if (owner.getPlan() != null) {
                 calcularLimites();
-                textoPlano.setText("Você ainda pode postar " + (limiteFotos - owner.getPlan().getNumberPhotos()) + " fotos e " + (limiteAds - owner.getPlan().getNumberAdActive()) + " anúncios");
+                textoPlano.setText("Você ainda pode postar " + (limiteFotos - owner.getPlan().getTotalphoto()) + " fotos e " + (limiteAds - owner.getPlan().getTotalad()) + " anúncios");
             }else {
                 Toast.makeText(CriarAnuncioActivity.this, "Você precisa adiquirir um plano para postar anúncios", Toast.LENGTH_SHORT).show();
                 finish();
@@ -133,7 +133,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
                 mprogressDialog.setMessage("Cadastrando anúncio...");
                 mprogressDialog.show();
                 try {
-                    if (limiteFotos - owner.getPlan().getNumberPhotos() < 0 || limiteAds - owner.getPlan().getNumberAdActive() < 0) {
+                    if (limiteFotos - owner.getPlan().getTotalphoto() < 0 || limiteAds - owner.getPlan().getTotalad() < 0) {
                         Toast.makeText(CriarAnuncioActivity.this, "Você não tem limite suficiente para postar este anúncio", Toast.LENGTH_SHORT).show();
                         estourouLimite = true;
                     }

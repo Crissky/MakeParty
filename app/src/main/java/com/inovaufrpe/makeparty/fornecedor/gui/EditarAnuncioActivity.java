@@ -85,7 +85,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
             owner = SessaoApplication.getInstance().getObjOwnerSeEleForTipoLogado();
             if (owner.getPlan() != null) {
                 calcularLimites();
-                textViewLimitesAnuncio.setText("Você ainda pode postar " + (limiteFotos - owner.getPlan().getNumberPhotos()) + " fotos e " + (limiteAds - owner.getPlan().getNumberAdActive()) + " anúncios");
+                textViewLimitesAnuncio.setText("Você ainda pode postar " + (limiteFotos - owner.getPlan().getTotalphoto()) + " fotos e " + (limiteAds - owner.getPlan().getTotalad()) + " anúncios");
             }
         }catch (Error e){
             e.printStackTrace();
@@ -183,7 +183,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
             public void metodoSimAoDialog() {
                 boolean estourouLimite = false;
                 try {
-                    if (limiteFotos - owner.getPlan().getNumberPhotos() < 0) {
+                    if (limiteFotos - owner.getPlan().getTotalphoto() < 0) {
                         Toast.makeText(EditarAnuncioActivity.this, "Você não tem limite suficiente para postar este anúncio", Toast.LENGTH_SHORT).show();
                         estourouLimite = true;
                     }

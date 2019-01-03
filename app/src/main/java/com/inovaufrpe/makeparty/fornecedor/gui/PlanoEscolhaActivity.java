@@ -4,19 +4,24 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Plano;
+import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
 public class PlanoEscolhaActivity extends AppCompatActivity {
     private ImageView versaoGratuita, planoBronzeMensal,planoBronzeAnual,planoPrataMensal,planoPrataAnual;
     private ImageView planoOuroMensal,planoOuroAnual;
+    private String validar = "";
+    private boolean isValido = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,18 +110,28 @@ public class PlanoEscolhaActivity extends AppCompatActivity {
                 if (owner.getPlan() == null){
                     plano = new Plano();
                     plano.setType(planoClicado);
-                    plano.setNumberAdActive(0);
-                    plano.setNumberPhotos(0);
+                    plano.setTotalad(0);
+                    plano.setTotalphoto(0);
                 }else {
                     plano = owner.getPlan();
                     plano.setType(planoClicado);
-                    plano.setNumberPhotos(0);
-                    plano.setNumberAdActive(0);
                 }
                 owner.setPlan(plano);
-                msgToast("Plano de anúncios modificado com sucesso");
-                //msgToast("Erro");
-                mudarTela(ConfiguracoesFornecedorActivity.class);
+                Gson gson = new Gson();
+                String newOwner = gson.toJson(owner);
+                newOwner = newOwner.substring(0, newOwner.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
+                showProgressDialogWithTitle("Por favor, espere", "atualizando dados do perfil");
+                try {
+                    editarPlano(newOwner);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (isValido){
+                    msgToast("Plano de anúncios modificado com sucesso");
+                    mudarTela(ConfiguracoesFornecedorActivity.class);
+                }else {
+                    msgToast("Erro");
+                }
             }
         });
     }
@@ -143,5 +158,29 @@ public class PlanoEscolhaActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    public void editarPlano(String json) throws InterruptedException {
+        callServer("PUT", json);
+    }
+
+    private void callServer(final String method, final String data) throws InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (method.equals("PUT")) {
+                    validar = ConectarServidor.putJadiel("https://makepartyserver.herokuapp.com/advertisers", data);
+                    Log.i("Script", "OLHAAA: " + validar);
+                    if (validar.substring(2, 5).equals("err")) {
+                        validar = "Não foi possível editar o perfil";
+                    } else {
+                        validar = "Perfil editado com sucesso";
+                        isValido = true;
+                    }
+                }
+            }
+        });
+        thread.start();
+        thread.join();
     }
 }
