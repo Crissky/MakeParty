@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Plano;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FotosAnuncioAdapter;
 import com.inovaufrpe.makeparty.user.dominio.Address;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
@@ -45,6 +46,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
     private Button cadastroAnuncio;
     private ImageButton imgButtonAnexMaisFt;
     private String validar = "";
+    private String validarPlano = "";
     private boolean isValido = false;
     private ProgressDialog mprogressDialog;
     private ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
@@ -133,7 +135,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
                 mprogressDialog.setMessage("Cadastrando anúncio...");
                 mprogressDialog.show();
                 try {
-                    if (limiteFotos - owner.getPlan().getTotalphoto() < 0 || limiteAds - owner.getPlan().getTotalad() < 0) {
+                    if (limiteFotos - (owner.getPlan().getTotalphoto() + bitmaps.size()) < 0 || limiteAds - (owner.getPlan().getTotalad() + 1) < 0) {
                         Toast.makeText(CriarAnuncioActivity.this, "Você não tem limite suficiente para postar este anúncio", Toast.LENGTH_SHORT).show();
                         estourouLimite = true;
                     }
@@ -152,6 +154,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
 
                     exibirMensagemSeValidouCadastro();
                     if (isValido) {
+                        atualizarOwner();
                         mudarTela(AnunciosFornecedorActivity.class);
                     }
                 }
@@ -271,7 +274,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         ads.setCreatedAt(new Date());
         ads.setDescription(descricao);
         ads.setPhone(telefone);
-        ads.setPhotos(bitmaps);
+//        ads.setPhotos(bitmaps);
         String tipo = edtTipoAnuncio.getSelectedItem().toString().trim();
         tipo=ValidacaoGuiRapida.deAccent(tipo);
         ads.setType(tipo);
@@ -316,6 +319,20 @@ public class CriarAnuncioActivity extends AppCompatActivity {
         thread.join();
     }
 
+    private void atualizarOwner(){
+        Plano plano = owner.getPlan();
+        plano.setTotalad(plano.getTotalad() + 1);
+//        plano.setTotalphoto(plano.getTotalphoto() + bitmaps.size());
+        Gson gson = new Gson();
+        String newOwner = gson.toJson(owner);
+        newOwner = newOwner.substring(0, newOwner.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
+        try {
+            atualizarPlano(newOwner);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void exibirMensagemSeValidouCadastro() {
         Toast.makeText(getApplicationContext(), validar, Toast.LENGTH_SHORT).show();
     }
@@ -349,5 +366,28 @@ public class CriarAnuncioActivity extends AppCompatActivity {
             limiteAds = 40;
             limiteFotos = 200;
         }
+    }
+
+    public void atualizarPlano(String json) throws InterruptedException {
+        callServerPlan("PUT", json);
+    }
+
+    private void callServerPlan(final String method, final String data) throws InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (method.equals("PUT")) {
+                    validarPlano = ConectarServidor.putJadiel("https://makepartyserver.herokuapp.com/advertisers", data);
+                    Log.i("Script", "OLHAAA: " + validar);
+                    if (validarPlano.substring(2, 5).equals("err")) {
+                        validarPlano = "Não foi possível editar o perfil";
+                    } else {
+                        validarPlano = "Perfil editado com sucesso";
+                    }
+                }
+            }
+        });
+        thread.start();
+        thread.join();
     }
 }
