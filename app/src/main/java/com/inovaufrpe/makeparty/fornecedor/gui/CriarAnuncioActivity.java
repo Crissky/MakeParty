@@ -378,7 +378,7 @@ public class CriarAnuncioActivity extends AppCompatActivity {
             public void run() {
                 if (method.equals("PUT")) {
                     validarPlano = ConectarServidor.putJadiel("https://makepartyserver.herokuapp.com/advertisers", data);
-                    Log.i("Script", "OLHAAA: " + validar);
+                    Log.i("Script", "OLHAAA: " + validarPlano);
                     if (validarPlano.substring(2, 5).equals("err")) {
                         validarPlano = "Não foi possível editar o perfil";
                     } else {

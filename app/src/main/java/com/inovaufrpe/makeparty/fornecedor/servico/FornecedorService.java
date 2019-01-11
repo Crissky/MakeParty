@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Event;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Plano;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.Response;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -142,6 +143,7 @@ public class FornecedorService {
                 throw new IOException("Erro ao excluir da lista " + response.getMsg());
             }
         }
+        atualizarOwner(selectedAds.size());
         return true;
     }
     private static List<Event> parserJSONListaEventsComFor(String json) throws IOException {
@@ -217,5 +219,33 @@ public class FornecedorService {
             }
         }
         return true;
+    }
+
+    private static void atualizarOwner(int numeroAds){
+        Owner owner = SessaoApplication.getInstance().getObjOwnerSeEleForTipoLogado();
+        Plano plano = owner.getPlan();
+        plano.setTotalad(plano.getTotalad() - numeroAds);
+//        plano.setTotalphoto(plano.getTotalphoto() - bitmaps.size());
+        Gson gson = new Gson();
+        String newOwner = gson.toJson(owner);
+        final String ownerSend = newOwner.substring(0, newOwner.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
+        try {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String validarPlano = ConectarServidor.putJadiel("https://makepartyserver.herokuapp.com/advertisers", ownerSend);
+                    Log.i("Script", "OLHAAA: " + validarPlano);
+                    if (validarPlano.substring(2, 5).equals("err")) {
+                        validarPlano = "Não foi possível editar o perfil";
+                    } else {
+                        validarPlano = "Perfil editado com sucesso";
+                    }
+                }
+            });
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

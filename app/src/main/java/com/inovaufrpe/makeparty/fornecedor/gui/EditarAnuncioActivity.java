@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Plano;
 import com.inovaufrpe.makeparty.fornecedor.gui.adapter.FotosAnuncioAdapter;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
@@ -49,6 +50,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     private ImageButton imgButtonAnexarMaisFtAnEdit;
     ValidacaoGuiRapida validacaoGuiRapida = new ValidacaoGuiRapida();
     private String validar = "";
+    private String validarPlano = "";
     boolean isValido = false;
     //imagens
     public static final int IMAGE_GALLERY_REQUEST = 20;
@@ -273,6 +275,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
                 exibirMsgSeValidouAtualizaoOuExclusao();
 
                 if (isValido){
+                    atualizarOwner();
                     msgToast("Anúncio excluído com sucesso");
                     mudarTela(AnunciosFornecedorActivity.class);
                 }else{
@@ -409,6 +412,43 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         }else if (owner.getPlan().getType().equals("Plano Ouro Mensal") || owner.getPlan().getType().equals("Plano Ouro Anual")){
             limiteAds = 40;
             limiteFotos = 200;
+        }
+    }
+
+    public void atualizarPlano(String json) throws InterruptedException {
+        callServerPlan("PUT", json);
+    }
+
+    private void callServerPlan(final String method, final String data) throws InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (method.equals("PUT")) {
+                    validarPlano = ConectarServidor.putJadiel("https://makepartyserver.herokuapp.com/advertisers", data);
+                    Log.i("Script", "OLHAAA: " + validarPlano);
+                    if (validarPlano.substring(2, 5).equals("err")) {
+                        validarPlano = "Não foi possível editar o perfil";
+                    } else {
+                        validarPlano = "Perfil editado com sucesso";
+                    }
+                }
+            }
+        });
+        thread.start();
+        thread.join();
+    }
+
+    private void atualizarOwner(){
+        Plano plano = owner.getPlan();
+        plano.setTotalad(plano.getTotalad() - 1);
+//        plano.setTotalphoto(plano.getTotalphoto() - bitmaps.size());
+        Gson gson = new Gson();
+        String newOwner = gson.toJson(owner);
+        newOwner = newOwner.substring(0, newOwner.length() - 1) + "," + "\"token\"" + ":" + "\"" + SessaoApplication.getInstance().getTokenUser() + "\"" + "}";
+        try {
+            atualizarPlano(newOwner);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
