@@ -23,11 +23,11 @@ public class SplashActivity extends Activity implements Runnable {
     }
 
     /**
-     * @see EscolhaTipoUserActivity
+     * @see EntrarOuCadastrarActivity
      */
 
     public void run() {
-        startActivity(new Intent(this, EscolhaTipoUserActivity.class));
+        startActivity(new Intent(this, EntrarOuCadastrarActivity.class));
         finish();
     }
 }

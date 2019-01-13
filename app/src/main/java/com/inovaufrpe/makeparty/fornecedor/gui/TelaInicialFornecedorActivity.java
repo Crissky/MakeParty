@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
-import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
+import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 
 
@@ -61,7 +61,7 @@ public class TelaInicialFornecedorActivity extends AppCompatActivity {
             @Override
             public void metodoSimAoDialog() {
                 SessaoApplication.getInstance().onTerminate();
-                mudarTela(EscolhaTipoUserActivity.class);
+                mudarTela(EntrarOuCadastrarActivity.class);
             }
         });
     }

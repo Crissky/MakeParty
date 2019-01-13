@@ -20,7 +20,6 @@ import com.inovaufrpe.makeparty.R;
 import com.inovaufrpe.makeparty.infra.ConectarServidor;
 import com.inovaufrpe.makeparty.infra.utils.Permissoes;
 import com.inovaufrpe.makeparty.user.gui.EntrarOuCadastrarActivity;
-import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.infra.SessaoApplication;
 
@@ -164,7 +163,7 @@ public class ConfigClienteActivity extends AppCompatActivity {
                 }
                 exibirMensagemSeValidou();
                 if (isValido){
-                    mudarTela(EscolhaTipoUserActivity.class);
+                    mudarTela(EntrarOuCadastrarActivity.class);
                 }
                 mprogressDialog.dismiss();
 

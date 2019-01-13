@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.inovaufrpe.makeparty.R;
 //import com.inovaufrpe.makeparty.usuario.gui.fragment.AnunciosFragment;
-import com.inovaufrpe.makeparty.user.gui.EscolhaTipoUserActivity;
 import com.inovaufrpe.makeparty.user.gui.adapter.FiltroAnuncioSelecionado;
 import com.inovaufrpe.makeparty.user.gui.dialog.SimOuNaoDialog;
 import com.inovaufrpe.makeparty.user.gui.fragment.AnunciosOutroFragment;
@@ -230,11 +229,11 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
                 @Override
                 public void metodoSimAoDialog() {
                     SessaoApplication.getInstance().onTerminate();
-                    mudarTela(EscolhaTipoUserActivity.class);
+                    mudarTela(EntrarOuCadastrarActivity.class);
                 }
             });
         }else{
-            mudarTela(EscolhaTipoUserActivity.class);
+            mudarTela(EntrarOuCadastrarActivity.class);
         }
     }
     public void irParaTelaListaDeDesejos(){

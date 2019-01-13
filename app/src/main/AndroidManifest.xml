@@ -53,7 +53,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".user.gui.EscolhaTipoUserActivity" />
         <activity
             android:name=".user.gui.CadastroActivity"
             android:label="@string/label_cadastro"
@@ -66,12 +65,8 @@
         <activity android:name=".cliente.gui.TelaInicialClienteActivity" />
         <activity
             android:name=".user.gui.EntrarOuCadastrarActivity"
-            android:label="@string/label_entrar_ou_cadastrar"
-            android:parentActivityName=".user.gui.EscolhaTipoUserActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".user.gui.EscolhaTipoUserActivity" />
-        </activity>
+            android:label="@string/label_entrar_ou_cadastrar" />
+
         <activity
             android:name=".user.gui.LoginActivity"
             android:label="@string/label_login"
@@ -103,7 +98,7 @@
         <activity android:name=".fornecedor.gui.CriarHorarioDisponivelActivity" />
         <activity android:name=".fornecedor.gui.EditarEventoActivity" />
         <activity android:name=".fornecedor.gui.AlterandoDadosPerfilFornecedorActivity" />
-        <activity android:name=".user.gui.NovaTelaEscolhaLoginCadastroActivity"></activity>
+
     </application>
 
 </manifest>

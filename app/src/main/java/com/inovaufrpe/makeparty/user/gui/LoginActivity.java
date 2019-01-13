@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -25,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity{
+    ImageView imgFundo;
     private EditText edtEmail, edtSenha;
     private ProgressDialog progressDialog;
     private ProgressDialog dialog;
@@ -40,9 +43,18 @@ public class LoginActivity extends AppCompatActivity{
 
     }
     private void encontrandoElementosView(){
+        imgFundo = findViewById(R.id.imageViewBackgroundLogin);
+        int backgroundImgFundo = R.drawable.backgroundfestainfchacaraescuro;
+        imgFundo.setImageResource(backgroundImgFundo);
+        //abaixo o unico q funcionou para deixar a imagem em tela toda(no pixel A) - era bom colocar conforme o tam de cd
+        //tela
+        imgFundo.setScaleX(2);
+        imgFundo.setScaleY((float) 2.55);
+
         edtEmail= findViewById(R.id.editTextEmail);
         edtSenha= findViewById(R.id.editTextSenha);
-
+        //getResources().getDimension()
+        //getResources().getDimensionPixelSize()
     }
     //Por enq só pegando os dados e transf em string, sem chamar o serviço
     public void onClickLogar(View view){

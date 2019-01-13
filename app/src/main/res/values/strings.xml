@@ -193,6 +193,7 @@
     <string name="button_excluir_evento_forn">Excluir evento</string>
     <string name="button_editar_evento">Editar evento</string>
     <string name="edit_text_nome_criar_ev_forn">Dê um título para esse evento</string>
+    <string name="text_view_entrar_sem_logar_cliente">NÃO, NÃO QUERO LOGAR NEM CADASTRAR ></string>
     <string-array name="tipo">
         <item>Casa de Festa</item>
         <item>Animação</item>
