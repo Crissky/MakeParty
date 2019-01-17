@@ -156,6 +156,8 @@ public class TelaInicialClienteActivity extends AppCompatActivity implements Nav
 
         } else if (id == R.id.nav_exit) {
             SessaoApplication.instance.onTerminate();
+        } else if (id == R.id.nav_sb_recomendacao){
+            startActivity(new Intent(TelaInicialClienteActivity.this, SeekBarsRecomendacaoActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

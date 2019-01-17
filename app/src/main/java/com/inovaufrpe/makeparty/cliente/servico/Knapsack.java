@@ -1,0 +1,83 @@
+package com.inovaufrpe.makeparty.cliente.servico;
+
+import com.inovaufrpe.makeparty.cliente.dominio.Problem;
+import com.inovaufrpe.makeparty.cliente.dominio.Solution;
+
+public class Knapsack {
+    private Problem problem;
+    private float maximumProfit;
+
+    public Knapsack(Problem problem) {
+        this.problem = problem;
+        this.maximumProfit = 0f;
+    }
+
+    public Solution solve() {
+        int bagSize = problem.getBagSize();
+        float[] profit = problem.getProfit();
+        int[] weight = problem.getWeight();
+        int[] group = problem.getGroup();
+
+        int N = profit.length - 1;
+        float[][] matrix = new float[bagSize + 1][N + 1];
+        boolean[][] solution = new boolean[bagSize + 1][N + 1];
+
+        //just to make print pretty :D
+        for (int i = 0; i <= bagSize; i++) {
+            matrix[i][0] = i;
+        }
+
+        for (int w = 1; w <= bagSize; w++) {
+            for (int n = 1; n <= N; n++) {
+                if (group[n] == 0) {
+                    if (weight[n] <= w) {
+                        float option2 = profit[n] + problem.getMax(group[n] - 1, matrix[w - weight[n]], group, n);
+                        matrix[w][n] = Math.max(profit[n], option2);
+                        updateMaximumProfit(matrix[w][n]);
+                        solution[w][n] = true;
+                    }
+                } else {
+                    float option1 = problem.getMax(group[n] - 1, matrix[w], group, n);
+                    float option2 = Integer.MIN_VALUE;
+                    float option3 = problem.getMax(group[n], matrix[w], group, n);
+                    if (weight[n] <= w) {
+                        option2 = profit[n] + problem.getMax(group[n] - 1, matrix[w - weight[n]], group, n);
+                    }
+                    matrix[w][n] = Math.max(option1, option2);
+                    updateMaximumProfit(matrix[w][n]);
+                    solution[w][n] = problem.getSolution(option1,option2,option3);
+                }
+            }
+        }
+
+//        Printer.printBagTable(bagSize, N, matrix);
+//        Printer.printSolutionTable(bagSize, N, solution);
+        boolean[] take = getSolution(N, bagSize, solution, group, matrix, weight);
+//        Printer.printResult(N, profit, weight, group, take);
+        return new Solution(take);
+    }
+
+    private void updateMaximumProfit(float profit) {
+        if ( profit > maximumProfit){
+            maximumProfit = profit;
+        }
+    }
+
+    private boolean[] getSolution(int N, int W, boolean[][] sol, int[] group, float[][] matrix, int[] weight) {
+        boolean[] solution = new boolean[N + 1];
+        int lastTakenGroup = -1;
+        for (int n = N, w = W; n > 0; n--) {
+            if (sol[w][n] && problem.calculateIsMax(n, w, group, matrix, N)) {
+                if(problem.checkIfInSameGroup(n, lastTakenGroup, group)){
+                    continue;
+                }
+                solution[n] = true;
+                w = w - weight[n];
+                lastTakenGroup = group[n];
+            } else {
+                solution[n] = false;
+            }
+        }
+        return solution;
+    }
+}

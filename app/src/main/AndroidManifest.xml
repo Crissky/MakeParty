@@ -66,7 +66,6 @@
         <activity
             android:name=".user.gui.EntrarOuCadastrarActivity"
             android:label="@string/label_entrar_ou_cadastrar" />
-
         <activity
             android:name=".user.gui.LoginActivity"
             android:label="@string/label_login"
@@ -98,7 +97,7 @@
         <activity android:name=".fornecedor.gui.CriarHorarioDisponivelActivity" />
         <activity android:name=".fornecedor.gui.EditarEventoActivity" />
         <activity android:name=".fornecedor.gui.AlterandoDadosPerfilFornecedorActivity" />
-
+        <activity android:name=".cliente.gui.SeekBarsRecomendacaoActivity"></activity>
     </application>
 
 </manifest>
