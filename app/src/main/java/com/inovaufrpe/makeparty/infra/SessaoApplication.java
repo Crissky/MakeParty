@@ -5,12 +5,14 @@ import android.content.Context;
 import android.util.Log;
 
 import com.inovaufrpe.makeparty.cliente.dominio.Customer;
+import com.inovaufrpe.makeparty.fornecedor.dominio.Ad;
 import com.inovaufrpe.makeparty.fornecedor.dominio.Owner;
 import com.inovaufrpe.makeparty.user.dominio.User;
 import com.squareup.otto.Bus;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SessaoApplication extends Application {
@@ -29,6 +31,7 @@ public class SessaoApplication extends Application {
     private Class telaAtual =null;
     private Class telaAnterior =null;
     private static Context mContext;
+    private static List<Ad> adRecomendacao;
 
     public static SessaoApplication getInstance() {
         return instance; // Singleton
@@ -146,5 +149,11 @@ public class SessaoApplication extends Application {
         this.values.clear();
     }
 
+    public static List<Ad> getAdRecomendacao() {
+        return adRecomendacao;
+    }
 
+    public static void setAdRecomendacao(List<Ad> adRecomendacao) {
+        SessaoApplication.adRecomendacao = adRecomendacao;
+    }
 }

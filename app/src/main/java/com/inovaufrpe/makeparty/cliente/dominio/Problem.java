@@ -2,7 +2,7 @@ package com.inovaufrpe.makeparty.cliente.dominio;
 
 public class Problem {
     private int bagSize;
-    private float[] profit;
+    private int[] profit;
     private int[] weight;
     private int[] group;
 
@@ -13,7 +13,7 @@ public class Problem {
         return bagSize;
     }
 
-    public float[] getProfit() {
+    public int[] getProfit() {
         return profit;
     }
 
@@ -29,7 +29,7 @@ public class Problem {
         this.bagSize = bagSize;
     }
 
-    public void setProfit(float[] profit) {
+    public void setProfit(int[] profit) {
         this.profit = profit;
     }
 
@@ -49,8 +49,8 @@ public class Problem {
         return group[n] == lastTakenGroup;
     }
 
-    public float getMax(int group, float[] row, int[] groups, int n) {
-        float max = 0;
+    public int getMax(int group, int[] row, int[] groups, int n) {
+        int max = 0;
         for (int i = 1; i < n; i++) {
             if (groups[i] == group) {
                 if (row[i] > max) max = row[i];
@@ -59,7 +59,7 @@ public class Problem {
         return max;
     }
 
-    public boolean calculateIsMax(int n, int w, int[] groups, float[][] matrix, int N) {
+    public boolean calculateIsMax(int n, int w, int[] groups, int[][] matrix, int N) {
         int group = groups[n];
         float max = 0;
         for (int i = 1; i <= N; i++) {

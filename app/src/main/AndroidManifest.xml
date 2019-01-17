@@ -97,7 +97,8 @@
         <activity android:name=".fornecedor.gui.CriarHorarioDisponivelActivity" />
         <activity android:name=".fornecedor.gui.EditarEventoActivity" />
         <activity android:name=".fornecedor.gui.AlterandoDadosPerfilFornecedorActivity" />
-        <activity android:name=".cliente.gui.SeekBarsRecomendacaoActivity"></activity>
+        <activity android:name=".cliente.gui.SeekBarsRecomendacaoActivity" />
+        <activity android:name=".cliente.gui.ResultadoRecomendacaoActivity"></activity>
     </application>
 
 </manifest>

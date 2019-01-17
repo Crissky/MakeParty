@@ -14,12 +14,12 @@ public class Knapsack {
 
     public Solution solve() {
         int bagSize = problem.getBagSize();
-        float[] profit = problem.getProfit();
+        int[] profit = problem.getProfit();
         int[] weight = problem.getWeight();
         int[] group = problem.getGroup();
 
         int N = profit.length - 1;
-        float[][] matrix = new float[bagSize + 1][N + 1];
+        int[][] matrix = new int[bagSize + 1][N + 1];
         boolean[][] solution = new boolean[bagSize + 1][N + 1];
 
         //just to make print pretty :D
@@ -31,15 +31,15 @@ public class Knapsack {
             for (int n = 1; n <= N; n++) {
                 if (group[n] == 0) {
                     if (weight[n] <= w) {
-                        float option2 = profit[n] + problem.getMax(group[n] - 1, matrix[w - weight[n]], group, n);
+                        int option2 = profit[n] + problem.getMax(group[n] - 1, matrix[w - weight[n]], group, n);
                         matrix[w][n] = Math.max(profit[n], option2);
                         updateMaximumProfit(matrix[w][n]);
                         solution[w][n] = true;
                     }
                 } else {
-                    float option1 = problem.getMax(group[n] - 1, matrix[w], group, n);
-                    float option2 = Integer.MIN_VALUE;
-                    float option3 = problem.getMax(group[n], matrix[w], group, n);
+                    int option1 = problem.getMax(group[n] - 1, matrix[w], group, n);
+                    int option2 = Integer.MIN_VALUE;
+                    int option3 = problem.getMax(group[n], matrix[w], group, n);
                     if (weight[n] <= w) {
                         option2 = profit[n] + problem.getMax(group[n] - 1, matrix[w - weight[n]], group, n);
                     }
@@ -63,7 +63,7 @@ public class Knapsack {
         }
     }
 
-    private boolean[] getSolution(int N, int W, boolean[][] sol, int[] group, float[][] matrix, int[] weight) {
+    private boolean[] getSolution(int N, int W, boolean[][] sol, int[] group, int[][] matrix, int[] weight) {
         boolean[] solution = new boolean[N + 1];
         int lastTakenGroup = -1;
         for (int n = N, w = W; n > 0; n--) {

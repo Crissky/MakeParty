@@ -272,11 +272,19 @@ public class DetalhesAnuncioActivity extends AppCompatActivity implements DatePi
     @Override
     public void onBackPressed() {
         if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("customer")) {
-            this.mudarTela(SessaoApplication.getInstance().getTelaAnterior());
+            if (SessaoApplication.getAdRecomendacao() == null) {
+                this.mudarTela(SessaoApplication.getInstance().getTelaAnterior());
+            }else {
+                finish();
+            }
         } else if (SessaoApplication.getInstance().getTipoDeUserLogado().equals("advertiser")) {
             this.mudarTela(AnunciosFornecedorActivity.class);
         } else{
-            this.mudarTela(TelaInicialClienteActivity.class);
+            if (SessaoApplication.getAdRecomendacao() == null) {
+                this.mudarTela(TelaInicialClienteActivity.class);
+            }else {
+                finish();
+            }
         }
     }
 }
