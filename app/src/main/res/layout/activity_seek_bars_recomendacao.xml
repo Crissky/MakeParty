@@ -23,143 +23,170 @@
             app:theme="@style/ThemeOverlay.AppCompat.Light"
             app:title="Recomendação"
             app:titleTextColor="@color/colorFundo" />
+
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Valor:"/>
-
-        <EditText
-            android:id="@+id/editTextValorRecomendacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="1000.00"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Casa de Festa: "/>
+                android:text="Selecione o preço total a ser gasto e os pesos/importância que você da aos itens: "
+                android:layout_margin="16dp"
+                android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/textViewCasaRecomendacao"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="5"/>
+                android:text="Valor:"
+                android:layout_margin="16dp"/>
+
+            <EditText
+                android:id="@+id/editTextValorRecomendacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="1000.00"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Casa de Festa: "
+                    android:layout_margin="16dp"/>
+
+                <TextView
+                    android:id="@+id/textViewCasaRecomendacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_margin="16dp"/>
+
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbCasaRecomendacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="5"
+                android:progress="5"
+                android:layout_marginTop="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buffet: "
+                    android:layout_margin="16dp"/>
+
+                <TextView
+                    android:id="@+id/textViewBuffetRecomendacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_margin="16dp"/>
+
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbBuffetRecomendacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="5"
+                android:progress="5"
+                android:layout_marginTop="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Decoração: "
+                    android:layout_margin="16dp"/>
+
+                <TextView
+                    android:id="@+id/textViewDecoracaoRecomendacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_margin="16dp"/>
+
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbDecoracaoRecomendacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="5"
+                android:progress="5"
+                android:layout_marginTop="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Animação: "
+                    android:layout_margin="16dp"/>
+
+                <TextView
+                    android:id="@+id/textViewAnimacaoRecomendacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_margin="16dp"/>
+
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbAnimacaoRecomendacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="5"
+                android:progress="5"
+                android:layout_marginTop="5dp"/>
+
+            <Button
+                android:id="@+id/buttonProcurarRecomendacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorButoes"
+                android:textColor="@color/colorTextoBut"
+                android:text="procurar recomendação"
+                android:layout_marginTop="40dp"/>
 
         </LinearLayout>
-
-        <SeekBar
-            android:id="@+id/sbCasaRecomendacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="5"
-            android:progress="5"
-            android:layout_marginTop="5dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Buffet: "/>
-
-            <TextView
-                android:id="@+id/textViewBuffetRecomendacao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5"/>
-
-        </LinearLayout>
-
-        <SeekBar
-            android:id="@+id/sbBuffetRecomendacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="5"
-            android:progress="5"
-            android:layout_marginTop="5dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Decoração: "/>
-
-            <TextView
-                android:id="@+id/textViewDecoracaoRecomendacao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5"/>
-
-        </LinearLayout>
-
-        <SeekBar
-            android:id="@+id/sbDecoracaoRecomendacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="5"
-            android:progress="5"
-            android:layout_marginTop="5dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Animação: "/>
-
-            <TextView
-                android:id="@+id/textViewAnimacaoRecomendacao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5"/>
-
-        </LinearLayout>
-
-        <SeekBar
-            android:id="@+id/sbAnimacaoRecomendacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="5"
-            android:progress="5"
-            android:layout_marginTop="5dp"/>
-
-        <Button
-            android:id="@+id/buttonProcurarRecomendacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorButoes"
-            android:textColor="@color/colorTextoBut"
-            android:text="procurar recomendação"
-            android:layout_marginTop="40dp"/>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

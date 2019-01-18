@@ -98,7 +98,9 @@
         <activity android:name=".fornecedor.gui.EditarEventoActivity" />
         <activity android:name=".fornecedor.gui.AlterandoDadosPerfilFornecedorActivity" />
         <activity android:name=".cliente.gui.SeekBarsRecomendacaoActivity" />
-        <activity android:name=".cliente.gui.ResultadoRecomendacaoActivity"></activity>
+        <activity android:name=".cliente.gui.ResultadoRecomendacaoActivity" />
+        <activity android:name=".cliente.gui.EscolhasDeConviteActivity" />
+        <activity android:name=".cliente.gui.EdicaoConviteEscolhidoActivity"></activity>
     </application>
 
 </manifest>

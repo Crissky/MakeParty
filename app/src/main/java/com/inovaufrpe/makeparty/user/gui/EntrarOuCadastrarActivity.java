@@ -62,7 +62,7 @@ public class EntrarOuCadastrarActivity extends AppCompatActivity {
         //abaixo o unico q funcionou para deixar a imagem em tela toda(no pixel A) - era bom colocar conforme o tam de cd
         //tela
         imageView.setScaleX(2);
-        imageView.setScaleY((float) 2.55);
+        imageView.setScaleY((float) 2.75);
 
         //imageView.getLayoutParams().width = width / getResources().getDisplayMetrics().density;
         //imageView.getLayoutParams().height = pixelsValue / getResources().getDisplayMetrics().density;
@@ -80,8 +80,9 @@ public class EntrarOuCadastrarActivity extends AppCompatActivity {
     }
     private void setUpFlipperGaleriaFotos() {
         //Ainda falta add mais foto e tbm refazer de modo q o escuro fiq ok
-        int[] images = new int[] {R.drawable.backgroundfestainfchacaraescuro,R.drawable.backgroundclownandkidsescuro,
-                R.drawable.backgroundbrinqinflavelescuro,R.drawable.background_flores_lindas_decoracao_festa_infantil_conto_de_fadas_1_800x500};
+        int[] images = new int[] {R.drawable.backgroundfestainfchacaraescuro,R.drawable.background_palhaco_anima,R.drawable.backgroundcriancaassop, R.drawable.background_flores_lindas,
+                R.drawable.backgroundbrinqinflavelescuro,R.drawable.background_doces_para_festa_infantil_centraldoevento,R.drawable.backgrounddecorinffotorkd,
+                R.drawable.background_salao_infantil,R.drawable.background_decor_too};
 
         v_flipper = findViewById(R.id.slideLoginOuCadastroViewFlipper);
 
